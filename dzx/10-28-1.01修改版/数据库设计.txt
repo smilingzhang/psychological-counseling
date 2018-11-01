@@ -1,0 +1,222 @@
+1.用户表：
+	专属ID：int
+	头像：varchar 
+	昵称：varchar 
+	性别：varchar
+	个性签名：varchar
+	账号：varchar
+	密码：varchar
+	注册日期：Date
+	手机号：int 
+	身份：客户/咨询师( 前端不提供管理员登录接口)
+		varchar
+	城市：varchar
+1.1 日记表 ：
+	用户ID：int 
+	记日记的时间：Date
+	日记内容：varchar
+
+2.咨询师信息表：
+	咨询师ID：int 
+	//以下三个能不能直接拿而不做多对多的拆分
+	认证资质：varchar
+	擅长方向：varchar
+	咨询对象：varchar
+	从业年限：int
+	好评率：double
+	价格：int
+	可预约时间：
+	详细介绍：varchar
+	
+3.咨询/倾听表：
+     3.1咨询记录表 
+	流水号id:int 
+	客户ID：int
+	预约时间：Date
+	咨询开始时间：Date
+	咨询结束时间：Date
+	价格：double
+	订单状态：已完成/已支付/已取消 varchar
+	咨询师ID：int 
+	咨询方法：面对面/视频/语音 varchar
+	资源路径：varchar
+	
+    3.2倾听记录表
+	流水号id:  int 
+	客户ID：int
+	预约时间：Date
+	倾听开始时间：Date
+	倾听结束时间：Date
+	倾听总价：倾听为按时间计算 double
+	订单状态：已完成/已支付/已取消 varchar
+	倾听师ID：int
+	//倾听方法：语音 varchar
+	资源路径：varchar
+	
+
+     3.3 客户反馈表（客户评价咨询师的）
+	流水id:  int 
+	业务类型：1.咨询2.倾听3.课程 varchar
+	业务id:  int 
+	评价内容：varchar
+	评价时间：Date
+	评价星级：int 
+
+     3.4 客户标签表：(咨询师评价客户的)
+	流水id：int
+	评价人ID：int 
+	受评人ID：int
+	评价内容：varchar
+	业务类型：1.咨询2.倾听 3.课程 4.测评  varchar
+	业务id:  int 
+4.课程表：
+	课程ID：int
+	课程名称： varchar
+	讲师ID（咨询师）：int
+	资源路径：varchar
+	课程展示图路径：varchar 
+	价格：double 
+	折后价格：double
+	介绍：varchar 
+	
+ ！！ 4.1 类别总表
+	流水号id:  int 
+	类别名：varchar
+	
+  ！！ 4.2 业务-类别表
+	流水号id: int 
+	业务名称：varchar 1.课程 2.文章  3.测评 4.动态
+	业务ID:  int 
+	类别ID：int 
+     4.3 课程目录表
+	流水id : int 
+	课程号ID： int 
+	目录等级：int  （1级目录，2级目录···）
+	目录名：varchar
+
+5.课程订单表：
+	流水id : int 
+	课程ID：int
+	客户ID：int
+	购买时间：Date
+	
+
+6.课程学习记录表：
+	用户ID: int 
+	课程ID: int
+	是否看完：varchar
+	看到的位置：（看到哪儿了）Date
+	观看视频的时间：（几点看的）Date
+
+
+7.测评表：
+	测评ID：int 
+	测评名称：varchar
+	测评简介：varchar
+	Banner图地址：varchar
+	
+ //    7.1测评分类表
+	流水id: int 
+	分类名称： varchar 
+  //   7.2 测评-分类表
+	流水id : int 
+	测评ID ：int 
+	分类ID ：int
+     7.3 测评题目表
+	流水id : int 
+	测评ID：int 
+	题目号： int 
+	题目内容：varchar
+	题目选项： varchar
+	
+//可能不需要此表
+8.测评记录表：
+	用户ID:
+	测评ID：
+	测评结果：
+	测评时间：
+	关键字：
+
+9.文章表：
+	文章ID：int 
+	文章名称：varchar
+	咨询师ID：int
+	发表人名称:  varchar
+	Banner图路径：varchar
+	文章简介：varchar
+	文章正文：varchar
+	发表时间：Date
+	浏览次数：int
+	
+
+//可不要此表
+10. 文章阅读记录表：
+	文章ID：
+	用户ID：
+	阅读时间：
+	客户评论：
+	关键字：
+
+11.动态表：
+	时间：Date
+	标题：varchar
+	正文详情：varchar
+	图片链接路径：varchar
+	视频链接路径：varchar
+	报名链接（活动）：varchar
+
+//配置文件配置	
+12. 事务所简介表：
+	名称：
+	简介：
+	详细介绍：
+	图片链接：
+	地址：
+	电话：
+	负责人信息：
+	
+13.心理问答表：
+	问题ID: int 
+	问题标题：varchar
+	问题内容：varchar
+	提问者ID：int
+	提问时间：Date
+	问题浏览次数：int
+	
+     13.1 回答表
+	流水id : int 
+	问题ID : int 
+	咨询师ID ：int
+	回复内容：varchar
+	回答时间：Date
+	点赞次数：int
+
+14.特色服务表：
+	特色服务名称：
+	特色服务ID：
+	特色服务简介：
+	下面吧啦吧啦我也不知道他让写点啥，先空着
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
