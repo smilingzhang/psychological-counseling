@@ -42,22 +42,13 @@ html {
   font-family: "微软雅黑",sans-serif;
   font-size: 14px;
   color: #464646;
-
+  background-image: url('../images/bg.gif');
+  background-repeat: repeat;
       -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   }
 body {
   margin: 0;
-  background:url(images/bg.gif)no-repeat;
-  width:100%;
-  height:100%;
-  background-size:100% 100%;
-  position:absolute;
-  filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='bg-login.png',sizingMethod='scale');
-
-  /* filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/bg.gif',sizingMethod='scale'); */
-  /* background-repeat: no-repeat;  */
-  /* background-positon: 100%, 100%;  */
   }
 a {
   background: transparent;
@@ -913,7 +904,7 @@ body {
   line-height: 1.5em;
   color: #464646;
   /* background-color: #fff; */
-  background-image: url('images/bg.gif');
+  background-image: url('../images/bg.gif');
   background-repeat: repeat;
   }
 input,
@@ -5007,10 +4998,10 @@ a.list-group-item:focus {
   }
 .panel {
   margin-bottom: 20px;
-  background-color: #fff;
-  border: 1px solid transparent;
-  border-color: #ddd;
-  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.60);
+  /* border: 1px solid transparent; */
+  /* border-color: #ddd; */
+  border-radius: 18px;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
           box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
   }

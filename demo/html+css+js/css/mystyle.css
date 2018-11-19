@@ -117,3 +117,129 @@ line-height: 1.5em;
 .login-form{
     margin-top: 30px;
 }
+.consult-category .tag{
+    color: #979292;
+}
+.consult-category{
+    width: 580px;
+}
+.contains .panel{
+    float: left;
+    margin-left: 10px;
+}
+.contains{
+    width: 960px;
+    margin: auto;  position: relative;  top: 0; left: 0; bottom: 0; right: 0;
+}
+.qualification,
+.tag,
+.instr
+{
+    color: #979292;
+    font-size: 12px;
+}
+
+.board-title-h1{
+    font-weight: bold;
+    font-size: 20px;
+}
+.intr{
+    font-size: 12px;
+}
+
+.consult-panel .panel-body{
+    width: 500px;
+    margin: auto;  position: relative;  top: 0; left: 0; bottom: 0; right: 0;
+}
+.consult-panel{
+    width: 580px;
+}
+.consult-panel .name{
+    font-size: 16px;
+}
+.app-state{
+    display: block;
+    text-align: center;
+    width: 4em;
+    line-height: 1.5em;
+    background-color: #d75455;
+    color: #ffffff;
+    border-radius: 5px;
+    float: left;
+    margin-right: 10px;
+}
+.crightlist-detail .num{
+    /* display: block; */
+    color: #d75455;
+    /* float: left; */
+    /* padding-left: 10px; */
+}
+.data span{
+    padding-left: 5px;
+}
+.data{
+    margin-top: 5px;
+}
+.app-state:hover{
+    text-decoration: none;
+    background-color: #e26162;
+}
+.timetable{
+    margin-top: 5px;
+}
+.timetable .time-cell-able,
+.timetable .time-cell-disable
+{   display: block;
+    width: 3em;
+    line-height: 1.5em;
+    float: left;
+    margin-left: 5px;
+    margin-top: 4px;
+}
+.timetable .time-cell-able{
+    background-color: #ec6a6b;
+}
+.timetable .time-cell-disable{
+    background-color: #e8d1d2;
+}
+.timetable .time-cell-able a,
+.timetable .time-cell-disable a
+{   
+    display: block;
+    text-align: center;
+}
+.timetable .time-cell-able a{
+    color: #ec6a6b;
+}
+.timetable .time-cell-disable a{
+    color: #e8d1d2;
+}
+.timetable .time-cell-able a:hover{
+    color: #ffffff;
+}
+.timetable .time-cell-disable a:hover{
+    color: #ffffff;
+}
+.timetable .time-cell-able a:hover,
+.timetable .time-cell-disable a:hover
+{
+    text-decoration: none;
+}
+.timetable{
+    width: 200px;
+}
+.cleftlist-consultant{
+    margin-top: 10px;
+    width: 360px;
+    height: 80px;
+}
+.crightlist-consultant{
+    width: 500px;
+    height: 140px;
+    /* margin-top: 10px; */
+}
+.button-pager{
+    width: 960px;
+    margin: auto;  position: relative;  top: 0; left: 0; bottom: 0; right: 0;
+    /* background-color: #000000; */
+}

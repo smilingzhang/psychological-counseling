@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>咨询列表</title>
+    <!-- zui -->
+    <link href="css/zui-theme.css" rel="stylesheet">
+    <link href="css/zui.css" rel="stylesheet">
+    <link href="css/mystyle.css" rel="stylesheet">
+    <link href="lib/datetimepicker/datetimepicker.min.css" rel="stylesheet">
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/attached.js"></script>
+    <script src="js/zui.js"></script> 
+    <script src="js/zui.lite.js"></script>
+    <script src="lib/datetimepicker/datetimepicker.min.js"></script>
+  </head>
+  <body>
+
+    <!-- 在此处编码你的创意 -->
+    <div class="contains">
+        <div class="panel consult-category">
+            <div class="panel-body">
+                <span class="tag">分类</span>
+                <span>婚姻</span><span>亲子</span><span>职场</span><span>健康</span>
+            </br>
+                <span class="tag">筛选</span>
+                <div class="input-group date form-date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                    <input class="form-control" size="16" type="text" value="" readonly="" onclick='activeCalindar()'>
+                    <span class="input-group-addon"><span class="icon-remove"></span></span>
+                    <span class="input-group-addon"><span class="icon-calendar"></span></span>
+                </div>
+                <script type="text/javascript">
+                    $(".form-date").datetimepicker(
+                        {
+                            language:  "zh-CN",
+                            weekStart: 1,
+                            todayBtn:  1,
+                            autoclose: 1,
+                            todayHighlight: 1,
+                            startView: 2,
+                            minView: 2,
+                            forceParse: 0,
+                            format: "yyyy-mm-dd"
+                        });
+                </script>
+            </br>
+                <span class="tag">咨询方式</span>
+                <span>语音咨询</span>
+                <span>视频咨询</span>
+                <span>面对面咨询</span>
+            </div>
+        </div>
+        <!--左侧专家列表-->
+        <div class="panel consult-panel">
+            <div class="panel-body">
+                <!--一个专家-->
+                <div class="crightlist-consultant">
+                    <!--头像-->
+                    <div><img src="images/consultant.png" style="width: 100px;margin-right:20px;float: left;"/></div>
+                    <!--具体信息-->
+                    <div class="crightlist-detail">
+                        <!--名字-->
+                        <span class="name">梁田</span>
+                        <!--资质-->
+                        <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
+                        <div class="data">
+                            <!--预约状态，跳转到预约界面-->
+                            <a class="app-state"href="#">可预约</a>
+                            <!--从业年限-->
+                            <span>从业年限</span><span class="num">5</span>
+                            <!--好评率-->
+                            <span>好评率</span><span class="num">100%</span>
+                            <!--价格-->
+                            <span>价格</span><span class="num">￥500/次</span>
+                        </div>
+                        <!--时间表-->
+                        <!--time-cell-able:可预约 time-cell-disable:不可预约-->
+                        <div class="timetable">
+                            <span class="time-cell-able"><a href="#">9:00</a></span>
+                            <span class="time-cell-disable"><a href="#">10:00</a></span>
+                            <span class="time-cell-disable"><a href="#">11:00</a></span>
+                            <span class="time-cell-disable"><a href="#">14:00</a></span>                            
+                            <span class="time-cell-able"><a href="#">15:00</a></span>
+                            <span class="time-cell-disable"><a href="#">16:00</a></span>
+                            <span class="time-cell-able"><a href="#">17:00</a></span>
+                            <span class="time-cell-able"><a href="#">18:00</a></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!--下面都是重复的-->
+                <!--一个专家-->
+                <div class="crightlist-consultant">
+                    <!--头像-->
+                    <div><img src="images/consultant.png" style="width: 100px;margin-right:20px;float: left;"/></div>
+                    <!--具体信息-->
+                    <div class="crightlist-detail">
+                        <!--名字-->
+                        <span class="name">梁田</span>
+                        <!--资质-->
+                        <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
+                        <div class="data">
+                            <!--预约状态，跳转到预约界面-->
+                            <a class="app-state"href="#">可预约</a>
+                            <!--从业年限-->
+                            <span>从业年限</span><span class="num">5</span>
+                            <!--好评率-->
+                            <span>好评率</span><span class="num">100%</span>
+                            <!--价格-->
+                            <span>价格</span><span class="num">￥500/次</span>
+                        </div>
+                        <!--时间表-->
+                        <!--time-cell-able:可预约 time-cell-disable:不可预约-->
+                        <div class="timetable">
+                            <span class="time-cell-able"><a href="#">9:00</a></span>
+                            <span class="time-cell-disable"><a href="#">10:00</a></span>
+                            <span class="time-cell-disable"><a href="#">11:00</a></span>
+                            <span class="time-cell-disable"><a href="#">14:00</a></span>                            
+                            <span class="time-cell-able"><a href="#">15:00</a></span>
+                            <span class="time-cell-disable"><a href="#">16:00</a></span>
+                            <span class="time-cell-able"><a href="#">17:00</a></span>
+                            <span class="time-cell-able"><a href="#">18:00</a></span>
+                        </div>
+                    </div>
+                </div>
+                <!--一个专家-->
+                <div class="crightlist-consultant">
+                    <!--头像-->
+                    <div><img src="images/consultant.png" style="width: 100px;margin-right:20px;float: left;"/></div>
+                    <!--具体信息-->
+                    <div class="crightlist-detail">
+                        <!--名字-->
+                        <span class="name">梁田</span>
+                        <!--资质-->
+                        <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
+                        <div class="data">
+                            <!--预约状态，跳转到预约界面-->
+                            <a class="app-state"href="#">可预约</a>
+                            <!--从业年限-->
+                            <span>从业年限</span><span class="num">5</span>
+                            <!--好评率-->
+                            <span>好评率</span><span class="num">100%</span>
+                            <!--价格-->
+                            <span>价格</span><span class="num">￥500/次</span>
+                        </div>
+                        <!--时间表-->
+                        <!--time-cell-able:可预约 time-cell-disable:不可预约-->
+                        <div class="timetable">
+                            <span class="time-cell-able"><a href="#">9:00</a></span>
+                            <span class="time-cell-disable"><a href="#">10:00</a></span>
+                            <span class="time-cell-disable"><a href="#">11:00</a></span>
+                            <span class="time-cell-disable"><a href="#">14:00</a></span>                            
+                            <span class="time-cell-able"><a href="#">15:00</a></span>
+                            <span class="time-cell-disable"><a href="#">16:00</a></span>
+                            <span class="time-cell-able"><a href="#">17:00</a></span>
+                            <span class="time-cell-able"><a href="#">18:00</a></span>
+                        </div>
+                    </div>
+                </div>
+                <!--一个专家-->
+                <div class="crightlist-consultant">
+                        <!--头像-->
+                        <div><img src="images/consultant.png" style="width: 100px;margin-right:20px;float: left;"/></div>
+                        <!--具体信息-->
+                        <div class="crightlist-detail">
+                            <!--名字-->
+                            <span class="name">梁田</span>
+                            <!--资质-->
+                            <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
+                            <div class="data">
+                                <!--预约状态，跳转到预约界面-->
+                                <a class="app-state"href="#">可预约</a>
+                                <!--从业年限-->
+                                <span>从业年限</span><span class="num">5</span>
+                                <!--好评率-->
+                                <span>好评率</span><span class="num">100%</span>
+                                <!--价格-->
+                                <span>价格</span><span class="num">￥500/次</span>
+                            </div>
+                            <!--时间表-->
+                            <!--time-cell-able:可预约 time-cell-disable:不可预约-->
+                            <div class="timetable">
+                                <span class="time-cell-able"><a href="#">9:00</a></span>
+                                <span class="time-cell-disable"><a href="#">10:00</a></span>
+                                <span class="time-cell-disable"><a href="#">11:00</a></span>
+                                <span class="time-cell-disable"><a href="#">14:00</a></span>                            
+                                <span class="time-cell-able"><a href="#">15:00</a></span>
+                                <span class="time-cell-disable"><a href="#">16:00</a></span>
+                                <span class="time-cell-able"><a href="#">17:00</a></span>
+                                <span class="time-cell-able"><a href="#">18:00</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--一个专家-->
+                <div class="crightlist-consultant">
+                        <!--头像-->
+                        <div><img src="images/consultant.png" style="width: 100px;margin-right:20px;float: left;"/></div>
+                        <!--具体信息-->
+                        <div class="crightlist-detail">
+                            <!--名字-->
+                            <span class="name">梁田</span>
+                            <!--资质-->
+                            <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
+                            <div class="data">
+                                <!--预约状态，跳转到预约界面-->
+                                <a class="app-state"href="#">可预约</a>
+                                <!--从业年限-->
+                                <span>从业年限</span><span class="num">5</span>
+                                <!--好评率-->
+                                <span>好评率</span><span class="num">100%</span>
+                                <!--价格-->
+                                <span>价格</span><span class="num">￥500/次</span>
+                            </div>
+                            <!--时间表-->
+                            <!--time-cell-able:可预约 time-cell-disable:不可预约-->
+                            <div class="timetable">
+                                <span class="time-cell-able"><a href="#">9:00</a></span>
+                                <span class="time-cell-disable"><a href="#">10:00</a></span>
+                                <span class="time-cell-disable"><a href="#">11:00</a></span>
+                                <span class="time-cell-disable"><a href="#">14:00</a></span>                            
+                                <span class="time-cell-able"><a href="#">15:00</a></span>
+                                <span class="time-cell-disable"><a href="#">16:00</a></span>
+                                <span class="time-cell-able"><a href="#">17:00</a></span>
+                                <span class="time-cell-able"><a href="#">18:00</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--一个专家-->
+                <div class="crightlist-consultant">
+                        <!--头像-->
+                        <div><img src="images/consultant.png" style="width: 100px;margin-right:20px;float: left;"/></div>
+                        <!--具体信息-->
+                        <div class="crightlist-detail">
+                            <!--名字-->
+                            <span class="name">梁田</span>
+                            <!--资质-->
+                            <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
+                            <div class="data">
+                                <!--预约状态，跳转到预约界面-->
+                                <a class="app-state"href="#">可预约</a>
+                                <!--从业年限-->
+                                <span>从业年限</span><span class="num">5</span>
+                                <!--好评率-->
+                                <span>好评率</span><span class="num">100%</span>
+                                <!--价格-->
+                                <span>价格</span><span class="num">￥500/次</span>
+                            </div>
+                            <!--时间表-->
+                            <!--time-cell-able:可预约 time-cell-disable:不可预约-->
+                            <div class="timetable">
+                                <span class="time-cell-able"><a href="#">9:00</a></span>
+                                <span class="time-cell-disable"><a href="#">10:00</a></span>
+                                <span class="time-cell-disable"><a href="#">11:00</a></span>
+                                <span class="time-cell-disable"><a href="#">14:00</a></span>                            
+                                <span class="time-cell-able"><a href="#">15:00</a></span>
+                                <span class="time-cell-disable"><a href="#">16:00</a></span>
+                                <span class="time-cell-able"><a href="#">17:00</a></span>
+                                <span class="time-cell-able"><a href="#">18:00</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--一个专家-->
+                <div class="crightlist-consultant">
+                        <!--头像-->
+                        <div><img src="images/consultant.png" style="width: 100px;margin-right:20px;float: left;"/></div>
+                        <!--具体信息-->
+                        <div class="crightlist-detail">
+                            <!--名字-->
+                            <span class="name">梁田</span>
+                            <!--资质-->
+                            <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
+                            <div class="data">
+                                <!--预约状态，跳转到预约界面-->
+                                <a class="app-state"href="#">可预约</a>
+                                <!--从业年限-->
+                                <span>从业年限</span><span class="num">5</span>
+                                <!--好评率-->
+                                <span>好评率</span><span class="num">100%</span>
+                                <!--价格-->
+                                <span>价格</span><span class="num">￥500/次</span>
+                            </div>
+                            <!--时间表-->
+                            <!--time-cell-able:可预约 time-cell-disable:不可预约-->
+                            <div class="timetable">
+                                <span class="time-cell-able"><a href="#">9:00</a></span>
+                                <span class="time-cell-disable"><a href="#">10:00</a></span>
+                                <span class="time-cell-disable"><a href="#">11:00</a></span>
+                                <span class="time-cell-disable"><a href="#">14:00</a></span>                            
+                                <span class="time-cell-able"><a href="#">15:00</a></span>
+                                <span class="time-cell-disable"><a href="#">16:00</a></span>
+                                <span class="time-cell-able"><a href="#">17:00</a></span>
+                                <span class="time-cell-able"><a href="#">18:00</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--一个专家-->
+                <div class="crightlist-consultant">
+                        <!--头像-->
+                        <div><img src="images/consultant.png" style="width: 100px;margin-right:20px;float: left;"/></div>
+                        <!--具体信息-->
+                        <div class="crightlist-detail">
+                            <!--名字-->
+                            <span class="name">梁田</span>
+                            <!--资质-->
+                            <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
+                            <div class="data">
+                                <!--预约状态，跳转到预约界面-->
+                                <a class="app-state"href="#">可预约</a>
+                                <!--从业年限-->
+                                <span>从业年限</span><span class="num">5</span>
+                                <!--好评率-->
+                                <span>好评率</span><span class="num">100%</span>
+                                <!--价格-->
+                                <span>价格</span><span class="num">￥500/次</span>
+                            </div>
+                            <!--时间表-->
+                            <!--time-cell-able:可预约 time-cell-disable:不可预约-->
+                            <div class="timetable">
+                                <span class="time-cell-able"><a href="#">9:00</a></span>
+                                <span class="time-cell-disable"><a href="#">10:00</a></span>
+                                <span class="time-cell-disable"><a href="#">11:00</a></span>
+                                <span class="time-cell-disable"><a href="#">14:00</a></span>                            
+                                <span class="time-cell-able"><a href="#">15:00</a></span>
+                                <span class="time-cell-disable"><a href="#">16:00</a></span>
+                                <span class="time-cell-able"><a href="#">17:00</a></span>
+                                <span class="time-cell-able"><a href="#">18:00</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--一个专家-->
+                <div class="crightlist-consultant">
+                        <!--头像-->
+                        <div><img src="images/consultant.png" style="width: 100px;margin-right:20px;float: left;"/></div>
+                        <!--具体信息-->
+                        <div class="crightlist-detail">
+                            <!--名字-->
+                            <span class="name">梁田</span>
+                            <!--资质-->
+                            <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
+                            <div class="data">
+                                <!--预约状态，跳转到预约界面-->
+                                <a class="app-state"href="#">可预约</a>
+                                <!--从业年限-->
+                                <span>从业年限</span><span class="num">5</span>
+                                <!--好评率-->
+                                <span>好评率</span><span class="num">100%</span>
+                                <!--价格-->
+                                <span>价格</span><span class="num">￥500/次</span>
+                            </div>
+                            <!--时间表-->
+                            <!--time-cell-able:可预约 time-cell-disable:不可预约-->
+                            <div class="timetable">
+                                <span class="time-cell-able"><a href="#">9:00</a></span>
+                                <span class="time-cell-disable"><a href="#">10:00</a></span>
+                                <span class="time-cell-disable"><a href="#">11:00</a></span>
+                                <span class="time-cell-disable"><a href="#">14:00</a></span>                            
+                                <span class="time-cell-able"><a href="#">15:00</a></span>
+                                <span class="time-cell-disable"><a href="#">16:00</a></span>
+                                <span class="time-cell-able"><a href="#">17:00</a></span>
+                                <span class="time-cell-able"><a href="#">18:00</a></span>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div><!--左侧专家列表--End-->
+        <!--右侧热门专家列表-->
+        <div class="panel" style="width: 360px;">
+            <div class="panel-body">
+                <div class="right-list">
+                    <span class="board-title-h1">热门专家</span>
+                    <!--一个专家-->
+                    <div class="cleftlist-consultant">
+                        <!--头像-->
+                        <img class="avatar-round" src="images/consultant2.png" style="float:left;width: 66px;"/>
+                        <!--咨询师名称-->
+                        <span class="name">梁田</span>           
+                        <!--资质-->
+                        <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
+                        <!--个性签名-->
+                        <span class="intr">人只活一次，去自己尝试没体验过的</span></br>
+                    </div>
+                    <!--下面都是重复的-->
+                    <!--一个专家-->
+                    <div class="cleftlist-consultant">
+                            <!--头像-->
+                            <img class="avatar-round" src="images/consultant2.png" style="float:left;width: 66px;"/>
+                            <!--咨询师名称-->
+                            <span class="name">梁田</span>           
+                            <!--资质-->
+                            <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
+                            <!--个性签名-->
+                            <span class="intr">人只活一次，去自己尝试没体验过的</span></br>
+                    </div>
+                    <!--一个专家-->
+                    <div class="cleftlist-consultant">
+                            <!--头像-->
+                            <img class="avatar-round" src="images/consultant2.png" style="float:left;width: 66px;"/>
+                            <!--咨询师名称-->
+                            <span class="name">梁田</span>           
+                            <!--资质-->
+                            <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
+                            <!--个性签名-->
+                            <span class="intr">人只活一次，去自己尝试没体验过的</span></br>
+                    </div>
+                        <!--一个专家-->
+                    <div class="cleftlist-consultant">
+                            <!--头像-->
+                            <img class="avatar-round" src="images/consultant2.png" style="float:left;width: 66px;"/>
+                            <!--咨询师名称-->
+                            <span class="name">梁田</span>           
+                            <!--资质-->
+                            <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
+                            <!--个性签名-->
+                            <span class="intr">人只活一次，去自己尝试没体验过的</span></br>
+                    </div>
+                        <!--一个专家-->
+                        <div class="cleftlist-consultant">
+                                <!--头像-->
+                                <img class="avatar-round" src="images/consultant2.png" style="float:left;width: 66px;"/>
+                                <!--咨询师名称-->
+                                <span class="name">梁田</span>           
+                                <!--资质-->
+                                <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
+                                <!--个性签名-->
+                                <span class="intr">人只活一次，去自己尝试没体验过的</span></br>
+                        </div>
+                            <!--一个专家-->
+                    <div class="cleftlist-consultant">
+                            <!--头像-->
+                            <img class="avatar-round" src="images/consultant2.png" style="float:left;width: 66px;"/>
+                            <!--咨询师名称-->
+                            <span class="name">梁田</span>           
+                            <!--资质-->
+                            <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
+                            <!--个性签名-->
+                            <span class="intr">人只活一次，去自己尝试没体验过的</span></br>
+                    </div>
+                        <!--一个专家-->
+                        <div class="cleftlist-consultant">
+                                <!--头像-->
+                                <img class="avatar-round" src="images/consultant2.png" style="float:left;width: 66px;"/>
+                                <!--咨询师名称-->
+                                <span class="name">梁田</span>           
+                                <!--资质-->
+                                <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
+                                <!--个性签名-->
+                                <span class="intr">人只活一次，去自己尝试没体验过的</span></br>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <!--分页-->
+        <!-- <div class="button-pager">
+            <ul class="pager">
+                <li class="previous disabled"><a href="your/nice/url">«</a></li>
+                <li class="active"><a href="your/nice/url">1</a></li>
+                <li><a href="your/nice/url">2</a></li>
+                <li><a href="your/nice/url">3</a></li>
+                <li><a href="your/nice/url">4</a></li>
+                <li><a href="your/nice/url">5</a></li>
+                <li class="next"><a href="your/nice/url">»</a></li>
+            </ul>
+        </div> -->
+    </div><!--内容结束-->
+
+    <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <!-- ZUI Javascript组件 -->
+    <script src="js/zui.min.js"></script>
+  </body>
+</html>
