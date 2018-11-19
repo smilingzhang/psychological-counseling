@@ -1,0 +1,119 @@
+
+.navbar{
+    background-color: #d75455;
+    height: 50px;
+    display: block;
+}
+.navbar .nav-list{
+    z-index: 0;
+    display: block;
+
+}
+.navbar .nav-list li{
+    list-style: none;
+    float: left;
+    width: 80px;
+    /* margin-left: 30px; */
+}
+.navbar .nav-list .search{
+    width: 350px;
+    float: left;
+}
+.navbar .nav-list a{
+    display: block;
+    color: white;
+    line-height: 50px;
+    text-align: center;
+    text-decoration-line: none;
+    font-size: 16px;
+}
+.navbar .nav-list .list:hover{
+    /* color: #1ABC9C; */
+    height: 50px;
+    background-color: #ec6a6b;
+}
+
+/* .navbar .nav-list .active{
+    height: 50px;
+    background-color:#921600;
+} */
+.navbar input:checked~.nav-list {
+    position: absolute;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+     display: block;
+     background-color: #d75455;
+     z-index: 0;
+     margin-top: 50px;
+
+}
+.navbar input:checked~.nav-list li{
+ clear: both;
+ background-color: #d75455;
+
+}
+.navbar label{
+    display: none;
+}
+.navbar .nav-toggle{
+    display: none;
+}
+@media screen and (max-width: 600px) {
+    .navbar .nav-toggle{
+        display: none;
+    }
+    .navbar label{
+        display: block;
+        z-index: 4;
+    }
+    .navbar .nav-list{
+        display: none;
+        margin-left: 0px;
+    }
+    .navbar .nav-list li{
+        margin-left: 0px;
+    }
+    .navbar  .menu-icon{
+         display: block;
+         float: left;
+         width: 36px;
+         height: 26px;
+         line-height: 0;
+         padding-top: 10px;
+         text-align: center;
+
+    }
+    .navbar  .menu-icon>svg path{
+         fill: white;
+    }
+    .navbar  label[for="nav-toggler"] {
+         display: block;
+         float: left;
+         width: 36px;
+         height: 36px;
+         z-index: 2;
+         cursor: pointer;
+     }
+}
+
+.loginpanel{
+    width: 300px;
+    height: 350px;
+    margin: auto;  position: absolute;  top: 0; left: 0; bottom: 0; right: 0;
+}
+.head{
+    width: 300px;
+    height: 50px;
+}
+.head h1{
+    display: inline;
+    text-align: center;
+}
+.login-tag p{
+text-align: center;
+line-height: 1.5em;
+}
+.login-form{
+    margin-top: 30px;
+}
