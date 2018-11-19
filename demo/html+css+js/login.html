@@ -14,19 +14,37 @@
   </head>
   <body>
     <!-- 在此处编码你的创意 -->
-    <div class="panel">
-        <div class="panel-body">
-            <!--导航条-->
-            <ul class="nav nav-secondary">
-                <li class="active"><a href="your/nice/url">注册/快速登录</a></li>
-                <li><a href="your/nice/url">账号密码登录</a></li>
-            </ul>
-            <!--手机号登录表单-->
-            <form action="" method="POST">
-                <input type="text" class="form-control" placeholder="11位手机号">
-            </form>
+    <div class="contaisn">
+        <div class="head">
+            <img src="images/logo.png"/>
+            <h1>明心社工事务所</h1>
         </div>
-    </div>
+        <div class="panel loginpanel">
+            <div class="panel-body">
+                <!--导航条-->
+                <ul class="nav nav-secondary">
+                    <li class="active"><a href="login.html?type=regist">注册/快速登录</a></li>
+                    <li><a href="login.html?type=login">账号密码登录</a></li>
+                </ul>
+                <!--手机号登录表单-->
+                <form class="login-form" action="" method="POST">
+                    <input type="text" class="form-control" placeholder="11位手机号"></br>
+                    <input type="text" class="form-control" placeholder="验证码" style="width: 170px;display: block;float: left;">
+                    <a class="btn btn-primary" href="your/url/">获取验证码</a></br>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="isAgreeProtocal"> 同意《XXX用户注册协议》
+                        </label>
+                    </div>
+                    <button class="btn btn-block">快速登录</button>
+                    <div class="login-tag">
+                        <p>-----------------------</p>
+                        <p>第三方登录</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> 
     <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <!-- ZUI Javascript组件 -->

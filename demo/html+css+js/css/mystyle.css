@@ -96,3 +96,24 @@
          cursor: pointer;
      }
 }
+
+.loginpanel{
+    width: 300px;
+    height: 350px;
+    margin: auto;  position: absolute;  top: 0; left: 0; bottom: 0; right: 0;
+}
+.head{
+    width: 300px;
+    height: 50px;
+}
+.head h1{
+    display: inline;
+    text-align: center;
+}
+.login-tag p{
+text-align: center;
+line-height: 1.5em;
+}
+.login-form{
+    margin-top: 30px;
+}
