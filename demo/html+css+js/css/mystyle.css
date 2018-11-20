@@ -243,3 +243,72 @@ line-height: 1.5em;
     margin: auto;  position: relative;  top: 0; left: 0; bottom: 0; right: 0;
     /* background-color: #000000; */
 }
+.footer{
+    /* width: 1920px; */
+    height: 419px;
+    background-image: none;
+    background-color: #33221f;
+}
+.footer .container{
+    width: 750px;
+    margin: auto;  position: relative;  top: 0; left: 0; bottom: 0; right: 0;
+}
+.footer a{
+    color: #ffffff;
+}
+.footer a:hover{
+    color: #d75455;
+    text-decoration: none;
+}
+#footer-social-account,
+#footer-link,
+#footer-contact,
+.feedback
+{
+    float: left;
+    line-height: 1.5em;
+}
+#footer-link,
+#footer-contact
+{
+    margin-left: 60px;
+    font-size: 12px;
+}
+.feedback{
+    margin-left: 90px;
+}
+.footer-title-h1{
+    font-size: 20px;
+    color: #ffffff;
+    line-height: 1.5em;
+}
+.up-part{
+    height: 150px;
+    margin-top: 80px;
+}
+#footer-contact .tel,
+#footer-contact .phone,
+#footer-contact .add
+{
+ color: #ffffff;
+ line-height: 2em;
+}
+#footer-social-account img{
+    margin-right: 10px;
+}
+.button-part{
+    width: 750px;
+    margin: auto;  position: relative;  top: 0; left: 0; bottom: 0; right: 0;
+}
+.button-part span{
+    color: #883231;
+    font-weight: bold;
+}
+.button-part .footer-icp{
+    display: block;
+    text-align: center;
+    width: 750px;
+}
+#footer-contact .icon{
+    width: 1em;
+}
