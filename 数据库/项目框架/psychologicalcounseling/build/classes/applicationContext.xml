@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+	<description>Spring公共配置 </description>
+
+	<!-- 配置Spring上下文的注解 -->
+	<context:annotation-config />
+	<!-- 使用annotation 自动注册bean, 并保证@Required、@Autowired的属性被注入 -->
+	<context:component-scan base-package="com.psychologicalcounseling">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	<!-- 属性文件位置 -->
+	<context:property-placeholder location="classpath:*.properties" />
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="com.psychologicalcounseling.entity" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+				<prop key="hibernate.useUnicode">${hibernate.useUnicode}</prop>
+				<prop key="hibernate.characterEncoding">${hibernate.characterEncoding}</prop>
+				<prop key="javax.persistence.validation.mode">none</prop> 
+			</props>
+		</property>
+	</bean>
+	<!--Hibernate SessionFactory -->
+	<!--bean id="sessionFactory"
+		class="org.springframework.orm.hibernate.LocalSessionFactoryBean">
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.service.jdbc.connections.spi.provider_class">com.jolbox.bonecp.provider.BoneCPConnectionProvider</prop>
+				<prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
+				<prop key="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/psychological_counseling?useUnicode=true&amp;characterEncoding=UTF-8</prop>
+				<prop key="hibernate.connection.username">root</prop>
+				<prop key="hibernate.connection.password"></prop>
+				<prop key="bonecp.idleMaxAge">240</prop>
+				<prop key="bonecp.idleConnectionTestPeriod">60</prop>
+				<prop key="bonecp.partitionCount">3</prop>
+				<prop key="bonecp.acquireIncrement">10</prop>
+				<prop key="bonecp.maxConnectionsPerPartition">60</prop>
+				<prop key="bonecp.minConnectionsPerPartition">20</prop>
+				<prop key="bonecp.statementsCacheSize">50</prop>
+				<prop key="bonecp.releaseHelperThreads">3</prop>
+			</props>
+		</property>
+	</bean-->
+	</beans>
