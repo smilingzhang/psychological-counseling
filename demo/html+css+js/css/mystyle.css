@@ -1,4 +1,6 @@
-
+.panel{
+    padding: 10px;
+}
 .navbar{
     background-color: #d75455;
     height: 50px;
@@ -411,4 +413,108 @@ line-height: 1.5em;
     display: block;
     margin: auto;  position: relative;  top: 0; left: 0; bottom: 0; right: 0;
     width: 400px;
+}
+
+.business-diagram{
+    width: 600px;
+    height: 150px;;
+    background-color: #d7545431;
+    margin: 30px;
+}
+.appointment-body{
+    width: 960px;
+    margin: auto;  position: relative;  top: 0; left: 0; bottom: 0; right: 0;
+}
+.consulter-info{
+    width: 60%;
+    height: 120px;
+}
+.consulter-info img{
+    width: 80px;
+    display: block;
+    border-radius: 100%;
+    border-color: #e8d1d2;
+    float: left;
+    margin-right: 20px;
+}
+.consulter-info a{
+    color: #33221f;
+    font-size: 18px;
+}
+.consulter-info .label{
+    background-color: #ec6a6b;
+}
+.pay-info{
+    display: block;
+    width: 37%;
+    height: 120px;
+    padding: 10px;
+}
+.pay-info span{
+    display: block;
+    font-size: 18px;
+    float: left;
+}
+.pay-info .tag-stress{
+    color: #d75455;
+}
+.pay-info .money{
+    color: #d75455;
+    font-weight: 700;
+    font-size: 22px;
+    text-align: center;
+    padding: 20px;
+}
+.business-panel{
+    width: 800px;
+}
+.business-panel .board-title-h1{
+    color: #d75455;
+    font-size: 20px;
+    line-height: 2em;
+}
+.business-panel p{
+    text-indent: 2em;
+    color: #d75455;
+    line-height: 1.5em;
+}
+.pay .board-title-h1{
+    display: block;
+    width: 50px;
+    margin: auto;  position: relative;  top: 0; left: 0; bottom: 0; right: 0;
+}
+.pay-method{
+    width: 250px;
+    display: block;
+    margin: auto;  position: relative;  top: 0; left: 0; bottom: 0; right: 0;
+}
+.pay-method img{
+    width: 80px;
+    margin: 20px;
+}
+.pay-method img:hover{
+    opacity: 0.8;
+}
+.protocal{
+    width: 400px;
+    display: block;
+    margin: auto;  position: relative;  top: 0; left: 0; bottom: 0; right: 0;
+}
+.protocal input{
+    padding: 10px;
+}
+.consulter{
+    width: 960px;
+}
+.consulter img{
+    display: block;
+    width: 100px;
+    float: left;
+}
+.block{
+    margin: 20px;
+}
+.consult-panel-body .board-title-h2{
+    font-size: 16px;
+    font-weight: 600
 }
