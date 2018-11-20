@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>评论</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="comment.css" type="text/css" />
+	<script type="text/javascript" src="comment.js"></script>
+	<style type="text/css">
+		div{
+				
+				border:3px solid #000;
+				width: 500px;
+				height: 200px;
+				margin: auto;
+			}
+		#look{
+			float: left;
+			margin-left: 10px;
+			margin-top: 5px;
+		}
+		#biaoqing{
+			display: none;
+			float: left;
+			margin-left:430px;
+			width:300px;
+			height:200px;
+			border:1px solid #000;
+			overflow: auto;
+		}
+		#form{
+			border: 2px solid #000
+			width: 500px;
+			height: 150px;
+			margin-top: 37px;
+		}
+		#text{
+			margin-left:10px; 
+			width:470px;
+			height:110px;
+		}
+		#submit{
+			margin-top: 10px;
+			margin-left: 440px;
+		}
+	</style>
+</head>
+<body>
+<!--
+	<div id="comment">
+		<a href="#" id="look"><img src="2.png"></a>
+		<textarea class="area"></textarea>
+		<ul class="button">
+			<li  class="send">评论</li>
+		</ul>
+	</div>
+-->
+	<div id="biaoqing"></div>
+	<hr>
+	<div id="comment">
+		<a href="#" id="look"><img src="2.png"></a>
+		<form id="form" action="" method="">
+			<input id="text" type="textarea" value="在这里输入您的评论。"><br>
+			<input id="submit" type="submit" name="评论" value="评论">
+		</form>
+	</div>
+</body>
+<script type="text/javascript">
+	var text =document.getElementById("text"); 
+	var biaoqing=document.getElementById("biaoqing");
+	var look = document.getElementById("look");
+	var look2 = document.getElementById("look2");
+	//表情格式
+	for(var i=1;i<=77;i++){
+		biaoqing.innerHTML+='<button id="look2" value="'+i+'"><img src="look/'+i+'.gif"/></button>'
+	}
+	look.onclick=function(){
+		if(biaoqing.style.display!='none')
+			biaoqing.style.display='none';
+		else
+			biaoqing.style.display='block';
+	}
+	var bq=biaoqing.children;
+	window.onload=function(){
+		for(var i=0;i<bq.length;i++){
+			bq[i].index=i+1;
+			bq[i].onclick=function(){
+				text.value+='<img src="look/'+this.index+'.gif"/>';
+				text.focus();
+			}
+		}
+	}
+</script>
+</html>
