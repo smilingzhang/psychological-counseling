@@ -117,8 +117,33 @@ line-height: 1.5em;
 .login-form{
     margin-top: 30px;
 }
+.consult-category .panel-body{
+    width: 500px;
+}
+.consult-category{
+    line-height: 3em;
+}
 .consult-category .tag{
-    color: #979292;
+    color: #d75455;
+    font-size: 14px;
+}
+.consult-category .date{
+    float: left;
+    margin-left: 0;
+    width: 200px;
+    height: 30px; 
+    clear: right;
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
+.consult-category a{
+    margin-left: 10px;
+    color: #33221f;
+    /* line-height: 2em; */
+}
+.consult-category a:hover{
+    color: #d75455;
+    text-decoration: none;
 }
 .consult-category{
     width: 580px;
@@ -130,6 +155,7 @@ line-height: 1.5em;
 .contains{
     width: 960px;
     margin: auto;  position: relative;  top: 0; left: 0; bottom: 0; right: 0;
+    margin-bottom: 100px;
 }
 .qualification,
 .tag,
@@ -153,20 +179,27 @@ line-height: 1.5em;
 }
 .consult-panel{
     width: 580px;
+    height: 1300px;;
 }
 .consult-panel .name{
     font-size: 16px;
 }
-.app-state{
+.app-state-able,.app-state-disable{
     display: block;
     text-align: center;
     width: 4em;
     line-height: 1.5em;
-    background-color: #d75455;
+    
     color: #ffffff;
     border-radius: 5px;
     float: left;
     margin-right: 10px;
+}
+.app-state-able{
+    background-color: #d75455;
+}
+.app-state-disable{
+    background-color: #e8d1d2;
 }
 .crightlist-detail .num{
     /* display: block; */
@@ -180,7 +213,7 @@ line-height: 1.5em;
 .data{
     margin-top: 5px;
 }
-.app-state:hover{
+.app-state-able:hover{
     text-decoration: none;
     background-color: #e26162;
 }
@@ -233,19 +266,25 @@ line-height: 1.5em;
     width: 360px;
     height: 80px;
 }
+.crightlist-consultant a:hover{
+    text-decoration: none;
+    color: #ffffff;
+}
 .crightlist-consultant{
     width: 500px;
     height: 140px;
     /* margin-top: 10px; */
 }
 .button-pager{
-    width: 960px;
-    margin: auto;  position: relative;  top: 0; left: 0; bottom: 0; right: 0;
+    /* display: block; */
+    width: 300px;
+    clear: both;
+    margin: auto 0;
     /* background-color: #000000; */
 }
 .footer{
     /* width: 1920px; */
-    height: 419px;
+    height: 360px;
     background-image: none;
     background-color: #33221f;
 }

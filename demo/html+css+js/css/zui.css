@@ -916,7 +916,7 @@ textarea {
   line-height: inherit;
   }
 a {
-  color: #145ccd;
+  color: #6e0706;
   text-decoration: none;
   -webkit-transition: all .4s cubic-bezier(.175, .885, .32, 1);
        -o-transition: all .4s cubic-bezier(.175, .885, .32, 1);
@@ -5770,8 +5770,8 @@ pre code {
   z-index: 3;
   color: #fff;
   cursor: default;
-  background-color: #3280fc;
-  border-color: #3280fc;
+  background-color:#d75455;
+  border-color: #d75455;
   }
 .pager > li.disabled > span,
 .pager > li.disabled > span:hover,
