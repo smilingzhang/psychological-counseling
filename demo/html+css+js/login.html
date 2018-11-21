@@ -9,6 +9,8 @@
     <link href="css/zui-theme.css" rel="stylesheet">
     <link href="css/zui.css" rel="stylesheet">
     <link href="css/mystyle.css" rel="stylesheet">
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/verify.js"></script> 
     <script src="js/zui.js"></script> 
     <script src="js/zui.lite.js"></script> 
   </head>
@@ -29,27 +31,42 @@
                     </ul>
                 </div>
                 <!--手机号登录表单-->
-                <!-- <form class="login-form" action="" method="POST">
-                    <input type="text" class="form-control" placeholder="11位手机号"></br>
-                    <input type="text" class="form-control" placeholder="验证码" style="width: 170px;display: block;float: left;">
-                    <a class="btn btn-primary" href="your/url/">获取验证码</a></br>
-                    <div class="checkbox">
+                <form class="login-form" action="" method="POST">
+                    <!--错误信息-->
+                    <font name="loginErrMsg4Phone" id="loginErrMsg4Phone" class=""></font>
+                    <input name="phoneNum" type="text" class="form-control" placeholder="11位手机号" onkeyup="loginVerifyPhone()"></br>
+
+                    <!--错误信息-->
+                    <font name="loginErrMsg4Code" id="loginErrMsg4Code" class=""></font>
+                    <input name="verifyCode" type="text" class="form-control" placeholder="验证码" onkeyup="loginVerifyCode()" style="width: 150px;display: block;float: left;">
+                    <a class="btn btn-primarys" id="login-send-verifyCode"  onclick="sendVerifyCode()">获取验证码</a></br>
+
+                    <!-- <div class="checkbox">
                         <label>
                             <input type="checkbox" name="isAgreeProtocal"> 同意《XXX用户注册协议》
                         </label>
-                    </div>
-                    <button class="btn btn-block">快速登录</button>
+                    </div> -->
+                    <button class="btn btn-block login-form-submit-button" disabled="disabled">快速登录</button>
                     <div class="login-tag">
                         <p>-----------------------</p>
                         <p>第三方登录</p>
                     </div>
-                </form> -->
-                <!--账号密码登录表单-->
-                <form class="login-form" action="" method="POST">
-                    <input type="text" class="form-control" placeholder="11位手机号"><br/>
-                    <input type="text" class="form-control" placeholder="密码"><br/>
-                    <button class="btn btn-block">登录</button>
                 </form>
+                <!--账号密码登录表单-->
+                <!-- <form class="login-form" action="" method="POST">
+                    <!--手机号-->
+                    <!--错误信息-->
+                    <!--jsp <font name="phoneLoginErrMsg4Phone">${phoneLoginErrMsg4Phone }</font> -->
+                    <!-- <font name="loginErrMsg4Phone" id="loginErrMsg4Phone" class=""></font>
+                    <div><input name="phoneNum" type="text" class="form-control" id="phoneNum" placeholder="11位手机号" onkeyup="loginVerifyPhone();"></div><br/> -->
+
+                    <!--密码-->
+                    <!--错误信息-->
+                    <!--jsp <font name="phoneLoginErrMsg4Pwd">${phoneLoginErrMsg4Pwd }</font> -->
+                    <!-- <font name="loginErrMsg4Pwd" id="loginErrMsg4Pwd" class=""></font>
+                    <div><input name="pwd" type="text" class="form-control" id="pwd" placeholder="密码" onkeyup="loginVerifyPwd();"></div><br/>
+                    <button id="login-form-submit-button" class="btn btn-block" disabled="disabled">登录</button>
+                </form>  -->
             </div>
         </div>
     </div> 

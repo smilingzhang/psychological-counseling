@@ -115,6 +115,17 @@
     float: right;
     margin-left: 10px;
 }
+.login-form .msg-err,
+.login-form .msg-right
+{
+    font-size: 12px;
+}
+.login-form .msg-err{
+    color: #d75455;
+}
+.login-form .msg-right{
+    color: #38b03f;
+}
 .loginpanel .login-nav{
     display: block;
     /* width: 80%; */
