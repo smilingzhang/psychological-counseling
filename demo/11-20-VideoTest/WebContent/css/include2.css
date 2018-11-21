@@ -1,0 +1,11 @@
+*{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+
+.include2{
+	width: 970px;
+	height: 350px
+	background-color: red;
+}
