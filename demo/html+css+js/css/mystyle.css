@@ -518,3 +518,53 @@ line-height: 1.5em;
     font-size: 16px;
     font-weight: 600
 }
+
+.media{
+    display: block;
+    height: 700px;
+    width: 1300px;
+    /* background-color: #fff; */
+    /* margin: 20px; */
+}
+.media .video{
+    display: block;
+    width: 70%;
+    height: 100%;
+    /* background-color:#979292; */
+}
+.media .video .video-consulter{
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color:#979292;
+}
+.media .video .video-user{
+    display: block;
+    width: 30%;
+    height: 30%;
+    position: relative;
+    top: 0;right: 0;
+    background-color:#fffefe;
+}
+.media .board-text{
+    width: 28%;
+    height: 100%;
+    background-color: #fff;
+}
+.media .board-text,
+.media .video
+{
+    margin: 5px;
+    float: left;
+}
+.board-text .board-show {
+    height: 70%;
+}
+.board-text .input{
+    height: 25%;
+}
+.input .board-words-input,
+.input #editor
+{
+    height: 100%;
+}
