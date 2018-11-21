@@ -24,6 +24,7 @@ public class TestDao {
 			Teacher t = new Teacher();
 			GoodAt g = new GoodAt(); 
 			g.setGoodAt("亲子");
+			t.setTeacherId(3);
 			t.setTeacherWorkTime(100);
 			Set<GoodAt> sets =new HashSet<>();
 			sets.add(g);
