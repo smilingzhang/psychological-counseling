@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50599
 File Encoding         : 65001
 
-Date: 2018-11-21 09:47:21
+Date: 2018-11-21 14:38:42
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -140,6 +140,29 @@ AUTO_INCREMENT=15
 -- ----------------------------
 BEGIN;
 INSERT INTO `businesstype` VALUES ('1', '1', '4', '1'), ('2', '1', '4', '2'), ('3', '1', '5', '1'), ('4', '1', '5', '2'), ('5', '1', '5', '3'), ('6', '1', '6', '4'), ('7', '1', '7', '2'), ('8', '1', '7', '5'), ('9', '2', '1', '1'), ('10', '2', '2', '1'), ('11', '2', '2', '2'), ('12', '2', '2', '5'), ('13', '2', '3', '3'), ('14', '2', '4', '4');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for `collection`
+-- ----------------------------
+DROP TABLE IF EXISTS `collection`;
+CREATE TABLE `collection` (
+`collectionId`  int(11) NOT NULL AUTO_INCREMENT ,
+`userId`  int(11) NULL DEFAULT NULL ,
+`courseId`  int(11) NULL DEFAULT NULL ,
+PRIMARY KEY (`collectionId`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+AUTO_INCREMENT=5
+
+;
+
+-- ----------------------------
+-- Records of collection
+-- ----------------------------
+BEGIN;
+INSERT INTO `collection` VALUES ('1', '1', '1'), ('2', '1', '2'), ('3', '2', '3'), ('4', '2', '2');
 COMMIT;
 
 -- ----------------------------
@@ -593,6 +616,11 @@ ALTER TABLE `authentication` AUTO_INCREMENT=11;
 -- Auto increment value for `businesstype`
 -- ----------------------------
 ALTER TABLE `businesstype` AUTO_INCREMENT=15;
+
+-- ----------------------------
+-- Auto increment value for `collection`
+-- ----------------------------
+ALTER TABLE `collection` AUTO_INCREMENT=5;
 
 -- ----------------------------
 -- Auto increment value for `consultationrecord`
