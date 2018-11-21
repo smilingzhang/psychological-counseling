@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50599
 File Encoding         : 65001
 
-Date: 2018-11-21 08:22:14
+Date: 2018-11-21 09:47:21
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -150,8 +150,8 @@ CREATE TABLE `consultationrecord` (
 `consultationrecordId`  int(11) NOT NULL AUTO_INCREMENT ,
 `userId`  int(11) NULL DEFAULT NULL ,
 `consultationrecordOrderTime`  timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-`consultationrecordStartTime`  timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ,
-`consultationrecordEndTime`  timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ,
+`consultationrecordStartTime`  timestamp NULL DEFAULT '0000-00-00 00:00:00' ,
+`consultationrecordEndTime`  timestamp NULL DEFAULT '0000-00-00 00:00:00' ,
 `consultationrecordPrice`  float NULL DEFAULT NULL ,
 `consultationrecordState`  int(11) NULL DEFAULT NULL ,
 `teacherId`  int(11) NULL DEFAULT NULL ,
@@ -408,8 +408,8 @@ CREATE TABLE `listenrecord` (
 `listenrecordId`  int(11) NOT NULL AUTO_INCREMENT ,
 `userId`  int(11) NULL DEFAULT NULL ,
 `listenrecordOrderTime`  timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-`listenrecordStartTime`  timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ,
-`listenrecordEndTime`  timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ,
+`listenrecordStartTime`  timestamp NULL DEFAULT '0000-00-00 00:00:00' ,
+`listenrecordEndTime`  timestamp NULL DEFAULT '0000-00-00 00:00:00' ,
 `listenrecordPrice`  float NULL DEFAULT NULL ,
 `listenrecordState`  int(11) NULL DEFAULT NULL ,
 `teacherId`  int(11) NULL DEFAULT NULL ,
