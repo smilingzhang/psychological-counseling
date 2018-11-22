@@ -1,3 +1,7 @@
+a:focus{
+    color: #6e0706;
+    text-decoration: none;
+}
 .panel{
     padding: 10px;
 }
@@ -606,4 +610,259 @@ line-height: 1.5em;
 .input #editor
 {
     height: 100%;
+}
+.lesson-nav{
+    margin-bottom: 0;
+}
+.lesson-nav li{
+    margin-right: 10px;
+}
+.lesson-nav .ch-name{
+    display: block;
+    font-size: 18px;
+    text-align: center;
+    padding: 10px;
+    /* vertical-align: middle; */
+}
+.lesson-nav i{
+    color: #fff;
+    font-size: 20px;
+}
+.lesson-nav .navbar-nav a:hover{
+    background-color: #ec6a6b;
+}
+.lesson-nav .navbar-nav a:focus{
+    background-color: #d75455;
+}
+.lesson-contains{
+    width: 100%;
+    
+    /* padding: 20px; */
+}
+.lesson-contains .lesson-video,
+.lesson-contains .directory
+{
+    height: 70%;
+    float: right;
+}
+.lesson-contains .lesson-part{
+    /* width: 70%; */
+    height: 740px;
+    width: 100%;
+    padding: 30px;
+    margin: auto;  position: relative;  top: 0; left: 0; bottom: 0; right: 0;
+    background-color: #533937;
+    /* background-color: #fff; */
+}
+.lesson-contains .directory{
+    width: 26%;
+    height: 100%;
+    background-color: #faecec;
+    margin-left: 20px;
+    /* clear: left; */
+}
+.lesson-contains .lesson-video{
+    width: 70%;
+    height:  100%;
+    background-color: #4e4a49;
+    padding: 0;
+    margin: auto;  position: relative;  top: 0; left: 0; bottom: 0; right: 0;
+}
+.lesson-video .m,
+.lesson-video .m .video-js
+{
+    width: 100%;
+    height: 100%;
+}
+.comment-part{
+    width: 60%;
+    height: 800px;
+    padding-top: 60px;
+}
+.comment-part .board-title-h1{
+    font-size: 30px;
+    /* display: block; */
+    /* float: left; */
+    padding-right: 30px;
+    float: left;
+
+}
+.comment-part .to-comment{
+    color: #d75455;
+}
+.comment-part .back-to-course{
+    color: #979292;
+    line-height: 2em;
+    float: right;
+}
+.comment-part .back-to-course:hover{
+    text-decoration: none;
+    color: #e26162;
+}
+.directory .dir-nav{
+    display: block;
+    width: 100%;
+    height: 10%;
+
+    margin: auto;  position: relative;  top: 0; left: 0; bottom: 0; right: 0;
+}
+.directory .dir-nav ul{
+    height: 100%;
+    padding-left: 0;
+    margin-top: 0;
+}
+.directory .dir-nav ul li{
+    /* display: block; */
+    list-style: none;
+    float: left;
+    /* height: 100%; */
+    line-height: 4em;
+    text-align: center;
+    width: 50%;
+    background-color: #d8bcbe;
+}
+.directory .dir-nav ul li a:hover{
+    text-decoration: none;
+    color: #6e0706;
+}
+.directory .dir-nav ul li:hover{
+    text-decoration: none;
+    background-color: #db9696;
+    
+}
+.directory-contain{
+    clear: both;
+    padding-top: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    height: 90%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.directory-contain span{
+    display: block;
+    margin: 0;
+    padding: 0;
+    height: 2em;
+    /* line-height: 2em; */
+}
+.directory-contain a{
+    margin: 0;
+    padding: 0;
+    line-height: 2em;
+}
+.directory-contain a:hover{
+    color: #6e0706;
+    text-decoration: none;
+}
+.directory-contain .directory-level-1{
+    font-size: 16px;
+    font-weight: 600;
+}
+.directory-contain .directory-level-1 .num{
+    display: inline;
+    padding-right: 5px;
+    font-size: 24px;
+}
+.directory-contain .directory-level-2{
+    font-size: 14px;
+    padding-left: 2em;
+}
+.directory-contain .directory-level-2:hover{
+    background-color: #db9696;
+    /* color: #fff; */
+}
+.directory-contain .active,
+.directory-contain .active:hover
+{
+    background-color: #f0d2d2;
+}
+.comment-contain,
+.comment-contain .panel-body
+{
+    width: 100%
+}
+.comment-contain{
+    margin-top: 20px;
+}
+.panel-body{
+    padding: 25px;
+}
+.comment-header img{
+    width: 50px;
+    border-radius: 5px;
+    padding-right: 10px; 
+}
+.comment-header{
+    margin-bottom: 14px;
+}
+/* .comment-header .date{
+    font-size: 12p
+} */
+.comment-header a:hover{
+    color: #6e0706;
+}
+.comment-contain .comment{
+    margin-bottom: 20px;
+}
+.pager-bar{
+    /* float: left; */
+    padding-left: 40px;
+}
+.recomment-course{
+    width: 100%;
+    height: 18%;
+    padding: 10px;
+    /* margin-bottom: 2px; */
+}
+.recomment-course .course-img{
+    display: block;
+    width: 50%;
+    float: left;
+    margin-right: 10px;
+}
+.recomment-course .course-name{
+    line-height: 4em;
+}
+.recomment-course .course-name:hover{
+    color: #d75455;
+}
+.recomment-course .title-h2{
+    font-size: 14px;
+}
+.recomment-course:hover{
+    color: #d75455;
+    background-color: #f0d2d2;
+}
+.comment-input{
+    z-index: 1000;
+    position: fixed;
+    width: 45%;
+    height: 35%;
+    margin: auto;    top: 0; left: 0; bottom: 0; right: 0;
+    background-color: #fff;
+    display: none;
+}
+.comment-input #editor{
+    height: 88%;
+}
+.comment-input .btn{
+    z-index: 100000;
+    float: right;
+}
+.comment-input .btn-link{
+    color: #979292;
+    /* border-width: 0px; */
+}
+.comment-input .btn-link:hover{
+    color: #fff
+}
+#shade{
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    background-color: #97929257;
+    display: none;
+    position: fixed;
+    margin: auto;    top: 0; left: 0; bottom: 0; right: 0;
 }
