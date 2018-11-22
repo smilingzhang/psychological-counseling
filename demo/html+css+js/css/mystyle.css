@@ -98,18 +98,57 @@
          cursor: pointer;
      }
 }
-
-.loginpanel{
-    width: 300px;
-    height: 350px;
+.login-contains{
+    width: 60%;
     margin: auto;  position: absolute;  top: 0; left: 0; bottom: 0; right: 0;
 }
+.loginpanel{
+    clear: both;
+    width: 40%;
+    height: 45%;
+    margin: auto;  position: absolute;  top: 0; left: 0; bottom: 0; right: 0;
+}
+.loginpanel .panel-body{
+    margin: 10px;
+}
+.login-form a{
+    float: right;
+    margin-left: 10px;
+}
+.login-form .msg-err,
+.login-form .msg-right
+{
+    font-size: 12px;
+}
+.login-form .msg-err{
+    color: #d75455;
+}
+.login-form .msg-right{
+    color: #38b03f;
+}
+.loginpanel .login-nav{
+    display: block;
+    /* width: 80%; */
+    /* margin: 10px; */
+    /* margin: auto;  position: absolute;  top: 0; left: 0; bottom: 0; right: 0; */
+    /* margin: 10px; */
+}
+.login-form .checkbox{
+    margin: 20px;
+}
 .head{
-    width: 300px;
-    height: 50px;
+    display: block;
+    padding: 10px;
+    width: 40%;
+    margin-top: 10%;
+}
+.head img{
+    float: left;
+    display: block;
 }
 .head h1{
-    display: inline;
+    /* display: inline; */
+    font-size: 40px;
     text-align: center;
 }
 .login-tag p{
@@ -517,4 +556,54 @@ line-height: 1.5em;
 .consult-panel-body .board-title-h2{
     font-size: 16px;
     font-weight: 600
+}
+
+.media{
+    display: block;
+    height: 700px;
+    width: 1300px;
+    /* background-color: #fff; */
+    /* margin: 20px; */
+}
+.media .video{
+    display: block;
+    width: 70%;
+    height: 100%;
+    /* background-color:#979292; */
+}
+.media .video .video-consulter{
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color:#979292;
+}
+.media .video .video-user{
+    display: block;
+    width: 30%;
+    height: 30%;
+    position: relative;
+    top: 0;right: 0;
+    background-color:#fffefe;
+}
+.media .board-text{
+    width: 28%;
+    height: 100%;
+    background-color: #fff;
+}
+.media .board-text,
+.media .video
+{
+    margin: 5px;
+    float: left;
+}
+.board-text .board-show {
+    height: 70%;
+}
+.board-text .input{
+    height: 25%;
+}
+.input .board-words-input,
+.input #editor
+{
+    height: 100%;
 }
