@@ -13,6 +13,8 @@
     <link href="assets/css/zui-theme.css" rel="stylesheet">
     <link href="assets/css/zui.css" rel="stylesheet">
     <link href="assets/css/mystyle.css" rel="stylesheet">
+    <script src="assets/js/jquery-3.3.1.js"></script>
+    <script src="assets/js/verify.js"></script> 
     <script src="assets/js/zui.js"></script> 
     <script src="assets/js/zui.lite.js"></script> 
   </head>
@@ -29,6 +31,7 @@
 	  		- phoneNum			：手机号码（需要进行验证）
 	  		- verifyCode		：验证码（尚未规定长度）
 	  		- pwd				：密码
+	  		- isRegist			：是否注册过
 	  	
 	  	需要使用的数据：请把参数存在对应名称的变量中
 	  	【错误参数  scope=request】
@@ -63,21 +66,24 @@
                 <c:if test="${param.type=='phoneLogin' || empty(param.type)}">
 	                <!--手机号登录表单-->
 	                <form class="login-form" action="" method="POST">
-	                    <input name="phoneNum" type="text" class="form-control" placeholder="11位手机号"></br>
-	                    <!-- 错误信息 -->
-	                    <font name="phoneLoginErrMsg4Phone">${phoneLoginErrMsg4Phone }</font></br>
+	                      <!--错误信息-->
+                    <font name="loginErrMsg4Phone" id="loginErrMsg4Phone" class=""></font>
+                    <div><input id="phoneNum" name="phoneNum" type="text" class="form-control" placeholder="11位手机号" onkeyup="loginVerifyPhone()"></div></br>
+
+                    <!--错误信息-->
+                    <font name="loginErrMsg4Code" id="loginErrMsg4Code" class=""></font>
+                    <div><input id="verifyCode" name="verifyCode" type="text" class="form-control" placeholder="验证码" onkeyup="loginVerifyCode()" style="width: 150px;display: block;float: left;"></div>
 	                    
-	                    <input name="verifCode" type="text" class="form-control" placeholder="验证码" style="width: 170px;display: block;float: left;">
-	                    <!-- 错误信息 -->
-	                    <font name="phoneLoginErrMsg4Code">${phoneLoginErrMsg4Code }</font></br>
-	                    
-	                    <a class="btn btn-primary" href="#">获取验证码</a></br>
-	                    <div class="checkbox">
+	                    <a class="btn btn-primarys" id="login-send-verifyCode"  onclick="sendVerifyCode()">获取验证码</a></br>
+	                    <c:if test="${empty(isRegist) || isRegist=='F' }">
+	                    	<div class="checkbox">
 	                        <label>
 	                            <input type="checkbox" name="isAgreeProtocal"> 同意《XXX用户注册协议》
 	                        </label>
-	                    </div>
-	                    <button class="btn btn-block">快速登录</button>
+	                    	</div>
+	                    </c:if>
+	                    
+	                    <button class="btn btn-block " id="login-form-submit-button" disabled="disabled">快速登录</button>
 	                    <div class="login-tag">
 	                        <p>-----------------------</p>
 	                        <p>第三方登录</p>
@@ -87,14 +93,12 @@
                 <c:if test="${param.type=='login' }">
 	                <!--账号密码登录表单-->
 	                <form class="login-form" action="" method="POST">
-	                    <input name="phoneNum" type="text" class="form-control" placeholder="11位手机号"><br/>
-	                    <!-- 错误信息 -->
-	                    <font name="phoneLoginErrMsg4Phone">${phoneLoginErrMsg4Phone }</font></br>
+	                    <font name="loginErrMsg4Phone" id="loginErrMsg4Phone" class=""></font>
+                    	<div><input name="phoneNum" type="text" class="form-control" id="phoneNum" placeholder="11位手机号" onkeyup="loginVerifyPhone();"></div><br/>
 	                    
-	                    <input name="pwd" type="text" class="form-control" placeholder="密码"><br/>
-	                    <!-- 错误信息 -->
-	                    <font name="phoneLoginErrMsg4Pwd">${phoneLoginErrMsg4Pwd }</font></br>
-	                    <button class="btn btn-block">登录</button>
+	                    <font name="loginErrMsg4Pwd" id="loginErrMsg4Pwd" class=""></font>
+                    	<div><input name="pwd" type="text" class="form-control" id="pwd" placeholder="密码" onkeyup="loginVerifyPwd();"></div><br/>
+	                    <button id="login-form-submit-button" class="btn btn-block" disabled="disabled">登录</button>
 	                </form>
                 </c:if>
             </div>
