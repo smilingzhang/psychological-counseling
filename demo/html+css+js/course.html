@@ -6,27 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--页面标题“课程_章节命名”-->
     <title>课程</title>
+    <!--video-->
+    <link href="css/video/video-js.min.css" rel="stylesheet">
     <!-- zui -->
-    <link href="css/video-js.min.css" rel="stylesheet">
     <link href="css/zui-theme.css" rel="stylesheet">
     <link href="css/zui.css" rel="stylesheet">
-    <link href="css/mystyle.css" rel="stylesheet">
     <script src="js/jquery-3.3.1.js"></script>
     <script src="js/zui.js"></script> 
     <script src="js/zui.lite.js"></script>
+    <!--自定义-->
+    <link href="css/mystyle.css" rel="stylesheet">
     <script src="js/change-state.js"></script>
-    <style>
-        body {
-            background-color: #191919
-        }
-        /* .m {
-            width: 960px;
-            height: 400px;
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 100px;
-        } */
-    </style>
   </head>
   <body>
     <!-- 在此处编码你的创意 -->
@@ -47,7 +37,7 @@
         </div>
     </nav><!--END .lesson-nav-->
 
-    <!--页面内容实体-->
+    <!--页面内容主体-->
     <div class="lesson-contains">
         <!--课程播放板块-->
         <div class="lesson-part">
@@ -55,24 +45,24 @@
             <div class="directory">
                 <!--导航条-->
                 <div class="dir-nav">
-                    <ul>
-                        <li class="active"><a href="#">课程目录</a></li>
-                        <li><a href="#">相关视频</a></li>
+                    <ul id="dir-nav-contain">
+                        <li id="dir-nav-1" class="active" onclick="changeNav(this)"><a href="#">课程目录</a></li>
+                        <li id="dir-nav-2" onclick="changeNav(this)"><a href="#">相关视频</a></li>
                     </ul>
                 </div>
                 <!--目录主体-->
-                <!-- <div class="directory-contain"> -->
+                <div id="directory-contain-1" class="directory-contain" style="display:block">
                     <!--注：一级目录不可点击-->
                     <!--注：二级目录提供选中(.active)和未选中两种样式-->
                     <!--范例-->
                     <!--一级目录：章节-->
-                    <!-- <span class="directory-level-1"><span class="num">①</span><a>引擎的概述</a></span> -->
+                    <span class="directory-level-1"><span class="num">①</span><a>引擎的概述</a></span>
                     <!-- 二级目录：课程 -->
-                    <!-- <span class="directory-level-2 active"><a href="#">引擎的概念简介</a></span>
-                    <span class="directory-level-2"><a href="#">游戏引擎的发展与约翰卡马克</a></span> -->
+                    <span class="directory-level-2 active"><a href="#">引擎的概念简介</a></span>
+                    <span class="directory-level-2"><a href="#">游戏引擎的发展与约翰卡马克</a></span>
                     <!--END 范例-->
 
-                    <!-- <span class="directory-level-2"><a href="#">游戏引擎的发展与约翰卡马克</a></span>
+                    <span class="directory-level-2"><a href="#">游戏引擎的发展与约翰卡马克</a></span>
                     <span class="directory-level-2"><a href="#">游戏引擎的发展与约翰卡马克</a></span>
 
                     <span class="directory-level-1"><span class="num">②</span><a>引擎的概述</a></span>
@@ -96,10 +86,10 @@
                     <span class="directory-level-2"><a href="#">游戏引擎的发展与约翰卡马克</a></span>
                     <span class="directory-level-2"><a href="#">游戏引擎的发展与约翰卡马克</a></span>
                     <span class="directory-level-2"><a href="#">游戏引擎的发展与约翰卡马克</a></span>
-                </div>END 目录主体 -->
+                </div><!-- END 目录主体 -->
                 
                 <!--相关视频-->
-                <div class="directory-contain">
+                <div id="directory-contain-2" class="directory-contain" style="display:none">
                     <!--一个课程-->
                     <div class="recomment-course">
                         <!--课程图片-->
@@ -157,7 +147,7 @@
                         <source src="http://vjs.zencdn.net/v/oceans.ogv" type="video/ogg">
                         <p class="vjs-no-js"> To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a> </p>
                     </video>
-                    <script src="js/video.min.js"></script> 
+                    <script src="js/video/video.min.js"></script> 
                     <script src="http://vjs.zencdn.net/5.19/lang/zh-CN.js"></script>
                     <script type="text/javascript">                        
                         var myPlayer = videojs('my-video');
@@ -311,8 +301,6 @@
                 </div>
             </div><!--END panel-->
         </div><!--END comment-part-->
-    </div>
-
     </div>
     <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
     <script src="js/jquery-1.11.0.min.js"></script>
