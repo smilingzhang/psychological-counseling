@@ -613,6 +613,8 @@ line-height: 1.5em;
 .input #editor
 {
     height: 100%;
+<<<<<<< HEAD
+=======
 }
 .lesson-nav{
     margin-bottom: 0;
@@ -978,6 +980,7 @@ line-height: 1.5em;
 }
 #editor{
     background-color: #fff;
+<<<<<<< HEAD
 }
 .botton-board{
     width: 100%;
@@ -1070,4 +1073,7 @@ line-height: 1.5em;
 .botton-board  .pager-div{
     /* display: block; */
     clear: both;
+=======
+>>>>>>> 6795f203100df7ff75ce92039d4efb408b7b523f
+>>>>>>> a977fe07a671c74b494948b90ecd8c5f49a53563
 }
