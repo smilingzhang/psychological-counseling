@@ -1,3 +1,6 @@
+.btn{
+    border-radius: 5px;
+}
 a:focus{
     color: #6e0706;
     text-decoration: none;
@@ -975,4 +978,96 @@ line-height: 1.5em;
 }
 #editor{
     background-color: #fff;
+}
+.botton-board{
+    width: 100%;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.course-list-contains{
+    /* width: 90% */
+}
+.course-list-contains .upper-board > .panel{
+    margin-left: 0;
+    margin-top: 10px;
+    /* height: 20%; */
+}
+.course-list-contains .upper-board .panel .panel-body{
+    padding: 5px;
+}
+.recommend-2nd{
+    width: 100%;
+    margin-top: 10px;
+}
+.recommend-2nd .panel{
+    width: 23%;
+    height:26%;
+    padding: 10px;
+    margin: 8px;
+}
+.recommend-2nd .recommend-course .price{
+    color: #d75455;
+    font-size: 12px;
+}
+.recommend-2nd .recommend-course .course-name{
+    font-size: 16px;
+}
+.recommend-2nd .recommend-course .teacher{
+    font-size: 12px
+}
+.recommend-2nd .recommend-course img{
+    margin-bottom: 10px;
+}
+.course-list-dir{
+    width: 100%;
+    height: 10%;
+    padding: 10px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+.course-list-dir .panel-body{
+    padding: 5px;
+}
+.course-list-dir .panel-body a,
+.course-list-dir .panel-body span
+{
+    padding: 5px;
+}
+.course-list-dir .panel-body a:hover{
+    color: #d75455;
+    text-decoration: none;
+}
+.botton-board .course-block{
+    width: 24%;
+    height: 10%;
+    background-color: #fcf5f6;
+    padding: 5px;
+    float: left;
+    margin: 4px;
+}
+.course-block img{
+    margin-bottom: 5px;
+}
+.course-block .teacher{
+    font-size: 12px;
+}
+.course-block .teacher:hover{
+    text-decoration: none;
+    color: #d75455
+}
+.course-block .price{
+    float: right;
+    color: #d75455;
+}
+.botton-board .course-block .title-h2{
+    font-weight: 600
+}
+.botton-board .course-block .title-h2:hover{
+    text-decoration: none;
+    color: #d75455
+}
+.botton-board  .pager-div{
+    /* display: block; */
+    clear: both;
 }

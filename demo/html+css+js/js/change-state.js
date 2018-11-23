@@ -15,6 +15,13 @@ function changeNav(obj){
     obj.className="active";
     $("#directory-contain-"+$(obj).attr("id")).css("display","display");
 }
+function changeActive(obj){
+    var list = $(obj).parent().children();
+    list.each(function(index,element){
+        element.className = "";
+    });
+    obj.className="active";
+}
 function showBtn(obj){
     $(obj).css("background-color","#9792925b");
     $(obj).children().css("display","block");
