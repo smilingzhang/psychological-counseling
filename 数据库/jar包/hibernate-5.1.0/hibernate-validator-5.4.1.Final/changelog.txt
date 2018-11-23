@@ -1,0 +1,1414 @@
+Hibernate Validator Changelog
+=============================
+
+5.4.1.Final (16-03-2017)
+-------------------------
+
+** Bug
+    * HV-1284 - build                - Reenable testing under the security manager
+    * HV-1280 - engine               - Class loading conflict when custom Xerces is part of a deployment
+    * HV-1264 - engine               - Message interpolation fails with single opening or closing brace in regex character class
+    * HV-1253 - validators           - Constraints shouldn't be declared TYPE_USE in the 5.4 branch
+    * HV-1252 - annotation-processor - Annotation processor is not aware of new constraint @Currency and validators for type MonetaryAmount
+    * HV-1242 - documentation        - Don't mention JSR 380 in HV 5.4 reference guide
+    * HV-1088 - engine               - Unexpected behavior multi threads accessing ConstraintValidatorManager
+
+** Improvement
+    * HV-1283 - engine               - Make HV engine more friendly towards usage as a Java 9 named module
+    * HV-1262 - engine               - Add affected validator classes to exception messages if there are multiple matching ones
+    * HV-1244 - translations         - Add translation for Persian language
+    * HV-1235 - validators           - Javadoc for PESEL mentions NIP
+
+** Task
+    * HV-1266 - build                - Update build instructions as per latest Java 9 releases
+    * HV-1233 - documentation        - Convert tabs to space in rendered doc to have a consistent behavior across browsers
+    * HV-1228 - documentation        - Switch to the common AsciiDoctor theme for the documentation
+
+5.4.0.Final (01-02-2017)
+-------------------------
+
+** Bug
+    * HV-1220 - engine        - Programmatically defined cross parameter method constraints don't work on method returning void
+    * HV-1205 - engine        - Don't use @Repeatable on some constraints
+
+** Improvement
+    * HV-1218 - engine        - Add missing programmatic constraint definitions 
+    * HV-1217 - documentation - Simplify description of annotation processor set-up in docs
+    * HV-1204 - engine        - Add CurrencyDef for programmatic usage of @Currency constraint
+
+** Task
+    * HV-1216 - documentation - Avoid usage of tables in reference docs where feasible
+    * HV-1214 - documentation - Switch to Asciidoctor output for the documentation
+    * HV-1210 - build         - Upgrade to Groovy 2.4.8
+    * HV-1201 - engine        - Allow to specify a field for reporting constraint violations from @ScriptAssert
+
+5.4.0.CR1 (14-01-2017)
+-------------------------
+
+** Bug
+    * HV-1198 - engine               - @Past and @Future break with too far in past/future for Java8
+
+** Improvement
+    * HV-1203 - engine               - Add a @Currency annotation for javax.money
+    * HV-1195 - documentation        - Fix link to annotation processor documentation in README.md
+    * HV-1189 - engine               - Outdated javadoc comment for BeanMetaData#getDefaultValidationSequence
+    * HV-1187 - build, engine        - Support JDK9 ea+148
+    * HV-1180 - annotation-processor - Detect cyclic definition of group sequence due to group inheritance in the annotation processor
+    * HV-1124 - integration          - Add integration test for javax.money validation on WildFly
+
+5.4.0.Beta1 (08-12-2016)
+-------------------------
+
+** Bug
+    * HV-1170 - documentation        - Typo in documentation
+    * HV-1149 - build                - Missing javax.money dependency in the distribution pom
+
+** Improvement
+    * HV-1182 - documentation        - Update WildFly patch name in the documentation
+    * HV-1177 - integration          - Test our javax.money integration in OSGi environments
+    * HV-1173 - engine               - Clean up some superfluous operations
+    * HV-1169 - build                - Upgrade javax.el dependency to 3.0.1-b8
+    * HV-1161 - tests                - osgi/integrationtest/pom.xml points to the wrong checkstyle configuration
+    * HV-1150 - validators           - Minor infelicities in the Polish specific annotations javadoc
+    * HV-1138 - engine               - Improve consistency of ValidatorImpl regarding parameters order
+    * HV-1137 - engine               - Avoid unnecessary counting of constraint violations in ValidatorImpl
+    * HV-1136 - translations         - Add translation of validation messages  to Ukrainian
+    * HV-1133 - documentation        - Add group inheritance chapter in HV documentation
+    * HV-1119 - annotation-processor - Verify that annotation parameters on method/constructor parameters are valid
+    * HV-1107 - build                - Checkstyle: stricter ParenPad rule
+    * HV-1099 - tests, validators    - Support quoted local part and extend tests around @Email constraint
+    * HV-1087 - documentation        - Update all outdated links to java.sun.com
+    * HV-840 - annotation-processor - Annotation Processor doesn't detect errors in parameter constraints in inheritance hierarchies
+    * HV-763 - engine               - Streamline usage of logging API
+
+** New Feature
+    * HV-1116 - engine               - Add support for javax.money
+    * HV-1095 - build                - Provide module ZIP file for easily upgrading Hibernate Validator in a WildFly instance
+    * HV-991 - validators           - Add constraint annotations for Polish identification numbers
+    * HV-822 - annotation-processor - Add check on default message to recognize missing {} for keys
+    * HV-455 - annotation-processor - The annotation processor should verify the groups parameter of a constraint declaration
+    * HV-451 - annotation-processor - The annotation processor should check @GroupSequence
+    * HV-270 - annotation-processor - Verify in the annotation processor that constraints are not stupid
+
+** Task
+    * HV-1181 - build                - Distribution contains some superfluous files
+    * HV-1168 - integration          - Parameterize the versions in the patch.xml WildFly patch
+    * HV-1167 - tck-runner           - Use the WildFly patch file in the TCK runner when in incontainer mode
+    * HV-1163 - performance          - Update performance tests to 5.3.3.Final
+    * HV-1156 - build                - Initialize 5.4 branch
+    * HV-1147 - integration          - Generate a patch file for WildFly instead of a zip file
+    * HV-1146 - build                - Upgrade previous stable used by japicmp to 5.3.1.Final
+    * HV-1144 - documentation        - Link JavaDocs of javax.money
+    * HV-1114 - engine               - Move the code generated by JAXB to its own package
+    * HV-1102 - tests                - Prohibit org.junit usage
+    * HV-1100 - documentation        - Convert the reference guide to use source includes
+    * HV-1069 - tests                - Replace fest-assert with assertj
+    * HV-1056 - engine               - Avoid usage of ReflectionHelper#getPropertyName() in validation code path
+    * HV-962 - build, tests         - Remove Chronos/JMeter performance test harness and replace with JMH based tests
+
+5.3.4.Final (08-12-2016)
+-------------------------
+
+** Bug
+    * HV-1176 - engine     - Type argument constraints for Optional are ignored for method parameters and return value if there are no other constraints
+    * HV-1165 - engine     - Use type annotations for Set values with @NotNull annotation on the Set
+    * HV-1164 - engine     - getDynamicPayload(Class<C> type) throws Nullpointerexception
+
+** Task
+    * HV-1183 - validators - Upgrade JodaTime to 2.9.5
+
+5.3.3.Final (22-11-2016)
+-------------------------
+
+** Bug
+    * HV-1155 - engine - ClassLoader issues in modularized environments
+
+5.3.2.Final (10-11-2016)
+-------------------------
+
+** Bug
+    * HV-1153 - engine - Missing javax.el impl throws a javax.el.ELException instead of a ValidationException
+
+** Improvement
+    * HV-1154 - build  - Make distribution and documentation buildable with JDK9
+
+5.3.1.Final (27-10-2016)
+-------------------------
+
+** Bug
+    * HV-1140 - engine        - StringHelper#decapitalize not working properly on turkish locale
+    * HV-1134 - documentation - Asciidoc Docbook processing is missing the sourcedir attribute
+    * HV-1132 - documentation - Force language in documentation tests
+    * HV-1131 - engine        - EL once again a hard requirement
+    * HV-1032 - engine        - Infinite Loop when validating custom type constraint under certain inheritance scheme
+    * HV-1002 - engine        - validateProperty() behaviour for prop paths with a Set/ List inconsistent with validateValue() 
+
+** Improvement
+    * HV-1130 - build         - Ensure 5.3 runs on JDK 9
+    * HV-1129 - tests         - Upgrade WildFly Arquillian version
+    * HV-1128 - tests         - Enable integration tests on JDK 9
+    * HV-1126 - build         - Upgrade the plexus-archiver dependency used by the assembly plugin to support JDK9
+
+** Task
+    * HV-1125 - build         - Latest Java 9 preview builds need --add-modules instead of -addmods as build option
+
+5.3.0.Final (11-10-2016)
+-------------------------
+
+** Bug
+    * HV-1117 - build         - Downgrade to surefire and failsafe 2.18.1
+    * HV-1109 - documentation - Fix "Using validation groups" example
+    * HV-1101 - engine        - Issues when using XML validation configuration
+
+** Improvement
+    * HV-1123 - build         - Set up japicmp tooling to create API/SPI change reports
+    * HV-1121 - engine        - Validation error path generation for TYPE_USE annotation
+    * HV-1112 - translations  - ValidationMessages for Slovak
+    * HV-1098 - tck-runner    - Adapt test.policy file of TCK runner for reading "validation.provider" property
+
+** Task
+    * HV-1093 - build         - Change CI links in README.md and pom.xml
+
+5.3.0.CR1 (05-09-2016)
+-------------------------
+
+** Bug
+    * HV-1057 - engine        - Group sequences don't honor inheritance relationships properly
+    * HV-1055 - engine        - Default group sequence does not honour group hierarchy
+    * HV-1068 - engine        - Wrong import in MessageDescriptorFormatException
+    * HV-1071 - engine        - HV-1049 prevents annotations in the default package working
+    * HV-1049 - engine        - Don't access annotations from "jdk.internal" package
+    * HV-1054 - engine        - Catch correct exception type in AbstractMessageInterpolator
+    * HV-1072 - engine        - Parameter validation does not stop when group in sequence has cascaded constraint violations.
+    * HV-1050 - build         - Build fails under Windows
+    * HV-1063 - tests         - Upgrade dependencies used by OSGi integration tests
+    * HV-1080 - engine        - Validation of Java 8 Optional throws ClassCastException
+    * HV-1066 - validators    - email domains with a 63 character length fails EmailValidator
+    * HV-1048 - engine        - Correctly interpret version string returned by JDK 9
+    * HV-1062 - validators    - Use type annotations for map values with @NotNull annotation on the map
+    * HV-1013 - validators    - Validator invokes hashCode() with null mandatory field 
+    * HV-1046 - documentation - Fix example 11.4 in reference guide
+    * HV-1091 - engine        - java.lang.StackOverflowError generated when using too big validation message
+    * HV-1031 - engine        - Type parameter validations are not executed against all elements in a collection if elements contain the same object instance.
+
+** Improvement
+    * HV-1038 - build         - Update to ClassMate 1.3.0
+    * HV-1058 - engine        - Avoid repeated retrieval of default group sequence in BeanMetadataImpl#getConstrainedPropertiesAsDescriptors()
+    * HV-1060 - engine        - Include messages for @EAN and @ParameterScriptAssert in Brazilian Portuguese error messages
+    * HV-1076 - build         - Improve Checkstyle configuration
+    * HV-1081 - build         - Reuse the release scripts of OGM to automatize the release process
+    * HV-1077 - engine        - Add missing @Override annotation
+    * HV-1074 - engine        - Add Arabic translation
+    * HV-1015 - tests         - Provide test case template
+    * HV-1082 - documentation - Upgrade maven-jdocbook-plugin and pressgang to generate valid HTML5 documentation
+    * HV-1078 - documentation - Update the CONTRIBUTING.md file
+    * HV-1075 - validators    - Update and improve the French translation
+    * HV-1083 - build         - Properly ignore hibernate-noorm-release-scripts directory in the build
+    * HV-1014 - documentation - Clarify what @ValidPart is in example 2.3 of the reference guide
+    * HV-1096 - validators    - ValidationMessages for Russian
+    * HV-1086 - build         - Update Maven dependencies and align with WildFly 10.1.0.Final
+
+** New Feature
+    * HV-1070 - build         - Preparatory work for building with Java 9
+    * HV-501 - engine        - Extend programmatic API to allow alteration of ConstraintValidator list for a given constraint
+    * HV-1065 - engine        - Add hibernate.validator.constraint_mapping_contributor*s* to take a list of contributors and deprecate hibernate.validator.constraint_mapping_contributor
+
+** Task
+    * HV-1053 - build         - Use WildFly 10.0.0.Final for integration tests
+    * HV-1052 - build         - Upgrade to current version of JBoss logging processor
+    * HV-1034 - build         - Allow compilation using JDK9
+    * HV-1064 - tests         - Add Travis support
+
+5.3.0.Alpha1 (15.01.2016)
+-------------------------
+
+** New Feature
+    * [HV-872] - Implement optional relaxation of parameter validation consistent with Section 4.5.5
+    * [HV-1020] - ConstraintValidatorContext should allow to attach arbitrary context information to a ConstrainViolation
+
+** Bug
+    * [HV-864] - Cross-parameter constraint is disallowed by Annotation Processor
+    * [HV-1019] - Copying PathImpl results in hashCode==0
+    * [HV-1022] - Validator.validateValue does not work for JDK-8 TYPE_USE annotations
+    * [HV-1023] - Validator fails with Google App Engine due to use of restricted class java.util.ResourceBundle.Control
+    * [HV-1025] - Configuration streams not reusable on IBM JVM
+    * [HV-1035] - Wrong messages in Korean for NotNull and Null
+
+** Task
+    * [HV-1041] - Upgrade to jaxb2-maven-plugin 2.2
+    * [HV-1045] - Use WildFly 10.0.0.CR5 for integration tests and update to JodaTime 2.7
+
+** Improvement
+    * [HV-1021] - Monitor contention at ValidatorFactoryImpl
+    * [HV-1026] - Exceptions during execution of LoadClass don't provide enough context
+    * [HV-1037] - General code quality improvements
+    * [HV-1039] - Improve OSGi integration addressing class loading issues
+
+5.2.2.Final (29.09.2015)
+-------------------------
+
+** Bug
+    * [HV-862] - ExecutableHelper#overrides() should take visibilities into account
+    * [HV-891] - CDI extension doesn't trigger validation if a method parameter is of a type parameter type
+    * [HV-917] - Use map implementation safe for concurrent access in MetaDataProviderKeyedByClassName
+    * [HV-1011] - Generic Method is not recognized
+    * [HV-1012] - XSS vulnerability not caught by SafeHtml
+    * [HV-1017] - javafx detection uses TCCL but JavaFXPropertyValueUnwrapper does not
+    * [HV-1018] - NPE when validating an object tree whith a class whose parent has defined property constraints
+
+** Task
+    * [HV-1006] - Upgrade to WildFly 10
+
+** Improvement
+    * [HV-807] - Make annotation ignores configurable via API for executables
+    * [HV-995] - Add google analytics to the HTML documentation
+    * [HV-1016] - Let maven build support maven-color
+
+
+5.2.1.Final (30.07.2015)
+-------------------------
+
+** Bug
+    * [HV-1007] - Unable to parse validation.xml with IBM JDK
+
+
+5.2.0.Final (20.07.2015)
+-------------------------
+
+** Bug
+    * [HV-992] - Documentation not very clear: do I need interceptor to trigger method validation?
+    * [HV-1004] - CnpjValidator validation is failing for a valid cnpj
+    * [HV-1005] - @Email incorrectly flags emails with 64 character length local-part as invalid
+
+** Improvement
+    * [HV-984] - Further documentation review and improvements
+    * [HV-999] - Update to Bean Validation TCK 1.1.4
+
+
+5.2.0.CR1 (22.05.2015)
+-------------------------
+
+** Bug
+    * [HV-726] - Retrieve constraint target from composing constraints for purely composed constraints
+    * [HV-847] - Custom constraint causes "target cannot be inferred" exception when used for return value
+    * [HV-897] - Create a TimeProvider contract to get the current data time
+    * [HV-975] - NullPointerException in ValueContext.appendNode
+    * [HV-976] - Optional and Type Annotations
+    * [HV-977] - OptionalValueUnwrapper needs to handle null values passed to handleValidatedValue
+    * [HV-978] - Generic method is not validated
+    * [HV-979] - CPF Validation still fails (partly)
+    * [HV-982] - SNAPSHOT deploy fails with compiler error
+    * [HV-993] - OSGi metadata is missing optional import for com.thoughtworks.paranamer
+    * [HV-997] - Upgrade asciidoctor plugin
+
+** Improvement
+    * [HV-846] - Make hibernate-validator-cdi OSGI compliant
+    * [HV-941] - Documentation review and improvements (chapter 1,2,11)
+    * [HV-974] - Deploy the test util artifact
+    * [HV-980] - Store violated element of a java.util.Set in Path
+    * [HV-985] - Update to Classmate 1.1.0 or latest
+    * [HV-989] - ConcurrentReferenceHashMap is inadvertently licensed as LGPL
+
+** Task
+    * [HV-892] - Update javadoc css templates to match the JDK doclet output
+    * [HV-899] - Errors during javadoc creations
+    * [HV-981] - Remove @Future and @Past validators validation partial dates
+
+
+5.2.0.Beta1 (20.02.2015)
+-------------------------
+
+** Bug
+    * [HV-861] - AIOOBE in ReflectionHelper#parametersResolveToSameTypes
+    * [HV-887] - Validator ParanamerParameterNameProvider with inheritance
+    * [HV-890] - Take visibility into account for method override check
+    * [HV-933] - @CPF and @CPNJ only works with input containing puctuation characters like 134.241.313-00
+    * [HV-943] - Reference guide incorrect regarding DefaultTraversableResolver
+    * [HV-948] - Incorrect JPA 2 detection
+    * [HV-950] - Wrong warning log in TypeAnnotationAwareMetaDataProvider.getTypeParameter
+    * [HV-957] - WhiteListType.RELAXED allows <div>, <span>
+    * [HV-959] - CPF validation
+    * [HV-965] - The module description list on the contribute page needs updating
+    * [HV-969] - No tests are executed for the CDI module
+
+** Improvement
+    * [HV-913] - Provide a way to run the test suite using a security manager
+    * [HV-914] - Document permissions required to run Hibernate Validator with a security manager
+    * [HV-944] - French translation of @Min and @Max messages is incorrect
+    * [HV-946] - French translation of @DecimalMin and @DecimalMax messages is incorrect (with inclusive parameter)
+    * [HV-951] - Make expression variables accessible from ConstraintViolation
+    * [HV-953] - Create possiblity to contribute resource bundles as part of a ConstraintDefinitionContributor
+    * [HV-964] - Create a dedicated module for the testutils code
+    * [HV-968] - Performance improvements for ConstraintHelper
+    * [HV-970] - Avoid accessing package javax.xml.stream.* when not working with XML descriptors
+    * [HV-971] - Remove requirement to use JBoss's Maven repositories
+
+** New Feature
+    * [HV-582] - Introduce a class loading service
+    * [HV-955] - Using the fluent API in a JavaEE environment
+
+** Task
+    * [HV-896] - Add "ParenPad" CheckStyle rule
+    * [HV-915] - Make it possible to import the project in Eclipse
+    * [HV-942] - Upgrade Wildfly version for tck/integration tests to 8.2.0.Final
+    * [HV-960] - Create Karaf-based integration test for running HV in OSGi
+    * [HV-963] - Upgrade to the latest JBoss Logging version
+    * [HV-967] - Updating old and broken links in documentation, README.md and CONTRIBUTING.md
+    * [HV-972] - Avoid dependency on ASM4 (upgrade groovy-jsr223)
+
+
+5.2.0.Alpha1 (22.10.2014)
+-------------------------
+
+** Sub-task
+    * [HV-874] - Support new date/time datatypes (JSR 310)
+    * [HV-876] - Retrieve parameter names via reflection to report parameter constraint violations
+    * [HV-877] - Use type annotations to support constraints on collection elements
+    * [HV-878] - Integrate with the new Optional type and/or JavaFX types
+    * [HV-884] - Switch build to use JDK 8
+    * [HV-900] - Add dedicated Java 8 chapter to summarize and reference Java 8 features and specifics
+
+** Bug
+    * [HV-881] - @CreditCardNumber throws PropertyNotFoundException on validation error
+    * [HV-886] - Javadoc of URL constraint is really misleading
+    * [HV-889] - Translation error in ValidationMessages_zh_CN.properties
+    * [HV-895] - @Valid doesn't work together with @UnwrapValidatedValue
+    * [HV-901] - Luhn Credit Card Validator incorrect return statement
+    * [HV-902] - Cascading validation does not work on classes which implement Iterable.
+    * [HV-906] - org.hibernate.validator.constraints.CreditCardNumber does not fail on a non-numbers string
+    * [HV-907] - Unwanted classes during build created in source tree of annotation-processor
+    * [HV-908] - Fix Chinese translation file
+    * [HV-924] - Make HV 5.1.x compatible with Java 6
+    * [HV-929] - Minimum requirement for 5.5.2 is Java 7 not Java 6 as indicated
+    * [HV-930] - ConstraintLocation does not specify equals() and hashCode()
+    * [HV-931] - Using NaN and Infinity triggers an exception for (Decimal)Min and (Decimal)Max constraints
+    * [HV-940] - ConstraintDescriptorImpl.equals does not match Annotation Proxies
+
+** Improvement
+    * [HV-853] - Provide a NonElMessageInterpolator for usecases where no EL is provided
+    * [HV-888] - ValidationMessage for Korean
+    * [HV-893] - Improve execution speed of BeanMetaDataManagerTest under JDK 8
+    * [HV-903] - Improve error message HV000030
+    * [HV-905] - Allow for auto unwrapping of values
+    * [HV-920] - URLValidator performance
+    * [HV-921] - Use precompiled regexp Pattern instances in AbstractMessageInterpolator for meta character replacements
+    * [HV-922] - Avoid unnecessary conversions from Collections to arrays and vice versa
+    * [HV-923] - Precalculate identifier of Executable element instead of using string concatenation on each getIdentifier() call
+    * [HV-936] - Upgrade JSoup dependecy
+
+** New Feature
+    * [HV-296] - Apply constraints on the elements of an Iterable instance
+    * [HV-825] - Integration with Java 8
+
+** Task
+    * [HV-826] - Switch from docbook to asciidoc
+    * [HV-828] - Provide a mechanism to automatically discover custom constraint validators
+    * [HV-894] - Check release process for Java 8
+    * [HV-912] - Improve integration with Java's security manager
+    * [HV-916] - Disable BeanMetaDataManagerTest
+    * [HV-925] - Implement rules for automatic value unwrapping
+    * [HV-926] - Remove license headers in source files
+    * [HV-939] - Assembly plugin logs warning about javax.el:el-api exclusion
+
+
+5.1.3.Final (22.10.2014)
+------------------------
+
+** Bug
+    * [HV-924] - Make HV 5.1.x compatible with Java 6
+    * [HV-929] - Minimum requirement for 5.5.2 is Java 7 not Java 6 as indicated
+    * [HV-930] - ConstraintLocation does not specify equals() and hashCode()
+    * [HV-931] - Using NaN and Infinity triggers an exception for (Decimal)Min and (Decimal)Max constraints
+    * [HV-940] - ConstraintDescriptorImpl.equals does not match Annotation Proxies
+
+
+5.1.2.Final (25.07.2014)
+------------------------
+
+** Bug
+    * [HV-889] - Translation error in ValidationMessages_zh_CN.properties
+    * [HV-901] - Luhn Credit Card Validator incorrect return statement
+    * [HV-902] - Cascading validation does not work on classes which implement Iterable.
+    * [HV-906] - org.hibernate.validator.constraints.CreditCardNumber does not fail on a non-numbers string
+    * [HV-908] - Fix Chinese translation file
+
+** Task
+    * [HV-912] - Improve integration with Java's security manager
+
+
+5.1.1.Final (06.05.2014)
+------------------------
+
+** Bug
+    * [HV-871] - hv test suite isn't compatible with java 8
+    * [HV-873] - @SafeHtml(whitelistType = WhiteListType.NONE) allow <td>, <tr>
+    * [HV-882] - ValidationExtension must not expect a ProcessBean event to be fired right after AfterBeanDiscovery.addBean() is called
+
+
+5.1.0.Final (02.03.2014)
+------------------------
+
+** Bug
+    * [HV-865] - java.lang.NullPointerException at org.hibernate.validator.internal.cdi.InjectingConstraintValidatorFactory.releaseInstance
+
+
+5.1.0.CR1 (17.02.2014)
+----------------------
+
+** Bug
+    * [HV-834] - Support curly braces within EL expressions
+    * [HV-858] - ValidatorFactoryBean should use default BV provider
+    * [HV-860] - Leverage validated value unwrapper for validateProperty() and validateValue()
+
+** Improvement
+    * [HV-859] - Allow to upload to  /docs_htdocs/hibernate/stable/validator for final releases
+
+** New Feature
+    * [HV-814] - Re-consider semantics of options of mod check constraints
+
+** Remove Feature
+    * [HV-799] - EANValidator removed from the latest versions
+
+** Task
+    * [HV-812] - Make @Mod10Check and @Mod11Check constraints usable via API
+    * [HV-837] - Re-enable CustomValidatorFactoryInPersistenceUnitIT#testValidatorFactoryPassedToPersistenceUnit
+
+
+5.1.0.Beta1 (15.01.2014)
+------------------------
+
+** Bug
+    * [HV-596] - Improve error message for unsupported validateValue() invocations
+    * [HV-808] - Brazilian CPF and ModCheck Validator are returning false positives
+    * [HV-809] - Create Dedicated Mod10 and Mod11 constraints
+    * [HV-810] - @Email constraint accepts addresses with trailing @ characters
+    * [HV-818] - ArrayIndexOutOfBoundsException in ReflectionHelper#parametersResolveToSameTypes()
+    * [HV-838] - ReflectionHelper leaks deployment classes in wildfly integration
+    * [HV-842] - XmlParserHelper can leak deployment classloader in wildfly integration
+    * [HV-843] - Make members of non-public constraint types accessible
+    * [HV-848] - ValidationContext$BeanAndPath shouldn't access hashCode() of validated beans
+
+** Improvement
+    * [HV-589] - Keep a constant metadata placeholder for unconstrained entities
+    * [HV-789] - Update dependencies for CDI, Weld etc.
+    * [HV-793] - Fail during building of validator factory in case EL dependencies are missing
+    * [HV-805] - Raise descriptive exception in case parameter array passed to validation engine has wrong length
+    * [HV-815] - German translation of @Length message is incorrect
+    * [HV-817] - Rethink Validator SafeHtml design to support custom "WhiteListType"
+    * [HV-821] - Improve reference documentation for EL interpolation
+    * [HV-835] - Update to Classmate 1.0.0
+    * [HV-841] - Add "UnusedImports" check to checkstyle.xml
+    * [HV-845] - ValidationMessage for Korean
+    * [HV-850] - Add checkstyle IllegalImport configuration for junit.framework
+
+** New Feature
+    * [HV-565] - @Valid for custom composite types
+    * [HV-813] - Make @Mod10 check constraint more generic
+    * [HV-819] - Add an API/SPI which allows to make the process of value retrieval customizable
+    * [HV-824] - Use WildFly for integration tests
+
+
+5.1.0.Alpha1 (09.08.2013)
+-------------------------
+
+** Bug
+    * [HV-691] - Failed tests:   testBeanMetaDataCanBeGarbageCollected(org.hibernate.validator.test.internal.metadata.BeanMetaDataManagerTest)
+    * [HV-716] - Refactor programmatic API to instantiate the raw model classes directly
+    * [HV-798] - Escaping validator messages doesn't work
+
+** Improvement
+    * [HV-652] - Update JavaDoc stylesheet when building with Java 7
+    * [HV-760] - Align line endings style
+    * [HV-769] - Derive constraint target automatically for XML-configured constraints
+    * [HV-779] - Remove dependency to run in Android
+    * [HV-796] - Convert missing files with incorrect line endings
+
+** New Feature
+    * [HV-642] - Extend programmatic constraint API to support new constructs from BV 1.1
+    * [HV-701] - Provide API to make additional objects available for message interpolation
+    * [HV-714] - Provide cross-parameter validator for @ScriptAssert
+
+** Patch
+    * [HV-797] - Require Maven 3.0.3 to build
+
+** Task
+    * [HV-619] - Use WildFly for tck-runner module
+    * [HV-637] - Investigate performance regression between HV 4.3 and 5.0
+    * [HV-684] - Some follow-up tasks/minor todos
+    * [HV-802] - Investigate integration with ParaNamer
+
+
+5.0.1.Final (30.04.2013)
+------------------------
+
+** Bug
+    * [HV-702] - Upgrade JPA version used in HV
+    * [HV-725] - Update docbook documentation to reflect the changes of Bean Validation 1.1
+    * [HV-790] - Change EL impl dependency scope from runtime to provided
+    * [HV-791] - XML configuration fails for primitive types
+
+** Improvement
+    * [HV-604] - Class-level constraints section of online docs refers to PassengerCount example which is never shown
+
+
+5.0.0.Final (11.04.2013)
+------------------------
+
+** Bug
+    * [HV-787] - javax.enterprise.inject.spi.Bean implementations should also implement PassivationCapable
+    * [HV-788] - Upgrade BV API and TCK to final versions
+
+** Improvement
+    * [HV-752] - Check transitive dependencies from CDI API
+    * [HV-785] - Improve structure of JavaDoc
+
+** Task
+    * [HV-781] - Align with latest Weld release
+
+
+5.0.0.CR5 (02.04.2013)
+----------------------
+
+** Bug
+    * [HV-778] - Provide a way to deactivate cdi extension
+    * [HV-782] - Multiple constraint-mappings files for one constraint to not work
+
+** Improvement
+    * [HV-648] - Script documentation and distribution upload
+    * [HV-724] - Remove JavaDoc warnings
+    * [HV-783] - Extract hierarchy related functionality from ReflectionHelper
+    * [HV-786] - Update dependencies to Weld and BV TCK
+
+
+5.0.0.CR4 (20.03.2013)
+----------------------
+
+** Bug
+    * [HV-678] - Constraint is validated several times if part of several groups
+    * [HV-766] - Method return values are allowed to be marked with @Valid in parallel methods
+    * [HV-767] - Group conversions not correctly applied for inherited group
+    * [HV-771] - @ValidateOnExecution not retrieved from overridden methods for sub-classes
+    * [HV-772] - @ValidateOnExecution not always retrieved from highest method in inheritance hierarchy
+    * [HV-773] - @ValidateOnExecution(type=IMPLICIT) on type-level causes getters to be validated
+    * [HV-774] - Consider return type when detecting getter methods
+    * [HV-775] - Node#as() doesn't throw ClassCastException if wrong type is passed
+    * [HV-776] - ValidationExtension should throw an exception in case of invalid @ValidateOnExecution configuration
+
+** Improvement
+    * [HV-672] - Throw meaningful exception in case object and method passed to validateParameters() don't match
+    * [HV-768] - Eagerly throw exceptions in case of illegal method constraints
+    * [HV-770] - Cascaded return value validation causes exception when used with Weld
+    * [HV-777] - Adapt to changed option name for excluding integration tests from TCK run
+
+
+5.0.0.CR3 (15.03.2013)
+----------------------
+
+** Bug
+    * [HV-704] - Mark dependency to UEL as provided
+    * [HV-728] - ConstraintViolation#getLeafBean() returns null for constructor return value validation
+    * [HV-729] - Consider "\$" as the literal "$" instead of considering it as the beginning of a message expression
+    * [HV-730] - Propagate "validationAppliesTo" to composing constraints
+    * [HV-732] - Verification whether group conversions is specified on cascaded element cannot be made in raw model
+    * [HV-734] - Align XML parsing code with the latest xsd in the BV API
+    * [HV-735] - Xml parsing needs to track whether 'ignore-annotations' is set to true or false or not at all
+    * [HV-737] - A getter method can only by configured via XML by either a getter or method node, not both
+    * [HV-743] - Messages using EL should stay unchanged also if RuntimeExceptions are raised
+    * [HV-744] - Wrap exceptions from message interpolators into ValidationException
+    * [HV-747] - Wrong validator used when constraint has generic and cross-parameter validator for the same type
+    * [HV-748] - Throw UnexpectedTypeException if there are two validators for the same type
+
+** Improvement
+    * [HV-723] - Re-enable CDI portable extension
+    * [HV-736] - Provide patched JAR for making AS 7.1.1 usable with HV 5.x
+
+** Task
+    * [HV-439] - Revisit the use of generics in ValidatorImpl
+    * [HV-740] - Implement programmatic addition of method validation interceptor binding
+    * [HV-745] - Default package is not taken into account for class-typed constraint attributes configured via XML
+
+
+5.0.0.CR2 (11.03.2013)
+----------------------
+
+** Bug
+    * [HV-704] - Mark dependency to UEL as provided
+    * [HV-728] - ConstraintViolation#getLeafBean() returns null for constructor return value validation
+    * [HV-729] - Consider "\$" as the literal "$" instead of considering it as the beginning of a message expression
+    * [HV-730] - Propagate "validationAppliesTo" to composing constraints
+    * [HV-732] - Verification whether group conversions is specified on cascaded element cannot be made in raw model
+    * [HV-734] - Align XML parsing code with the latest xsd in the BV API
+    * [HV-735] - Xml parsing needs to track whether 'ignore-annotations' is set to true or false or not at all
+    * [HV-737] - A getter method can only by configured via XML by either a getter or method node, not both
+    * [HV-743] - Messages using EL should stay unchanged also if RuntimeExceptions are raised
+    * [HV-744] - Wrap exceptions from message interpolators into ValidationException
+    * [HV-747] - Wrong validator used when constraint has generic and cross-parameter validator for the same type
+    * [HV-748] - Throw UnexpectedTypeException if there are two validators for the same type
+
+** Improvement
+    * [HV-723] - Re-enable CDI portable extension
+    * [HV-736] - Provide patched JAR for making AS 7.1.1 usable with HV 5.x
+
+** Task
+    * [HV-439] - Revisit the use of generics in ValidatorImpl
+    * [HV-740] - Implement programmatic addition of method validation interceptor binding
+    * [HV-745] - Default package is not taken into account for class-typed constraint attributes configured via XML
+
+
+5.0.0.CR1 (21.02.2013)
+----------------------
+
+** Bug
+    * [HV-683] - Meta model should not be retrievable in case of illegal parameter constraints in hierarchies
+    * [HV-699] - Import EL packages in OSGi manifest
+    * [HV-703] - Upgrade Jsoups dependency
+    * [HV-707] - BootstrapConfiguration#getValidatedExecutableTypes() returns wrong default value
+    * [HV-708] - Adapt to API changes around Node#getKind()
+    * [HV-710] - Implement CrossParameterNode and ExecutableDescriptor#getCrossParameterDescriptor()
+    * [HV-711] - Updates around ReturnValueNode and ReturnValueDescriptor
+    * [HV-717] - Implement Beandescriptor#hasConstrainedExecutables
+    * [HV-719] - Use List instead of arrays in ParameterNameProvider
+    * [HV-720] - Use @SupportValidationTarget instead of @CrossParameterConstraint for cross paramter constraints
+
+** Improvement
+    * [HV-713] - Implement new methods on ConstraintViolation
+    * [HV-722] - Temporarily disable CDI portable extension
+
+** New Feature
+    * [HV-373] - XML-based configuration of method-level constraints and group conversions
+    * [HV-698] - Don't support unwrapping to internal implementation classes
+    * [HV-709] - Implement new methods in node builder API
+
+** Task
+    * [HV-690] - Update XML schema and parsing code
+
+
+5.0.0.Beta1 (06.02.2013)
+------------------------
+
+** Bug
+    * [HV-618] - Unable to validate methods in complex inheritance hierarchy
+    * [HV-646] - Shouldn't access the index for non-indexable types
+    * [HV-656] - MethodValidationContext.isReturnValueValidation throws NPE
+    * [HV-657] - Remove tests in BeanMetaDataImplTest
+    * [HV-658] - Escape special characters in README.md
+    * [HV-659] - ValidatorContextImpl ignores custom ParameterNameProvider
+    * [HV-660] - BeanDescriptor#getConstrainedProperties() must return no elements for class-level constraints
+    * [HV-662] - ConstraintValidatorManager caching fails for XML-defined constraints
+    * [HV-663] - ParameterNameProviders passed via ValidatorFactory#usingContext() are ignored
+    * [HV-664] - Path nodes representing executable return values must return null as name
+    * [HV-665] - Consider concerned constraint in identity of constraint violations
+    * [HV-666] - ExecutableDescriptorImpl#areParametersConstrained() must consider cross-parameter constraints
+    * [HV-668] - ExecutableDescriptorImpl must honor contract for hasConstrained() etc.
+    * [HV-675] - Method return values must not be marked with @Valid if the super-type/interface method is marked
+    * [HV-676] - Implement EL expression interpolation in message interpolation
+    * [HV-677] - ElementDescriptor is null for property nodes reached via traversing a Map- or array-typed parameter
+    * [HV-679] - Must pass Default group to cascaded object when validating object with redefined default group sequence
+    * [HV-680] - No cascaded validation is performed when return value constraints are failing
+    * [HV-681] - Throw IllegalArgumentExceptions in ExecutableValidator methods as described in API
+    * [HV-682] - ExecutableDescriptor#findConstraints() returns constraints with wrong scope
+    * [HV-685] - The tck runner setup fails to run in container
+    * [HV-692] - Implement missing functionality after latest  BV 1.1 changes
+    * [HV-695] - CDI extension throws exception due to calling BeanManager#getBeans during AfterBeanDiscovery event processing
+    * [HV-700] - Update dependency to TCK, include JUEL in distribution
+
+** Improvement
+    * [HV-256] - Add 'exclusive' boolean attribute to @DecimalMin/@DecimalMax constraints
+    * [HV-576] - Consistently apply coding guidelines throughout the code base
+    * [HV-661] - Make sure Hibernate Validator can be used on Java 6 < 1.6.0_18
+    * [HV-673] - JPATraversableResolver must handle method parameters when invoked during method validation
+    * [HV-687] - Constraints for non overridden super-type method have wrong scope
+
+** New Feature
+    * [HV-697] - Create HV-specific MessageInterpolator.Context extension exposing the root bean type
+
+
+5.0.0.Alpha2 (28.11.2012)
+-------------------------
+
+** Sub-task
+    * [HV-629] - Move methods related to method validation to delegate interface
+    * [HV-631] - Extend the meta-data API with required convenience methods for method validation
+    * [HV-632] - Support cross-parameter constraints
+
+** Bug
+    * [HV-601] - NPE w/ overloaded methods on class validated with MethodValidationInterceptor
+    * [HV-602] - Docs are wrong about location of /validation.xml or the code is
+    * [HV-603] - XML based configuration fails when context class loader is not set
+    * [HV-612] - Documentation fails to build on locales with accented months
+    * [HV-615] - Create a CDI extension to activate Bean Validation
+    * [HV-622] - Assumes all getX/setX methods are bean properties and errors with "wrong number of arguments"
+    * [HV-623] - Wrong constraint validator type resolution in case of constraint placed on parameterized type in class hierachy
+    * [HV-626] - AnnotationMetaDataProvider should use #getDeclaredAnnotations instead of #getAnnotations when reading metadata from class and members
+    * [HV-638] - Support groups translation during cascaded validations
+    * [HV-647] - Don't add JMeter API doc to distribution
+
+** Improvement
+    * [HV-557] - Refactor package organisation to clearly separate spi, public and private APIs - part 2 (public packages)
+    * [HV-620] - Improve error message for HV000085
+    * [HV-621] - Avoid GroupChainGenerator to use reflection at runtime
+    * [HV-628] - Method validation changes from BV 1.1 PR
+    * [HV-630] - Refinements around ConfigurationSource
+    * [HV-636] - Investigate possiblity to run tests in parallel
+
+** Task
+    * [HV-584] - Remove deprecated types
+    * [HV-595] - Determine how to handle different versions of validation-configuration and validation-mapping xsd
+    * [HV-597] - Update tck-runner module
+    * [HV-635] - Align TCK runner with beta release of BVTCK
+    * [HV-639] - Evaluation of composed constraints should stops on first validation error when @ReportAsSingleViolation is used
+    * [HV-649] - Upgrade the tck runner module to BV TCK release 1.1.0.Beta2
+
+
+4.3.1.Final (28.11.2012)
+------------------------
+
+** Bug
+    * [HV-591] - EmailValidator throws an IllegalArgumentException for long email addresses
+    * [HV-601] - NPE w/ overloaded methods on class validated with MethodValidationInterceptor
+    * [HV-607] - Email Validator producing error for large email addresses
+    * [HV-609] - EmailValidator fails where email address is large
+    * [HV-613] - email handles complete address as idn label and fails for valid longer addresses
+    * [HV-622] - Assumes all getX/setX methods are bean properties and errors with "wrong number of arguments"
+    * [HV-623] - Wrong constraint validator type resolution in case of constraint placed on parameterized type in class hierachy
+    * [HV-625] - EmailValidator.isValid sometimes throws an exception instead of returning false
+    * [HV-626] - AnnotationMetaDataProvider should use #getDeclaredAnnotations instead of #getAnnotations when reading metadata from class and members
+
+** Task
+    * [HV-639] - Evaluation of composed constraints should stops on first validation error when @ReportAsSingleViolation is used
+
+
+5.0.0.Alpha1 (21.06.2012)
+-------------------------
+
+** Bug
+    * [HV-590] - Update copyright year in reference guide
+    * [HV-591] - EmailValidator throws an IllegalArgumentException for long email addresses
+
+** Improvement
+    * [HV-583] - Upgrade JBoss Logging dependency
+
+** Task
+    * [HV-541] - The hibernate-validator-tck-runner project should not be deployed to the maven repository
+    * [HV-571] - Align method level validation w/ Bean Validation 1.1
+
+
+4.3.0.Final (09.05.2012)
+------------------------
+
+** Improvement
+    * [HV-568] - Perform a profiling of the annotation processor code and make use of caching where appropriate
+    * [HV-577] - Include javadoc jar in Maven repo
+
+** Task
+    * [HV-578] - Remove remaining references to slf4j
+    * [HV-580] - Remove deprecation of package org.hibernate.validator.group
+
+
+4.3.0.CR1 (30.04.2012)
+----------------------
+
+** Bug
+    * [HV-572] - Ensure the docs directory gets properly included into the distribution
+    * [HV-573] - Need graceful handling of return value constraint applied to method with void return type
+    * [HV-574] - Annotations processing fails with 4.3.0 Beta1
+    * [HV-575] - NPE in annotation processor ConstraintHelper.getName()
+
+** Improvement
+    * [HV-538] - Perform a profiling of the HV code in order to identify performance bottlenecks
+    * [HV-554] -  Regular Expression for @Email
+
+** Task
+    * [HV-100] - Implement a performance test harness for Bean Validation
+    * [HV-569] - Switch to Java 6
+
+
+4.3.0.Beta1 (04.04.2012)
+------------------------
+
+** Bug
+    * [HV-563] - Enable Configuration#buildValidatorFactory() to be callable several times
+    * [HV-567] - @Email reported as "disallowed" for String field
+
+** Improvement
+    * [HV-457] - Simplify annotation processor setup in IDEs in regards to required dependencies
+    * [HV-463] - Revisit the class and implementation of Group/GroupChain
+    * [HV-479] - Implement an eviction strategy for BeanMetaDataCache
+    * [HV-517] - Establish the notion of AnnotationIgnores for programmatic API
+    * [HV-564] - Allow caching of ConstraintValidator instances also for custom ConstraintValidatorFactories
+    * [HV-566] - Shorten directory names
+
+** Task
+    * [HV-558] - Upgrade AS 7 dependencies
+    * [HV-561] - Determine and mark the API to be deprecated for HV5
+
+
+4.3.0.Alpha1 (06.03.2012)
+-------------------------
+
+** Bug
+    * [HV-443] - Scope of ConstraintDescriptors sometimes wrong in type hierarchies
+    * [HV-472] - E-Mail Validator does not validate IDN E-Mail-Addresses
+    * [HV-480] - Constraints configured via XML and programmatic API aren't merged
+    * [HV-506] - Message interpolation should check whether an interpolated annotation paramter is an array
+    * [HV-508] - DecimalMaxValidatorForNumber for a double values is not correct
+    * [HV-509] - Property path is wrong for cascaded validation of class-level constraints
+    * [HV-511] - Minor documentation error
+    * [HV-516] - Hibernate Validator doesn't work well with hibernate persistence when generating DDL
+    * [HV-519] - Typos in ValidationMessages_de.properties
+    * [HV-524] - java.util.NoSuchElementException in type level validation using EclipseLink
+    * [HV-525] - tests fail on openjdk
+    * [HV-531] - hibernate-validator-annotation-processor tests fails when running against JDK7
+    * [HV-537] - Reintroduce jdocbook.ignoreTranslations in the docbook configuration
+    * [HV-543] - spelling mistake in org.hibernate.valisdator.validationMessages_fr.properties
+    * [HV-546] - LazyValidatorFactory does not allow alternative bean validation providers
+    * [HV-550] - fail-fast doesn't work on composite constraints
+    * [HV-551] - @Size doesn't work on List with bounded wildcard
+
+** Improvement
+    * [HV-473] - Add option to Canonicalize String Input
+    * [HV-491] - Add support for MOD11 Algorithm
+    * [HV-500] - ConfigurationImpl should support multiple programmatic constraint mappings
+    * [HV-502] - Changing Generic Type on @Size, @Pattern a.s.o. from String to CharacterSequence
+    * [HV-515] - Performance improvement for MinValidatorForString
+    * [HV-518] - Create copyright.txt as mentioned by the license headers
+    * [HV-520] - Remove package cycle between "descriptor" and "aggregated" packages
+    * [HV-527] - ValidationMessages in Czech language
+    * [HV-529] - ConstraintHelper is obsolete in ValidatorImpl
+    * [HV-539] - Modify how MANIFESTs are generated
+    * [HV-545] - Update TCK runner to run against AS 7.1
+    * [HV-547] - Make Hibernate Validator build not fail
+
+** Task
+    * [HV-441] - Refactor BeanMetaDataImpl
+    * [HV-465] - Remove obsolete type parameter from MetaConstraint#validateConstraint()
+    * [HV-481] - Move to i18n logs and exception via JBoss Logging
+    * [HV-484] - Refactor package organisation to clearly separate spi, public and private APIs - part 1 (internal packages)
+    * [HV-496] - Include Hibernate Validator test classes in a different classifier
+    * [HV-505] - Update tck runner to run against AS 7.0.0.Final
+    * [HV-510] - Upgrade BV TCK dependency to 1.0.6.GA
+    * [HV-528] - Compilation fails with JDK 7 due to incompatabilites of JAXB versions
+    * [HV-530] - Explain propagation of redefined default groups across associated instances annotated with @Valid
+    * [HV-534] - Consider removing the shading plug-in
+    * [HV-536] - Upgrade JSoup dependency
+    * [HV-540] - Remove repository settings from the master pom
+    * [HV-544] - Create a integration test moodule
+
+4.2.0.Final (20.06.2011)
+----------------------
+
+** Improvement
+    * [HV-315] - Create package-level JavaDoc for the AP
+    * [HV-485] - Determine an order for the constraint mapping fluent API
+    * [HV-486] - Remove getMethod() from MethodConstraintViolation
+    * [HV-490] - Create @SafeHtml annotation
+    * [HV-493] - Add support for Brazilian Portuguese for ValidationMessages
+
+** New Feature
+    * [HV-372] - Add section to method-level validation to the HV reference guide
+
+** Task
+    * [HV-489] - Upgrade dependency to BV TCK to 1.0.5.GA
+    * [HV-494] - upgrade to hibernate-jpa-2.0-api-1.0.1.Final
+    * [HV-497] - Create aggregated javadocs for the distribution and deployment on docs server
+
+4.2.0.CR1 (09.06.2011)
+----------------------
+
+** Bug
+    * [HV-406] - URL Validator not effective
+    * [HV-437] - Improve the javadocs of the URL constraints
+    * [HV-447] - Create documentation for boolean composition of composing constraints
+    * [HV-452] - Incorrect Paths when using fluent API to add constraints to a context
+    * [HV-458] - Wrong behaviour determining default group constraints in conjunction with @GroupSequence
+    * [HV-459] - Run TCK against AS 7
+    * [HV-466] - Avoid repeated validation of constraints in certain type hierarchies
+    * [HV-468] - Determine whether a property is indexed based on the runtime not static type
+    * [HV-470] - resolvedMessages in ResourceBundleMessageInterpolator needs to be synchronized
+
+** Improvement
+    * [HV-407] - Update "Presentation layer validation" section
+    * [HV-417] - Add section on public API and it's changes to the reference guide
+    * [HV-434] - ValidatorImpl#shouldFailFast() and ValidationContext#shouldFailFast() seem redundant
+    * [HV-442] - Make clear in the documentation which types are supported for built-in constraints
+    * [HV-446] - The annotation processor should allow constraint annotations at non-getter methods
+    * [HV-449] - Remove interface check in BeanMetaDataImpl#newGroupSequenceProviderInstance()
+    * [HV-453] - Add an example of default group sequence provider configuration with the programmatic API
+    * [HV-454] - Fix a mistake in the reference guide about custom properties supported by Hibernate Validator
+    * [HV-461] - Refactor TestUtil class
+    * [HV-475] - Add required and public packages to the OSGi manifest
+    * [HV-488] - Rename MethodDescriptor#getParameterConstraints() method
+
+** New Feature
+    * [HV-436] - The annotation processor should check @GroupSequenceProvider
+
+** Patch
+    * [HV-483] - ValidationMessages translation to Spanish
+
+** Task
+    * [HV-400] - Align the configuration of the archetype plugin with the configuration in search
+    * [HV-431] - Extend programmatic API to allow the definition of method level constraints
+    * [HV-464] - Remove obsolete type parameter from ParameterMetaConstraint
+    * [HV-471] - Group has to be an interface - Documentation or code bug
+    * [HV-474] - Get Hibernate Validator a proper changelog file
+    * [HV-487] - Settle on an approach for instantiating constraint definitions
+
+4.2.0.Beta2 (09.02.2011)
+------------------------
+
+** Bug
+    * [HV-376] - validateValue() and validateProperty() are too restrictive regarding processable property names
+    * [HV-381] - Provide a fail fast switch to stop processing constraints on first failure
+    * [HV-414] - Assembly plugin fails with maven 3.0.1
+    * [HV-418] - The annotation processor shouldn't report @Past/@Future given at Joda types as errors
+    * [HV-421] - Reconsider behavior of parameter validation for inheritance hierarchies
+    * [HV-422] - slf4j version in hibernate-validator
+    * [HV-426] - Wrong name in version logging message
+    * [HV-428] - Java 1.6 specific method used in programmatic validation API
+    * [HV-429] - validateValue and validateProperty using wrong default group sequence
+    * [HV-430] - XML configuration does not allow configuration of public fields in superclass
+    * [HV-433] - Cascaded validation on superclass fields does not work if only @Valid is used
+    * [HV-444] - Default group sequence defined with programmatic API is not used if the configured class doesn't define programmatic constraints
+
+** Improvement
+    * [HV-415] - Rename validateParameters to validateAllParameters
+    * [HV-419] - Update the dependency to slf4j-api to 1.6.x
+    * [HV-424] - Validators for Joda types should be specified for ReadableInstant/ReadablePartial
+
+** New Feature
+    * [HV-94] - Support dynamic default group sequence definition
+    * [HV-371] - Support method-level constraints in meta-data API
+
+** Task
+    * [HV-420] - Deprecate legacy validator
+    * [HV-440] - Extend programmatic API to allow the definition of default group sequence provider
+
+4.2.0.Beta1 (13.01.2011)
+------------------------
+
+** Sub-task
+    * [HV-367] - Evaluate @Valid annotation given at parameters
+    * [HV-368] - Evaluate @Valid annotation given at return values
+    * [HV-369] - Evaluate constraint annotations given at parameters
+    * [HV-370] - Evaluate constraint annotations given at return values
+
+** Bug
+    * [HV-350] - Inherited Bean validates non-default constraints as default
+    * [HV-352] - In some cexceptional cases the original stacktrace is not preserved
+    * [HV-355] - RangeDef's min() and max() are just wrong
+    * [HV-362] - Including Annotation Processor in Eclipse results in java.lang.OutOfMemoryError: Java heap space
+    * [HV-363] - HV uses Thread's context class loader to load internal implementation classes
+    * [HV-374] - NoSuchMethodError on Persistence.getPersistenceUtil() on WebLogic 10.3.3 (11g)
+    * [HV-379] - Remove obsolete dependency exlusion from tck-runner pom
+    * [HV-382] - "java.lang.NoSuchMethodError: java.lang.String.isEmpty" in ScriptAssertValidator.java
+    * [HV-384] - Performence problem when using programatic constrain declaration
+    * [HV-385] - Typo in German validation messages
+    * [HV-387] - org.hibernate.validator.cfg.defs.GenericConstraintDef should (probably) not extend the raw type ConstraintDef
+    * [HV-391] - Review assertions of @Past and @Future tests
+    * [HV-395] - Align Path.Node implementation with the Bean Validation specification
+    * [HV-396] - Build for hibernate-validator module fails using Maven 3 due to problem with the maven-shade-plugin
+    * [HV-398] - Build of Hibernate Validator Quickstart failed with another default locale than en
+    * [HV-402] - Make sure that Validator still works on JDK 5 due to ValueMessageInterpolator
+    * [HV-403] - Create a ValueMessageInterpolator based on java.text.Format instead of the scripting engine
+    * [HV-405] - Hibernate validator doesn't work well on JDK5
+    * [HV-408] - Validator throws wrongly an exception for constraints placed on  non-getter methods
+
+** Improvement
+    * [HV-346] - Improve some of the default debug/info messages
+    * [HV-353] - Support inheritance for group validation
+    * [HV-359] - chinese message template
+    * [HV-365] - It is very hard to find the HV annotation processor
+    * [HV-366] - The documentation refers to http://repository.jboss.com/maven2: this should be fixed to point to the new maven settings
+    * [HV-410] - Clarify the license on both the website and the reference documentation
+    * [HV-412] - Move GenericConstraintDef into org.hibernate.validator.cfg
+
+** New Feature
+    * [HV-299] - Annotation processor should check constraint annotation type declarations
+    * [HV-307] - Support @Past/@Future annotations at types from the Joda Time API
+    * [HV-347] - Create method level validation
+    * [HV-357] - Create a chapter for the reference guide describing the meta-data API
+    * [HV-358] - Create a pluggable MessageInterpolator which can interploate ${value}
+    * [HV-390] - Boolean composition of constraints
+    * [HV-401] - Ensure that the default validation provider is Hibernate Validator in LazyValidatorFactory
+
+** Task
+    * [HV-327] - Update TCK runner dependecies to not depend on the JBoss deprecated repo
+    * [HV-348] - Add note to JPA integration section about access type when using lazy loaded OneToOne and ManyToOne associations
+    * [HV-349] - Hungarian translation for ValidationMessages.properties
+    * [HV-351] - Translate hv document into chinese
+    * [HV-375] - Update jboss-testharness and bv tck dependecies
+    * [HV-378] - Cleanup the pom
+    * [HV-383] - Update VCS information in pom
+    * [HV-386] - Move readme.txt into top level directory
+    * [HV-392] - Update entity-manager tests dependecy to 3.6.0.Final
+    * [HV-393] - Version class should get the version injected via the maven-injection-plugin
+    * [HV-394] - Change log level from info to debug in DefaultTraversableResolver
+    * [HV-413] - Activate chinese transalation, update po and pot files and make sure that the translation gets included in the dist bundle
+
+4.1.0.Final (21.06.2010)
+------------------------
+
+** Bug
+    * [HV-335] - @Max, @Min, @DecimalMax and @DecimalMin can give wrong results
+    * [HV-339] - ^ not allowed in Email
+    * [HV-343] - Package type in the documentation example
+
+** Improvement
+    * [HV-338] - Move the discovery of constraint types into the constructor of ConstraintTree
+    * [HV-340] - When checking for composing constraints ignore annotations like @Target, @Documented, ...
+    * [HV-341] - Reduce the amounf of Annotation.annotationType() calls since reflection calls are expensive
+    * [HV-342] - Reduce the amout of calls to ConstraintHelper.isMultiValueConstraint
+    * [HV-344] - Add example for configuring hibernate validator through Spring session factory bean
+
+** Task
+    * [HV-334] - Stop hibernate-validator-legacy to be deployed in the maven repo
+    * [HV-336] - Remove deprecated constructor in ResourceBundleMessageInterpolator
+    * [HV-337] - Update documentation regarding the effects of @Length during DDL generation
+
+4.1.0.CR1 (14.06.2010)
+----------------------
+
+** Bug
+    * [HV-332] - Investigate the usage of CachingResourceBundleLocator in ResourceBundleMessageInterpolator
+    * [HV-333] - Verify that MessageInterpolatorContext.getValidatedValue returns the right value
+
+** Task
+    * [HV-331] - Investigate use of  field/method.setAccessible( true )
+
+4.1.0.Beta2 (02.06.2010)
+------------------------
+
+** Bug
+    * [HV-281] - validation of a persisted map
+    * [HV-293] - Annotation processor fails in Eclipse when evaluating custom constraints not defined in the current project
+    * [HV-305] - JPATraversableResolver tries to access properties that do not exist
+    * [HV-306] - Falling back to system´s default locale if chosen locale was EN
+    * [HV-309] - POM file's content-type is text/plain
+    * [HV-312] - Close all input streams opened by HV
+    * [HV-319] - Example in online documention reference javax.validation.ConstraintPayload instead of  javax.validation.Payload
+    * [HV-321] - javax.persistence.PersistenceException when trying to validate an object graphs with a class-level constraint annotation. In addition to the error report HV-266
+    * [HV-323] - URL Validator needs to pass on empty Strings
+    * [HV-324] - Default annotation not executing when group selector activated
+    * [HV-326] - Verify that for caching user objects during the validation process we use a IdentityHashMap or IdentityHashSet
+    * [HV-328] - Configuration.addMapping( null ) should throw IllegalArgumentException
+    * [HV-329] - Update quickstart section and remove reference to archetype catalog
+
+** Improvement
+    * [HV-156] - Exploring properties and cascade is unnecessary if TraversableResolver returns false
+    * [HV-298] - Add a section on using the annotation processor to the HV reference guide
+    * [HV-302] - JAXB shouldn't be required when not using XML configuration
+    * [HV-310] - Define, which parts of HV constitute its public API
+    * [HV-313] - Extract messaging related stuff from ConstraintAnnotationVisitor
+    * [HV-314] - Add @List annotations to the HV-specific constraints
+    * [HV-316] - Extract constraint checking from ConstraintAnnotationVisitor into separate check classes
+    * [HV-322] - Establish a processor option "verbose"
+
+** New Feature
+    * [HV-230] - Database Connective or @Unique
+    * [HV-274] - Write a programmatic mapping API for constraint declarations
+    * [HV-292] - Provide a constraint annotation @ScriptAssert
+
+** Patch
+    * [HV-151] - The mongolian validation message translation patch.
+
+** Task
+    * [HV-311] - Update pom to use the new distributationManagement information
+    * [HV-317] - Rename Global- and LocalExecutionContext
+    * [HV-325] - Align javadoc styles with the Core javadoc styles
+    * [HV-330] - Add a new constructor to ResourceBundleMessageInterpolator which enable/disables internal message caching
+
+4.1.0.Beta1 (24.03.2010)
+------------------------
+
+** Bug
+    * [HV-246] - BeanValidationEventListener has a bug (technically a problem with hibernate-annotations 3.5.0beta1... but I couldn't find that project)
+    * [HV-261] - Invalid license info
+    * [HV-266] - NullPointerException when trying to validate an object with a class-level constraint annotation.
+    * [HV-272] - jaxb dependencies should be dependencies with scope 'provided' instead of profile dependencies
+    * [HV-275] - Update french message template for @Email
+    * [HV-279] - Validator docbook files still reference GPL
+    * [HV-288] - The validator doesn't validate correctly groups composing a group sequence
+    * [HV-290] - Check the right copyright header is used in documenation
+    * [HV-291] - ConstraintViolation not serializable for composed constraints
+    * [HV-294] - Annotation processor should raise an error when @Valid is given at wrong places
+    * [HV-297] - Custom error messages built via ConstraintValidatorContext get ignored when constraint uses @ReportAsSingleViolation
+    * [HV-300] - Relocation from com.googlecode.jtype to org.hibernate.validator.jtype didn't catch all references
+
+** Improvement
+    * [HV-251] - ResourceMessageInterpolater - allow create with map of user resource bundles
+    * [HV-267] - Enhance distribution jar to make it OSGi bundle
+    * [HV-278] - ValidationMessages_de.properties spelling: "erwartet" instead of "erwarted"
+    * [HV-287] - French translation is not complete
+
+** New Feature
+    * [HV-229] - @Url needs to be added
+    * [HV-238] - Introduce a ResourceBundleLocatorStrategy interface which allows the ResourceBundleMessageInterpolator to delegate the loading of the resource bundle
+    * [HV-269] - Create an annotation processor validating constraint and property matching
+    * [HV-301] - Add a trim property to @NotEmpty please
+
+** Patch
+    * [HV-227] - hibernate validator message for turkish locale
+    * [HV-284] - Documentation fixes for hibernate-core integration
+    * [HV-286] - NoSuchMethodError on Persistence.getPersistenceUtil() when one follows the README file
+
+** Task
+    * [HV-141] - Use commons-annotations to apply the configuration specified in XML
+    * [HV-254] - Add section about ConstraintValidatorContext to documentation
+    * [HV-273] - Upgrade jtype and jpa2 dependency
+    * [HV-276] - Make sure that all used maven plugins specify their version explicitly
+    * [HV-282] - Create CreditCardValidator
+    * [HV-283] - Remove the legacy module from the main aggregator
+    * [HV-289] - Add requirements section to online manual about usage of Validator in JDK 5 and 6
+
+4.0.2.GA (06.11.2009)
+---------------------
+
+** Bug
+    * [HV-263] - NullPointerException when no constraint in xml
+    * [HV-265] - Constraints not loaded consistently for inherited classes
+    * [HV-268] - Wrong message templates for @Email and @Range
+
+4.0.1.GA (28.10.2009)
+---------------------
+
+** Bug
+    * [HV-250] - No validator could be found for type: T
+    * [HV-252] - HV with XML config tells me "Invalid property path." even though I know there is such a property.
+    * [HV-255] - Improve error handling for validateValue and validateProperty
+    * [HV-257] - ReflectionHelper.getValue fails to retrieve values from methods defined on a parent interface
+    * [HV-258] - The documentation for HV contains a invalid reference in section 2.1.3 class level constraints
+    * [HV-262] - Using interface in xml configuration does not work
+
+** Improvement
+    * [HV-253] - Fluent API to add path nodes is not flexible enough
+
+** Task
+    * [HV-259] - Add a payload example to the documentation
+
+4.0.0.GA (08.10.2009)
+---------------------
+
+** Sub-task
+    * [HV-217] - ValidatorResolutionTest#testResolutionOfMultipleSizeValidators uses generics in the constraintValidator resolution
+    * [HV-218] - Validator implementation resolution is based on the returned value (at runtime) instead of the returned type
+    * [HV-222] - MessageInterpolationTest#testFallbackToDefaultLocale
+    * [HV-223] - BeanDescriptorTest#testGetConstraintsForNullProperty should be mapped
+    * [HV-224] - ConstraintValidatorContextTest#testDisableDefaultErrorWithoutAddingCustomError should raise a ValidationException
+    * [HV-225] - Tests in GroupSequenceIsolationTest and NestedConstraintCompositionTest need to be mapped or moved to the HV test suite
+    * [HV-244] - Cache the type to ConstraintValidator class computation per constraint declaration
+
+** Bug
+    * [HV-134] - Built-in constraint parameter validation
+    * [HV-180] - Failure when compiling Hibernate Validator
+    * [HV-199] - Various TCK issues
+    * [HV-213] - Should we mark ConstraintViolation as Serializable?
+    * [HV-231] - Add default messages for DecimalMin and DecimalMax to resource bundle
+    * [HV-234] - make sure int[] is converted in Integer[] when needed by a constraintValidator call
+    * [HV-249] - findConstraints() .unorderedAndMatchingGroups in ElementDescriptor honors default sequence overriding
+
+** Improvement
+    * [HV-129] - ResourceBundleMessageInterpolatorTest should not test ResourceBundleMessageInterpolato but rather the Bean Validation provider default bundle
+    * [HV-132] - Support hasBoolean format
+    * [HV-235] - More useful exception error messages
+    * [HV-236] - Spring/Hibernate integration, and maven suggestions
+    * [HV-239] - Rename ValidatorConfiguration to HibernateValidatorConfiguration and move from o.h.v.engine to o.h.v package
+    * [HV-240] - Replace Red Hat Middleware LLC to Red Hat, Inc. and/or its affiliates
+    * [HV-242] - Cache ConstraintValidator instances per ValidatorFactory and not per ConstraintTree
+    * [HV-245] - Make ConstraintViolation + Path implementations Serializable
+
+** Task
+    * [HV-220] - Complete documentation
+    * [HV-221] - Create a JPAValidateListener equivalent in the new hibernate validator
+    * [HV-232] - Modify the BeanValidationEventListener in the annotation project to be configurable via the hibernate config file
+    * [HV-233] - Make sure jtype implements the following rules
+    * [HV-237] - Add a toString implementation to ConstraintViolationImpl
+    * [HV-241] - Add @Email and @Range constraints
+    * [HV-247] - Implement latest changes to meta data API in ri
+
+4.0.0.CR1 (27.08.2009)
+----------------------
+
+** Sub-task
+    * [HV-200] - ValidationProviderResolverTest#testValidationExceptionIsThrownInCaseValidatorFactoryCreationFails => enable=false?
+    * [HV-201] - BootstrapTest#testServiceFileExists shouldn't we test for the actual provider passing the TCK ie get the right name?
+    * [HV-202] - BootstrapTest#testCustomMessageInterpolatorViaConfiguration is not testing via configuration but via validator context (ie like testCustomMessageInterpolatorViaValidatorContext)
+    * [HV-203] - MappingStreamHandlingTest#testMappingStreamGetsClosed and testMappingStreamGetsClosedInExceptionalCondition are wrong and a failure for HV
+    * [HV-206] - CustomConstraintValidatorTest#testNonInterpolatedMessageParameterIsUsed assumes English locale, needs fix before commented line reactivation
+
+** Bug
+    * [HV-183] - Composite constraints have to honour the payload parameter as well
+    * [HV-191] - JPA 2 Dependency
+    * [HV-208] - Wrong Path in ConstraintViolation
+    * [HV-209] - Correctly handle <valid> configured in xml
+    * [HV-210] - XML constraint declaration with missing mandatory elements throws IllegalArgumentException insteadof  ValidationException
+    * [HV-212] - Group sequence resolution has to take sequence order of composing groups (via inheritance or other group sequence) into account
+    * [HV-214] - Constraints from interfaces and superclasses are not inherited when XML descriptors are used
+    * [HV-216] - Add the payload parameter to the xml configuration
+
+
+** Improvement
+    * [HV-185] - Change package name in codebase from org.hibernate.validation to org.hibernate.validator
+    * [HV-189] - ResourceBundleMessageInterpolator should cache the interpolation results for step 1-3 of the interpolation algorithm
+
+** New Feature
+    * [HV-91] - Make sure Validator<T> is thread-safe in the RI
+    * [HV-176] - Return the list of matching ConstraintDescriptor for a given set of groups
+
+
+
+** Task
+    * [HV-99] - Write unit tests for bootstrapping
+    * [HV-140] - Review all unchecked warnings
+    * [HV-188] - Cleanup ElementDescriptorImpl after we depend on bv api post CR3
+    * [HV-211] - Class name refactoring
+    * [HV-215] - Rename ConstraintPayload to Payload
+
+4.0.0.Beta3 (12.08.2009)
+------------------------
+
+** Bug
+    * [HV-124] - Hundreds of raw type use across the codebase
+    * [HV-186] - ResourceBundleMessageInterpolator has to allow all characters as message parameter
+    * [HV-187] - An exception occuring during a cal to the TraversableResolver has to be wrapped in a ValidationException
+    * [HV-190] - The Path implementation has to be matched with the specification
+    * [HV-192] - DigitsValidatorForNumber should strip trailing zeros
+    * [HV-193] - @OverridesAttribute.index starts at 0, not 1
+    * [HV-194] - Loading XML resources leads to NPE if the context classloader is not set
+    * [HV-196] - validateValue incorrectly reports java.lang.IllegalArgumentException on non constrained properties
+    * [HV-198] - Wrong constraint violation path when adding subnode error to subnode
+
+
+** Improvement
+    * [HV-171] - Hibernate Validator must specify how to run in environments that use a SecurityManager
+    * [HV-195] - Be permissive to heading '/' in mapping file names
+
+** New Feature
+    * [HV-197] - Implement a LazyValidatorFactory
+
+
+4.0.0.Beta2 (20.07.2009)
+------------------------
+
+** Bug
+    * [HV-79] - The test suite assumes Hibernate Validator as the BV provider
+    * [HV-146] - ConstraintValidator impls cannot inherit from a super class implementing ConstraintValidator
+    * [HV-149] - ReflectionHelper.containsMethod ignores "is" methods
+    * [HV-150] - TraversableResolver pathToTraversableObject incorrectly includes traversableProperty
+    * [HV-153] - ConstraintValidators created out of CVF should be cached to minimize initialization overhead
+    * [HV-154] - isTraversable is called with a root bean class null when validateValue is used
+    * [HV-157] - properties are cascaded despite TraversableResolver answering no
+    * [HV-158] - ClassCastException in org.hibernate.validation.constraints.FutureValidatorForDate.initialize
+    * [HV-159] - NullPointerException in ValidatorFactoryImpl, if XML config file doesn't contain at least one constraint and one cascade configuration
+    * [HV-162] - XML based configuration should be tolerant to line breaks and white spaces where appropriate
+    * [HV-164] - Add test for default group sequence isolation
+    * [HV-165] - Hibernate Validator does not validate groups in class level annotations.
+    * [HV-169] - Make sure Validator is concurrent safe
+    * [HV-170] - Refactor the group sequence expansion and take the default sequence expansion of the validated entity into considertation
+    * [HV-172] - Static fields and methods annotated with constraints should be ignored
+    * [HV-173] - @Valid on an array type does not properly validate the elements of the array
+    * [HV-174] - When using Matcher.appendReplacement all \ and $ characters must be escaped
+    * [HV-175] - @Valid should be polymorphic
+    * [HV-181] - Refactor ConstraintDescriptorImpl
+    * [HV-182] - Error when using composite constraints (wrong messages and stack traces)
+    * [HV-184] - ResourceBundlerMessageInterpolator fails to meet the spec in some issues
+
+** Improvement
+    * [HV-155] - Use a TraversableResolver caching results within a call stack to reduce overhead
+    * [HV-166] - Move constraints validator impl into org.hibernate.validation.constraints.impl
+    * [HV-167] - Rewrite @NotEmpty as a composition of @NotNull, @Size(min=1) @ReportAsSingleViolation
+
+** New Feature
+    * [HV-89] - Implement XML mapping
+    * [HV-97] - Support XML Configuration and merge of configuration metadata
+    * [HV-131] - Support @DecimalMin / @DecimalMax
+    * [HV-160] - Make use of the TraversableResolver contract spliting reachability and cascadability
+    * [HV-163] - Add [] to non-indexed iterable in paths
+
+** Task
+    * [HV-101] - Write unit tests for constraint composition
+    * [HV-107] - Implement a Hibernate Core specifc implementation of TraversableResolver
+    * [HV-109] - Implement test for bootstrapping with multiple providers
+    * [HV-127] - Implement test for the different types of Size validators
+    * [HV-133] - Create test baseclass to allow test to run w and w/o xml configuration
+    * [HV-147] - Invetigate problem with maven release plugin
+    * [HV-148] - Make sure that context as well as current class loader are used when trying to load xml configuration files
+    * [HV-168] - Add validators for DecimalMin and DecimalMax
+    * [HV-177] - Integrate the new Path model
+    * [HV-178] - Add check for payload parameter
+
+
+4.0.0.Beta1 (27.04.2009)
+------------------------
+
+** Bug
+    * [HV-139] - BeanMetaDataCache and ConstraintValidatorDefinitionsCache should not be static
+
+** New Feature
+    * [HV-144] - Add support for ConstraintViolation.getRootBeanClass
+
+** Task
+    * [HV-110] - Implement parser for validation.xml
+    * [HV-111] - Bootstrap HV using validation.xml
+    * [HV-112] - Map constraints using XML
+    * [HV-137] - Create a Hibernate Validator maven archetype
+    * [HV-142] - Extract the xml parsing code from ValidatorFactoryImpl and delegate the parsing to a seperate class
+
+
+4.0.0.Alpha3 (20.03.2009)
+-------------------------
+
+** Bug
+    * [HV-78] - ValidatorImpl.expandGroupName() does not seem to expand recursively, this goes against the spec
+    * [HV-80] - Group sequence sequences can contain group sequence names
+    * [HV-83] - Object graph traversed too many times
+    * [HV-85] - Group sequence expansion and validation execution should be decoupled
+    * [HV-117] - BuiltinConstraints doesn't contain @Digits
+    * [HV-118] - BuiltinConstraints doesn't contain @Past
+    * [HV-120] - ConstraintDescriptor.getGroups() returns Default.class if no group is declared on the constraint
+    * [HV-123] - Wrong elementType in MetaConstraint constructor
+
+** Improvement
+    * [HV-103] - Default error message for Min/Max constraints doesn't reflect constraint specification and implementation
+
+** New Feature
+    * [HV-92] - Implement sequences on group interfaces and group inheritance
+    * [HV-121] - @Pattern support
+    * [HV-122] - Add byte support for numeric constraints (digits, max etc)
+
+** Task
+    * [HV-106] - Integrate TraversableResolver into reference implementation
+    * [HV-108] - Verify correct polymorphic behaviour for validation
+    * [HV-113] - Redefining the Default group for a class
+    * [HV-114] - Implement error report customization via ConstraintValidatorContext
+
+
+
+4.0.0.Alpha2 (03.03.2009)
+-------------------------
+
+** Bug
+    * [HV-78] - ValidatorImpl.expandGroupName() does not seem to expand recursively, this goes against the spec
+    * [HV-80] - Group sequence sequences can contain group sequence names
+    * [HV-83] - Object graph traversed too many times
+    * [HV-85] - Group sequence expansion and validation execution should be decoupled
+    * [HV-117] - BuiltinConstraints doesn't contain @Digits
+    * [HV-118] - BuiltinConstraints doesn't contain @Past
+    * [HV-120] - ConstraintDescriptor.getGroups() returns Default.class if no group is declared on the constraint
+    * [HV-123] - Wrong elementType in MetaConstraint constructor
+
+** Improvement
+    * [HV-103] - Default error message for Min/Max constraints doesn't reflect constraint specification and implementation
+
+** New Feature
+    * [HV-92] - Implement sequences on group interfaces and group inheritance
+    * [HV-121] - @Pattern support
+    * [HV-122] - Add byte support for numeric constraints (digits, max etc)
+
+** Task
+    * [HV-106] - Integrate TraversableResolver into reference implementation
+    * [HV-108] - Verify correct polymorphic behaviour for validation
+    * [HV-113] - Redefining the Default group for a class
+    * [HV-114] - Implement error report customization via ConstraintValidatorContext
+
+
+
