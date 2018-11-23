@@ -10,15 +10,20 @@ function changeNav(obj){
     var list = $(".dir-nav li");
     list.each(function(index,element){
         element.className="";
+        $("#directory-contain-"+index).css("display","none");
     })
     obj.className="active";
-    
-    if($(obj).attr("id")=="dir-nav-1"){
-        $("#directory-contain-1").css("display","display");
-        $("#directory-contain-2").css("display","none");
-    }
-    if($(obj).attr("id")=="dir-nav-2"){
-        $("#directory-contain-1").css("display","none");
-        $("#directory-contain-2").css("display","display");
-    }
+    $("#directory-contain-"+$(obj).attr("id")).css("display","display");
+}
+function showBtn(obj){
+    $(obj).css("background-color","#9792925b");
+    $(obj).children().css("display","block");
+}
+function hideBtn(obj){
+    $(obj).css("background-color","none");
+    $(obj).children().css("display","none");
+}
+function changeCollectIcon(){
+    $(".collect i").removeClass("icon-star-empty");
+    $(".collect i").addClass("icon-star");
 }

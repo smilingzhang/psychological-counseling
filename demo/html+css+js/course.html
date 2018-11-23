@@ -27,9 +27,9 @@
             <!-- 一般导航项目 -->
             <ul class="nav navbar-nav">
                 <!--返回目录按钮-->
-              <li><a href="#"><i class="icon icon-reply"></i></a></li>
+              <li><a href="course-instr.html"><i class="icon icon-reply"></i></a></li>
               <!--章节名-->
-              <li><span class="ch-name">游戏引擎的概念简介</span></li>
+              <li><span class="ch-name">婴儿的认知发展</span></li>
               <!--跳转评论按钮：锚点定位-->
               <li><a href="#comment" name="course"><i class="icon icon-comment-alt"></i></a></li>
             </ul>
@@ -46,46 +46,47 @@
                 <!--导航条-->
                 <div class="dir-nav">
                     <ul id="dir-nav-contain">
-                        <li id="dir-nav-1" class="active" onclick="changeNav(this)"><a href="#">课程目录</a></li>
-                        <li id="dir-nav-2" onclick="changeNav(this)"><a href="#">相关视频</a></li>
+                        <li id="1" class="active" onclick="changeNav(this)"><a href="#">课程目录</a></li>
+                        <li id="2" onclick="changeNav(this)"><a href="#">相关视频</a></li>
                     </ul>
                 </div>
                 <!--目录主体-->
                 <div id="directory-contain-1" class="directory-contain" style="display:block">
                     <!--注：一级目录不可点击-->
                     <!--注：二级目录提供选中(.active)和未选中两种样式-->
+                    <!--注：二级目录的选中(.active)样式可能需要后台负责人手动设置，暂未提供可用的js函数-->
                     <!--范例-->
                     <!--一级目录：章节-->
-                    <span class="directory-level-1"><span class="num">①</span><a>引擎的概述</a></span>
+                    <span class="directory-level-1"><span class="num">①</span><a>基础心理学</a></span>
                     <!-- 二级目录：课程 -->
-                    <span class="directory-level-2 active"><a href="#">引擎的概念简介</a></span>
-                    <span class="directory-level-2"><a href="#">游戏引擎的发展与约翰卡马克</a></span>
+                    <span class="directory-level-2 active"><a href="course.html">婴儿的认知发展</a></span>
+                    <span class="directory-level-2"><a href="course.html">幼儿的语言发展</a></span>
                     <!--END 范例-->
 
-                    <span class="directory-level-2"><a href="#">游戏引擎的发展与约翰卡马克</a></span>
-                    <span class="directory-level-2"><a href="#">游戏引擎的发展与约翰卡马克</a></span>
+                    <span class="directory-level-2"><a href="course.html">婴儿的认知发展</a></span>
+                    <span class="directory-level-2"><a href="course.html">幼儿的语言发展</a></span>
 
-                    <span class="directory-level-1"><span class="num">②</span><a>引擎的概述</a></span>
-                    <span class="directory-level-2"><a href="#">游戏引擎的发展与约翰卡马克</a></span>
-                    <span class="directory-level-2"><a href="#">游戏引擎的发展与约翰卡马克</a></span>
-                    <span class="directory-level-2"><a href="#">游戏引擎的发展与约翰卡马克</a></span>
-                    <span class="directory-level-2"><a href="#">游戏引擎的发展与约翰卡马克</a></span>
+                    <span class="directory-level-1"><span class="num">②</span><a>基础心理学</a></span>
+                    <span class="directory-level-2"><a href="course.html">婴儿的认知发展</a></span>
+                    <span class="directory-level-2"><a href="course.html">幼儿的语言发展</a></span>
+                    <span class="directory-level-2"><a href="course.html">婴儿的认知发展</a></span>
+                    <span class="directory-level-2"><a href="course.html">幼儿的语言发展</a></span>
 
-                    <span class="directory-level-1"><span class="num">②</span><a>引擎的概述</a></span>
-                    <span class="directory-level-2"><a href="#">游戏引擎的发展与约翰卡马克</a></span>
-                    <span class="directory-level-2"><a href="#">游戏引擎的发展与约翰卡马克</a></span>
-                    <span class="directory-level-2"><a href="#">游戏引擎的发展与约翰卡马克</a></span>
-                    <span class="directory-level-2"><a href="#">游戏引擎的发展与约翰卡马克</a></span>
-                    <span class="directory-level-2"><a href="#">游戏引擎的发展与约翰卡马克</a></span>
-                    <span class="directory-level-2"><a href="#">游戏引擎的发展与约翰卡马克</a></span>
+                    <span class="directory-level-1"><span class="num">②</span><a>基础心理学</a></span>
+                    <span class="directory-level-2"><a href="course.html">婴儿的认知发展</a></span>
+                    <span class="directory-level-2"><a href="course.html">幼儿的语言发展</a></span>
+                    <span class="directory-level-2"><a href="course.html">婴儿的认知发展</a></span>
+                    <span class="directory-level-2"><a href="course.html">幼儿的语言发展</a></span>
+                    <span class="directory-level-2"><a href="course.html">婴儿的认知发展</a></span>
+                    <span class="directory-level-2"><a href="course.html">幼儿的语言发展</a></span>
                     
-                    <span class="directory-level-1"><span class="num">②</span><a>引擎的概述</a></span>
-                    <span class="directory-level-2"><a href="#">游戏引擎的发展与约翰卡马克</a></span>
-                    <span class="directory-level-2"><a href="#">游戏引擎的发展与约翰卡马克</a></span>
-                    <span class="directory-level-2"><a href="#">游戏引擎的发展与约翰卡马克</a></span>
-                    <span class="directory-level-2"><a href="#">游戏引擎的发展与约翰卡马克</a></span>
-                    <span class="directory-level-2"><a href="#">游戏引擎的发展与约翰卡马克</a></span>
-                    <span class="directory-level-2"><a href="#">游戏引擎的发展与约翰卡马克</a></span>
+                    <span class="directory-level-1"><span class="num">③</span><a>基础心理学</a></span>
+                    <span class="directory-level-2"><a href="course.html">婴儿的认知发展</a></span>
+                    <span class="directory-level-2"><a href="course.html">幼儿的语言发展</a></span>
+                    <span class="directory-level-2"><a href="course.html">婴儿的认知发展</a></span>
+                    <span class="directory-level-2"><a href="course.html">幼儿的语言发展</a></span>
+                    <span class="directory-level-2"><a href="course.html">婴儿的认知发展</a></span>
+                    <span class="directory-level-2"><a href="course.html">幼儿的语言发展</a></span>
                 </div><!-- END 目录主体 -->
                 
                 <!--相关视频-->
@@ -102,39 +103,39 @@
                     <!--以下都是重复的-->
                     <!--一个课程-->
                     <div class="recomment-course">
-                            <!--课程图片-->
-                            <img class="course-img" src="images/course.jpg" alt="课程"/>
-                            <!--课程名：跳转到对应课程介绍页-->
-                            <a href="#" class="course-name title-h2">时间管理·速成指南</a>
-                            <!--主讲人姓名-->
-                            <span class="teacher">纪元</span>
-                        </div>
-                        <!--一个课程-->
+                        <!--课程图片-->
+                        <img class="course-img" src="images/course.jpg" alt="课程"/>
+                        <!--课程名：跳转到对应课程介绍页-->
+                        <a href="#" class="course-name title-h2">时间管理·速成指南</a>
+                        <!--主讲人姓名-->
+                        <span class="teacher">纪元</span>
+                    </div>
+                    <!--一个课程-->
                     <div class="recomment-course">
-                            <!--课程图片-->
-                            <img class="course-img" src="images/course.jpg" alt="课程"/>
-                            <!--课程名：跳转到对应课程介绍页-->
-                            <a href="#" class="course-name title-h2">时间管理·速成指南</a>
-                            <!--主讲人姓名-->
-                            <span class="teacher">纪元</span>
-                        </div>
-                        <!--一个课程-->
+                        <!--课程图片-->
+                        <img class="course-img" src="images/course.jpg" alt="课程"/>
+                        <!--课程名：跳转到对应课程介绍页-->
+                        <a href="#" class="course-name title-h2">时间管理·速成指南</a>
+                        <!--主讲人姓名-->
+                        <span class="teacher">纪元</span>
+                    </div>
+                    <!--一个课程-->
                     <div class="recomment-course">
-                            <!--课程图片-->
-                            <img class="course-img" src="images/course.jpg" alt="课程"/>
-                            <!--课程名：跳转到对应课程介绍页-->
-                            <a href="#" class="course-name title-h2">时间管理·速成指南</a>
-                            <!--主讲人姓名-->
-                            <span class="teacher">纪元</span>
-                        </div>
-                        <div class="recomment-course">
-                                <!--课程图片-->
-                                <img class="course-img" src="images/course.jpg" alt="课程"/>
-                                <!--课程名：跳转到对应课程介绍页-->
-                                <a href="#" class="course-name title-h2">时间管理·速成指南</a>
-                                <!--主讲人姓名-->
-                                <span class="teacher">纪元</span>
-                            </div>
+                        <!--课程图片-->
+                        <img class="course-img" src="images/course.jpg" alt="课程"/>
+                        <!--课程名：跳转到对应课程介绍页-->
+                        <a href="#" class="course-name title-h2">时间管理·速成指南</a>
+                        <!--主讲人姓名-->
+                        <span class="teacher">纪元</span>
+                    </div>
+                    <div class="recomment-course">
+                        <!--课程图片-->
+                        <img class="course-img" src="images/course.jpg" alt="课程"/>
+                        <!--课程名：跳转到对应课程介绍页-->
+                        <a href="#" class="course-name title-h2">时间管理·速成指南</a>
+                        <!--主讲人姓名-->
+                        <span class="teacher">纪元</span>
+                    </div>
                 </div>
             </div>
             <!--视频-->
