@@ -870,7 +870,7 @@ line-height: 1.5em;
     width: 100%;
     height: 100%;
     background-color: #97929257;
-    display: none;
+    /* display: none; */
     position: fixed;
     margin: auto;    top: 0; left: 0; bottom: 0; right: 0;
 }
@@ -1169,4 +1169,55 @@ line-height: 1.5em;
     float: left;
     margin: 0.5%;
     margin-bottom: 2%
+}
+.info-conatin .directory-contain-list .passage-block{
+    width: 74%;
+    clear: both;
+    margin-bottom: 24px;
+}
+.info-conatin .directory-contain-list .passage-block img{
+    width: 32%;
+    float: left;
+    margin-right: 30px;
+}
+.info-conatin .directory-contain-list .passage-block .title{
+    font-size: 16px;
+    font-weight: bold;
+}
+.info-conatin .directory-contain-list .passage-block .writer{
+    line-height: 3em
+}
+.info-conatin .directory-contain-list .self-intr{
+    width: 100%
+}
+.info-conatin .directory-contain-list form table{
+    margin-bottom: 30px;
+}
+.info-conatin .directory-contain-list form table .btn-block{
+    float: left;
+}
+.info-conatin .directory-contain-list .find-back-pwd{
+    z-index: 100;
+    width: 30%;
+    height: 30%;
+    position: fixed;
+    margin: auto;    top: 0; left: 0; bottom: 0; right: 0;   
+    background-color: rgba(255, 255, 255, 0.863);
+    padding: 30px;
+    line-height: 2em;
+}
+.info-conatin .directory-contain-list .find-back-pwd i{
+    display: block;
+    color: #d7545469;
+    float: right;
+    font-size: 20px;
+    margin: 0px;
+}
+.info-conatin .directory-contain-list .find-back-pwd i:hover,
+.phone-num
+{
+    color: #d75455
+}
+.info-conatin .directory-contain-list .find-back-pwd .verify-zoom{
+    margin: 20px;
 }
