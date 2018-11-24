@@ -5912,7 +5912,7 @@ pre code {
 .nav > li > a:focus {
   color: #6e0706;
   text-decoration: none;
-  background-color: #f1f1f1;
+  background-color: #dd5b5b31;
   }
 .nav > li.disabled > a {
   color: #ddd;
@@ -5946,7 +5946,7 @@ pre code {
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
   color: #fff;
-  background-color: #3280fc;
+  background-color: #d75455;
   }
 .nav-primary > li {
   float: left;

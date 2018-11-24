@@ -6,14 +6,14 @@ function closeCommentWindow(){
     $("#comment-input").css("display","none");
     $("#shade").css("display","none");
 }
-function changeNav(obj){
-    var list = $(".dir-nav li");
+function changeNav(obj,prefix){
+    var list = $(obj).parent().children();
     list.each(function(index,element){
         element.className="";
-        $("#directory-contain-"+index).css("display","none");
+        $("#"+prefix+(index+1)).css("display","none");
     })
     obj.className="active";
-    $("#directory-contain-"+$(obj).attr("id")).css("display","display");
+    $("#"+prefix+(list.index($(obj))+1)).css("display","display");
 }
 function changeActive(obj){
     var list = $(obj).parent().children();

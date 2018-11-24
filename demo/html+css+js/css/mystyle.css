@@ -1,5 +1,10 @@
 .btn{
     border-radius: 5px;
+    border-width: 0;
+}
+a:hover{
+    color: #d75455;
+    text-decoration: none
 }
 a:focus{
     color: #6e0706;
@@ -613,8 +618,6 @@ line-height: 1.5em;
 .input #editor
 {
     height: 100%;
-<<<<<<< HEAD
-=======
 }
 .lesson-nav{
     margin-bottom: 0;
@@ -980,7 +983,6 @@ line-height: 1.5em;
 }
 #editor{
     background-color: #fff;
-<<<<<<< HEAD
 }
 .botton-board{
     width: 100%;
@@ -1073,7 +1075,98 @@ line-height: 1.5em;
 .botton-board  .pager-div{
     /* display: block; */
     clear: both;
-=======
->>>>>>> 6795f203100df7ff75ce92039d4efb408b7b523f
->>>>>>> a977fe07a671c74b494948b90ecd8c5f49a53563
+}
+.user-contain{
+    width: 960px;
+    margin-top: 0;
+}
+.user-contain .user{
+    width: 100%;
+}
+.user-contain .user .panel-body{
+    margin: 0;
+}
+.user-contain .user .panel-body img{
+    width: 10%;
+    float: left;
+}
+.user-contain .user .panel-body .intr{
+    width: 85%;
+    margin-left: 30px;
+    float: right;
+}
+.user-contain .user .panel-body .intr .user-name{
+    font-size: 16px;
+    font-weight: 700;
+}
+.user-contain .user .panel-body .intr .btn{
+    border: 0;
+}
+.user-contain .nav-bar{
+    width: 100%;
+    border-radius: 27px;
+    position: relative;
+}
+.user-contain .nav-bar .active{
+    border: 2px solid #d75455;
+    /* border-bottom: #d75455; */
+    border-width: 0 0 2px 0;
+}
+.user-contain .nav-bar{
+    padding: 0;
+    padding-left: 26%;
+    padding-right: 26%;
+}
+.user-contain .nav-bar .panel-body{
+    margin: 0;
+    padding: 0;
+}
+.info-conatin .dir-nav{
+    margin: 20px;
+}
+.info-conatin .dir-nav li a{
+    font-size: 14px;
+    line-height: 1em
+}
+.info-conatin .dir-nav li a:focus{
+    background-color: #d75455;
+}
+.info-conatin .panel{
+    width: 100%;
+    padding-left: 6%;
+    padding-right: 6%;
+}
+.info-conatin .directory-contain-list{
+    width: 100%;
+    padding-top: 10px
+}
+.info-conatin .directory-contain-list table{
+    width: 100%;
+}
+.info-conatin .directory-contain-list table img{
+    height: 80px;
+}
+.info-conatin .directory-contain-list table span{
+    font-size: 14px;
+}
+.info-conatin .directory-contain-list table .catagory{
+    font-weight: bold;
+}
+.info-conatin .directory-contain-list table .tag{
+    font-size: 12px;
+}
+.info-conatin .directory-contain-list table td{
+    border: 1px solid #979292;
+    border-width: 0 0 1px 0;
+    padding: 10px;
+}
+.info-conatin #directory-contain-2 .directory-contain-list .title{
+    font-size: 14px;
+    font-weight: bold
+}
+.info-conatin #directory-contain-2 .directory-contain-list .course-block{
+    width: 24%;
+    float: left;
+    margin: 0.5%;
+    margin-bottom: 2%
 }
