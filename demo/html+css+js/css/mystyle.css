@@ -1102,22 +1102,34 @@ line-height: 1.5em;
 .user-contain .user .panel-body .intr .btn{
     border: 0;
 }
-.user-contain .nav-bar{
+.user-contain .nav-bar,
+.passage-list-contain .nav-bar
+{
     width: 100%;
     border-radius: 27px;
     position: relative;
 }
-.user-contain .nav-bar .active{
+.user-contain .nav-bar .active,
+.passage-list-contain .nav-bar .active
+{
     border: 2px solid #d75455;
     /* border-bottom: #d75455; */
     border-width: 0 0 2px 0;
 }
-.user-contain .nav-bar{
+.passage-list-contain .nav-bar{
+    padding: 0;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+.user-contain .nav-bar,
+{
     padding: 0;
     padding-left: 26%;
     padding-right: 26%;
 }
-.user-contain .nav-bar .panel-body{
+.user-contain .nav-bar .panel-body,
+.passage-list-contain .nav-bar .panel-body
+{
     margin: 0;
     padding: 0;
 }
@@ -1170,21 +1182,29 @@ line-height: 1.5em;
     margin: 0.5%;
     margin-bottom: 2%
 }
-.info-conatin .directory-contain-list .passage-block{
+.info-conatin .directory-contain-list .passage-block,
+.passage-list-contain .passage-list-body .passage-block
+{
     width: 74%;
     clear: both;
     margin-bottom: 24px;
 }
-.info-conatin .directory-contain-list .passage-block img{
+.info-conatin .directory-contain-list .passage-block img,
+.passage-list-contain .passage-list-body .passage-block img
+{
     width: 32%;
     float: left;
     margin-right: 30px;
 }
-.info-conatin .directory-contain-list .passage-block .title{
+.info-conatin .directory-contain-list .passage-block .title,
+.passage-list-contain .passage-list-body .passage-block .title
+{
     font-size: 16px;
     font-weight: bold;
 }
-.info-conatin .directory-contain-list .passage-block .writer{
+.info-conatin .directory-contain-list .passage-block .writer,
+.passage-list-contain .passage-list-body .passage-block .writer
+{
     line-height: 3em
 }
 .info-conatin .directory-contain-list .self-intr{
@@ -1220,4 +1240,44 @@ line-height: 1.5em;
 }
 .info-conatin .directory-contain-list .find-back-pwd .verify-zoom{
     margin: 20px;
+}
+.passage-contain .passage-panel,
+.comment-contain
+{
+    padding-left: 6%;
+    padding-right: 6%;
+}
+.passage-contain .passage-panel .bread-crumb-navigation{
+    display: block;
+    margin-bottom: 10px;
+}
+.passage-contain .passage-panel .passage .board-title-h1{
+    font-size: 30px;
+    line-height: 2.5em;
+}
+.passage-contain .passage-panel .passage .writer-info{
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+.passage-contain .passage-panel .passage .writer-info img{
+    float: left;
+    margin-right: 20px;
+}
+.passage-contain .passage-panel .passage-body{
+    text-indent: 2em;
+}
+.passage-contain .comment-contain .btn{
+    color: #d75455;
+    margin-left: 20px;
+}
+.passage-contain .comment-contain .btn:hover{
+    color: #fff;
+}
+.passage-list-contain #myNiceCarousel{
+    width: 100%;
+    margin-bottom: 20px;
+}
+.passage-list-contain .panel{
+    margin-left: 0;
+    margin-right: 0;
 }
