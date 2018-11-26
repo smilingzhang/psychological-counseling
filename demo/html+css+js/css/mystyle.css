@@ -1387,4 +1387,28 @@ a:focus{
     float: left;
     padding-right: 10px;
 }
-
+.checkout-contain{
+    width: 50%
+}
+.checkout-contain .checkout-panel{
+    width: 100%;
+    clear: both;
+    padding-left: 18%;
+    padding-right: 18%;
+}
+.checkout-contain .checkout-panel .board-title-h1{
+    font-size: 30px;
+    line-height: 2em;
+    color: #d75455;
+}
+.checkout-contain .checkout-panel .panel-body div{
+    /* margin-top: 14px; */
+    margin-bottom: 14px
+}
+.checkout-contain .checkout-panel .panel-body div span{
+    line-height: 2em
+}
+.checkout-contain .checkout-panel .panel-body div input{
+    /* line-height: 3em */
+    margin: 5px
+}
