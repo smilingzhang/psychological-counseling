@@ -1,0 +1,34 @@
+## MPlayer Windows configuration - last rev. 20100716
+
+## It's better to leave this enabled on Windows, since the console is slow.
+quiet=yes
+
+## Fancy Color Messages
+msgcolor=yes
+
+## Frame dropping
+#framedrop=yes
+
+## drive letter of your DVD
+#dvd-device=d:
+
+## Uncomment this for AC-3 passthrough.
+#afm=hwac3
+
+## Multithreaded decoding on supported codec
+#lavdopts=threads=2
+
+## You can use the DirectX or OpenGL video output, default is directx.
+## For Vista or later you should avoid using directx vo, it will
+## disable Aero
+#vo=directx
+vo=direct3d
+
+## video filtering and postprocessing
+## eq is useful if your video card does not support video overlay.
+#vf=pp,eq
+#vf=eq,pp=lb/hb/vb
+
+## Fontconfig
+fontconfig=yes
+font=Arial
