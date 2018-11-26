@@ -453,7 +453,7 @@ line-height: 1.5em;
     padding-right: 10px;
 }
 .contains .btn{
-    margin-top: 10px;
+    /* margin-top: 10px; */
     color: #ffffff;
     font-size: 12px;
     text-shadow: none;
@@ -1280,4 +1280,54 @@ line-height: 1.5em;
 .passage-list-contain .panel{
     margin-left: 0;
     margin-right: 0;
+}
+.search-conatin .panel{
+    padding: 30px
+}
+.search-conatin .panel .panel-body{
+    width: 88%
+}
+.search-conatin .panel .panel-body .input-group{
+    width: 60%;
+    margin-left: 0;
+}
+.search-conatin .panel .input-group,
+.search-conatin .panel  .search-nav,
+.search-conatin .panel .result .consult-block
+{
+    margin-bottom: 10px;
+}
+.search-conatin .panel .result .consult-block{
+    height: 80px;
+}
+.search-conatin .panel .result-sum
+{
+    display: block;
+    margin-bottom: 10px;
+    /* line-height: 2em; */
+}
+.search-conatin .panel .result .result-block{
+    clear: both;
+}
+.search-conatin .panel .result .result-block .type{
+    line-height: 2em;
+    text-align: center;
+    font-size: 12px;
+    background-color: #e8d1d2;
+}
+.search-conatin .panel .result .consult-block .consult-block-contain{
+    width: 30%;
+    background-color: #f7babd41;
+    border-radius: 27px;
+    padding: 10px;
+    float: left;
+    margin-right: 10px;
+    line-height: 1em;
+}
+.search-conatin .panel .result .result-block.consult-block .consult-block-contain .name{
+    line-height: 1.5em;
+}
+.search-conatin .panel .result .result-block.consult-block .consult-block-contain img{
+    float: left;
+    padding-right: 10px;
 }
