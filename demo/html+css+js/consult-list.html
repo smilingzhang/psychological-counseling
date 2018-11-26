@@ -58,36 +58,45 @@
     <div class="contains">
         <div class="panel consult-category">
             <div class="panel-body">
-                <span class="tag">分类</span>
-                <a href="#">婚姻</a><a href="#">亲子</a><a href="#">职场</a><a href="#">健康</a>
-                <br/>
-                <span class="tag" style="display:block;float: left;">筛选</span>
-                <div class="date">
-                    <div class="input-group date form-date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                        <input class="form-control" size="16" type="text" value="" readonly="" onclick='activeCalindar()'>
-                        <span class="input-group-addon"><span class="icon-remove"></span></span>
-                        <span class="input-group-addon"><span class="icon-calendar"></span></span>
-                    </div>
-                </div>
-                <script type="text/javascript">
-                    $(".form-date").datetimepicker(
-                        {
-                            language:  "zh-CN",
-                            weekStart: 1,
-                            todayBtn:  1,
-                            autoclose: 1,
-                            todayHighlight: 1,
-                            startView: 2,
-                            minView: 2,
-                            forceParse: 0,
-                            format: "yyyy-mm-dd"
-                        });
-                </script>
-                </br>
-                <div style="display:block;clear: both;">
+                <form action="" method="POST">
+                    <span class="tag">分类</span>
+                    <select name="cata" id="">
+                        <option value="marriage">婚姻</option>
+                        <option value="parentChild">亲子</option>
+                        <option value="health">健康</option>
+                    </select>
+                    <!-- <br/> -->&nbsp;
                     <span class="tag">咨询方式</span>
-                    <a href="#">语音咨询</a><a href="#">视频咨询</a><a href="#">面对面咨询</a>
-                </div>
+                    <select name="cata" id="">
+                        <option value="audio">语音咨询</option>
+                        <option value="vedio">视频咨询</option>
+                        <option value="faceToFace">面对面咨询</option>
+                    </select>
+                    <br/>
+                    <span class="tag" style="float: left;">筛选</span>
+                    <div class="date">
+                        <div class="input-group date form-date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                            <input class="form-control" size="16" type="text" value="" readonly="" onclick='activeCalindar()'>
+                            <span class="input-group-addon"><span class="icon-remove"></span></span>
+                            <span class="input-group-addon"><span class="icon-calendar"></span></span>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        $(".form-date").datetimepicker(
+                            {
+                                language:  "zh-CN",
+                                weekStart: 1,
+                                todayBtn:  1,
+                                autoclose: 1,
+                                todayHighlight: 1,
+                                startView: 2,
+                                minView: 2,
+                                forceParse: 0,
+                                format: "yyyy-mm-dd"
+                            });
+                    </script>
+                    <button class="btn btn-primary">确定筛选条件</button>
+                </form>
             </div>
         </div>
         <!--左侧专家列表-->
@@ -96,16 +105,16 @@
                 <!--一个专家-->
                 <div class="crightlist-consultant">
                     <!--头像-->
-                    <div><img src="images/consultant.png" style="width: 100px;margin-right:20px;float: left;"/></div>
+                    <div><a href="consulter.html"><img src="images/consultant.png" style="width: 100px;margin-right:20px;float: left;"/></a></div>
                     <!--具体信息-->
                     <div class="crightlist-detail">
                         <!--名字-->
-                        <span class="name">梁田</span>
+                        <a href="#" class="name">梁田</a>
                         <!--资质-->
                         <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
                         <div class="data">
                             <!--预约状态，跳转到预约界面-->
-                            <a class="app-state-able"href="#">可预约</a>
+                            <!-- <a class="app-state-able"href="#">可预约</a> -->
                             <!--从业年限-->
                             <span>从业年限</span><span class="num">5</span>
                             <!--好评率-->
@@ -132,16 +141,16 @@
                 <!--一个专家-->
                 <div class="crightlist-consultant">
                     <!--头像-->
-                    <div><img src="images/consultant.png" style="width: 100px;margin-right:20px;float: left;"/></div>
+                    <div><a href="consulter.html"><img src="images/consultant.png" style="width: 100px;margin-right:20px;float: left;"/></a></div>
                     <!--具体信息-->
                     <div class="crightlist-detail">
                         <!--名字-->
-                        <span class="name">梁田</span>
+                        <a href="#" class="name">梁田</a>
                         <!--资质-->
                         <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
                         <div class="data">
                             <!--预约状态，跳转到预约界面-->
-                            <a class="app-state-able"href="#">可预约</a>
+                            <!-- <a class="app-state-able"href="#">可预约</a> -->
                             <!--从业年限-->
                             <span>从业年限</span><span class="num">5</span>
                             <!--好评率-->
@@ -166,16 +175,16 @@
                 <!--一个专家-->
                 <div class="crightlist-consultant">
                     <!--头像-->
-                    <div><img src="images/consultant.png" style="width: 100px;margin-right:20px;float: left;"/></div>
+                    <div><a href="consulter.html"><img src="images/consultant.png" style="width: 100px;margin-right:20px;float: left;"/></a></div>
                     <!--具体信息-->
                     <div class="crightlist-detail">
                         <!--名字-->
-                        <span class="name">梁田</span>
+                        <a href="#" class="name">梁田</a>
                         <!--资质-->
                         <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
                         <div class="data">
                             <!--预约状态，跳转到预约界面-->
-                            <a class="app-state-able"href="#">可预约</a>
+                            <!-- <a class="app-state-able"href="#">可预约</a> -->
                             <!--从业年限-->
                             <span>从业年限</span><span class="num">5</span>
                             <!--好评率-->
@@ -200,16 +209,16 @@
                 <!--一个专家-->
                 <div class="crightlist-consultant">
                         <!--头像-->
-                        <div><img src="images/consultant.png" style="width: 100px;margin-right:20px;float: left;"/></div>
+                        <div><a href="consulter.html"><img src="images/consultant.png" style="width: 100px;margin-right:20px;float: left;"/></a></div>
                         <!--具体信息-->
                         <div class="crightlist-detail">
                             <!--名字-->
-                            <span class="name">梁田</span>
+                            <a href="#" class="name">梁田</a>
                             <!--资质-->
                             <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
                             <div class="data">
                                 <!--预约状态，跳转到预约界面-->
-                                <a class="app-state-able"href="#">可预约</a>
+                                <!-- <a class="app-state-able"href="#">可预约</a> -->
                                 <!--从业年限-->
                                 <span>从业年限</span><span class="num">5</span>
                                 <!--好评率-->
@@ -234,16 +243,16 @@
                     <!--一个专家-->
                 <div class="crightlist-consultant">
                         <!--头像-->
-                        <div><img src="images/consultant.png" style="width: 100px;margin-right:20px;float: left;"/></div>
+                        <div><a href="consulter.html"><img src="images/consultant.png" style="width: 100px;margin-right:20px;float: left;"/></a></div>
                         <!--具体信息-->
                         <div class="crightlist-detail">
                             <!--名字-->
-                            <span class="name">梁田</span>
+                            <a href="#" class="name">梁田</a>
                             <!--资质-->
                             <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
                             <div class="data">
                                 <!--预约状态，跳转到预约界面-->
-                                <a class="app-state-able"href="#">可预约</a>
+                                <!-- <a class="app-state-able"href="#">可预约</a> -->
                                 <!--从业年限-->
                                 <span>从业年限</span><span class="num">5</span>
                                 <!--好评率-->
@@ -268,16 +277,16 @@
                     <!--一个专家-->
                 <div class="crightlist-consultant">
                         <!--头像-->
-                        <div><img src="images/consultant.png" style="width: 100px;margin-right:20px;float: left;"/></div>
+                        <div><a href="consulter.html"><img src="images/consultant.png" style="width: 100px;margin-right:20px;float: left;"/></a></div>
                         <!--具体信息-->
                         <div class="crightlist-detail">
                             <!--名字-->
-                            <span class="name">梁田</span>
+                            <a href="#" class="name">梁田</a>
                             <!--资质-->
                             <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
                             <div class="data">
                                 <!--预约状态，跳转到预约界面-->
-                                <a class="app-state-able"href="#">可预约</a>
+                                <!-- <a class="app-state-able"href="#">可预约</a> -->
                                 <!--从业年限-->
                                 <span>从业年限</span><span class="num">5</span>
                                 <!--好评率-->
@@ -302,16 +311,16 @@
                     <!--一个专家-->
                 <div class="crightlist-consultant">
                         <!--头像-->
-                        <div><img src="images/consultant.png" style="width: 100px;margin-right:20px;float: left;"/></div>
+                        <div><a href="consulter.html"><img src="images/consultant.png" style="width: 100px;margin-right:20px;float: left;"/></a></div>
                         <!--具体信息-->
                         <div class="crightlist-detail">
                             <!--名字-->
-                            <span class="name">梁田</span>
+                            <a href="#" class="name">梁田</a>
                             <!--资质-->
                             <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
                             <div class="data">
                                 <!--预约状态，跳转到预约界面-->
-                                <a class="app-state-disable"href="#">可预约</a>
+                                <!-- <a class="app-state-disable"href="#">可预约</a> -->
                                 <!--从业年限-->
                                 <span>从业年限</span><span class="num">5</span>
                                 <!--好评率-->
@@ -336,16 +345,16 @@
                     <!--一个专家-->
                 <div class="crightlist-consultant">
                         <!--头像-->
-                        <div><img src="images/consultant.png" style="width: 100px;margin-right:20px;float: left;"/></div>
+                        <div><a href="consulter.html"><img src="images/consultant.png" style="width: 100px;margin-right:20px;float: left;"/></a></div>
                         <!--具体信息-->
                         <div class="crightlist-detail">
                             <!--名字-->
-                            <span class="name">梁田</span>
+                            <a href="#" class="name">梁田</a>
                             <!--资质-->
                             <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
                             <div class="data">
                                 <!--预约状态，跳转到预约界面-->
-                                <a class="app-state-disable"href="#">可预约</a>
+                                <!-- <a class="app-state-disable"href="#">可预约</a> -->
                                 <!--从业年限-->
                                 <span>从业年限</span><span class="num">5</span>
                                 <!--好评率-->
@@ -370,16 +379,16 @@
                     <!--一个专家-->
                 <div class="crightlist-consultant">
                         <!--头像-->
-                        <div><img src="images/consultant.png" style="width: 100px;margin-right:20px;float: left;"/></div>
+                        <div><a href="consulter.html"><img src="images/consultant.png" style="width: 100px;margin-right:20px;float: left;"/></a></div>
                         <!--具体信息-->
                         <div class="crightlist-detail">
                             <!--名字-->
-                            <span class="name">梁田</span>
+                            <a href="#" class="name">梁田</a>
                             <!--资质-->
                             <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
                             <div class="data">
                                 <!--预约状态，跳转到预约界面-->
-                                <a class="app-state-disable"href="#">可预约</a>
+                                <!-- <a class="app-state-disable"href="#">可预约</a> -->
                                 <!--从业年限-->
                                 <span>从业年限</span><span class="num">5</span>
                                 <!--好评率-->
@@ -412,12 +421,14 @@
                     <div class="cleftlist-consultant">
                         <!--头像-->
                         <img class="avatar-round" src="images/consultant2.png" style="float:left;width: 66px;"/>
-                        <!--咨询师名称-->
-                        <span class="name">梁田</span>           
-                        <!--资质-->
-                        <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
-                        <!--个性签名-->
-                        <span class="intr">人只活一次，去自己尝试没体验过的</span></br>
+                        <div>
+                            <!--咨询师名称-->
+                            <a href="#" class="name">梁田</a>           
+                            <!--资质-->
+                            <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
+                            <!--个性签名-->
+                            <span class="intr">人只活一次，去自己尝试没体验过的</span></br>
+                        </div>
                     </div>
                     <!--下面都是重复的-->
                     <!--一个专家-->
@@ -425,7 +436,7 @@
                             <!--头像-->
                             <img class="avatar-round" src="images/consultant2.png" style="float:left;width: 66px;"/>
                             <!--咨询师名称-->
-                            <span class="name">梁田</span>           
+                            <a href="#" class="name">梁田</a>           
                             <!--资质-->
                             <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
                             <!--个性签名-->
@@ -436,7 +447,7 @@
                             <!--头像-->
                             <img class="avatar-round" src="images/consultant2.png" style="float:left;width: 66px;"/>
                             <!--咨询师名称-->
-                            <span class="name">梁田</span>           
+                            <a href="#" class="name">梁田</a>           
                             <!--资质-->
                             <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
                             <!--个性签名-->
@@ -447,7 +458,7 @@
                             <!--头像-->
                             <img class="avatar-round" src="images/consultant2.png" style="float:left;width: 66px;"/>
                             <!--咨询师名称-->
-                            <span class="name">梁田</span>           
+                            <a href="#" class="name">梁田</a>           
                             <!--资质-->
                             <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
                             <!--个性签名-->
@@ -458,7 +469,7 @@
                                 <!--头像-->
                                 <img class="avatar-round" src="images/consultant2.png" style="float:left;width: 66px;"/>
                                 <!--咨询师名称-->
-                                <span class="name">梁田</span>           
+                                <a href="#" class="name">梁田</a>           
                                 <!--资质-->
                                 <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
                                 <!--个性签名-->
@@ -469,7 +480,7 @@
                             <!--头像-->
                             <img class="avatar-round" src="images/consultant2.png" style="float:left;width: 66px;"/>
                             <!--咨询师名称-->
-                            <span class="name">梁田</span>           
+                            <a href="#" class="name">梁田</a>           
                             <!--资质-->
                             <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
                             <!--个性签名-->
@@ -480,7 +491,7 @@
                                 <!--头像-->
                                 <img class="avatar-round" src="images/consultant2.png" style="float:left;width: 66px;"/>
                                 <!--咨询师名称-->
-                                <span class="name">梁田</span>           
+                                <a href="#" class="name">梁田</a>           
                                 <!--资质-->
                                 <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
                                 <!--个性签名-->

@@ -1,3 +1,13 @@
+select{
+    background:#fafdfe;  
+    height:1.8em;  
+    width:6em;  
+    line-height:28px;  
+    border:1px solid #d75455;  
+    -moz-border-radius:2px;  
+    -webkit-border-radius:5px;  
+    border-radius:2px; 
+}
 .btn{
     border-radius: 5px;
     border-width: 0;
@@ -41,12 +51,43 @@ a:focus{
     text-decoration-line: none;
     font-size: 16px;
 }
+.navbar .nav-list #list{
+    width: 120px;
+}
 .navbar .nav-list .list:hover{
     /* color: #1ABC9C; */
     height: 50px;
     background-color: #ec6a6b;
 }
-
+.navbar .nav-list #list-after-login a img{
+    display: block;
+    /* margin: 5px; */
+    height: 40px;
+    float: left;
+}
+.navbar .nav-list #list-after-login li{
+    display: block;
+    width: 100%;
+    border-bottom:1px solid #ff8383;
+    border-top:1px solid #ff8383;
+}
+.navbar .nav-list #list-after-login li .label-success{
+    background-color: #fff171;
+    color: #e26162
+}
+.navbar .nav-list #list-after-login .dropdown-list a{
+    line-height: 2em;
+    color: #fff;
+}
+.navbar .nav-list #list-after-login .dropdown-menu{
+    background-color: #ec6a6b;
+}
+.navbar .nav-list #list-after-login .dropdown-list:hover,
+.navbar .nav-list #list-after-login .dropdown-list a:hover
+{
+    color: #fff;
+    background-color: #ff8383;
+}
 /* .navbar .nav-list .active{
     height: 50px;
     background-color:#921600;
@@ -206,6 +247,9 @@ a:focus{
 .consult-category .panel-body{
     width: 500px;
 }
+.consult-category .panel-body .btn-primary{
+    float: right;
+}
 .consult-category{
     line-height: 3em;
 }
@@ -217,7 +261,7 @@ a:focus{
     float: left;
     margin-left: 0;
     width: 200px;
-    height: 30px; 
+    height: 1.5em; 
     clear: right;
     margin-bottom: 5px;
     margin-left: 10px;
@@ -270,6 +314,9 @@ a:focus{
 }
 .consult-panel .name{
     font-size: 16px;
+}
+.consult-panel .name:hover{
+    color: #d75455;;
 }
 .app-state-able,.app-state-disable{
     display: block;
@@ -349,9 +396,12 @@ a:focus{
     width: 200px;
 }
 .cleftlist-consultant{
-    margin-top: 10px;
-    width: 360px;
-    height: 80px;
+    margin-top: 20px;
+    /* width: 360px; */
+    /* height: 80px; */
+}
+.cleftlist-consultant img{
+    padding-right: 10px;
 }
 .crightlist-consultant a:hover{
     text-decoration: none;
@@ -1011,7 +1061,8 @@ a:focus{
     padding: 0
 }
 .dir-part table{
-    width: 100%
+    width: 100%;
+    table-layout:fixed;
 }
 .dir-part table td,
 .dir-part table th
@@ -1019,6 +1070,9 @@ a:focus{
     line-height: 2em;
     border: 2px solid #c9c7c79d;
     padding: 10px;
+}
+.dir-part table th{
+    width: 30%;
 }
 .dir-part table th,
 .dir-part table .index{
