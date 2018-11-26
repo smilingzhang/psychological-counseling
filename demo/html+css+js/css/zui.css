@@ -902,6 +902,7 @@ body {
   font-family: "Helvetica Neue", Helvetica, Tahoma, Arial, 'Microsoft Yahei', 'PingFang SC', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif;
   font-size: 14px;
   line-height: 1.5em;
+  letter-spacing: 0.1em;
   color: #464646;
   /* background-color: #fff; */
   background-image: url('../images/bg.gif');
@@ -5911,7 +5912,7 @@ pre code {
 .nav > li > a:focus {
   color: #6e0706;
   text-decoration: none;
-  background-color: #f1f1f1;
+  background-color: #dd5b5b31;
   }
 .nav > li.disabled > a {
   color: #ddd;
@@ -5945,7 +5946,7 @@ pre code {
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
   color: #fff;
-  background-color: #3280fc;
+  background-color: #d75455;
   }
 .nav-primary > li {
   float: left;
@@ -6360,9 +6361,9 @@ pre code {
   margin: 5px -10px;
   }
 .navbar-nav > li > a, .navbar-nav > li > a > #searchboxExample{
-  padding-top: 10px;
-  padding-bottom: 10px;
-  line-height: 20px;
+  /* padding-top: 10px; */
+  /* padding-bottom: 10px; */
+  line-height: 30px;
   }
 @media (max-width: 767px) {
   .navbar-nav .open .dropdown-menu {
