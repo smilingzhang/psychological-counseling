@@ -117,18 +117,33 @@ a:focus{
 .loginpanel{
     clear: both;
     width: 40%;
-    height: 45%;
+    height: 50%;
+    padding: 10px;
     margin: auto;  position: absolute;  top: 0; left: 0; bottom: 0; right: 0;
 }
 .loginpanel .panel-body{
     margin: 10px;
+    padding: 0;
+    padding-left: 20px;
+    padding-right: 20px;
 }
-.login-form a{
+.login-contains .loginpanel  #login-form-submit-button{
+    clear: both;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-shadow: none;
+}
+.login-form #login-send-verifyCode{
     float: right;
-    margin-left: 10px;
+    text-shadow: none;
+}
+.login-form .group{
+    margin-bottom: 10px;
+    height: 50px;
 }
 .login-form .msg-err,
-.login-form .msg-right
+.login-form .msg-right,
+.login-form .msg-warning
 {
     font-size: 12px;
 }
@@ -138,15 +153,29 @@ a:focus{
 .login-form .msg-right{
     color: #38b03f;
 }
+.login-form .msg-warning{
+    color: #d5890e;
+}
 .loginpanel .login-nav{
     display: block;
-    /* width: 80%; */
-    /* margin: 10px; */
-    /* margin: auto;  position: absolute;  top: 0; left: 0; bottom: 0; right: 0; */
-    /* margin: 10px; */
 }
 .login-form .checkbox{
     margin: 20px;
+}
+.login-contains .loginpanel .login-other{
+    /* margin: auto;  position: absolute;  top: 0; left: 0; bottom: 0; right: 0; */
+    height: 80px;
+    padding-left:20%;
+    padding-right: 20%;
+}
+.login-contains .loginpanel .login-other img{
+    /* display: block; */
+    width: 50%;
+    float: left;
+    padding-right: 20px;
+}
+.login-contains .loginpanel .login-other img:hover{
+    box-shadow: #6e0706
 }
 .head{
     display: block;
@@ -163,9 +192,13 @@ a:focus{
     font-size: 40px;
     text-align: center;
 }
+.login-tag{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 .login-tag p{
-text-align: center;
-line-height: 1.5em;
+    text-align: center;
+    line-height: 1.5em;
 }
 .login-form{
     margin-top: 30px;
@@ -655,7 +688,7 @@ line-height: 1.5em;
 }
 .lesson-contains .lesson-part{
     /* width: 70%; */
-    height: 740px;
+    height: 740px;  
     width: 100%;
     padding: 30px;
     margin: auto;  position: relative;  top: 0; left: 0; bottom: 0; right: 0;
@@ -1331,3 +1364,4 @@ line-height: 1.5em;
     float: left;
     padding-right: 10px;
 }
+
