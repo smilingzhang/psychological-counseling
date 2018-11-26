@@ -512,6 +512,10 @@ a:focus{
 .consulter-info{
     width: 60%;
     height: 120px;
+    padding: 20px;
+}
+.consulter-info .panel-body{
+    padding: 0
 }
 .consulter-info img{
     width: 80px;
@@ -532,7 +536,10 @@ a:focus{
     display: block;
     width: 37%;
     height: 120px;
-    padding: 10px;
+    padding: 30px;
+}
+.pay-info .panel-body{
+    padding: 0
 }
 .pay-info span{
     display: block;
@@ -561,6 +568,22 @@ a:focus{
     text-indent: 2em;
     color: #d75455;
     line-height: 1.5em;
+}
+.business-panel .info-panel{
+    width: 100%;
+    padding: 30px;
+}
+.business-panel .info-panel p{
+    width: 100%
+}
+.business-panel .info-panel p .stress{
+    font-weight: bold
+}
+.business-panel .info-panel .info-contain{
+    text-indent: 4em
+}
+.business-panel .info-panel .panel-body{
+    padding: 0
 }
 .pay .board-title-h1{
     display: block;
