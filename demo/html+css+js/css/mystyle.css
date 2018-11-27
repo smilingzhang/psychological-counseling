@@ -989,6 +989,26 @@ a:focus{
     width: 45%;
     float: left;
 }
+.course-instr-contains .class-instr .panel-body .course-btn{
+    width: 100%;
+    height: 20px;
+}
+.course-instr-contains .class-instr .panel-body .course-btn .btn-primary{
+    width: 30%;
+    float: right;
+    margin-right: 10px;
+    background-color: #ec6a6b;
+    text-shadow: none;
+    font-weight: bold;
+}
+.course-instr-contains .class-instr .panel-body .course-btn .btn-primary:hover{
+    background-color: #db5757;
+}
+.course-instr-contains .class-instr .panel-body .course-btn .add-course{
+    width: 65%;
+    text-shadow: none;
+    float: left;
+}
 .course-instr-contains .class-instr .panel-body .course-brief-instr{
     width: 45%;
     margin: 20px;
@@ -1004,9 +1024,6 @@ a:focus{
 .course-instr-contains .class-instr .panel-body .course-brief-instr .title-h1{
     font-size: 26px;
     font-weight: bold;
-}
-.course-instr-contains .class-instr .panel-body .course-brief-instr .btn-block{
-    margin-top: 20px;
 }
 .course-instr-contains .class-instr .panel-body .course-brief-instr .price{
     line-height: 4em;
