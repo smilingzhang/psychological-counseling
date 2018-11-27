@@ -395,13 +395,22 @@ a:focus{
 .timetable{
     width: 200px;
 }
-.cleftlist-consultant{
+.crightlist-course{
     margin-top: 20px;
     /* width: 360px; */
     /* height: 80px; */
 }
-.cleftlist-consultant img{
-    padding-right: 10px;
+.crightlist-course img{
+    display: block;
+    width: 36%;
+    margin-right: 10px;
+    float: left;
+}
+.crightlist-course .price{
+    color: #d75455;
+}
+.crightlist-course .sell{
+    text-decoration: line-through;
 }
 .crightlist-consultant a:hover{
     text-decoration: none;
@@ -662,11 +671,30 @@ a:focus{
 }
 .consulter{
     width: 960px;
+    padding: 20px;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+.consulter .name{
+    font-size: 18px;
+    /* color: #d75455; */
+    /* line-height: 1.5em; */
+    font-weight: bold
+}
+.consulter .intr{
+    font-size: 14px;
+    line-height: 2em;
+}
+.consulter .stress{
+    color: #d75455;
+    font-size: 16px;
+    line-height: 2.5em;
 }
 .consulter img{
     display: block;
     width: 100px;
     float: left;
+    margin-right: 20px;
 }
 .block{
     margin: 20px;
@@ -761,7 +789,7 @@ a:focus{
 }
 .lesson-contains .lesson-part{
     /* width: 70%; */
-    height: 740px;  
+    /* height: 740px;   */
     width: 100%;
     padding: 30px;
     margin: auto;  position: relative;  top: 0; left: 0; bottom: 0; right: 0;
