@@ -40,24 +40,31 @@
               </div>
             </div>
             <!--小贴士-->
-            <div class="panel">
+            <div class="panel info-panel">
               <div class="panel-body">
-                <span class="board-title-h1">小贴士</span>
-                <p>说明收费原则等等的条约需要用户同意说明收费原则等等的条约需要用户同意说明收费原则等等的条约需要用户同意说明收费原则等等的条约需要用户同意说明收费原则等等的条约需要用户同意。</p>
-                <div class="protocal">
-                    <input type="checkbox" value="protocal1" name="protocal"/>已阅读并同意上文所述&nbsp;
-                    <input type="checkbox" value="protocal1" name="protocal"/>已阅读并同意《相关协议》
+                <form action="" method="POST">
+                  <span class="board-title-h1">小贴士</span>
+                  <p>您将获得<span class="stress">一个小时</span>的一对一咨询服务，请您确认以下信息：</p>
+                    <!--预约时间-->
+                    <p class="info-contain">预约时间：<span class="stress">2018年12月25日下午3：00</span>&nbsp;至&nbsp;<span class="stress">年12月25日下午4：00</span></p>
+                    <!--咨询方式-->
+                    <p  class="info-contain"><span>咨询方式：</span>
+                      <!--在线语音-->
+                      <input type="radio" name="type" value="audio">在线语音&nbsp;
+                      <!--在线视频-->
+                      <input type="radio" name="type" id="" value="vedio">在线视频&nbsp;
+                      <!--线下面对面-->
+                      <input type="radio" name="type" id="" value="faceToFace">线下面对面&nbsp;
+                    </p>
+                    <!-- <p>记得按时来参加咨询哦。</p> -->
+                    <div class="protocal">
+                      <input type="checkbox" value="protocal1" name="protocal"/>已阅读并同意上文所述&nbsp;
+                      <input type="checkbox" value="protocal1" name="protocal"/>已阅读并同意《相关协议》
+                    </div>
                   </div>
-              </div>
-            </div>
-            <!--付款-->
-            <div class="pay">
-              <span class="board-title-h1">付款</span>
-              <div class="pay-method">
-                <a href="#"><img src="images/alipay.png" alt=""></a>
-                <a href="#"><img src="images/wepay.png" alt=""></a>
-              </div>
-            </div>
+                </div>
+                    <button class="btn btn-block " >确认并前往支付&nbsp;<i class="icon icon-smile"></i></button>
+                </form>
         </div>
     </div>
     <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->

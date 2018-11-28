@@ -40,7 +40,7 @@
     <!--页面内容主体-->
     <div class="lesson-contains">
         <!--课程播放板块-->
-        <div class="lesson-part">
+        <div class="lesson-part" id="lesson-part">
             <!--目录-->
             <div class="directory">
                 <!--导航条-->
@@ -308,4 +308,12 @@
     <!-- ZUI Javascript组件 -->
     <script src="js/zui.min.js"></script>
   </body>
+    <script>
+        $(
+            function(){
+                var height = window.innerHeight-50;
+                $("#lesson-part").css("height",height);
+            }
+        )(jQuery);
+    </script>   
 </html>

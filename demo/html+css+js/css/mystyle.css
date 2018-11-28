@@ -1,3 +1,13 @@
+select{
+    background:#fafdfe;  
+    height:1.8em;  
+    width:6em;  
+    line-height:28px;  
+    border:1px solid #d75455;  
+    -moz-border-radius:2px;  
+    -webkit-border-radius:5px;  
+    border-radius:2px; 
+}
 .btn{
     border-radius: 5px;
     border-width: 0;
@@ -41,12 +51,43 @@ a:focus{
     text-decoration-line: none;
     font-size: 16px;
 }
+.navbar .nav-list #list{
+    width: 120px;
+}
 .navbar .nav-list .list:hover{
     /* color: #1ABC9C; */
     height: 50px;
     background-color: #ec6a6b;
 }
-
+.navbar .nav-list #list-after-login a img{
+    display: block;
+    /* margin: 5px; */
+    height: 40px;
+    float: left;
+}
+.navbar .nav-list #list-after-login li{
+    display: block;
+    width: 100%;
+    border-bottom:1px solid #ff8383;
+    border-top:1px solid #ff8383;
+}
+.navbar .nav-list #list-after-login li .label-success{
+    background-color: #fff171;
+    color: #e26162
+}
+.navbar .nav-list #list-after-login .dropdown-list a{
+    line-height: 2em;
+    color: #fff;
+}
+.navbar .nav-list #list-after-login .dropdown-menu{
+    background-color: #ec6a6b;
+}
+.navbar .nav-list #list-after-login .dropdown-list:hover,
+.navbar .nav-list #list-after-login .dropdown-list a:hover
+{
+    color: #fff;
+    background-color: #ff8383;
+}
 /* .navbar .nav-list .active{
     height: 50px;
     background-color:#921600;
@@ -117,18 +158,33 @@ a:focus{
 .loginpanel{
     clear: both;
     width: 40%;
-    height: 45%;
+    height: 50%;
+    padding: 10px;
     margin: auto;  position: absolute;  top: 0; left: 0; bottom: 0; right: 0;
 }
 .loginpanel .panel-body{
     margin: 10px;
+    padding: 0;
+    padding-left: 20px;
+    padding-right: 20px;
 }
-.login-form a{
+.login-contains .loginpanel  #login-form-submit-button{
+    clear: both;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-shadow: none;
+}
+.login-form #login-send-verifyCode{
     float: right;
-    margin-left: 10px;
+    text-shadow: none;
+}
+.login-form .group{
+    margin-bottom: 10px;
+    height: 50px;
 }
 .login-form .msg-err,
-.login-form .msg-right
+.login-form .msg-right,
+.login-form .msg-warning
 {
     font-size: 12px;
 }
@@ -138,15 +194,29 @@ a:focus{
 .login-form .msg-right{
     color: #38b03f;
 }
+.login-form .msg-warning{
+    color: #d5890e;
+}
 .loginpanel .login-nav{
     display: block;
-    /* width: 80%; */
-    /* margin: 10px; */
-    /* margin: auto;  position: absolute;  top: 0; left: 0; bottom: 0; right: 0; */
-    /* margin: 10px; */
 }
 .login-form .checkbox{
     margin: 20px;
+}
+.login-contains .loginpanel .login-other{
+    /* margin: auto;  position: absolute;  top: 0; left: 0; bottom: 0; right: 0; */
+    height: 80px;
+    padding-left:20%;
+    padding-right: 20%;
+}
+.login-contains .loginpanel .login-other img{
+    /* display: block; */
+    width: 50%;
+    float: left;
+    padding-right: 20px;
+}
+.login-contains .loginpanel .login-other img:hover{
+    box-shadow: #6e0706
 }
 .head{
     display: block;
@@ -163,15 +233,22 @@ a:focus{
     font-size: 40px;
     text-align: center;
 }
+.login-tag{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 .login-tag p{
-text-align: center;
-line-height: 1.5em;
+    text-align: center;
+    line-height: 1.5em;
 }
 .login-form{
     margin-top: 30px;
 }
 .consult-category .panel-body{
     width: 500px;
+}
+.consult-category .panel-body .btn-primary{
+    float: right;
 }
 .consult-category{
     line-height: 3em;
@@ -184,7 +261,7 @@ line-height: 1.5em;
     float: left;
     margin-left: 0;
     width: 200px;
-    height: 30px; 
+    height: 1.5em; 
     clear: right;
     margin-bottom: 5px;
     margin-left: 10px;
@@ -237,6 +314,9 @@ line-height: 1.5em;
 }
 .consult-panel .name{
     font-size: 16px;
+}
+.consult-panel .name:hover{
+    color: #d75455;;
 }
 .app-state-able,.app-state-disable{
     display: block;
@@ -315,10 +395,22 @@ line-height: 1.5em;
 .timetable{
     width: 200px;
 }
-.cleftlist-consultant{
-    margin-top: 10px;
-    width: 360px;
-    height: 80px;
+.crightlist-course{
+    margin-top: 20px;
+    /* width: 360px; */
+    /* height: 80px; */
+}
+.crightlist-course img{
+    display: block;
+    width: 36%;
+    margin-right: 10px;
+    float: left;
+}
+.crightlist-course .price{
+    color: #d75455;
+}
+.crightlist-course .sell{
+    text-decoration: line-through;
 }
 .crightlist-consultant a:hover{
     text-decoration: none;
@@ -410,6 +502,7 @@ line-height: 1.5em;
     /* background-color: #e4d9d950; */
     font-weight: 100;
     text-shadow: none;
+    margin-top: 0;
     /* color: #33221f; */
     /* height: 2em; */
 }
@@ -424,44 +517,69 @@ line-height: 1.5em;
     margin: 20px;
 }
 .listener{
-    width: 200px;
-    height: 250px;
+    width: 22%;
+    height: 38%;
     background-image: url(../images/listener-list-bg.png);
+    background-size: 100%;
     background-repeat: no-repeat;
-    margin: 22px;
+    margin: 10px;
+    padding: 10px;
 }
 .listener img{
     display: block;
     width: 70px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    /* margin-top: 10px; */
+    /* margin-bottom: 10px; */
     border-radius: 200%;
     
 }
 .listener a{
+    display: block;
     font-size: 16px;
     line-height: 2em;
     text-align: center;
-    color: #33221f;
+    /* color: #33221f; */
 }
 .listener .panel-body{
-    width: 150px;
+    width: 100%;
+    
+}
+.listener div{
+    /* width: 100%; */
     margin: auto;  position: relative;  top: 0; left: 0; bottom: 0; right: 0;
 }
+.listener div .time{
+    padding: 5px;
+}
 .listener .tag{
-    font-size: 14px;
+    /* display: block; */
+    text-align: center;
+    /* float: left; */
+    font-size: 12px;
     padding-right: 10px;
 }
-.contains .btn{
+.listener .stress-tag{
+    color: #d75455;
+    font-size: 12px;
+}
+.contains .listener .btn{
     margin-top: 10px;
     color: #ffffff;
     font-size: 12px;
     text-shadow: none;
-    border-color: #883231;
+    background-color: #ec6a6b;
+    /* border-color: #883231; */
     /* height: 2em; */
+}
+.contains .listener .btn:hover{
+    background-color: #ff8383;
+}
+.appointment-body .linstener-group{
+    margin-bottom: 10px;
 }
 .contains .btn-block{
     display: block;
+    text-shadow: none;
     margin: auto;  position: relative;  top: 0; left: 0; bottom: 0; right: 0;
     width: 400px;
 }
@@ -479,6 +597,10 @@ line-height: 1.5em;
 .consulter-info{
     width: 60%;
     height: 120px;
+    padding: 20px;
+}
+.consulter-info .panel-body{
+    padding: 0
 }
 .consulter-info img{
     width: 80px;
@@ -499,7 +621,10 @@ line-height: 1.5em;
     display: block;
     width: 37%;
     height: 120px;
-    padding: 10px;
+    padding: 30px;
+}
+.pay-info .panel-body{
+    padding: 0
 }
 .pay-info span{
     display: block;
@@ -529,6 +654,22 @@ line-height: 1.5em;
     color: #d75455;
     line-height: 1.5em;
 }
+.business-panel .info-panel{
+    width: 100%;
+    padding: 30px;
+}
+.business-panel .info-panel p{
+    width: 100%
+}
+.business-panel .info-panel p .stress{
+    font-weight: bold
+}
+.business-panel .info-panel .info-contain{
+    text-indent: 4em
+}
+.business-panel .info-panel .panel-body{
+    padding: 0
+}
 .pay .board-title-h1{
     display: block;
     width: 50px;
@@ -556,11 +697,30 @@ line-height: 1.5em;
 }
 .consulter{
     width: 960px;
+    padding: 20px;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+.consulter .name{
+    font-size: 18px;
+    /* color: #d75455; */
+    /* line-height: 1.5em; */
+    font-weight: bold
+}
+.consulter .intr{
+    font-size: 14px;
+    line-height: 2em;
+}
+.consulter .stress{
+    color: #d75455;
+    font-size: 16px;
+    line-height: 2.5em;
 }
 .consulter img{
     display: block;
     width: 100px;
     float: left;
+    margin-right: 20px;
 }
 .block{
     margin: 20px;
@@ -655,7 +815,7 @@ line-height: 1.5em;
 }
 .lesson-contains .lesson-part{
     /* width: 70%; */
-    height: 740px;
+    /* height: 740px;   */
     width: 100%;
     padding: 30px;
     margin: auto;  position: relative;  top: 0; left: 0; bottom: 0; right: 0;
@@ -883,6 +1043,26 @@ line-height: 1.5em;
     width: 45%;
     float: left;
 }
+.course-instr-contains .class-instr .panel-body .course-btn{
+    width: 100%;
+    height: 20px;
+}
+.course-instr-contains .class-instr .panel-body .course-btn .btn-primary{
+    width: 30%;
+    float: right;
+    margin-right: 10px;
+    background-color: #ec6a6b;
+    text-shadow: none;
+    font-weight: bold;
+}
+.course-instr-contains .class-instr .panel-body .course-btn .btn-primary:hover{
+    background-color: #db5757;
+}
+.course-instr-contains .class-instr .panel-body .course-btn .add-course{
+    width: 65%;
+    text-shadow: none;
+    float: left;
+}
 .course-instr-contains .class-instr .panel-body .course-brief-instr{
     width: 45%;
     margin: 20px;
@@ -898,9 +1078,6 @@ line-height: 1.5em;
 .course-instr-contains .class-instr .panel-body .course-brief-instr .title-h1{
     font-size: 26px;
     font-weight: bold;
-}
-.course-instr-contains .class-instr .panel-body .course-brief-instr .btn-block{
-    margin-top: 20px;
 }
 .course-instr-contains .class-instr .panel-body .course-brief-instr .price{
     line-height: 4em;
@@ -955,7 +1132,8 @@ line-height: 1.5em;
     padding: 0
 }
 .dir-part table{
-    width: 100%
+    width: 100%;
+    table-layout:fixed;
 }
 .dir-part table td,
 .dir-part table th
@@ -963,6 +1141,9 @@ line-height: 1.5em;
     line-height: 2em;
     border: 2px solid #c9c7c79d;
     padding: 10px;
+}
+.dir-part table th{
+    width: 30%;
 }
 .dir-part table th,
 .dir-part table .index{
@@ -1280,4 +1461,79 @@ line-height: 1.5em;
 .passage-list-contain .panel{
     margin-left: 0;
     margin-right: 0;
+}
+.search-conatin .panel{
+    padding: 30px
+}
+.search-conatin .panel .panel-body{
+    width: 88%
+}
+.search-conatin .panel .panel-body .input-group{
+    width: 60%;
+    margin-left: 0;
+}
+.search-conatin .panel .input-group,
+.search-conatin .panel  .search-nav,
+.search-conatin .panel .result .consult-block
+{
+    margin-bottom: 10px;
+}
+.search-conatin .panel .result .consult-block{
+    height: 80px;
+}
+.search-conatin .panel .result-sum
+{
+    display: block;
+    margin-bottom: 10px;
+    /* line-height: 2em; */
+}
+.search-conatin .panel .result .result-block{
+    clear: both;
+}
+.search-conatin .panel .result .result-block .type{
+    line-height: 2em;
+    text-align: center;
+    font-size: 12px;
+    background-color: #e8d1d2;
+}
+.search-conatin .panel .result .consult-block .consult-block-contain{
+    width: 30%;
+    background-color: #f7babd41;
+    border-radius: 27px;
+    padding: 10px;
+    float: left;
+    margin-right: 10px;
+    line-height: 1em;
+}
+.search-conatin .panel .result .result-block.consult-block .consult-block-contain .name{
+    line-height: 1.5em;
+}
+.search-conatin .panel .result .result-block.consult-block .consult-block-contain img{
+    float: left;
+    padding-right: 10px;
+}
+.checkout-contain{
+    width: 50%
+}
+.checkout-contain .checkout-panel{
+    width: 100%;
+    clear: both;
+    padding-left: 18%;
+    padding-right: 18%;
+}
+.checkout-contain .checkout-panel .board-title-h1{
+    font-size: 30px;
+    line-height: 2em;
+    color: #d75455;
+}
+.checkout-contain .checkout-panel .panel-body div{
+    /* margin-top: 14px; */
+    margin-bottom: 14px
+}
+.checkout-contain .checkout-panel .panel-body div span{
+    line-height: 2em
+}
+.checkout-contain .checkout-panel .panel-body div input{
+    /* line-height: 3em */
+    margin: 5px
 }
