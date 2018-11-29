@@ -1,0 +1,18 @@
+https://api.weibo.com/oauth2/authorize?client_id=351975807&redirect_uri=http://janborn.wang&response_type=code
+Hit enter when it's done.[Enter]:650941be2424dc8386b17d5770469854
+0    INFO  [2018-11-28 14:50:58]  code: 650941be2424dc8386b17d5770469854
+3    DEBUG [2018-11-28 14:50:58]  Request:
+3    DEBUG [2018-11-28 14:50:58]  POSThttps://api.weibo.com/oauth2/access_token
+1422 DEBUG [2018-11-28 14:50:59]  Response:
+1422 DEBUG [2018-11-28 14:50:59]  https StatusCode:200
+1422 DEBUG [2018-11-28 14:50:59]  Server:nginx/1.6.1
+1422 DEBUG [2018-11-28 14:50:59]  Date:Wed, 28 Nov 2018 06:50:57 GMT
+1423 DEBUG [2018-11-28 14:50:59]  Content-Type:application/json;charset=UTF-8
+1423 DEBUG [2018-11-28 14:50:59]  Content-Length:131
+1423 DEBUG [2018-11-28 14:50:59]  Connection:keep-alive
+1423 DEBUG [2018-11-28 14:50:59]  Pragma:No-cache
+1423 DEBUG [2018-11-28 14:50:59]  Cache-Control:no-cache
+1423 DEBUG [2018-11-28 14:50:59]  Expires:Thu, 01 Jan 1970 00:00:00 GMT
+1427 DEBUG [2018-11-28 14:50:59]  {"access_token":"2.00mkgjvB0Jzqo4239e78a5410hfmkh","remind_in":"130142","expires_in":130142,"uid":"1769273092","isRealName":"true"}
+
+AccessToken [accessToken=2.00mkgjvB0Jzqo4239e78a5410hfmkh, expireIn=130142, refreshToken=,uid=1769273092]
