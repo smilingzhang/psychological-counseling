@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>咨询列表</title>
+    <!-- zui -->
+    <link href="css/zui-theme.css" rel="stylesheet">
+    <link href="css/zui.css" rel="stylesheet">
+    <link href="css/mystyle.css" rel="stylesheet">
+    <link href="lib/datetimepicker/datetimepicker.min.css" rel="stylesheet">
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/attached.js"></script>
+    <script src="js/zui.js"></script> 
+    <script src="js/zui.lite.js"></script>
+    <script src="lib/datetimepicker/datetimepicker.min.js"></script>
+  </head>
+  <body>
+
+    <!-- 在此处编码你的创意 -->
+    <header>
+            <nav class="navbar contianer">
+                <div class="container">
+                    <input type="checkbox" id="nav-toggle" class="nav-toggle"/>
+                    <label for="nav-toggle">
+                        <span class="menu-icon">
+                            <svg viewBox="0 0 18 15" width="18px" height="15px">
+                                <path fill="white" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+                                <path fill="white" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+                                <path fill="white" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+                        </svg>
+                    </span>
+                    </label>
+                    <ul class="nav-list">
+                        <li><img src="images/logo.png"></li>
+                        <li class="list active"><a href="#">首页</a></li>
+                        <li class="list"><a href="#">简介</a></li>
+                        <li class="list"><a href="#">咨询</a></li>
+                        <li class="list"><a href="#">课程</a></li>
+                        <li class="list"><a href="#">测试</a></li>
+                        <li class="list"><a href="#">阅读</a></li>
+                        <div class="search">
+                            <form class="navbar-form navbar-left" role="search">
+                                <div class="form-group">
+                                        <input id="inputSearchExample3" type="search" class="form-control search-input" placeholder="搜索">
+                                        <label for="inputSearchExample3" class="input-control-icon-left search-icon"><i class="icon icon-search"></i></label>
+                                </div>
+                                <button type="submit" class="btn btn-default">搜索</button>
+                            </form>
+                        </div>
+                        <li class="list"><a class="login" href="#">登录</a></li>
+                        <li class="list"><a class="regist" href="#">注册</a></li>
+                    </ul>  
+                </div>
+            </nav>
+        </header>
+    <div class="contains">
+        <div class="panel consult-category">
+            <div class="panel-body">
+                <form action="" method="POST">
+                    <span class="tag">分类</span>
+                    <select name="cata" id="">
+                        <option value="marriage">婚姻</option>
+                        <option value="parentChild">亲子</option>
+                        <option value="health">健康</option>
+                    </select>
+                    <!-- <br/> -->&nbsp;
+                    <span class="tag">咨询方式</span>
+                    <select name="cata" id="">
+                        <option value="audio">语音咨询</option>
+                        <option value="vedio">视频咨询</option>
+                        <option value="faceToFace">面对面咨询</option>
+                    </select>
+                    <br/>
+                    <span class="tag" style="float: left;">筛选</span>
+                    <div class="date">
+                        <div class="input-group date form-date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                            <input class="form-control" size="16" type="text" value="" readonly="" onclick='activeCalindar()'>
+                            <span class="input-group-addon"><span class="icon-remove"></span></span>
+                            <span class="input-group-addon"><span class="icon-calendar"></span></span>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        $(".form-date").datetimepicker(
+                            {
+                                language:  "zh-CN",
+                                weekStart: 1,
+                                todayBtn:  1,
+                                autoclose: 1,
+                                todayHighlight: 1,
+                                startView: 2,
+                                minView: 2,
+                                forceParse: 0,
+                                format: "yyyy-mm-dd"
+                            });
+                    </script>
+                    <button class="btn btn-primary">确定筛选条件</button>
+                </form>
+            </div>
+        </div>
+        <!--左侧专家列表-->
+        <div class="panel consult-panel">
+            <div class="panel-body">
+                <!--一个专家-->
+                <div class="crightlist-consultant">
+                    <!--头像-->
+                    <div><a href="consulter.html"><img src="images/consultant.png" style="width: 100px;margin-right:20px;float: left;"/></a></div>
+                    <!--具体信息-->
+                    <div class="crightlist-detail">
+                        <!--名字-->
+                        <a href="#" class="name">梁田</a>
+                        <!--资质-->
+                        <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
+                        <div class="data">
+                            <!--预约状态，跳转到预约界面-->
+                            <!-- <a class="app-state-able"href="#">可预约</a> -->
+                            <!--从业年限-->
+                            <span>从业年限</span><span class="num">5</span>
+                            <!--好评率-->
+                            <span>好评率</span><span class="num">100%</span>
+                            <!--价格-->
+                            <span>价格</span><span class="num">￥500/次</span>
+                        </div>
+                        <!--时间表-->
+                        <!--time-cell-able:可预约 time-cell-disable:不可预约-->
+                        <div class="timetable">
+                            <span class="time-cell-able"><a href="appointment-consult.html ">9:00-10:00</a></span>
+                            <span class="time-cell-disable"><a href="#">10:00-11:00</a></span>
+                            <span class="time-cell-disable"><a href="#">11:00-12:00</a></span>
+                            <span class="time-cell-able"><a href="#">12:00-13:00</a></span>                            
+                            <!-- <span class="time-cell-able"><a href="#">15:00</a></span>
+                            <span class="time-cell-disable"><a href="#">16:00</a></span>
+                            <span class="time-cell-able"><a href="#">17:00</a></span>
+                            <span class="time-cell-able"><a href="#">18:00</a></span> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--左侧专家列表--End-->
+        <!--右侧热门专家列表-->
+        <div class="panel" style="width: 360px;">
+            <div class="panel-body">
+                <div class="right-list">
+                    <span class="board-title-h1">热门专家</span>
+                    <!--一个专家-->
+                    <div class="cleftlist-consultant">
+                        <!--头像-->
+                        <img class="avatar-round" src="images/consultant2.png" style="float:left;width: 66px;"/>
+                        <div>
+                            <!--咨询师名称-->
+                            <a href="#" class="name">梁田</a>           
+                            <!--资质-->
+                            <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
+                            <!--个性签名-->
+                            <span class="intr">人只活一次，去自己尝试没体验过的</span></br>
+                        </div>
+                    </div>
+                    <!--下面都是重复的-->
+                    <!--一个专家-->
+                    <div class="cleftlist-consultant">
+                            <!--头像-->
+                            <img class="avatar-round" src="images/consultant2.png" style="float:left;width: 66px;"/>
+                            <!--咨询师名称-->
+                            <a href="#" class="name">梁田</a>           
+                            <!--资质-->
+                            <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
+                            <!--个性签名-->
+                            <span class="intr">人只活一次，去自己尝试没体验过的</span></br>
+                    </div>
+                    <!--一个专家-->
+                    <div class="cleftlist-consultant">
+                            <!--头像-->
+                            <img class="avatar-round" src="images/consultant2.png" style="float:left;width: 66px;"/>
+                            <!--咨询师名称-->
+                            <a href="#" class="name">梁田</a>           
+                            <!--资质-->
+                            <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
+                            <!--个性签名-->
+                            <span class="intr">人只活一次，去自己尝试没体验过的</span></br>
+                    </div>
+                        <!--一个专家-->
+                    <div class="cleftlist-consultant">
+                            <!--头像-->
+                            <img class="avatar-round" src="images/consultant2.png" style="float:left;width: 66px;"/>
+                            <!--咨询师名称-->
+                            <a href="#" class="name">梁田</a>           
+                            <!--资质-->
+                            <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
+                            <!--个性签名-->
+                            <span class="intr">人只活一次，去自己尝试没体验过的</span></br>
+                    </div>
+                        <!--一个专家-->
+                        <div class="cleftlist-consultant">
+                                <!--头像-->
+                                <img class="avatar-round" src="images/consultant2.png" style="float:left;width: 66px;"/>
+                                <!--咨询师名称-->
+                                <a href="#" class="name">梁田</a>           
+                                <!--资质-->
+                                <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
+                                <!--个性签名-->
+                                <span class="intr">人只活一次，去自己尝试没体验过的</span></br>
+                        </div>
+                            <!--一个专家-->
+                    <div class="cleftlist-consultant">
+                            <!--头像-->
+                            <img class="avatar-round" src="images/consultant2.png" style="float:left;width: 66px;"/>
+                            <!--咨询师名称-->
+                            <a href="#" class="name">梁田</a>           
+                            <!--资质-->
+                            <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
+                            <!--个性签名-->
+                            <span class="intr">人只活一次，去自己尝试没体验过的</span></br>
+                    </div>
+                        <!--一个专家-->
+                        <div class="cleftlist-consultant">
+                                <!--头像-->
+                                <img class="avatar-round" src="images/consultant2.png" style="float:left;width: 66px;"/>
+                                <!--咨询师名称-->
+                                <a href="#" class="name">梁田</a>           
+                                <!--资质-->
+                                <span class="qualification">留法硕士/二级心理咨询师/燕园心理督导师</span></br>
+                                <!--个性签名-->
+                                <span class="intr">人只活一次，去自己尝试没体验过的</span></br>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <!--分页-->
+        <div class="button-pager">
+            <ul class="pager pager-loose pager-pills">
+                <li class="previous disabled"><a href="your/nice/url">«</a></li>
+                <li class="active"><a href="your/nice/url">1</a></li>
+                <li><a href="your/nice/url">2</a></li>
+                <li><a href="your/nice/url">3</a></li>
+                <li><a href="your/nice/url">4</a></li>
+                <li><a href="your/nice/url">5</a></li>
+                <li class="next"><a href="your/nice/url">»</a></li>
+            </ul>
+        </div>
+    </div><!--内容结束-->
+    <div class="footer">
+            <div class="container">
+                <div class="up-part">
+                    <!--社交账号-->
+                    <div id="footer-social-account">
+                        <span class="footer-title-h1">社交账号</span></br></br>
+                        <img src="images/avatar.png" />
+                        <img src="images/avatar.png" />
+                    </div>
+                    <!--相关链接-->
+                    <div id="footer-link">
+                        <span class="footer-title-h1">相关链接</span></br></br>
+                        <a href="http://www.baidu.com">百度</a></br>
+                        <a href="http://www.zhihu.com">知乎</a></br>
+                        <a href="http://www.baidu.com">百度</a></br>
+                        <a href="http://www.zhihu.com">知乎</a>
+                    </div>
+                    
+                    <!--联系我们-->
+                    <div id="footer-contact">
+                        <span class="footer-title-h1">联系我们</span></br></br>
+                        <img class="icon" src="icons/phone.png"/>
+                        <span class="tel">01-81596313</span>
+                        <img class="icon" src="icons/phone.png"></icon>
+                        <span class="phone">183016083</span></br>
+                        <img class="icon" src="icons/place.png"></icon>
+                        <span class="add">北京市通州区天时名&nbsp;苑5号楼1单元801</span>
+                    </div>
+                    <!--我要反馈-->
+                    <div class="feedback">
+                        <a class="footer-title-h1" href="#">我要反馈</a></br></br>
+                        <a class="footer-title-h1" href="#">关于我们</a></br>
+                        <a class="footer-title-h1" href="#">加入我们</a></br>
+                    </div>
+                </div>
+            <hr/>
+                <!--备案信息-->
+                <div class="button-part">
+                    <span class="footer-icp">©2018&nbsp;北京明心心理事务所京&nbsp;ICP&nbsp;证&nbsp;1****1&nbsp;号京公网安备&nbsp;1**********1&nbsp;号什么什么经营许可证</span></div></br>
+                    <!-- <span class="footer-icp"></span></div> -->
+                </div>
+            </div>
+        </div>
+    <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <!-- ZUI Javascript组件 -->
+    <script src="js/zui.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>搜索结果页</title>
+    <!-- zui -->
+    <link href="css/zui-theme.css" rel="stylesheet">
+    <link href="css/zui.css" rel="stylesheet">
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/zui.js"></script> 
+    <script src="js/zui.lite.js"></script>
+    <!--自定义-->
+    <link href="css/mystyle.css" rel="stylesheet">
+    <script src="js/change-state.js"></script>
+  </head>
+  <body>
+    <!-- 在此处编码你的创意 -->
+    <div class="contains search-conatin">
+      <div class=" panel">
+        <div class="panel-body">
+          <!--搜索框-->
+          <div class="input-group">
+              <div class="input-control search-box search-box-circle has-icon-left has-icon-right search-example" id="searchboxExample">
+                <input id="inputSearchExample3" type="search" class="form-control search-input" placeholder="搜索">
+                <label for="inputSearchExample3" class="input-control-icon-left search-icon"><i class="icon icon-search"></i></label>
+              </div>
+              <span class="input-group-btn">
+                <button class="btn btn-primary" type="button">搜索</button>
+              </span>
+          </div>
+          <!--搜索结果列表-->
+              <!--导航-->
+              <div class="search-nav">
+                <span class="tag">分类</span>
+                <a href="#" class="active">全部</a>
+                <a href="#">课程</a>
+                <a href="#">文章</a>
+                <a href="#">咨询师/倾听师</a>
+              </div>
+              <!--搜索结果条数-->
+              <span class="result-sum tag">为您找到xxx条结果</span>
+              <div class="result">
+                <!--咨询师/倾听师的示例 ：在“全部”筛选下，将咨询师放在最上方一排-->
+                <div class="result-block consult-block">
+                    <!--类型-->
+                    <!-- <span class="type">咨询师</span> -->
+                    <div class="consult-block-contain">
+                      <!--头像：圆形-->
+                      <img src="images/avatar.png" alt="${咨询师/倾听师姓名}">
+                      <div>
+                        <!--咨询师/倾听师名-->
+                        <span class="name">梁田1号</span><br/>
+                        <!--资质-->
+                        <span class="tag">留法硕士/二级心理咨询师/燕园心理督导师</span>
+                      </div>
+                    </div>
+                    <div class="consult-block-contain">
+                      <!--头像：圆形-->
+                      <img src="images/avatar.png" alt="${咨询师/倾听师姓名}">
+                      <div>
+                        <!--咨询师/倾听师名-->
+                        <span class="name">梁田2号</span><br/>
+                        <!--资质-->
+                        <span class="tag">留法硕士/二级心理咨询师/燕园心理督导师</span>
+                      </div>
+                    </div>
+                    <div class="consult-block-contain">
+                      <!--头像：圆形-->
+                      <img src="images/avatar.png" alt="${咨询师/倾听师姓名}">
+                      <div>
+                        <!--咨询师/倾听师名-->
+                        <span class="name">梁田3号</span><br/>
+                        <!--资质-->
+                        <span class="tag">留法硕士/二级心理咨询师/燕园心理督导师</span>
+                      </div>
+                    </div>
+                </div>
+                <!--1. 课程的示例-->
+                <div class="result-block">
+                  <!--类型-->
+                  <span class="type">课程</span>
+                  <!--名称_发布人-->
+                  <a href="course-intr.html">心理咨询师职业认证课程（台湾博士2017版）_会天心理</a>
+                  <!--发布时间-->
+                  <!--课程没有发布时间-->
+                  <!-- <span></span> -->
+                  <!--介绍-->
+                  <p>这是一段课程介绍这是一段课程介绍这是一段课程介绍这是一段课程介绍这是一段课程介绍这是一段课程介绍这是一段课程介绍这是一段课程介绍</p>
+                </div>
+                <!--2. 文章的示例-->
+                <div class="result-block">
+                    <!--类型-->
+                    <span class="type">文章</span>
+                    <!--名称_发布人-->
+                    <a href="passage.html">结婚前，听听咨询师给你的3个建议_黄小希</a><br/>
+                    <!--发布时间-->
+                    <span class="tag">2018.09.25</span>
+                    <!--介绍-->
+                    <p>你和你的家人相处融洽，除了血亲之外，还有几十年的相处默契，她作为一个新加入的人，要让她用自己的节奏慢慢熟悉这个新的家庭。</p>
+                </div>
+                <!--以下是重复的-->
+                <!--1. 课程的示例-->
+                <div class="result-block">
+                    <!--类型-->
+                    <span class="type">课程</span>
+                    <!--名称_发布人-->
+                    <a href="course-intr.html">心理咨询师职业认证课程（台湾博士2017版）_会天心理</a>
+                    <!--发布时间-->
+                    <!--课程没有发布时间-->
+                    <!-- <span></span> -->
+                    <!--介绍-->
+                    <p>这是一段课程介绍这是一段课程介绍这是一段课程介绍这是一段课程介绍这是一段课程介绍这是一段课程介绍这是一段课程介绍这是一段课程介绍</p>
+                  </div>
+                  <!--2. 文章的示例-->
+                  <div class="result-block">
+                      <!--类型-->
+                      <span class="type">文章</span>
+                      <!--名称_发布人-->
+                      <a href="passage.html">结婚前，听听咨询师给你的3个建议_黄小希</a><br/>
+                      <!--发布时间-->
+                      <span class="tag">2018.09.25</span>
+                      <!--介绍-->
+                      <p>你和你的家人相处融洽，除了血亲之外，还有几十年的相处默契，她作为一个新加入的人，要让她用自己的节奏慢慢熟悉这个新的家庭。</p>
+                  </div>
+                <!--1. 课程的示例-->
+                <div class="result-block">
+                    <!--类型-->
+                    <span class="type">课程</span>
+                    <!--名称_发布人-->
+                    <a href="course-intr.html">心理咨询师职业认证课程（台湾博士2017版）_会天心理</a>
+                    <!--发布时间-->
+                    <!--课程没有发布时间-->
+                    <!-- <span></span> -->
+                    <!--介绍-->
+                    <p>这是一段课程介绍这是一段课程介绍这是一段课程介绍这是一段课程介绍这是一段课程介绍这是一段课程介绍这是一段课程介绍这是一段课程介绍</p>
+                  </div>
+                  <!--2. 文章的示例-->
+                  <div class="result-block">
+                      <!--类型-->
+                      <span class="type">文章</span>
+                      <!--名称_发布人-->
+                      <a href="passage.html">结婚前，听听咨询师给你的3个建议_黄小希</a><br/>
+                      <!--发布时间-->
+                      <span class="tag">2018.09.25</span>
+                      <!--介绍-->
+                      <p>你和你的家人相处融洽，除了血亲之外，还有几十年的相处默契，她作为一个新加入的人，要让她用自己的节奏慢慢熟悉这个新的家庭。</p>
+                  </div>
+                <!--1. 课程的示例-->
+                <div class="result-block">
+                    <!--类型-->
+                    <span class="type">课程</span>
+                    <!--名称_发布人-->
+                    <a href="course-intr.html">心理咨询师职业认证课程（台湾博士2017版）_会天心理</a>
+                    <!--发布时间-->
+                    <!--课程没有发布时间-->
+                    <!-- <span></span> -->
+                    <!--介绍-->
+                    <p>这是一段课程介绍这是一段课程介绍这是一段课程介绍这是一段课程介绍这是一段课程介绍这是一段课程介绍这是一段课程介绍这是一段课程介绍</p>
+                  </div>
+                  <!--2. 文章的示例-->
+                  <div class="result-block">
+                      <!--类型-->
+                      <span class="type">文章</span>
+                      <!--名称_发布人-->
+                      <a href="passage.html">结婚前，听听咨询师给你的3个建议_黄小希</a><br/>
+                      <!--发布时间-->
+                      <span class="tag">2018.09.25</span>
+                      <!--介绍-->
+                      <p>你和你的家人相处融洽，除了血亲之外，还有几十年的相处默契，她作为一个新加入的人，要让她用自己的节奏慢慢熟悉这个新的家庭。</p>
+                  </div>
+                <!--1. 课程的示例-->
+                <div class="result-block">
+                    <!--类型-->
+                    <span class="type">课程</span>
+                    <!--名称_发布人-->
+                    <a href="course-intr.html">心理咨询师职业认证课程（台湾博士2017版）_会天心理</a>
+                    <!--发布时间-->
+                    <!--课程没有发布时间-->
+                    <!-- <span></span> -->
+                    <!--介绍-->
+                    <p>这是一段课程介绍这是一段课程介绍这是一段课程介绍这是一段课程介绍这是一段课程介绍这是一段课程介绍这是一段课程介绍这是一段课程介绍</p>
+                  </div>
+                  <!--2. 文章的示例-->
+                  <div class="result-block">
+                      <!--类型-->
+                      <span class="type">文章</span>
+                      <!--名称_发布人-->
+                      <a href="passage.html">结婚前，听听咨询师给你的3个建议_黄小希</a><br/>
+                      <!--发布时间-->
+                      <span class="tag">2018.09.25</span>
+                      <!--介绍-->
+                      <p>你和你的家人相处融洽，除了血亲之外，还有几十年的相处默契，她作为一个新加入的人，要让她用自己的节奏慢慢熟悉这个新的家庭。</p>
+                  </div>
+              </div>
+              <!--分页器-->
+                <div class="directory-contain-pager">
+                    <ul class="pager">
+                        <li class="previous"><a href="your/nice/url">«</a></li>
+                        <li><a href="your/nice/url">1</a></li>
+                        <li class="active"><a href="your/nice/url">2</a></li>
+                        <li><a href="your/nice/url">3</a></li>
+                        <li><a href="your/nice/url">4</a></li>
+                        <li><a href="your/nice/url">5</a></li>
+                        <li class="next"><a href="your/nice/url">»</a></li>
+                    </ul>
+                </div>
+          </div>
+        </div>
+    </div>
+    <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <!-- ZUI Javascript组件 -->
+    <script src="js/zui.min.js"></script>
+  </body>
+</html>
