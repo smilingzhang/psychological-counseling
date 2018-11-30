@@ -160,20 +160,23 @@ function sendVerifyCode(){
     //获取按钮元素
     var svButton = document.getElementById('login-send-verifyCode');
     //获取当前时间，并记录在全局变量sendTime中
-    sendTime = new Date().getSeconds();
+    sendTime = new Date().getTime();
     //将“发送验证码按钮设置为不可用”，设置按钮文字内容
     svButton.setAttribute("disabled","disabled");
     svButton.innerText = '重新发送（60s）'
     //每秒更新一次计时信息
+    var time = 60;
     self.setInterval(function(){
-        var currentTime = new Date().getSeconds();
-        var time = (currentTime - sendTime);
-        if(time > 60){
+        var currentTime = new Date().getTime();
+        time = time-1;
+        console.log(time)
+        if(time < 0){
             //一分钟后，重新激活按钮
             document.getElementById('login-send-verifyCode').removeAttribute("disabled");
-            window.clearInterval(int);
+            clearInterval(self);
+            document.getElementById('login-send-verifyCode').innerText = '重新发送';
             return;
         }
-        document.getElementById('login-send-verifyCode').innerText = '重新发送（'+(60-time)+'s）';
+        document.getElementById('login-send-verifyCode').innerText = '重新发送（'+time+'s）';
     },1000);
 }

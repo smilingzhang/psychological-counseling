@@ -365,7 +365,7 @@ a:focus{
 .timetable .time-cell-able,
 .timetable .time-cell-disable
 {   display: block;
-    width: 7em;
+    width: 3.5em;
     line-height: 1.5em;
     float: left;
     margin-left: 5px;
@@ -1547,7 +1547,7 @@ a:focus{
 .weiboContain{
     width: 60%;  
 }
-.weiboContain .panel .stress,
+.weiboContain .panel .stress
 {
     font-size: 30px;
     color: #db5757;

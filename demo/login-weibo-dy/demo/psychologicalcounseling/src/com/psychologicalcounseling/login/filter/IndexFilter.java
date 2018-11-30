@@ -26,6 +26,7 @@ public class IndexFilter implements Filter {
 	 * @see Filter#destroy()
 	 */
 	public void destroy() {
+		
 		// TODO Auto-generated method stub
 	}
 

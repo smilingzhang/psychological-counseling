@@ -11,6 +11,7 @@ select{
 .btn{
     border-radius: 5px;
     border-width: 0;
+    text-shadow: none;
 }
 a:hover{
     color: #d75455;
@@ -182,19 +183,19 @@ a:focus{
     margin-bottom: 10px;
     height: 50px;
 }
-.login-form .msg-err,
-.login-form .msg-right,
-.login-form .msg-warning
+.msg-err,
+.msg-right,
+.msg-warning
 {
     font-size: 12px;
 }
-.login-form .msg-err{
+.msg-err{
     color: #d75455;
 }
-.login-form .msg-right{
+.msg-right{
     color: #38b03f;
 }
-.login-form .msg-warning{
+.msg-warning{
     color: #d5890e;
 }
 .loginpanel .login-nav{
@@ -1543,3 +1544,48 @@ a:focus{
     margin: 5px
 }
 
+.weiboContain{
+    width: 60%;  
+}
+.weiboContain .panel .stress
+{
+    font-size: 30px;
+    color: #db5757;
+    line-height: 2.5em;
+}
+.weiboContain .panel{
+    padding-left: 10%;
+    padding-right: 10%;
+}
+.weiboContain .panel .info-text{
+    line-height: 2em;
+    color: #db5757;
+}
+.weiboContain .panel form{
+    width: 50%;
+    margin: 20px;
+}
+.weiboContain .panel #login-send-verifyCode,
+.verify-phone-modal .form-contain #login-send-verifyCode
+{
+    float: right;
+}
+.weiboContain .panel #login-form-submit-button,
+.verify-phone-modal .form-contain #login-form-submit-button
+{
+    clear: both;
+    display: block;
+    margin-right: 0;
+    width: 100%;
+}
+.verify-phone-modal .form-contain{
+    width: 50%;
+}
+.verify-phone-modal .stress {
+    font-size: 20px;
+    color: #db5757;
+    line-height: 2em;
+}
+.modal-footer{
+    margin-top: 20px;
+}
