@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>登录_完善手机号</title>
+    <!-- zui -->
+    <link href="css/zui-theme.css" rel="stylesheet">
+    <link href="css/zui.css" rel="stylesheet">
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/zui.js"></script> 
+    <script src="js/zui.lite.js"></script>
+    <!--自定义-->
+    <link href="css/mystyle.css" rel="stylesheet">
+    <script src="js/verify.js"></script> 
+  </head>
+  <body>
+    <!-- 在此处编码你的创意 -->
+    <div class="contains weiboContain">
+        <div class="panel">
+            <div class="panel-body">
+                <!--图标-->
+                <i class="stress icon icon-exclamation-sign"></i>
+                <!--提示标题-->
+                <span class="stress">离注册成功仅差一步</span><br/>
+                <!--提示内容-->
+                <span class="info-text">为了能及时给您发送课程、咨询等提醒信息，给您提供更友好的服务，我们需要您提供联系方式。</span>
+                <!--表单-->
+                <form action="" method="post">
+                    <div class="group">
+                        <!--错误信息-->
+                        <font name="loginErrMsg4Phone" id="loginErrMsg4Phone" class="">&nbsp;</font>
+                        <div><input id="phoneNum" name="phoneNum" type="text" class="form-control" placeholder="手机号" onkeyup="loginVerifyPhone(this)"></div>
+                    </div>
+    
+                    <div class="group">
+                        <!--错误信息-->
+                        <font name="loginErrMsg4Code" id="loginErrMsg4Code" class="">&nbsp;</font>
+                        <div><input id="verifyCode" name="verifyCode" type="text" class="form-control" placeholder="验证码" onkeyup="loginVerifyCode(this)" style="width: 150px;display: block;float: left;"></div>
+                        <a class="btn btn-primarys" id="login-send-verifyCode"  onclick="sendVerifyCode()">获取验证码</a><br/><br/>
+                    </div>
+                    <button class="btn btn-block " id="login-form-submit-button" disabled="disabled">确定</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <!-- ZUI Javascript组件 -->
+    <script src="js/zui.min.js"></script>
+  </body>
+</html>

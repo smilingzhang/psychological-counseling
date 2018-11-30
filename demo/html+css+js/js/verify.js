@@ -123,9 +123,9 @@ function isLoginAble(obj){
         }
     });
     
-    console.log(flag)
     if(flag==1){
         $(obj).parent().parent().parent().children(":last").removeAttr("disabled");
+        console.log($(obj).parent().parent().parent().children(":last"))
     }
         // document.getElementById('login-form-submit-button').removeAttribute("disabled");
 }

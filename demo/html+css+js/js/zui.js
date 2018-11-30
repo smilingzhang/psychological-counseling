@@ -3100,6 +3100,10 @@
             that.$element
                 .addClass('in')
                 .attr('aria-hidden', false)
+            
+            that.$element
+                .addClass('in')
+                .attr('style', "display:block")
 
             that.ajustPosition(position);
 
