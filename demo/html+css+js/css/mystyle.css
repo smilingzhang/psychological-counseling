@@ -11,6 +11,7 @@ select{
 .btn{
     border-radius: 5px;
     border-width: 0;
+    text-shadow: none;
 }
 a:hover{
     color: #d75455;
@@ -182,19 +183,19 @@ a:focus{
     margin-bottom: 10px;
     height: 50px;
 }
-.login-form .msg-err,
-.login-form .msg-right,
-.login-form .msg-warning
+.msg-err,
+.msg-right,
+.msg-warning
 {
     font-size: 12px;
 }
-.login-form .msg-err{
+.msg-err{
     color: #d75455;
 }
-.login-form .msg-right{
+.msg-right{
     color: #38b03f;
 }
-.login-form .msg-warning{
+.msg-warning{
     color: #d5890e;
 }
 .loginpanel .login-nav{
@@ -335,6 +336,11 @@ a:focus{
 .app-state-disable{
     background-color: #e8d1d2;
 }
+.cleftlist-consultant{
+    clear: both;
+    /* margin-left: 10px; */
+    margin-top: 25px;
+}
 .crightlist-detail .num{
     /* display: block; */
     color: #d75455;
@@ -352,12 +358,14 @@ a:focus{
     background-color: #e26162;
 }
 .timetable{
+    display: block;
+    width: 90%;
     margin-top: 5px;
 }
 .timetable .time-cell-able,
 .timetable .time-cell-disable
 {   display: block;
-    width: 3em;
+    width: 3.5em;
     line-height: 1.5em;
     float: left;
     margin-left: 5px;
@@ -376,7 +384,7 @@ a:focus{
     text-align: center;
 }
 .timetable .time-cell-able a{
-    color: #ec6a6b;
+    color: #fff;
 }
 .timetable .time-cell-disable a{
     color: #e8d1d2;
@@ -391,9 +399,6 @@ a:focus{
 .timetable .time-cell-disable a:hover
 {
     text-decoration: none;
-}
-.timetable{
-    width: 200px;
 }
 .crightlist-course{
     margin-top: 20px;
@@ -419,6 +424,7 @@ a:focus{
 .crightlist-consultant{
     width: 500px;
     height: 140px;
+    clear: left;
     /* margin-top: 10px; */
 }
 .button-pager{
@@ -1536,4 +1542,50 @@ a:focus{
 .checkout-contain .checkout-panel .panel-body div input{
     /* line-height: 3em */
     margin: 5px
+}
+
+.weiboContain{
+    width: 60%;  
+}
+.weiboContain .panel .stress
+{
+    font-size: 30px;
+    color: #db5757;
+    line-height: 2.5em;
+}
+.weiboContain .panel{
+    padding-left: 10%;
+    padding-right: 10%;
+}
+.weiboContain .panel .info-text{
+    line-height: 2em;
+    color: #db5757;
+}
+.weiboContain .panel form{
+    width: 50%;
+    margin: 20px;
+}
+.weiboContain .panel #login-send-verifyCode,
+.verify-phone-modal .form-contain #login-send-verifyCode
+{
+    float: right;
+}
+.weiboContain .panel #login-form-submit-button,
+.verify-phone-modal .form-contain #login-form-submit-button
+{
+    clear: both;
+    display: block;
+    margin-right: 0;
+    width: 100%;
+}
+.verify-phone-modal .form-contain{
+    width: 50%;
+}
+.verify-phone-modal .stress {
+    font-size: 20px;
+    color: #db5757;
+    line-height: 2em;
+}
+.modal-footer{
+    margin-top: 20px;
 }

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>倾听列表</title>
+    <!-- zui -->
+    <link href="css/zui-theme.css" rel="stylesheet">
+    <link href="css/zui.css" rel="stylesheet">
+    <link href="css/mystyle.css" rel="stylesheet">
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/zui.js"></script> 
+    <script src="js/zui.lite.js"></script>
+  </head>
+  <body>
+    <!-- 在此处编码你的创意 -->
+    <div class="panel contains">
+        <div class="panel-body appointment-body">
+            <!--筛选-->
+            <!-- <span class="tag">筛选</span> -->
+            <div class="listen-category">
+                <form action="" method="POST">
+                    <span class="tag">性别</span>
+                    <select name="gender" id="listen-list-gender">
+                        <option value="default">--请选择--</option>
+                        <option value="male">男</option>
+                        <option value="female">女</option>
+                    </select>
+                    <span class="tag">年龄</span>
+                    <select name="age" id="listen-list-gender">
+                            <option value="default">--请选择--</option>
+                            <option value="male">20~30岁</option>
+                            <option value="female">30~40岁</option>
+                            <option value="female">40岁以上</option>
+                        </select>
+                    <button class="btn">筛选</button>
+                </form>
+            </div>
+            <!--倾听师组 一次仅展示8个倾听师-->
+            <div class="linstener-group">
+                <!--一个倾听师-->
+                <div class="panel listener">
+                    <div class="panel-body">
+                        <!--头像 圆形-->
+                        <!-- <div class="avatar"></div> -->
+                        <img src="images/consultant.png" />
+                        <br/>
+                        <!--倾听师姓名-->
+                        <div>
+                            <a href="#">梁田</a>
+                            <!-- <br/> -->
+                            <!--累计倾听时间-->
+                            <div class="time"><span class="tag">累计倾听</span><span class="stress-tag">99小时</span></div>
+                            <!--预约按钮-->
+                            <a class="btn btn-sm" href="your/url/">说给我听</a>
+                        </div>
+                    </div>
+                </div>
+                <!--以下都是重复的-->
+                <!--一个倾听师-->
+                <div class="panel listener">
+                    <div class="panel-body">
+                        <!--头像 圆形-->
+                        <!-- <div class="avatar"></div> -->
+                        <img src="images/consultant.png" />
+                        <br/>
+                        <!--倾听师姓名-->
+                        <div>
+                            <a href="#">梁田</a>
+                            <!-- <br/> -->
+                            <!--累计倾听时间-->
+                            <div class="time"><span class="tag">累计倾听</span><span class="stress-tag">99小时</span></div>
+                            <!--预约按钮-->
+                            <a class="btn btn-sm" href="your/url/">说给我听</a>
+                        </div>
+                    </div>
+                </div>
+
+                    <!--一个倾听师-->
+                <div class="panel listener">
+                    <div class="panel-body">
+                        <!--头像 圆形-->
+                        <!-- <div class="avatar"></div> -->
+                        <img src="images/consultant.png" />
+                        <br/>
+                        <!--倾听师姓名-->
+                        <div>
+                            <a href="#">梁田</a>
+                            <!-- <br/> -->
+                            <!--累计倾听时间-->
+                            <div class="time"><span class="tag">累计倾听</span><span class="stress-tag">99小时</span></div>
+                            <!--预约按钮-->
+                            <a class="btn btn-sm" href="your/url/">说给我听</a>
+                        </div>
+                    </div>
+                </div><!--一个倾听师-->
+                <div class="panel listener">
+                    <div class="panel-body">
+                        <!--头像 圆形-->
+                        <!-- <div class="avatar"></div> -->
+                        <img src="images/consultant.png" />
+                        <br/>
+                        <!--倾听师姓名-->
+                        <div>
+                            <a href="#">梁田</a>
+                            <!-- <br/> -->
+                            <!--累计倾听时间-->
+                            <div class="time"><span class="tag">累计倾听</span><span class="stress-tag">99小时</span></div>
+                            <!--预约按钮-->
+                            <a class="btn btn-sm" href="your/url/">说给我听</a>
+                        </div>
+                    </div>
+                </div>
+                <!--一个倾听师-->
+                <div class="panel listener">
+                        <div class="panel-body">
+                            <!--头像 圆形-->
+                            <!-- <div class="avatar"></div> -->
+                            <img src="images/consultant.png" />
+                            <br/>
+                            <!--倾听师姓名-->
+                            <div>
+                                <a href="#">梁田</a>
+                                <!-- <br/> -->
+                                <!--累计倾听时间-->
+                                <div class="time"><span class="tag">累计倾听</span><span class="stress-tag">99小时</span></div>
+                                <!--预约按钮-->
+                                <a class="btn btn-sm" href="your/url/">说给我听</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--一个倾听师-->
+                <div class="panel listener">
+                        <div class="panel-body">
+                            <!--头像 圆形-->
+                            <!-- <div class="avatar"></div> -->
+                            <img src="images/consultant.png" />
+                            <br/>
+                            <!--倾听师姓名-->
+                            <div>
+                                <a href="#">梁田</a>
+                                <!-- <br/> -->
+                                <!--累计倾听时间-->
+                                <div class="time"><span class="tag">累计倾听</span><span class="stress-tag">99小时</span></div>
+                                <!--预约按钮-->
+                                <a class="btn btn-sm" href="your/url/">说给我听</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--一个倾听师-->
+                <div class="panel listener">
+                        <div class="panel-body">
+                            <!--头像 圆形-->
+                            <!-- <div class="avatar"></div> -->
+                            <img src="images/consultant.png" />
+                            <br/>
+                            <!--倾听师姓名-->
+                            <div>
+                                <a href="#">梁田</a>
+                                <!-- <br/> -->
+                                <!--累计倾听时间-->
+                                <div class="time"><span class="tag">累计倾听</span><span class="stress-tag">99小时</span></div>
+                                <!--预约按钮-->
+                                <a class="btn btn-sm" href="your/url/">说给我听</a>
+                            </div>
+                        </div>
+                    </div><!--一个倾听师-->
+                    <div class="panel listener">
+                        <div class="panel-body">
+                            <!--头像 圆形-->
+                            <!-- <div class="avatar"></div> -->
+                            <img src="images/consultant.png" />
+                            <br/>
+                            <!--倾听师姓名-->
+                            <div>
+                                <a href="#">梁田</a>
+                                <!-- <br/> -->
+                                <!--累计倾听时间-->
+                                <div class="time"><span class="tag">累计倾听</span><span class="stress-tag">99小时</span></div>
+                                <!--预约按钮-->
+                                <a class="btn btn-sm" href="your/url/">说给我听</a>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <!--换一波按钮 get请求-->
+            <button class="btn btn-block">换一波看看</button>
+        </div>
+    </div>
+    <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <!-- ZUI Javascript组件 -->
+    <script src="js/zui.min.js"></script>
+  </body>
+</html>
