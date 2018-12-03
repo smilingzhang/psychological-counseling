@@ -29,7 +29,7 @@ public class GenerateOrderController {
 	@Resource
 	private ConsultOrderService consultOrderService;
 	@RequestMapping("/insertorder")
-	public String generateOrder(@RequestParam("teacherId")int teacherId,@RequestParam("date")String date,
+	public String generateOrder(@RequestParam("teacherId")String teacherId,@RequestParam("date")String date,
 			@RequestParam("content")String content,@RequestParam("teacherPrice")String teacherPrice,
 			@RequestParam("type")String consultType,HttpServletRequest request,HttpServletResponse response) throws IOException {
 		response.setContentType("text/html;charset=utf-8");
@@ -40,7 +40,8 @@ public class GenerateOrderController {
 		 * 要获取session里存的用户 和 咨询师
 		 */
 		User user=this.consultOrderService.findUserById(userId);
-		Teacher teacher=this.consultOrderService.findTeacherById(teacherId);
+		int tId=Integer.parseInt(teacherId);
+		Teacher teacher=this.consultOrderService.findTeacherById(tId);
 		float price=Float.valueOf(teacherPrice);
 		ConsultationRecord consultationRecord=new ConsultationRecord();
 		//Nullpoint异常
@@ -65,15 +66,17 @@ public class GenerateOrderController {
 		this.consultOrderService.modifyRandomNum(result,consultOrderId);
 		String reOrderId=result+consultOrderId;
 		boolean isHasPhone=this.consultOrderService.findIsHasPhone(userId);
-		//request.setAttribute("reOrderId", reOrderId);
+		
 		request.getSession().setAttribute("reOrderId", reOrderId);
-		request.setAttribute("consultOrderId", consultOrderId);
-		//request.setAttribute("teacherPrice",price);
+		request.getSession().setAttribute("consultOrderId", consultOrderId);
+	
 		request.getSession().setAttribute("teacherPrice",price);
-		request.setAttribute("teacherId", teacherId);
-		request.setAttribute("date", date);
-		request.setAttribute("content", content);
-		request.setAttribute("type", consultType);
+		
+		
+		request.getSession().setAttribute("teacherId", teacherId);
+		request.getSession().setAttribute("date", date);
+		request.getSession().setAttribute("content", content);
+		request.getSession().setAttribute("type", consultType);
 		
 		if(isHasPhone) {
 			

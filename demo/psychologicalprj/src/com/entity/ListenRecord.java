@@ -11,12 +11,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 /**
  * 
- *@desc:倾听记录�?
- *		字段：流水号，用户ID，预约时间，�?始时间，结束时间，价�? �?
- *			订单状�?�：已完�?/已支�?/已取消，倾听师ID，资源路�?
+ *@desc:倾听记录�?
+ *		字段：流水号，用户ID，预约时间，�?始时间，结束时间，价�? �?
+ *			订单状�?�：已完�?/已支�?/已取消，倾听师ID，资源路�?
  *		映射关系：单向多对一  咨询师表，用户表
- *@author 段智�?
- *@date:2018�?11�?20日下�?4:25:53
+ *@author 段智�?
+ *@date:2018�?11�?20日下�?4:25:53
  */
 
 @Entity
@@ -32,8 +32,6 @@ public class ListenRecord {
 	private String listenrecordResourcePath;
 	private Teacher teacher;
 	private User user;
-	
-	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getListenrecordId() {

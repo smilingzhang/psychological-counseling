@@ -24,7 +24,7 @@
         <div class="checkout-panel panel">
             <div class="panel-body">
                 <form action="<%=path %>/paymentrequest" method="post">
-                	<input type="hidden" name="orderId" value="${reOrderId }"/>
+                	<!-- input type="hidden" name="orderId" value="${reOrderId }"/ -->
                 	<input type="hidden" name="teacherPrice" value="${teacherPrice }"/>
                 	<input type="hidden" name="teacherId" value="${teacherId }"/>
                 	<input type="hidden" name="date" value="${date }"/>

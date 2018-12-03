@@ -36,7 +36,8 @@ public class Teacher {
 	private float teacherPraiseRate;
 	private float teacherPrice;
 	private String teacherIntroduction;
-	//private int teacherListenTime;
+	//单位为分钟
+	private int teacherListenTime;
 	private String authenticationAptitudeName ;
 	private String goodats;
 	private Set<ConsultObject> consultobjects = new HashSet<ConsultObject>();
@@ -78,12 +79,12 @@ public class Teacher {
 	public void setTeacherIntroduction(String teacherIntroduction) {
 		this.teacherIntroduction = teacherIntroduction;
 	}
-/*	public int getTeacherListenTime() {
+	public int getTeacherListenTime() {
 		return teacherListenTime;
 	}
 	public void setTeacherListenTime(int teacherListenTime) {
 		this.teacherListenTime = teacherListenTime;
-	}*/
+	}
 	
 	@OneToMany(targetEntity=ConsultObject.class,cascade=CascadeType.ALL)
 	@JoinColumn(name="teacherId")

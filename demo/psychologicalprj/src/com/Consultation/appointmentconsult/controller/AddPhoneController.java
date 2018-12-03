@@ -15,12 +15,17 @@ public class AddPhoneController {
 	private ConsultOrderService consultOrderService;
 	@RequestMapping("addphone")
 	public String addPhone(@RequestParam("reOrderId")String reOrderId,@RequestParam("teacherPrice")String teacherPrice,
-			@RequestParam("phoneNum")String phoneNum,HttpServletRequest request) {
+			@RequestParam("phoneNum")String phoneNum,HttpServletRequest request,@RequestParam("teacherId") String teacherId,
+			@RequestParam("date")String date,@RequestParam("content")String content,@RequestParam("consultOrderId") String consultOrderId) {
 		//应该从session中获取
 		int userId=1;
 		this.consultOrderService.modifyUserPhoneById(userId, phoneNum);
 		request.setAttribute("reOrderId", reOrderId);
 		request.setAttribute("teacherPrice", teacherPrice);
+		request.setAttribute("teacherId", teacherId);
+		request.setAttribute("date", date);
+		request.setAttribute("content", content);
+		request.setAttribute("consultOrderId", consultOrderId);
 		return "checkout";
 	}
 }

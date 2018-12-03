@@ -21,6 +21,7 @@
     <script src="<%=path %>/js/zui.js"></script> 
     <script src="<%=path %>/js/zui.lite.js"></script>
     <script src="<%=path %>/lib/datetimepicker/datetimepicker.min.js"></script>
+  
   </head>
   <body>
 
@@ -72,8 +73,8 @@
         <!--左侧专家列表-->
         <div class="panel consult-panel">
             <div class="panel-body">
-            <c:if test="${empty teachers }">
-            <c:forEach items="${defaultTeachers }" var="d">
+            <c:if test="${empty date }">
+            <c:forEach items="${page.teacher }" var="d">
             	 <div class="crightlist-consultant">
                     <!--头像-->
                     <div><a href="<%=path %>/consultdetail/showdetail?teacherId=${d.teacherId }"><img src="<%=path %>/images/consultant.png" style="width: 100px;margin-right:20px;float: left;"/></a></div>
@@ -105,70 +106,72 @@
                         	<c:if test="${timelist.time8==0 }">
                             <span class="time-cell-disable">8:00</span>
                         	</c:if>
-                        	 	<c:if test="${timelist.time9==1 }">
+                        	 
+                        	 <c:if test="${timelist.time9==1 }">
                             <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=9:00-10:00">9:00</a></span>
                        		 </c:if>
                         	<c:if test="${timelist.time9==0 }">
                             <span class="time-cell-disable">9:00</span>
                         	 </c:if>
+                        	  	
                         	 	<c:if test="${timelist.time10==1 }">
                             <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=10:00-11:00">10:00</a></span>
                        		 </c:if>
                         	<c:if test="${timelist.time10==0 }">
                             <span class="time-cell-disable">10:00</span>
                         	 </c:if>
-                        	 <c:if test="${timelist.time8==1 }">
+                        	 <c:if test="${timelist.time11==1 }">
                             <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=11:00-12:00">11:00</a></span>
                        		 </c:if>
-                        	<c:if test="${timelist.time8==0 }">
+                        	<c:if test="${timelist.time11==0 }">
                             <span class="time-cell-disable">11:00</span>
                         	</c:if>
-                        	<c:if test="${timelist.time8==1 }">
+                        	<c:if test="${timelist.time12==1 }">
                             <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=12:00-13:00">12:00</a></span>
                        		 </c:if>
-                        	<c:if test="${timelist.time8==0 }">
+                        	<c:if test="${timelist.time12==0 }">
                             <span class="time-cell-disable">12:00</span>
                         	</c:if>
-                        	<c:if test="${timelist.time8==1 }">
+                        	<c:if test="${timelist.time13==1 }">
                             <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=13:00-14:00">13:00</a></span>
                        		 </c:if>
-                        	<c:if test="${timelist.time8==0 }">
+                        	<c:if test="${timelist.time13==0 }">
                             <span class="time-cell-disable">13:00</span>
                         	</c:if>
-                        	<c:if test="${timelist.time8==1 }">
+                        	<c:if test="${timelist.time14==1 }">
                             <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=14:00-15:00">14:00</a></span>
                        		 </c:if>
-                        	<c:if test="${timelist.time8==0 }">
+                        	<c:if test="${timelist.time14==0 }">
                             <span class="time-cell-disable">14:00</span>
                         	</c:if>
-                        	<c:if test="${timelist.time8==1 }">
+                        	<c:if test="${timelist.time15==1 }">
                             <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=15:00-16:00">15:00</a></span>
                        		 </c:if>
-                        	<c:if test="${timelist.time8==0 }">
+                        	<c:if test="${timelist.time15==0 }">
                             <span class="time-cell-disable">15:00</span>
                         	</c:if>
-                        	<c:if test="${timelist.time8==1 }">
+                        	<c:if test="${timelist.time16==1 }">
                             <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=16:00-17:00">16:00</a></span>
                        		 </c:if>
-                        	<c:if test="${timelist.time8==0 }">
+                        	<c:if test="${timelist.time16==0 }">
                             <span class="time-cell-disable">16:00</span>
                         	</c:if>
-                        	<c:if test="${timelist.time8==1 }">
+                        	<c:if test="${timelist.time17==1 }">
                             <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=17:00-18:00">17:00</a></span>
                        		 </c:if>
-                        	<c:if test="${timelist.time8==0 }">
+                        	<c:if test="${timelist.time17==0 }">
                             <span class="time-cell-disable">17:00</span>
                         	</c:if>
-                        	<c:if test="${timelist.time8==1 }">
+                        	<c:if test="${timelist.time18==1 }">
                             <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=18:00-19:00">18:00</a></span>
                        		 </c:if>
-                        	<c:if test="${timelist.time8==0 }">
+                        	<c:if test="${timelist.time18==0 }">
                             <span class="time-cell-disable">18:00</span>
                         	</c:if>
-                        	<c:if test="${timelist.time8==1 }">
+                        	<c:if test="${timelist.time19==1 }">
                             <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=19:00-20:00">19:00</a></span>
                        		 </c:if>
-                        	<c:if test="${timelist.time8==0 }">
+                        	<c:if test="${timelist.time19==0 }">
                             <span class="time-cell-disable">19:00</span>
                         	</c:if>
                          </c:forEach>
@@ -177,8 +180,8 @@
                 </div>
                 </c:forEach>
             </c:if>
-            <c:if test="${not empty teachers }">
-              <c:forEach var="t" items="${teachers }">
+            <c:if test="${not empty date }">
+              <c:forEach var="t" items="${page.teacher }">
                 <!--一个专家  循环展示这部分  专家-->
                 <div class="crightlist-consultant">
                     <!--头像-->
@@ -205,76 +208,80 @@
                         <!--time-cell-able:可预约 time-cell-disable:不可预约-->
                         <div class="timetable">
                         <c:forEach items="${t.teacherTimes }" var="timelist" >
+                       
                         	<c:if test="${timelist.time8==1 }">
                             <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=8:00-9:00">8:00</a></span>
                        		 </c:if>
                         	<c:if test="${timelist.time8==0 }">
                             <span class="time-cell-disable">8:00</span>
                         	</c:if>
+                        	
                         	 	<c:if test="${timelist.time9==1 }">
                             <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=9:00-10:00">9:00</a></span>
                        		 </c:if>
                         	<c:if test="${timelist.time9==0 }">
                             <span class="time-cell-disable">9:00</span>
                         	 </c:if>
+                        	 
                         	 	<c:if test="${timelist.time10==1 }">
                             <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=10:00-11:00">10:00</a></span>
                        		 </c:if>
                         	<c:if test="${timelist.time10==0 }">
                             <span class="time-cell-disable">10:00</span>
                         	 </c:if>
-                        	 <c:if test="${timelist.time8==1 }">
+                        	 
+                        	 <c:if test="${timelist.time11==1 }">
                             <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=11:00-12:00">11:00</a></span>
                        		 </c:if>
-                        	<c:if test="${timelist.time8==0 }">
+                        	<c:if test="${timelist.time11==0 }">
                             <span class="time-cell-disable">11:00</span>
                         	</c:if>
-                        	<c:if test="${timelist.time8==1 }">
+                        	<c:if test="${timelist.time12==1 }">
                             <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=12:00-13:00">12:00</a></span>
                        		 </c:if>
-                        	<c:if test="${timelist.time8==0 }">
+                        	<c:if test="${timelist.time12==0 }">
                             <span class="time-cell-disable">12:00</span>
                         	</c:if>
-                        	<c:if test="${timelist.time8==1 }">
+                        	<c:if test="${timelist.time13==1 }">
                             <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=13:00-14:00">13:00</a></span>
                        		 </c:if>
-                        	<c:if test="${timelist.time8==0 }">
+                        	<c:if test="${timelist.time13==0 }">
                             <span class="time-cell-disable">13:00</span>
                         	</c:if>
-                        	<c:if test="${timelist.time8==1 }">
+                        	<c:if test="${timelist.time14==1 }">
                             <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=14:00-15:00">14:00</a></span>
                        		 </c:if>
-                        	<c:if test="${timelist.time8==0 }">
+                        	<c:if test="${timelist.time14==0 }">
                             <span class="time-cell-disable">14:00</span>
                         	</c:if>
-                        	<c:if test="${timelist.time8==1 }">
+                        	<c:if test="${timelist.time15==1 }">
                             <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=15:00-16:00">15:00</a></span>
                        		 </c:if>
-                        	<c:if test="${timelist.time8==0 }">
+                        	<c:if test="${timelist.time15==0 }">
                             <span class="time-cell-disable">15:00</span>
                         	</c:if>
-                        	<c:if test="${timelist.time8==1 }">
+                        	<c:if test="${timelist.time16==1 }">
                             <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=16:00-17:00">16:00</a></span>
                        		 </c:if>
-                        	<c:if test="${timelist.time8==0 }">
+                        	<c:if test="${timelist.time16==0 }">
                             <span class="time-cell-disable">16:00</span>
                         	</c:if>
-                        	<c:if test="${timelist.time8==1 }">
+                        	<c:if test="${timelist.time17==1 }">
                             <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=17:00-18:00">17:00</a></span>
                        		 </c:if>
-                        	<c:if test="${timelist.time8==0 }">
+                        	<c:if test="${timelist.time17==0 }">
                             <span class="time-cell-disable">17:00</span>
                         	</c:if>
-                        	<c:if test="${timelist.time8==1 }">
+                        	<c:if test="${timelist.time18==1 }">
                             <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=18:00-19:00">18:00</a></span>
                        		 </c:if>
-                        	<c:if test="${timelist.time8==0 }">
+                        	<c:if test="${timelist.time18==0 }">
                             <span class="time-cell-disable">18:00</span>
                         	</c:if>
-                        	<c:if test="${timelist.time8==1 }">
+                        	<c:if test="${timelist.time19==1 }">
                             <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=19:00-20:00">19:00</a></span>
                        		 </c:if>
-                        	<c:if test="${timelist.time8==0 }">
+                        	<c:if test="${timelist.time19==0 }">
                             <span class="time-cell-disable">19:00</span>
                         	</c:if>
                          </c:forEach>
@@ -282,7 +289,7 @@
                     </div>
                 </div>
 			</c:forEach>
-                
+        
            </c:if>     
             </div>
         </div><!--左侧专家列表--End-->
@@ -314,22 +321,44 @@
             </div>
         </div>
         <!--分页-->
+        <c:if test="${empty date }">
         <div class="button-pager">
             <ul class="pager pager-loose pager-pills">
-                <li class="previous disabled"><a href="<%=path %>/consult/show?pageNum=${page.prePageNum }">«</a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#l">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li class="next"><a href="<%=path %>/consult/show?pageNum=${page.nextPageNum }">»</a></li>
+                <li class="previous disabled"><a href="<%=path %>/consult/default?pageNum=${page.prePageNum }">«</a></li>
+                <c:forEach var ="i" begin="1" end="${page.totalPageCount }">
+                	 <li><a href="<%=path %>/consult/default?pageNum=${i }" >${i }</a></li>    
+                </c:forEach> 
+                <c:if test="${page.pageNum==page.totalPageCount}">
+                <li class="next"><a href="<%=path %>/consult/default?pageNum=${page.totalPageCount }" >»</a></li>
+                </c:if>
+                <c:if test="${page.pageNum!=page.totalPageCount }">
+                <li class="next"><a href="<%=path %>/consult/default?pageNum=${page.nextPageNum }">»</a></li>
+                </c:if>
             </ul>
         </div>
+        </c:if>
+        <c:if test="${not empty date }">
+        	<div class="button-pager">
+            <ul class="pager pager-loose pager-pills">
+                <li class="previous disabled"><a href="<%=path %>/consult/show?pageNum=${page.prePageNum }&fenlei=${fenlei }&shijian=${date }">«</a></li>
+             	 <c:forEach var ="i" begin="1" end="${page.totalPageCount }">
+                	  <li><a href="<%=path %>/consult/show?pageNum=${i }&fenlei=${fenlei }&shijian=${date }">${i }</a></li>  
+                </c:forEach> 
+                <c:if test="${page.pageNum==page.totalPageCount}">
+                <li class="next"><a href="<%=path %>/consult/show?pageNum=${page.totalPageCount }&fenlei=${fenlei }&shijian=${date }">»</a></li>
+                </c:if>
+                <c:if test="${page.pageNum!=page.totalPageCount}">
+                   <li class="next"><a href="<%=path %>/consult/show?pageNum=${page.nextPageNum }&fenlei=${fenlei }&shijian=${date }">»</a></li>
+                </c:if>
+            </ul>
+        </div>
+        </c:if>
     </div><!--内容结束-->
     <%@include file="footer.jsp" %>
     <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
     <script src="js/jquery-1.11.0.min.js"></script>
     <!-- ZUI Javascript组件 -->
     <script src="js/zui.min.js"></script>
+    
   </body>
 </html>
