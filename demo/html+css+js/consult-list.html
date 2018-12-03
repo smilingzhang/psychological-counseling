@@ -8,53 +8,18 @@
     <!-- zui -->
     <link href="css/zui-theme.css" rel="stylesheet">
     <link href="css/zui.css" rel="stylesheet">
-    <link href="css/mystyle.css" rel="stylesheet">
     <link href="lib/datetimepicker/datetimepicker.min.css" rel="stylesheet">
     <script src="js/jquery-3.3.1.js"></script>
     <script src="js/attached.js"></script>
     <script src="js/zui.js"></script> 
     <script src="js/zui.lite.js"></script>
     <script src="lib/datetimepicker/datetimepicker.min.js"></script>
+    <!--自定义-->
+    <link href="css/mystyle.css" rel="stylesheet">
   </head>
   <body>
 
     <!-- 在此处编码你的创意 -->
-    <header>
-            <nav class="navbar contianer">
-                <div class="container">
-                    <input type="checkbox" id="nav-toggle" class="nav-toggle"/>
-                    <label for="nav-toggle">
-                        <span class="menu-icon">
-                            <svg viewBox="0 0 18 15" width="18px" height="15px">
-                                <path fill="white" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
-                                <path fill="white" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
-                                <path fill="white" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
-                        </svg>
-                    </span>
-                    </label>
-                    <ul class="nav-list">
-                        <li><img src="images/logo.png"></li>
-                        <li class="list active"><a href="#">首页</a></li>
-                        <li class="list"><a href="#">简介</a></li>
-                        <li class="list"><a href="#">咨询</a></li>
-                        <li class="list"><a href="#">课程</a></li>
-                        <li class="list"><a href="#">测试</a></li>
-                        <li class="list"><a href="#">阅读</a></li>
-                        <div class="search">
-                            <form class="navbar-form navbar-left" role="search">
-                                <div class="form-group">
-                                        <input id="inputSearchExample3" type="search" class="form-control search-input" placeholder="搜索">
-                                        <label for="inputSearchExample3" class="input-control-icon-left search-icon"><i class="icon icon-search"></i></label>
-                                </div>
-                                <button type="submit" class="btn btn-default">搜索</button>
-                            </form>
-                        </div>
-                        <li class="list"><a class="login" href="#">登录</a></li>
-                        <li class="list"><a class="regist" href="#">注册</a></li>
-                    </ul>  
-                </div>
-            </nav>
-        </header>
     <div class="contains">
         <div class="panel consult-category">
             <div class="panel-body">
@@ -241,60 +206,40 @@
         </div>
         <!--分页-->
         <div class="button-pager">
-            <ul class="pager pager-loose pager-pills">
-                <li class="previous disabled"><a href="your/nice/url">«</a></li>
-                <li class="active"><a href="your/nice/url">1</a></li>
-                <li><a href="your/nice/url">2</a></li>
-                <li><a href="your/nice/url">3</a></li>
-                <li><a href="your/nice/url">4</a></li>
-                <li><a href="your/nice/url">5</a></li>
-                <li class="next"><a href="your/nice/url">»</a></li>
+            <!--说明-->
+            <!--
+                每一次跳转都是一次get请求。
+                url范例：/consult-list.html#page=2?page=2
+                ★关键点：①#page={page} ②page={page}
+                ①用于分页器js的定位，②用于建立请求，两者都必不可少！！！
+            -->
+            <!--
+                ★注：以下为分页器导航栏的相关参数，需要朋友们动态地进行设置（在id为myPager的ul元素上）
+             data-page:             初始状态页数
+             data-rec-total：       总记录数
+             data-max-nav-count：   导航最大块数
+             data-rec-per-page：    每页的记录数 
+             ★注：若内容不足一页，请不要显示分页器。
+            -->
+            <ul id="myPager" class="pager" data-elements="prev,nav,next,goto" data-ride="pager"
+                data-page="1"
+                data-rec-total="50"
+                data-max-nav-count="5"
+                data-rec-per-page="8"
+                data-link-creator="${当前页面的url}#page={page}?page={page}"
+            >
             </ul>
+            <script>
+                $('#myPager').pager({
+                    linkCreator: function(page, pager) {
+                        var url = window.location.href;
+                        url = url.split("#")[0];
+                        return url+'#page='+ page +'?page=' + page;
+                    } 
+                });
+            </script>
         </div>
     </div><!--内容结束-->
-    <div class="footer">
-            <div class="container">
-                <div class="up-part">
-                    <!--社交账号-->
-                    <div id="footer-social-account">
-                        <span class="footer-title-h1">社交账号</span></br></br>
-                        <img src="images/avatar.png" />
-                        <img src="images/avatar.png" />
-                    </div>
-                    <!--相关链接-->
-                    <div id="footer-link">
-                        <span class="footer-title-h1">相关链接</span></br></br>
-                        <a href="http://www.baidu.com">百度</a></br>
-                        <a href="http://www.zhihu.com">知乎</a></br>
-                        <a href="http://www.baidu.com">百度</a></br>
-                        <a href="http://www.zhihu.com">知乎</a>
-                    </div>
-                    
-                    <!--联系我们-->
-                    <div id="footer-contact">
-                        <span class="footer-title-h1">联系我们</span></br></br>
-                        <img class="icon" src="icons/phone.png"/>
-                        <span class="tel">01-81596313</span>
-                        <img class="icon" src="icons/phone.png"></icon>
-                        <span class="phone">183016083</span></br>
-                        <img class="icon" src="icons/place.png"></icon>
-                        <span class="add">北京市通州区天时名&nbsp;苑5号楼1单元801</span>
-                    </div>
-                    <!--我要反馈-->
-                    <div class="feedback">
-                        <a class="footer-title-h1" href="#">我要反馈</a></br></br>
-                        <a class="footer-title-h1" href="#">关于我们</a></br>
-                        <a class="footer-title-h1" href="#">加入我们</a></br>
-                    </div>
-                </div>
-            <hr/>
-                <!--备案信息-->
-                <div class="button-part">
-                    <span class="footer-icp">©2018&nbsp;北京明心心理事务所京&nbsp;ICP&nbsp;证&nbsp;1****1&nbsp;号京公网安备&nbsp;1**********1&nbsp;号什么什么经营许可证</span></div></br>
-                    <!-- <span class="footer-icp"></span></div> -->
-                </div>
-            </div>
-        </div>
     <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
     <script src="js/jquery-1.11.0.min.js"></script>
     <!-- ZUI Javascript组件 -->
