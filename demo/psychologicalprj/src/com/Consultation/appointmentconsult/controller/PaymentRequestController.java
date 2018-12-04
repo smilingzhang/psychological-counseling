@@ -43,10 +43,10 @@ public class PaymentRequestController {
 	 *@trhows
 	 */
 	@RequestMapping("/paymentrequest")
-	public String getData(HttpServletRequest request,@RequestParam("orderId") String orderId,
-			@RequestParam("teacherPrice") String payMoney,@RequestParam("teacherId")int teacherId,
+	public String getData(HttpServletRequest request,
+			@RequestParam("teacherPrice") String payMoney,@RequestParam("teacherId")String teacherId,
 			@RequestParam("bank") String bank,@RequestParam("date")String date,@RequestParam("content")String content,
-			@RequestParam("consultOrderId")int consultOrderId,HttpServletResponse response) throws IOException {
+			@RequestParam("consultOrderId")String consultOrderId,HttpServletResponse response) throws IOException {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out=response.getWriter();
 		//业务类型，buy代表支付
@@ -70,10 +70,10 @@ public class PaymentRequestController {
 		//应答机制
 		String pr_NeedResponse="0";
 		String keyValue=ConfigInfo.getValue("keyValue");
-		String md5hmac=PaymentUtil.buildHmac(messageType, p1_MerId, orderId, payMoney, currency, productId, productCat, productDesc, merchantCallbackURL, addressFlag, sMctProperties, bank, pr_NeedResponse,keyValue);	
+		String md5hmac=PaymentUtil.buildHmac(messageType, p1_MerId, consultOrderId, payMoney, currency, productId, productCat, productDesc, merchantCallbackURL, addressFlag, sMctProperties, bank, pr_NeedResponse,keyValue);	
 		request.setAttribute("messageType", messageType);
 		request.setAttribute("p1_MerId", p1_MerId);
-		request.setAttribute("orderid", orderId);
+		request.setAttribute("orderid", consultOrderId);
 		request.setAttribute("amount", payMoney);
 		request.setAttribute("currency", currency);
 		request.setAttribute("productId", productId);
@@ -88,13 +88,15 @@ public class PaymentRequestController {
 		
 		//验证当前咨询师的此段时间是否已经被预约
 		String[] aString=content.split("-");
-		boolean isConsult=this.ConsultOrderService.findIsConsult(teacherId, date, aString[0], aString[1]);
+		int tId=Integer.parseInt(teacherId);
+		boolean isConsult=this.ConsultOrderService.findIsConsult(tId, date, aString[0], aString[1]);
 		request.setAttribute("isConsult", isConsult);
 		if(isConsult) {
-			this.ConsultOrderService.modifyConsultState(consultOrderId);
+			int id=Integer.parseInt(consultOrderId);
+			this.ConsultOrderService.modifyConsultState(id);
 			return "sendpay";
 		}
-		out.write("<script>alert('哎呀，慢了一步,您选择的该咨询师的此段时间被别人抢先预约走了呢，请您重新选择时间或挑选其它咨询师哦!'); window.location='consult/default' ;window.close();</script>");    
+		out.write("<script>alert('哎呀，慢了一步,您选择的该咨询师的此段时间被别人抢先预约走了呢，请您重新选择时间或挑选其它咨询师哦!'); window.location='consult/default?pageNum=1' ;window.close();</script>");    
 		response.getWriter().flush();
 		return "checkout";
 

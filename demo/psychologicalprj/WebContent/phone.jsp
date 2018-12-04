@@ -33,6 +33,10 @@
                 <form action="<%=path %>/addphone" method="post">
                 <input type="hidden" name="reOrderId" value="${reOrderId }"/>
                 <input type="hidden" name="teacherPrice" value="${teacherPrice }"/>
+                <input type="hidden" name="teacherId" value="${teacherId }"/>
+                <input type="hidden" name="date" value="${date }"/>
+                <input type="hidden" name="content" value="${content }">
+                <input type="hidden" name="consultOrderId" value="${consultOrderId }">
                 
                     <div class="group">
                         <!--错误信息-->

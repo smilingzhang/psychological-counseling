@@ -8,6 +8,6 @@
 <title>首页</title>
 </head>
 <body>
- <jsp:forward page="consult/default"></jsp:forward>
+ <jsp:forward page="consult/default?pageNum=1"></jsp:forward>
 </body>
 </html> 

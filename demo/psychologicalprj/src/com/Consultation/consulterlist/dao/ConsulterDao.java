@@ -42,7 +42,7 @@ public class ConsulterDao {
 		List<Integer> list =query.list();
 		for(int i=0;i<list.size();i++) {
 			Query query2=session.createQuery("from Teacher t where t.teacherId=?");
-			query2.setParameter(0, list.get(i));	
+			query2.setParameter(0, list.get(i));
 			List<Teacher> list2=query2.list();
 			for(int j=0;j<list2.size();j++) { 
 				List<TeacherTime> teacherTimes=list2.get(j).getTeacherTimes();
@@ -56,6 +56,7 @@ public class ConsulterDao {
 			}	
 		}
 		return teachers;
+		
 	}
 	/**
 	 * 
@@ -74,7 +75,7 @@ public class ConsulterDao {
 	}
 	/**
 	 * 
-	 *@desc:随意检索6个咨询师展示在预约检索页的左边
+	 *@desc:检索所有的咨询师，一页展示6个
 	 *@return
 	 *@return:List<Teacher>
 	 *@trhows
@@ -82,8 +83,8 @@ public class ConsulterDao {
 	public List<Teacher> selectDefault(){
 		Session session=sessionFactory.getCurrentSession();
 		Query query=session.createQuery("from Teacher t");
-		query.setFirstResult(0);
-		query.setMaxResults(6);
+		/*query.setFirstResult((pageNum - 1) * pageSize);
+		query.setMaxResults(pageSize);*/
 		return query.list();
 	}
 	/**

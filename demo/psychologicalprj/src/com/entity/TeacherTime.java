@@ -12,10 +12,10 @@ import javax.persistence.Table;
 /**
  * 
  *@desc:可预约时间表
- *		字段：流水号，咨询师ID，日期，以及�?8.30--21.30 13个时间段
-		映射关系�? 双向多对�?  咨询师表
- *@author 段智�?
- *@date:2018�?11�?20日下�?4:04:27
+ *		字段：流水号，咨询师ID，日期，以及�?8.30--21.30 13个时间段
+		映射关系�? 双向多对�?  咨询师表
+ *@author 段智�?
+ *@date:2018�?11�?20日下�?4:04:27
  */
 @Entity
 @Table(name="teachertime")
@@ -35,7 +35,7 @@ public class TeacherTime {
 	private int time17;
 	private int time18;
 	private int time19;
-	private int time20;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getTeachertimeId() {
@@ -122,12 +122,6 @@ public class TeacherTime {
 	}
 	public void setTime19(int time19) {
 		this.time19 = time19;
-	}
-	public int getTime20() {
-		return time20;
-	}
-	public void setTime20(int time20) {
-		this.time20 = time20;
 	}
 	@ManyToOne
 	@JoinColumn(name="teacherId")
