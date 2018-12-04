@@ -1,7 +1,5 @@
 package com.psychologicalcounseling.entity;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,19 +16,20 @@ import javax.persistence.Table;
 		映射关系：单向多对一   咨询师表
 				双向一对多  用户表
  *@author 段智兴
- *@date:2018年11月20日下午4:19:57
+ *@String:2018年11月20日下午4:19:57
  */
 @Entity
 @Table(name="consultationrecord")
 public class ConsultationRecord {
 	private int consultationrecordId;
-	private Date consultationrecordOrderTime;
-	private Date consultationrecordStartTime;
-	private Date consultationrecordEndTime;
+	private String consultationrecordOrderTime;
+	private String consultationrecordStartTime;
+	private String consultationrecordEndTime;
 	private float consultationrecordPrice;
 	private int consultationrecordState;
 	private int consultationrecordMethod;
 	private String consultationrecordResourcePath;
+	private String consultState;
 	private Teacher teacher;
 	private User user;
 	
@@ -42,22 +41,22 @@ public class ConsultationRecord {
 	public void setConsultationrecordId(int consultationrecordId) {
 		this.consultationrecordId = consultationrecordId;
 	}
-	public Date getConsultationrecordOrderTime() {
+	public String getConsultationrecordOrderTime() {
 		return consultationrecordOrderTime;
 	}
-	public void setConsultationrecordOrderTime(Date consultationrecordOrderTime) {
+	public void setConsultationrecordOrderTime(String consultationrecordOrderTime) {
 		this.consultationrecordOrderTime = consultationrecordOrderTime;
 	}
-	public Date getConsultationrecordStartTime() {
+	public String getConsultationrecordStartTime() {
 		return consultationrecordStartTime;
 	}
-	public void setConsultationrecordStartTime(Date consultationrecordStartTime) {
+	public void setConsultationrecordStartTime(String consultationrecordStartTime) {
 		this.consultationrecordStartTime = consultationrecordStartTime;
 	}
-	public Date getConsultationrecordEndTime() {
+	public String getConsultationrecordEndTime() {
 		return consultationrecordEndTime;
 	}
-	public void setConsultationrecordEndTime(Date consultationrecordEndTime) {
+	public void setConsultationrecordEndTime(String consultationrecordEndTime) {
 		this.consultationrecordEndTime = consultationrecordEndTime;
 	}
 
@@ -84,6 +83,12 @@ public class ConsultationRecord {
 	}
 	public void setConsultationrecordPrice(float consultationrecordPrice) {
 		this.consultationrecordPrice = consultationrecordPrice;
+	}
+	public String getConsultState() {
+		return consultState;
+	}
+	public void setConsultState(String consultState) {
+		this.consultState = consultState;
 	}
 	@ManyToOne
 	@JoinColumn(name="teacherId")
