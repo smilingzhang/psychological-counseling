@@ -43,14 +43,22 @@
                             <button type="submit" class="btn btn-default">搜索</button>
                         </form>
                     </div>
-                    <li class="list" id="list"><a class="login" href="login.html">登录/注册</a></li>
+                    <li class="dropdown list dropdown-hover" id="list-after-login">
+                        <a href="#"  class="dropdown-toggle" data-toggle="dropdown"><img src="images/consultant2.png" alt="头像"><b class="caret"></b></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li class="dropdown-list"><a href="user.html">个人中心</a></li>
+                            <li class="dropdown-list"><a href="#">我的消息&nbsp;<span class="label label-badge label-success">4</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="list" id="list-after-login">
+                    </li>
                 </ul>  
             </div>
         </nav>
     </header>
     
     <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="js/jquery-1.11.0.min.js"></script>
     <!-- ZUI Javascript组件 -->
     <script src="js/zui.min.js"></script>
   </body>
