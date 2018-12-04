@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>倾听</title>
+    <!-- zui -->
+    <link href="css/zui-theme.css" rel="stylesheet">
+    <link href="css/zui.css" rel="stylesheet">
+    <link href="css/mystyle.css" rel="stylesheet">
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/zui.js"></script> 
+    <script src="js/zui.lite.js"></script>
+  </head>
+  <body>
+    <!-- 在此处编码你的创意 -->
+    <!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>倾听列表</title>
+    <!-- zui -->
+    <link href="css/zui-theme.css" rel="stylesheet">
+    <link href="css/zui.css" rel="stylesheet">
+    <link href="css/mystyle.css" rel="stylesheet">
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/zui.js"></script> 
+    <script src="js/zui.lite.js"></script>
+  </head>
+  <body>
+    <!-- 在此处编码你的创意 -->
+    <div class="contains media">
+        <!--视频放置处 包括用户和咨询师的画面-->
+        <div class="video">
+            <div class="video-consulter"></div>
+            <!-- <div class="video-user"></div> -->
+        </div>
+        <!--文字聊天-->
+        <div class="board-text">
+            <div class="board-show">
+            </div>
+            <div class="input">
+                <div class="board-words-input">
+                    <div id="editor" class=""></div>
+                </div>
+                <!-- 注意， 只需要引用 JS，无需引用任何 CSS ！！！-->
+                <script type="text/javascript" src="js/wangEditor.min.js"></script>
+                <script type="text/javascript">
+                    var E = window.wangEditor
+                    var editor = new E('#editor')
+                    // 或者 var editor = new E( document.getElementById('editor') )
+                    // 自定义菜单配置
+                    editor.customConfig.menus = [
+                        'emoticon'
+                    ]
+
+                    // var editor = new E('#div1')
+                    editor.customConfig.zIndex = 100
+                    editor.create()
+                </script>
+            </div>
+        </div>
+    </div>
+    <!--课程列表-->
+    <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <!-- ZUI Javascript组件 -->
+    <script src="js/zui.min.js"></script>
+  </body>
+</html>
+
+    <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <!-- ZUI Javascript组件 -->
+    <script src="js/zui.min.js"></script>
+  </body>
+</html>

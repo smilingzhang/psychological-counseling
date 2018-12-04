@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>登录</title>
+    <!-- zui -->
+    <link href="css/zui-theme.css" rel="stylesheet">
+    <link href="css/zui.css" rel="stylesheet">
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/verify.js"></script> 
+    <script src="js/zui.js"></script> 
+    <script src="js/zui.lite.js"></script> 
+    <!--自定义-->
+    <link href="css/mystyle.css" rel="stylesheet">
+    <script src="js/change-state.js"></script> 
+  </head>
+  <body>
+    <!-- 在此处编码你的创意 -->
+    <div class="login-contains">
+        <div class="head">
+            <!-- <img src="images/logo.png"/> -->
+            <h1>明心社工事务所</h1>
+        </div>
+        <div class="loginpanel panel ">
+            <div class="panel-body">
+                <!--导航条-->
+                <div class="login-nav">
+                    <ul class="nav nav-secondary">
+                        <li class="active" onclick="changeNav(this,'form-')"><a href="#">注册/快速登录</a></li>
+                        <li onclick="changeNav(this,'form-')"><a href="#">账号密码登录</a></li>
+                    </ul>
+                </div>
+                <!--手机号登录表单-->
+                <form class="login-form" action="" method="POST" id="form-1">
+                    <div class="group">
+                        <!--错误信息-->
+                        <font name="loginErrMsg4Phone" id="loginErrMsg4Phone" class="">&nbsp;</font>
+                        <div><input id="phoneNum" name="phoneNum" type="text" class="form-control" placeholder="11位手机号" onkeyup="loginVerifyPhone(this)"></div>
+                    </div>
+
+                    <div class="group">
+                        <!--错误信息-->
+                        <font name="loginErrMsg4Code" id="loginErrMsg4Code" class="">&nbsp;</font>
+                        <div><input id="verifyCode" name="verifyCode" type="text" class="form-control" placeholder="验证码" onkeyup="loginVerifyCode(this)" style="width: 150px;display: block;float: left;"></div>
+                        <a class="btn btn-primarys" id="login-send-verifyCode"  onclick="sendVerifyCode()">获取验证码</a>
+                    </div>
+
+                    <!-- <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="isAgreeProtocal"> 同意《XXX用户注册协议》
+                        </label>
+                    </div> -->
+                    <button class="btn btn-block " id="login-form-submit-button" disabled="disabled">快速登录</button>
+                    
+                </form>
+                <!--账号密码登录表单-->
+                <form class="login-form" action="" method="POST"  id="form-2" style="display:none">
+                    <div class="group">
+                        <!--手机号-->
+                        <!--错误信息-->
+                        <!--jsp <font name="phoneLoginErrMsg4Phone">${phoneLoginErrMsg4Phone }</font> -->
+                        <font name="loginErrMsg4Phone" id="loginErrMsg4Phone" class="">&nbsp;</font>
+                        <div><input name="phoneNum" type="text" class="form-control" id="phoneNum" placeholder="11位手机号"  onkeyup="loginVerifyPhone(this)"></div>
+                    </div>
+                    <div class="group">
+                        <!--密码-->
+                        <!--错误信息-->
+                        <!--jsp <font name="phoneLoginErrMsg4Pwd">${phoneLoginErrMsg4Pwd }</font> -->
+                        <font name="loginErrMsg4Pwd" id="loginErrMsg4Pwd" class="">&nbsp;</font>
+                        <div><input name="pwd" type="text" class="form-control" id="pwd" placeholder="密码" onkeyup="loginVerifyPwd(this);"></div>
+                    </div>
+                    <button id="login-form-submit-button" class="btn btn-block" disabled="disabled">登录</button>
+                </form>
+                <!--第三方登录接口-->
+                <div class="login-tag">
+                    <span class="tag">------------------</span>
+                    <span class="tag">第三方登录</span>
+                    <span class="tag">------------------</span>
+                </div>
+                <div class="login-other">
+                        <!--支付宝-->
+                        <div class="img"><a href="#"><img src="images/alipay.png" alt=""></a></div>
+                        <!--微博-->
+                        <div class="img"><a href="loginWeiboRequest.do"><img src="images/weibo.png" alt=""></a></div>
+                    </div>
+            </div>
+        </div>
+    </div> 
+    <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <!-- ZUI Javascript组件 -->
+    <script src="js/zui.min.js"></script>
+  </body>
+</html>

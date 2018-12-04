@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>验证手机号</title>
+    <!-- zui -->
+    <link href="css/zui-theme.css" rel="stylesheet">
+    <link href="css/zui.css" rel="stylesheet">
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/zui.js"></script> 
+    <script src="js/zui.lite.js"></script>
+    <!--自定义-->
+    <link href="css/mystyle.css" rel="stylesheet">
+    <script src="js/verify.js"></script> 
+  </head>
+  <body>
+    <!-- 在此处编码你的创意 -->
+    <!--黑色遮罩-->
+    <div id="shade" style="display:none"></div>
+    <!-- 对话框触发按钮 -->
+    <button class="btn btn-block " onclick="showModal();">确认并前往支付&nbsp;<i class="icon icon-smile"></i></button>
+
+    <!-- 对话框HTML -->
+    <div class="modal verify-phone-modal" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+              <div class="alert alert-danger with-icon">
+                <i class="icon-remove-sign"></i>
+                <div class="content">
+                  <span class="stress">哎呀，慢了一步</span><br/>
+                  <!--提示内容-->
+                  <span class="info-text">您选择的时间被别人抢先预约走了呢，请您重新选择时间或挑选其它咨询师哦。</span>
+                </div>
+              </div>
+              <div class="modal-footer">
+                  <a class="btn btn-primary" href="consult-list.html" data-dismiss="modal">好的，明白了</a>
+              </div>
+        </div>
+      </div>
+    </div>
+    <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <!-- ZUI Javascript组件 -->
+    <script src="js/zui.min.js"></script>
+    <script>
+      function showModal(){
+        $("#myModal").css("display","block");
+        $("#shade").css("display","block");
+      }
+      function hideModal(){
+        $("#myModal").css("display","none");
+        $("#shade").css("display","none");
+      }
+    </script>
+  </body>
+</html>

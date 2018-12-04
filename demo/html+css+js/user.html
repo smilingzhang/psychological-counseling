@@ -38,7 +38,7 @@
         <div class="nav-bar panel">
             <!-- 一般导航项目 -->
             <div class="panel-body">
-                <ul class="nav navbar-nav .dir-nav">
+                <ul class="nav navbar-nav">
                     <li onclick="changeNav(this,'directory-contain-')" id="1" class="active"><a href="#">我的咨询</a></li>
                     <li onclick="changeNav(this,'directory-contain-')" id="2"><a href="#">我的课程</a></li>
                     <li onclick="changeNav(this,'directory-contain-')" id="3"><a href="#">我的文章</a></li>
@@ -59,6 +59,7 @@
                         <ul class="nav nav-pills">
                             <li onclick="changeNav(this,'dir-con-li-')" class="active"><a href="#">未开始</a></li>
                             <li onclick="changeNav(this,'dir-con-li-')" class=""><a href="#">已完成</a></li>
+                            <li onclick="changeNav(this,'dir-con-li-')" class=""><a href="#">已取消</a></li>
                         </ul>
                     </div>
                     <!--咨询列表-->
@@ -70,14 +71,10 @@
                                 <!--咨询师照片-->
                                 <td><img src="images/consultant.png" alt="!!这里写咨询师的名字!!"></td>
                                 <td>
-                                    <!--咨询类别-->
-                                    <span class="catagory">家庭婚姻</span>
-                                    <!--咨询费用-->
-                                    <span class="tag">￥499</span><br/>
                                     <!--咨询师名字-->
-                                    <span class="teacher">咨询师：<a href="consulter.html">梁田</a></span>
-                                    <!--头衔-->
-                                    <span class="qualification tag">清华大学特约讲师</span><br/>
+                                    <span class="teacher catagory">咨询师：<a href="consulter.html">梁田</a></span><br/>
+                                    <!--咨询费用-->
+                                    <span>咨询费用：￥499</span><br/>
                                     <!--咨询时间：精确到几点机几分-->
                                     <span>时间：2018年12月21日&nbsp;下午2：00</span><br/>
                                     <!--若为线下面对面咨询，则显示咨询地点-->
@@ -160,7 +157,28 @@
                                     <span class="place">地点：北京通州明心社工事务所</span>
                                 </td>
                             </tr>                            
-                            
+                        </table>
+                        <!--已取消表格-->
+                        <table id="dir-con-li-3" style="display:none">
+                             <!--一个咨询-->
+                             <tr>
+                                <!--咨询师照片-->
+                                <td><img src="images/consultant.png" alt="!!这里写咨询师的名字!!"></td>
+                                <td>
+                                    <!--咨询类别-->
+                                    <span class="catagory">家庭婚姻</span>
+                                    <!--咨询费用-->
+                                    <span class="tag">￥499</span><br/>
+                                    <!--咨询师名字-->
+                                    <span class="teacher">咨询师：<a href="consulter.html">梁田</a></span>
+                                    <!--头衔-->
+                                    <span class="qualification tag">清华大学特约讲师</span><br/>
+                                    <!--咨询时间：精确到几点机几分-->
+                                    <span>时间：2018年12月21日&nbsp;下午2：00</span><br/>
+                                    <!--若为线下面对面咨询，则显示咨询地点-->
+                                    <span class="place">地点：北京通州明心社工事务所</span>
+                                </td>
+                            </tr> 
                         </table>
                     </div>
                     <!--分页器：一页最多显示10项。示例并没有超过10项，就把这段注释掉吧-->
