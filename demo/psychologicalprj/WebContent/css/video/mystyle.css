@@ -1,6 +1,3 @@
-.label{
-    background-color: #d75455;
-}
 select{
     background:#fafdfe;  
     height:1.8em;  
@@ -213,19 +210,14 @@ a:focus{
     padding-left:20%;
     padding-right: 20%;
 }
-.login-contains .loginpanel .login-other .img{
+.login-contains .loginpanel .login-other img{
     /* display: block; */
     width: 50%;
     float: left;
     padding-right: 20px;
 }
-.login-contains .loginpanel .login-other img{
-    border-radius: 10px;
-    width: 100%;
-}
 .login-contains .loginpanel .login-other img:hover{
-    /* box-sshadow: ; */
-    box-shadow: #db96969c  0 0 15px 0px;
+    box-shadow: #6e0706
 }
 .head{
     display: block;
@@ -319,8 +311,7 @@ a:focus{
 }
 .consult-panel{
     width: 580px;
-    /* height: 1300px;; */
-}
+ }
 .consult-panel .name{
     font-size: 16px;
 }
@@ -437,7 +428,7 @@ a:focus{
 }
 .button-pager{
     /* display: block; */
-    width: 100%;
+    width: 300px;
     clear: both;
     margin: auto 0;
     /* background-color: #000000; */
@@ -1316,25 +1307,20 @@ a:focus{
     padding-left: 20%;
     padding-right: 20%;
 }
-.user-contain .nav-bar
+.user-contain .nav-bar,
 {
-    /* padding: 0; */
-    padding-left: 29%;
-    padding-right: 29%;
+    padding: 0;
+    padding-left: 26%;
+    padding-right: 26%;
 }
 .user-contain .nav-bar .panel-body,
 .passage-list-contain .nav-bar .panel-body
 {
     margin: 0;
     padding: 0;
-    width: 100%;
 }
 .info-conatin .dir-nav{
     margin: 20px;
-    width: 100%;
-}
-.info-conatin .dir-nav li{
-    margin-right: 10px;
 }
 .info-conatin .dir-nav li a{
     font-size: 14px;
@@ -1367,13 +1353,6 @@ a:focus{
 .info-conatin .directory-contain-list table .tag{
     font-size: 12px;
 }
-.directory-contain-list .btn{
-    background-color: #d75455;
-    margin-top: 10px;
-}
-.directory-contain-list .btn:hover{
-    background-color: #ec6a6b;
-}
 .info-conatin .directory-contain-list table td{
     border: 1px solid #979292;
     border-width: 0 0 1px 0;
@@ -1387,7 +1366,7 @@ a:focus{
     width: 24%;
     float: left;
     margin: 0.5%;
-    margin-bottom: 4%
+    margin-bottom: 2%
 }
 .info-conatin .directory-contain-list .passage-block,
 .passage-list-contain .passage-list-body .passage-block

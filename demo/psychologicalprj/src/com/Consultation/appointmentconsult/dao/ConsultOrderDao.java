@@ -10,8 +10,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
 import com.entity.ConsultationRecord;
-import com.entity.Teacher;
-import com.entity.User;
+import com.util.BaseDao;
 
 /**
  * 
@@ -20,7 +19,7 @@ import com.entity.User;
  *@date:Nov 29, 20181:43:31 PM
  */
 @Repository
-public class ConsultOrderDao {
+public class ConsultOrderDao extends BaseDao<ConsultationRecord>{
 	@Resource
 	private SessionFactory sessionFactory;
 	/**
@@ -32,38 +31,9 @@ public class ConsultOrderDao {
 	 *@trhows
 	 */
 	public int insertConsultOrder(ConsultationRecord consultOrder) {
-		Session session=sessionFactory.getCurrentSession();
-		return (int) session.save(consultOrder);
+		return (int) save(consultOrder);
 	}
-	/**
-	 * 
-	 *@desc:根据用户Id查询用户对象，实际上应该从session中获取，此方法应该不存在
-	 *
-	 *@param userId
-	 *@return
-	 *@return:User
-	 *@trhows
-	 */
-	public User selectUserById(int userId) {
-		Session session= sessionFactory.getCurrentSession();
-		Query query=session.createQuery("from User u where u.userId=?");
-		query.setParameter(0, userId);
-		return (User) query.list().get(0);
-	}
-	/**
-	 * 
-	 *@desc:查询咨询师对象存到咨询订单表中
-	 *@param teacherId
-	 *@return
-	 *@return:Teacher
-	 *@trhows
-	 */
-	public Teacher selectTeacherById(int teacherId) {
-		Session session=sessionFactory.getCurrentSession();
-		Query query=session.createQuery("from Teacher t where t.teacherId=?");
-		query.setParameter(0, teacherId);
-		return (Teacher) query.list().get(0);
-	}
+	
 	/**
 	 * 
 	 *@desc:生成的随机数存到对应订单的randomNum字段中
@@ -151,5 +121,16 @@ public class ConsultOrderDao {
 		query.setParameter(0, userPhone);
 		query.setParameter(1, userId);
 		query.executeUpdate();
+	}
+	/**
+	 * 
+	 *@desc:如果不能预约成功，则在咨询记录表中把这条记录删除
+	 *@param consultOrderId
+	 *@return:void
+	 *@trhows
+	 */
+	
+	public  void deleteConsultOrderMessage(int consultOrderId) {
+		delete(ConsultationRecord.class, consultOrderId);
 	}
 }
