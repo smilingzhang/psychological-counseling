@@ -50,21 +50,31 @@
                     <!--咨询方式-->
                     <p  class="info-contain"><span>咨询方式：</span>
                       <!--在线语音-->
-                      <input type="radio" name="type" value="audio">在线语音&nbsp;
+                      <input id="audio" type="radio" name="type" value="audio">在线语音&nbsp;
                       <!--在线视频-->
-                      <input type="radio" name="type" id="" value="vedio">在线视频&nbsp;
+                      <input id="vedio" type="radio" name="type" id="" value="vedio">在线视频&nbsp;
                       <!--线下面对面-->
-                      <input type="radio" name="type" id="" value="faceToFace">线下面对面&nbsp;
+                      <input id="faceToFace" type="radio" name="type" id="" value="faceToFace">线下面对面&nbsp;
                     </p>
                     <!-- <p>记得按时来参加咨询哦。</p> -->
                     <div class="protocal">
-                      <input type="checkbox" value="protocal1" name="protocal"/>已阅读并同意上文所述&nbsp;
-                      <input type="checkbox" value="protocal1" name="protocal"/>已阅读并同意《相关协议》
+                      <input id="pro1" type="checkbox" value="protocal1" name="protocal"/>已阅读并同意上文所述&nbsp;
+                      <input id="pro2" type="checkbox" value="protocal1" name="protocal"/>已阅读并同意《相关协议》
                     </div>
                   </div>
                 </div>
-                    <button class="btn btn-block " >确认并前往支付&nbsp;<i class="icon icon-smile"></i></button>
-                </form>
+                <button id="confirmed-btn" class="btn btn-block " disabled="disabled" >确认并前往支付&nbsp;<i class="icon icon-smile"></i></button>
+            </form>
+            <script>
+              $("input").click( function(){
+                if(($("#audio").is(":checked")
+                   || $("#vedio").is(":checked")
+                   || $("#faceToFace").is(":checked"))
+                    && ($("#pro1").is(":checked") && $("#pro2").is(":checked"))){
+                      $("#confirmed-btn").removeAttr("disabled");
+                    }
+              })
+            </script>
         </div>
     </div>
     <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->

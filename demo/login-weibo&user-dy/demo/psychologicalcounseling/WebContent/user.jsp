@@ -1,10 +1,15 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@page import="com.psychologicalcounseling.util.*" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://janborn.wang/dateutil" prefix="dateutil"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-cn">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>个人中心</title>
+    <title>${userNickName }_个人中心</title>
     <!-- zui -->
     <link href="css/zui-theme.css" rel="stylesheet">
     <link href="css/zui.css" rel="stylesheet">
@@ -17,7 +22,18 @@
   </head>
   <body>
     <!-- 在此处编码你的创意 -->
-    <div class="modal" id="user-app-dialog" style="display:none">
+    <!-- 头部 -->
+    <%@include file="head.jsp" %>
+    <c:if test="${!empty(cancelMsg) }">
+    	<script>
+    		window.onload = function(){
+    			new $.zui.Messager('${cancelMsg}', {
+    			    type: '${cancelMsgAttr}' // 定义颜色主题
+    			}).show();
+    		}
+    	</script>
+    </c:if>
+     <div class="modal" id="user-app-dialog" style="display:none">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -27,7 +43,7 @@
                 </div>  
                 <div class="modal-footer">
                     <button onclick="hideCancelDialog()" type="button" class="btn btn-default" data-dismiss="modal">再想想</button>
-                    <a type="button" class="btn btn-primary">我要取消预约</a>
+                    <a href="cancel.do?consultationId=${param.consultationId }" type="button" class="btn btn-primary">我要取消预约</a>
                 </div>
             </div>
         </div>
@@ -37,18 +53,20 @@
             $("#user-app-dialog").css("display","none");
         }
     </script>
-
     <div class="contains user-contain">
         <!--头部-->
         <div class="panel user">
             <div class="panel-body">
                 <!--头像 方形-->
-                <img src="images/consultant.png" alt="头像"/>
+                <img src="${avatarLink }" alt="${userNickName }_头像"/>
                 <div class="intr">
                     <!--用户昵称-->
-                    <span class="user-name">张三三</span><br/>
+                    <span class="user-name">${userNickName }</span><br/>
                     <!--个性签名-->
-                    <span class="tag">你的时间花在哪，你就会成为什么样的人。格局高的人，不会花太多时间在娱乐上。</span>
+                    <span class="tag">
+                    	<c:if test="${!empty(description) }">${description }</c:if>
+                    	<c:if test="${empty(description) }">未填写</c:if>
+                    	</span>
                     <br/>
                     <!--日记-->
                     <a class="btn btn-primary" href="your/url/">记录好时光<i class="icon icon-paint-brush"></i></a>
@@ -71,7 +89,7 @@
         <!--★★★注：以下1-3的“.directory-contain-list”中显示的内容均由查询给出-->
         <!--★★★注：jsp版本请将对应的导航中调用的changeNav()函数改成changeActive(this)函数 !!!-->
         <!--★★★注：切换效果由“我的咨询”板块给出，其它板块不再制作切换效果-->
-        <div class="info-conatin" style="display:block">
+        <div class="info-conatin" style="display:display">
             <!--1. 我的咨询-->
             <div id="directory-contain-1" class="panel">
                 <div class="panel-body">
@@ -87,124 +105,139 @@
                     <div class="directory-contain-list">
                         <!--未完成表格-->
                         <table id="dir-con-li-1">
-                            <!--一个咨询-->
-                            <tr>
-                                <!--咨询师照片-->
-                                <td><img src="images/consultant.png" alt="!!这里写咨询师的名字!!"></td>
-                                <td>
-                                    <!--咨询师名字-->
-                                    <span class="teacher catagory">咨询师：<a href="consulter.html">梁田</a></span><br/>
-                                    <!--咨询费用-->
-                                    <span>咨询费用：￥499</span><br/>
-                                    <!--咨询时间：精确到几点机几分-->
-                                    <span>时间：2018年12月21日&nbsp;下午2：00</span><br/>
-                                    <!--若为线下面对面咨询，则显示咨询地点-->
-                                    <span class="place">地点：北京通州明心社工事务所</span>
-                                </td>
-                                <!--非面对面咨询-->
-                                <td><span><a href="room.html">进入咨询室</a></span></td>
-                                <!--如果是线下面对面咨询，请使用以下这一行替代上面那一行👇-->
-                                <!-- <td><span class="disabled">进入咨询室</span></td> -->
-                                <td><span><button class="btn btn-link" type="button" onclick="showCancelDialog()">取消预约</button></span></td>
-                                <script>
-                                    function showCancelDialog(){
-                                        $("#user-app-dialog").css("display","block");
-                                    }
-                                </script>
-                            </tr>                            
-                            <!--以下都是重复的-->
-                            <!--一个咨询-->
-                            <tr>
-                                <!--咨询师照片-->
-                                <td><img src="images/consultant.png" alt="!!这里写咨询师的名字!!"></td>
-                                <td>
-                                    <!--咨询类别-->
-                                    <span class="catagory">家庭婚姻</span>
-                                    <!--咨询费用-->
-                                    <span class="tag">￥499</span><br/>
-                                    <!--咨询师名字-->
-                                    <span class="teacher">咨询师：<a href="consulter.html">梁田</a></span>
-                                    <!--头衔-->
-                                    <span class="qualification tag">清华大学特约讲师</span><br/>
-                                    <!--咨询时间：精确到几点机几分-->
-                                    <span>时间：2018年12月21日&nbsp;下午2：00</span><br/>
-                                    <!--若为线下面对面咨询，则显示咨询地点-->
-                                    <span class="place">地点：北京通州明心社工事务所</span>
-                                </td>
-                                <!--非面对面咨询-->
-                                <td><span><a href="room.html">进入咨询室</a></span></td>
-                                <!--如果是线下面对面咨询，请使用以下这一行替代上面那一行👇-->
-                                <!-- <td><span class="disabled">进入咨询室</span></td> -->
-                                <td><span><a href="#">取消咨询</a></span></td>
-                            </tr>                            
-                            <!--一个咨询-->
-                            <tr>
-                                <!--咨询师照片-->
-                                <td><img src="images/consultant.png" alt="!!这里写咨询师的名字!!"></td>
-                                <td>
-                                    <!--咨询类别-->
-                                    <span class="catagory">家庭婚姻</span>
-                                    <!--咨询费用-->
-                                    <span class="tag">￥499</span><br/>
-                                    <!--咨询师名字-->
-                                    <span class="teacher">咨询师：<a href="consulter.html">梁田</a></span>
-                                    <!--头衔-->
-                                    <span class="qualification tag">清华大学特约讲师</span><br/>
-                                    <!--咨询时间：精确到几点机几分-->
-                                    <span>时间：2018年12月21日&nbsp;下午2：00</span><br/>
-                                    <!--若为线下面对面咨询，则显示咨询地点-->
-                                    <span class="place">地点：北京通州明心社工事务所</span>
-                                </td>
-                                <!--非面对面咨询-->
-                                <td><span><a href="room.html">进入咨询室</a></span></td>
-                                <!--如果是线下面对面咨询，请使用以下这一行替代上面那一行👇-->
-                                <!-- <td><span class="disabled">进入咨询室</span></td> -->
-                                <td><span><a href="#">取消咨询</a></span></td>
-                            </tr>                            
+	                        <c:if test="${!empty(toDoList) && toDoList.size()>0 }">
+	                            <!--一个咨询-->
+	                            <c:forEach items="${toDoList }" var="consulter">
+		                            <tr>
+		                                <!--咨询师照片-->
+		                                <td><img src="${consulter.getTeacher().getUser().getUserHeadPath() }" alt="${consulter.getTeacher().getUser().getUserNickName() }"></td>
+		                                <td>
+		                                    <!--咨询师名字-->
+		                                    <span class="teacher catagory">咨询师：<a href="consulter.html">${consulter.getTeacher().getUser().getUserNickName() }</a></span><br/>
+		                                    <!--咨询费用-->
+		                                    <span>咨询费用：￥${consulter.getConsultationrecordPrice() }</span><br/>
+		                                    <!--咨询时间：精确到几点机几分-->
+		                                    <span>预约时间：${consulter.getConsultationrecordStartTime() }</span><br/>
+		                                    <!--咨询方式-->
+		                                    <c:if test="${consulter.getConsultationrecordMethod()==1 }">
+			                                    <span>咨询方式：面对面咨询</span><br/>
+		                                    	<!--若为线下面对面咨询，则显示咨询地点-->
+		                                    	<span class="place">线下地点：${consulter.getConsultationrecordLoc() }</span>
+		                                    </c:if>
+		                                    <c:if test="${consulter.getConsultationrecordMethod()==2 }">
+			                                    <span>咨询方式：线上音视频咨询</span><br/>
+		                                    </c:if>
+		                                    <c:if test="${consulter.getConsultationrecordMethod()==3 }">
+			                                    <span>咨询方式：线上语音咨询</span><br/>
+		                                    </c:if>
+		                                </td>
+		                                <td><span><button class="btn btn-link" type="button" onclick="showCancelDialog()">取消预约</button></span></td>
+		                                <script>
+		                                    function showCancelDialog(){
+		                                        $("#user-app-dialog").css("display","block");
+		                                        window.location.href = window.location.href+"?consultationId="+${consulter.getConsultationrecordId()};
+		                                    }
+		                                </script>
+		                                <%
+		                                	request.setAttribute("targetDate",com.psychologicalcounseling.util.DateUtil.addDate(com.psychologicalcounseling.util.DateUtil.getDate(),10*60*1000));
+		                                %>
+		                                <!--面对面咨询-->
+		                                <c:if test="${consulter.getConsultationrecordMethod()==1 }">
+			                                <td></td>
+		                                </c:if>
+		                                <!-- 非面对面咨询且没到规定时间 -->
+		                                <c:if test="${consulter.getConsultationrecordMethod()!=1 
+		                                				&& dateutil:compare(requestScope.targetDate,consulter.getConsultationrecordStartTime())==2 }">
+			                                <td><span class="disabled">进入咨询室</span></td>
+		                                </c:if>
+		                                <!-- 若是线上咨询，且离预约时间仅剩十分钟 -->
+		                                <c:if test="${consulter.getConsultationrecordMethod()!=1
+		                                				&& dateutil:compare(requestScope.targetDate,consulter.getConsultationrecordStartTime())==1
+		                                				&& dateutil:compare(dateutil:getDate(),consulter.getConsultationrecordEndTime())==2 }">
+			                                <td><span><a class="enter-room" href="room.html">进入咨询室</a></span></td>
+		                                </c:if>
+		                                <!-- 若是线上咨询，且已经结束 -->
+		                                <c:if test="${consulter.getConsultationrecordMethod()!=1
+		                                				&& dateutil:compare(dateutil:getDate(),consulter.getConsultationrecordEndTime())==1 }">
+			                                <td><span class="disabled">进入咨询室</span></td>
+		                                </c:if>
+		                            </tr>                            
+	                            </c:forEach>
+	                        </c:if>
+	                        <c:if test="${empty(toDoList) || toDoList.size()==0 }">
+	                        	<tr><td class="tag">您暂无预约的咨询,<a href="consult-list.html">去体验第一次心理咨询</a></td></tr>
+	                        </c:if>
                         </table>
+                        
                         <!--已完成表格-->
                         <table id="dir-con-li-2" style="display:none">
-                            <!--一个咨询-->
-                            <tr>
-                                <!--咨询师照片-->
-                                <td><img src="images/consultant.png" alt="!!这里写咨询师的名字!!"></td>
-                                <td>
-                                    <!--咨询类别-->
-                                    <span class="catagory">家庭婚姻</span>
-                                    <!--咨询费用-->
-                                    <span class="tag">￥499</span><br/>
-                                    <!--咨询师名字-->
-                                    <span class="teacher">咨询师：<a href="consulter.html">梁田</a></span>
-                                    <!--头衔-->
-                                    <span class="qualification tag">清华大学特约讲师</span><br/>
-                                    <!--咨询时间：精确到几点机几分-->
-                                    <span>时间：2018年12月21日&nbsp;下午2：00</span><br/>
-                                    <!--若为线下面对面咨询，则显示咨询地点-->
-                                    <span class="place">地点：北京通州明心社工事务所</span>
-                                </td>
-                            </tr>                            
+                        	<c:if test="${!empty(finishedList) && finishedList.size()>0 }">
+	                            <!--一个咨询-->
+	                            <c:forEach items="${finishedList }" var="consulter">
+		                            <tr>
+		                                <!--咨询师照片-->
+		                                <td><img src="${consulter.getTeacher().getUser().getUserHeadPath() }" alt="${consulter.getTeacher().getUser().getUserNickName() }"></td>
+		                                <td>
+		                                    <!--咨询师名字-->
+		                                    <span class="teacher catagory">咨询师：<a href="consulter.html">${consulter.getTeacher().getUser().getUserNickName() }</a></span><br/>
+		                                    <!--咨询费用-->
+		                                    <span>咨询费用：￥${consulter.getConsultationrecordPrice() }</span><br/>
+		                                    <!--咨询时间：精确到几点机几分-->
+		                                    <span>咨询时间：${consulter.getConsultationrecordStartTime() }~${consulter.getConsultationrecordEndTime() }</span><br/>
+		                                    <!--咨询方式-->
+		                                    <c:if test="${consulter.getConsultationrecordMethod()==1 }">
+			                                    <span>咨询方式：面对面咨询</span><br/>
+			                                    <!--若为线下面对面咨询，则显示咨询地点-->
+		                                    	<span class="place">线下地点：${consulter.getConsultationrecordLoc() }</span>
+		                                    </c:if>
+		                                    <c:if test="${consulter.getConsultationrecordMethod()==2 }">
+			                                    <span>咨询方式：线上音视频咨询</span><br/>
+		                                    </c:if>
+		                                    <c:if test="${consulter.getConsultationrecordMethod()==3 }">
+			                                    <span>咨询方式：线上语音咨询</span><br/>
+		                                    </c:if>
+		                                </td>
+		                            </tr>                            
+	                            </c:forEach>
+                        	</c:if>
+                        	<c:if test="${empty(finishedList) || finishedList.size()==0 }">
+                        		<tr><td class="tag">暂无已完成的咨询</td></tr>
+	                        </c:if>
                         </table>
                         <!--已取消表格-->
                         <table id="dir-con-li-3" style="display:none">
-                             <!--一个咨询-->
-                             <tr>
-                                <!--咨询师照片-->
-                                <td><img src="images/consultant.png" alt="!!这里写咨询师的名字!!"></td>
-                                <td>
-                                    <!--咨询类别-->
-                                    <span class="catagory">家庭婚姻</span>
-                                    <!--咨询费用-->
-                                    <span class="tag">￥499</span><br/>
-                                    <!--咨询师名字-->
-                                    <span class="teacher">咨询师：<a href="consulter.html">梁田</a></span>
-                                    <!--头衔-->
-                                    <span class="qualification tag">清华大学特约讲师</span><br/>
-                                    <!--咨询时间：精确到几点机几分-->
-                                    <span>时间：2018年12月21日&nbsp;下午2：00</span><br/>
-                                    <!--若为线下面对面咨询，则显示咨询地点-->
-                                    <span class="place">地点：北京通州明心社工事务所</span>
-                                </td>
-                            </tr> 
+                        	<c:if test="${!empty(canceledList) && canceledList.size()>0 }">
+	                             <!--一个咨询-->
+	                             <c:forEach items="${canceledList }" var="consulter">
+		                            <tr>
+		                                <!--咨询师照片-->
+		                                <td><img src="${consulter.getTeacher().getUser().getUserHeadPath() }" alt="${consulter.getTeacher().getUser().getUserNickName() }"></td>
+		                                <td>
+		                                    <!--咨询师名字-->
+		                                    <span class="teacher catagory">咨询师：<a href="consulter.html">${consulter.getTeacher().getUser().getUserNickName() }</a></span><br/>
+		                                    <!--咨询费用-->
+		                                    <span>咨询费用：￥${consulter.getConsultationrecordPrice() }</span><br/>
+		                                    <!--咨询时间：精确到几点机几分-->
+		                                    <span>预约时间：${consulter.getConsultationrecordStartTime() }</span><br/>
+		                                    <!--咨询方式-->
+		                                    <c:if test="${consulter.getConsultationrecordMethod()==1 }">
+			                                    <span>咨询方式：面对面咨询</span><br/>
+			                                    <!--若为线下面对面咨询，则显示咨询地点-->
+		                                    	<span class="place">线下地点：${consulter.getConsultationrecordLoc() }</span>
+		                                    </c:if>
+		                                    <c:if test="${consulter.getConsultationrecordMethod()==2 }">
+			                                    <span>咨询方式：线上音视频咨询</span><br/>
+		                                    </c:if>
+		                                    <c:if test="${consulter.getConsultationrecordMethod()==3 }">
+			                                    <span>咨询方式：线上语音咨询</span><br/>
+		                                    </c:if>
+		                                </td>
+		                            </tr>                            
+	                            </c:forEach>
+                        	</c:if>
+                        	<c:if test="${empty(canceledList) || canceledList.size()==0 }">
+                        		<tr><td class="tag">没有被取消的咨询</td></tr>
+                        	</c:if>
                         </table>
                     </div>
                     <!--分页器：一页最多显示10项。示例并没有超过10项，就把这段注释掉吧-->
@@ -594,6 +627,7 @@
             </div><!--END 个人设置-->
         </div>
     </div>
+    <%@include file="footer.jsp" %>
     <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
     <script src="js/jquery-1.11.0.min.js"></script>
     <!-- ZUI Javascript组件 -->

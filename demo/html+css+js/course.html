@@ -303,17 +303,16 @@
             </div><!--END panel-->
         </div><!--END comment-part-->
     </div>
+    <script>
+        window.onload = function(){
+            var bodyHeight = document.body.clientHeight;
+            var height =  bodyHeight-160;
+            $("#lesson-part").css("height",height);
+        }
+    </script>
     <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
     <script src="js/jquery-1.11.0.min.js"></script>
     <!-- ZUI Javascript组件 -->
     <script src="js/zui.min.js"></script>
-  </body>
-    <script>
-        $(
-            function(){
-                var height = window.innerHeight-50;
-                $("#lesson-part").css("height",height);
-            }
-        )(jQuery);
-    </script>   
+  </body>  
 </html>
