@@ -41,14 +41,19 @@
                     <div class="group">
                         <!--错误信息-->
                         <font name="loginErrMsg4Phone" id="loginErrMsg4Phone" class="">&nbsp;</font>
-                        <div><input id="phoneNum" name="phoneNum" type="text" class="form-control" placeholder="手机号" onkeyup="loginVerifyPhone(this)"></div>
+                        <div><input id="phoneNum" name="phoneNum" type="text" class="form-control" placeholder="11位手机号" onkeyup="loginVerifyPhone4Alert()"></div>
                     </div>
       
                     <div class="group">
                         <!--错误信息-->
                         <font name="loginErrMsg4Code" id="loginErrMsg4Code" class="">&nbsp;</font>
                         <div><input id="verifyCode" name="verifyCode" type="text" class="form-control" placeholder="验证码" onkeyup="loginVerifyCode(this)" style="width: 150px;display: block;float: left;"></div>
-                        <a class="btn btn-primarys" id="login-send-verifyCode"  onclick="sendVerifyCode()">获取验证码</a><br/><br/>
+                        <a class="btn btn-primarys" id="login-send-verifyCode"  onclick="settime(this);sendVerifyCode()" disabled="disabled">获取验证码</a></br>
+                        	<div >
+	                        <label id="checkbox" onclick="verifyAccord()" style="display:none;">
+	                            <input type="checkbox" name="isAgreeProtocal"  > 同意《XXX用户注册协议》
+	                        </label>
+	                    	</div>
                     </div>
                     <button class="btn btn-block " id="login-form-submit-button" disabled="disabled">确定</button>
                 </form>

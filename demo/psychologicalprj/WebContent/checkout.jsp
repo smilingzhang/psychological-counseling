@@ -24,7 +24,7 @@
         <div class="checkout-panel panel">
             <div class="panel-body">
                 <form action="<%=path %>/paymentrequest" method="post">
-                	<!-- input type="hidden" name="orderId" value="${reOrderId }"/ -->
+            
                 	<input type="hidden" name="teacherPrice" value="${teacherPrice }"/>
                 	<input type="hidden" name="teacherId" value="${teacherId }"/>
                 	<input type="hidden" name="date" value="${date }"/>
@@ -43,12 +43,9 @@
                         <input type="radio" name="bank" value="ECITIC-NET">中信银行
                         <input type="radio" name="bank" value="SPDB-NET">上海浦东发展银行<br/>
                     </div>
-                 <c:if test="${empty isConsult}">
+               
                     <button class="btn btn-block ">确认支付</button>
-                    </c:if>
-                    <c:if test="${not empty isConsult }">
-                    	  <button class="btn btn-block " onclick="showModal();">确认并前往支付&nbsp;<i class="icon icon-smile"></i></button>
-                    </c:if>
+    
          </form>
                    
                    

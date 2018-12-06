@@ -3,8 +3,8 @@ package com.entity;
 import java.util.List;
 
 
-public class Page {
-	private List<Teacher> teacher;
+public class Page<T> {
+	private List<T> teacher;
 	private int prePageNum;// 上一页
 	private int nextPageNum;// 下一页
 	private int pageNum;// 当前页
@@ -18,18 +18,20 @@ public class Page {
 		this.pageNum = pageNum;
 		this.pageSize = pageSize;
 	}
+	public Page(int pageNum, int pageSize, int totalCount, List<T> list) {
+		this.pageNum = pageNum;
+		this.pageSize = pageSize;
+		this.setTotalCount(totalCount);
+		this.teacher = list;
+	}
 
-	
-	public List<Teacher> getTeacher() {
+
+	public List<T> getTeacher() {
 		return teacher;
 	}
-
-
-	public void setTeacher(List<Teacher> teacher) {
+	public void setTeacher(List<T> teacher) {
 		this.teacher = teacher;
 	}
-
-
 	public int getPrePageNum() {
 		return prePageNum;
 	}
