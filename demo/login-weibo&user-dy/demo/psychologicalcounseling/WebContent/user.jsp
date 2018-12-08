@@ -1,0 +1,460 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@page import="com.psychologicalcounseling.util.*" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://janborn.wang/dateutil" prefix="dateutil"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>${userNickName }_个人中心</title>
+    <!-- zui -->
+    <link href="${ctx }css/zui-theme.css" rel="stylesheet">
+    <link href="${ctx }css/zui.css" rel="stylesheet">
+    <script src="${ctx }js/jquery-3.3.1.js"></script>
+    <script src="${ctx }js/zui.js"></script> 
+    <script src="${ctx }js/zui.lite.js"></script>
+    <!--自定义-->
+    <link href="${ctx }css/mystyle.css" rel="stylesheet">
+    <script src="${ctx }js/change-state.js"></script>
+  </head>
+  <body>
+    <!-- 在此处编码你的创意 -->
+    <!-- 头部 -->
+    <%@include file="head.jsp" %>
+    <c:if test="${!empty(cancelMsg) }">
+    	<script>
+    		window.onload = function(){
+    			new $.zui.Messager('${cancelMsg}', {
+    			    type: '${cancelMsgAttr}' // 定义颜色主题
+    			}).show();
+    		}
+    	</script>
+    </c:if>
+     <div class="modal" id="user-app-dialog" style="display:none">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                </div>
+                <div class="modal-body">
+                    <h4 class="modal-title">好不容易预约到的，真的要取消吗？</h4>
+                </div>  
+                <div class="modal-footer">
+                    <button onclick="hideCancelDialog()" type="button" class="btn btn-default" data-dismiss="modal">再想想</button>
+                    <a href="cancel.do?consultationId=${param.consultationId }" type="button" class="btn btn-primary">我要取消预约</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function hideCancelDialog(){
+            $("#user-app-dialog").css("display","none");
+        }
+    </script>
+    <div class="contains user-contain">
+        <!--头部-->
+        <div class="panel user">
+            <div class="panel-body">
+                <!--头像 方形-->
+                <img src="${sessionScope.avatarLink }" alt="${sessionScope.userNickName }_头像"/>
+                <div class="intr">
+                    <!--用户昵称-->
+                    <span class="user-name">${sessionScope.userNickName }</span><br/>
+                    <!--个性签名-->
+                    <span class="tag">
+                    	<c:if test="${!empty(sessionScope.description) }">${sessionScope.description }</c:if>
+                    	<c:if test="${empty(sessionScope.description) }">未填写</c:if>
+                    	</span>
+                    <br/>
+                    <!--日记-->
+                    <a class="btn btn-primary" href="your/url/">记录好时光<i class="icon icon-paint-brush"></i></a>
+                </div>
+            </div>
+        </div><!--END 头部-->
+        <!--导航栏-->
+        <div class="nav-bar panel">
+            <!-- 一般导航项目 -->
+            <div class="panel-body">
+                <ul class="nav navbar-nav">
+                    <li <c:if test='${empty(nav) || nav=="1" }'> class="active"</c:if>><a href="consultationRecord">我的咨询</a></li>
+                    <li <c:if test='${!empty(nav) && nav=="2" }'> class="active"</c:if>><a href="myCourse">我的课程</a></li>
+                    <li <c:if test='${!empty(nav) && nav=="3" }'> class="active"</c:if>><a href="myListen">我的倾听</a></li>
+                    <li <c:if test='${!empty(nav) && nav=="4" }'> class="active"</c:if>><a href="#">个人设置</a></li>
+                </ul>
+            </div>
+        </div><!--END 导航栏-->
+
+        <!--信息栏-->
+        <!--★★★注：以下1-3的“.directory-contain-list”中显示的内容均由查询给出-->
+        <!--★★★注：jsp版本请将对应的导航中调用的changeNav()函数改成changeActive(this)函数 !!!-->
+        <!--★★★注：切换效果由“我的咨询”板块给出，其它板块不再制作切换效果-->
+        <div class="info-contain" style="display:block">
+        	<c:if test='${empty(nav) || nav=="1" }'>
+	            <!--1. 我的咨询-->
+	            <div id="directory-contain-1" class="panel">
+	                <div class="panel-body">
+	                    <!--导航-->
+	                    <div class="dir-nav">
+	                        <ul class="nav nav-pills">
+	                            <li <c:if test='${empty(consultState) || consultState=="0" }'> class="active"</c:if>><a href="consultationRecord?consultState=0">未开始</a></li>
+	                            <li <c:if test='${!empty(consultState) and consultState=="1" }'> class="active"</c:if>><a href="consultationRecord?consultState=1">已完成</a></li>
+	                            <li <c:if test='${!empty(consultState) and consultState=="2" }'> class="active"</c:if>><a href="consultationRecord?consultState=2">已取消</a></li>
+	                        </ul>
+	                    </div>
+	                    <!--咨询列表-->
+	                    <div class="directory-contain-list">
+	                        <!--未完成表格-->
+	                        <table>
+		                        <c:if test="${!empty(crList) && crList.size()>0 }">
+		                            <!--一个咨询-->
+		                            <c:forEach items="${crList }" var="consulter">
+			                            <tr>
+			                                <!--咨询师照片-->
+			                                <td><img src="${consulter.getTeacher().getUser().getUserHeadPath() }" alt="${consulter.getTeacher().getUser().getUserNickName() }"></td>
+			                                <td>
+			                                    <!--咨询师名字-->
+			                                    <span class="teacher catagory">咨询师：<a href="consulter.html">${consulter.getTeacher().getUser().getUserNickName() }</a></span><br/>
+			                                    <!--咨询费用-->
+			                                    <span>咨询费用：￥${consulter.getConsultationrecordPrice() }</span><br/>
+			                                    <!--咨询时间：精确到几点机几分-->
+			                                    <span>预约时间：${dateutil:formatDate(consulter.getConsultationrecordStartTime()) }</span><br/>
+			                                    <!--咨询方式-->
+			                                    <c:if test="${consulter.getConsultationrecordMethod()==1 }">
+				                                    <span>咨询方式：面对面咨询</span><br/>
+			                                    	<!--若为线下面对面咨询，则显示咨询地点-->
+			                                    	<span class="place">线下地点：${consulter.getConsultationrecordLoc() }</span>
+			                                    </c:if>
+			                                    <c:if test="${consulter.getConsultationrecordMethod()==2 }">
+				                                    <span>咨询方式：线上音视频咨询</span><br/>
+			                                    </c:if>
+			                                    <c:if test="${consulter.getConsultationrecordMethod()==3 }">
+				                                    <span>咨询方式：线上语音咨询</span><br/>
+			                                    </c:if>
+			                                </td>
+			                                <c:if test="${consultState=='0'}">
+				                                <td><span><button class="btn btn-link" type="button" onclick="showCancelDialog()">取消预约</button></span></td>
+				                                <script>
+				                                    function showCancelDialog(){
+				                                        $("#user-app-dialog").css("display","block");
+				                                        window.location.href = window.location.href+"?consultationId="+${consulter.getConsultationrecordId()};
+				                                    }
+				                                </script>
+				                                <%
+				                                	request.setAttribute("targetDate",com.psychologicalcounseling.util.DateUtil.addDate(com.psychologicalcounseling.util.DateUtil.getDate(),10*60*1000));
+				                                %>
+				                                <!--面对面咨询-->
+				                                <c:if test="${consulter.getConsultationrecordMethod()==1 }">
+					                                <td></td>
+				                                </c:if>
+				                                <!-- 非面对面咨询且没到规定时间 -->
+				                                <c:if test="${consulter.getConsultationrecordMethod()!=1 
+				                                				&& dateutil:compare(requestScope.targetDate,consulter.getConsultationrecordStartTime())==2 }">
+					                                <td><span class="disabled">进入咨询室</span></td>
+				                                </c:if>
+				                                <!-- 若是线上咨询，且离预约时间仅剩十分钟 -->
+				                                <c:if test="${consulter.getConsultationrecordMethod()!=1
+				                                				&& dateutil:compare(requestScope.targetDate,consulter.getConsultationrecordStartTime())==1
+				                                				&& dateutil:compare(dateutil:getDate(),consulter.getConsultationrecordEndTime())==2 }">
+					                                <td><span><a class="enter-room" href="room.html">进入咨询室</a></span></td>
+				                                </c:if>
+				                                <!-- 若是线上咨询，且已经结束 -->
+				                                <c:if test="${consulter.getConsultationrecordMethod()!=1
+				                                				&& dateutil:compare(dateutil:getDate(),consulter.getConsultationrecordEndTime())==1 }">
+					                                <td><span class="disabled">进入咨询室</span></td>
+				                                </c:if>
+			                                </c:if>
+			                            </tr>                            
+		                            </c:forEach>
+		                        </c:if>
+		                        <c:if test="${consultState=='0' && empty(crList) }">
+		                        	<tr><td class="tag">您暂无预约的咨询,<a href="consult-list.html">去体验第一次心理咨询</a></td></tr>
+		                        </c:if>
+		                        <c:if test="${consultState=='1' && empty(crList) }">
+	                        		<tr><td class="tag">您暂无已完成的咨询</td></tr>
+		                        </c:if>
+		                        <c:if test="${consultState=='2' && empty(crList) }">
+	                        		<tr><td class="tag">您没有被取消的咨询</td></tr>
+		                        </c:if>
+	                        </table>
+	                    </div>
+	                    <!--分页器：一页最多显示10项。示例并没有超过10项，就把这段注释掉吧-->
+	                    <!-- <div class="directory-contain-pager">
+	                        <ul class="pager">
+	                            <li class="previous"><a href="your/nice/url">«</a></li>
+	                            <li><a href="your/nice/url">1</a></li>
+	                            <li class="active"><a href="your/nice/url">2</a></li>
+	                            <li><a href="your/nice/url">3</a></li>
+	                            <li><a href="your/nice/url">4</a></li>
+	                            <li><a href="your/nice/url">5</a></li>
+	                            <li class="next"><a href="your/nice/url">»</a></li>
+	                        </ul>
+	                    </div> -->
+	                </div>
+	            </div><!--END 我的咨询-->
+        	</c:if>
+        	
+        	<c:if test='${!empty(nav) && nav=="2"}'>
+	            <!--2. 我的课程-->
+	            <div id="directory-contain-2" class="panel">
+	                <div class="panel-body">
+	                    <!--导航-->
+	                    <div class="dir-nav">
+	                        <ul class="nav nav-pills">
+	                            <li <c:if test='${empty(courseType) or courseType=="0" }'> class="active"</c:if>><a href="myCourse">我的课程</a></li>
+	                            <li <c:if test='${!empty(courseType) and courseType=="1" }'> class="active"</c:if>><a href="myCourse?courseType=1">我的收藏</a></li>
+	                        </ul>
+	                    </div>
+	                    <!--课程列表-->
+	                    <div class="directory-contain-list">
+	                    	<c:forEach items="${courseList }" var="course">
+	                        <!--一门课程-->
+	                        <div class="course-block">
+	                            <!--课程图片-->
+	                            <a href="course-intr.html?courseId=${course.get('courseId')} "><img src="images/course.jpg" alt="${course.get('courseName') }"></a>
+	                            <!--课程名-->
+	                            <a class="title" href="course-intr.html?courseId=${course.get('courseId')}">${course.get('courseName') }</a><br/>
+	                            <!--教师名 -->
+	                            <a class="tag">${course.get('userRealName') }</a><br/>
+	                            <!--学习进度-->
+	                            <!-- <span class="progress">已学习1/12</span><br/> -->
+	                            <!--进入学习按钮-->
+	                            <a class="btn btn-primary" href="course.html?courseId=${course.get('courseId')}">进入学习</a>
+	                        </div>                    		
+	                    	</c:forEach>
+	                    </div>
+	                    <!--分页器：一页最多显示10行。示例并没有超过10行，就把这段注释掉吧-->
+	                    <!-- <div class="directory-contain-pager">
+	                        <ul class="pager">
+	                            <li class="previous"><a href="your/nice/url">«</a></li>
+	                            <li><a href="your/nice/url">1</a></li>
+	                            <li class="active"><a href="your/nice/url">2</a></li>
+	                            <li><a href="your/nice/url">3</a></li>
+	                            <li><a href="your/nice/url">4</a></li>
+	                            <li><a href="your/nice/url">5</a></li>
+	                            <li class="next"><a href="your/nice/url">»</a></li>
+	                        </ul>
+	                    </div> -->
+	                </div>
+	            </div><!--END 我的课程-->
+        	</c:if>
+            <!--3. 我的倾听-->
+            <c:if test="${!empty(nav) and nav=='3' }">
+	            <div id="directory-contain-3" class="panel">
+	                <div class="panel-body">
+		                <div class="directory-contain-list">
+		                    <table>
+		                        <c:if test="${!empty(listenList) && listenList.size()>0 }">
+		                            <!--一个咨询-->
+		                            <c:forEach items="${listenList }" var="listen">
+			                            <tr>
+			                                <!--倾听者头像-->
+			                                <td><a href="consulter.html?consulterId=${listen.get('teacherId') }"><img src="${listen.get('userHeadPath') }" alt="${listen.get('userRealName') }"></a></td>
+			                                <td>
+			                                    <!--倾听者名字-->
+			                                    <a href="consulter.html?consulterId=${listen.get('teacherId') }"><span class="teacher catagory">倾听者：${listen.get('userRealName') }</span></a><br/>
+			                                    <!-- 倾听时间 -->
+			                                    <span>倾听时间：${dateutil:formatDate(listen.get('listenrecordStartTime')) }&nbsp;~&nbsp;${dateutil:formatDate(listen.get('listenrecordEndTime')) }</span><br/>
+			                                    <!--倾听费用-->
+			                                    <span>倾听费用：￥${listen.get('listenrecordPrice') }</span><br/>
+			                            	<td>
+				                            	<!-- 倾听时长 -->
+				                            	<c:set var="startTime" value="${listen.get('listenrecordStartTime') }"/>
+				                            	<c:set var="endTime" value="${listen.get('listenrecordEndTime') }"/>
+				                            	
+				                            	<span class="min">总时长：${dateutil:getMinutes(dateutil:sub(listen.get('listenrecordStartTime'),listen.get('listenrecordEndTime'))) }分钟</span>
+			                            	</td>
+			                            </tr> 
+		                            </c:forEach>
+		                        </c:if>
+	                        </table>
+		                    
+		                    <!--分页器：一页最多显示10篇文章。示例并没有超过10篇，就把这段注释掉吧-->
+		                    <!-- <div class="directory-contain-pager">
+		                        <ul class="pager">
+		                            <li class="previous"><a href="your/nice/url">«</a></li>
+		                            <li><a href="your/nice/url">1</a></li>
+		                            <li class="active"><a href="your/nice/url">2</a></li>
+		                            <li><a href="your/nice/url">3</a></li>
+		                            <li><a href="your/nice/url">4</a></li>
+		                            <li><a href="your/nice/url">5</a></li>
+		                            <li class="next"><a href="your/nice/url">»</a></li>
+		                        </ul>
+		                    </div> -->
+		                </div>
+	                </div>
+	            </div><!--END 我的文章-->
+            </c:if>
+            <!--4. 个人设置-->
+            <div id="directory-contain-4" class="panel" style="display:none">
+                <div class="panel-body">
+                    <!--导航-->
+                    <div class="dir-nav">
+                        <ul class="nav nav-pills">
+                            <li onclick="changeNav(this,'setting-')" class="active"><a href="#">个人信息</a></li>
+                            <li onclick="changeNav(this,'setting-')" class=""><a href="#">修改密码</a></li>
+                            <li onclick="changeNav(this,'setting-')" class=""><a href="#">绑定手机</a></li>
+                        </ul>
+                    </div>
+                    <div class="directory-contain-list">
+                        <!--★★★注：以下所有表单信息，若数据库中对应字段值不为空，那么将数据库字段值作为对应表单项值-->
+                        <!--★★★注：请不要更改同一个板块中两个table的相对位置！！！-->
+                        <!--个人信息-->
+                        <div id="setting-1">
+                            <!--基本信息-->
+                            <form action="" method="POST">
+                                <span class="board-title-h1">基本信息</span>
+                                <button class="btn btn-mini " type="button" onclick="changeBtnValue(this)">修改</button>
+                                <table>
+                                    <tr><td>昵称</td><td>张三</td></tr>
+                                    <tr><td>性别</td><td>男</td></tr>
+                                    <tr><td>所在地</td><td>某某省&nbsp;某某市</td></tr>
+                                    <tr><td>签名</td><td>这世上本没有路，走的人多了，便成了路。</td></tr>
+                                </table>
+                                <table style="display:none">
+                                    <tr><td>昵称</td><td><input onblur="changeBtnStyle()" class="form-control" name="nicoName" type="text" value="张三"/></td></tr>
+                                    <tr><td>性别</td>
+                                        <td><input onblur="changeBtnStyle()" type="radio" name="gender" id="" value="male" checked="checked"/>男
+                                            <input onblur="changeBtnStyle()" type="radio" name="gender" id="" value="female"/>女
+                                        </td>
+                                    </tr>
+                                    <tr><td>省份</td>
+                                        <td>
+                                            <select name="province" id="">
+                                                <!--★★★注：第一个option填数据库中字段-->
+                                                <option value="province1">请选择</option>
+                                                <option value="province1">province1</option>
+                                                <option value="province1">province2</option>
+                                                <option value="province1">province3</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr><td>城市</td>
+                                        <td>
+                                            <select name="province" id="">
+                                                <!--★★★注：第一个option填数据库中字段-->
+                                                <option value="city1">请选择</option>
+                                                <option value="city1">city1</option>
+                                                <option value="city1">city2</option>
+                                                <option value="city1">city3</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr><td>签名</td><td><input onblur="changeBtnStyle()" class="self-intr form-control" type="text" name="intr" id="" value="这世上本没有路，走的人多了，便成了路。"/></td></tr>
+                                </table>
+                            </form>
+                            <!--实名信息-->
+                            <form action="" method="POST">
+                                <span class="board-title-h1">实名信息</span>
+                                <button class="btn btn-mini " type="button" onclick="changeBtnValue(this)">修改</button>
+                                <!--★★★注：若数据库中该字段为空，请帮忙填上“未实名”-->
+                                <table>
+                                    <tr><td>姓名</td><td>未实名</td></tr>
+                                    <tr><td>证件号</td><td>未实名</td></tr>
+                                </table>
+                                <table style="display:none">
+                                    <tr><td>姓名</td><td><input onblur="changeBtnStyle()" class="form-control" name="idName" type="text"/></td></tr>
+                                    <tr><td>证件号</td><td><input onblur="changeBtnStyle()" class="form-control" name="idNum" type="text"/></td></tr>
+                                </table>
+                            </form>
+                        </div><!--END 个人信息-->
+                        <!--修改密码-->
+                        <div id="setting-2" style="display:none">
+                            <!--基本信息-->
+                            <form action="" method="POST">
+                                <table>
+                                    <tr><td>原始密码</td><td><input onblur="changeBtnStyle()" class="form-control" name="oldPwd" type="text" value="张三"/></td></tr>
+                                    <tr><td>新密码</td><td><input onblur="changeBtnStyle()" class="form-control" type="text" name="newPwd"/></td></tr>
+                                    <tr><td>确认密码</td><td><input onblur="changeBtnStyle()" type="text" class="form-control" name="confirmedPwd" id=""></td></tr>
+                                </table>
+                                <span>忘记密码了？<a href="#" onclick="findBackPwd()">找回密码</a></span><br/>
+                                <button class="btn btn-block " type="button" onclick="changeBtnValue(this)">修改</button>
+                            </form>
+                            <!--黑色遮罩层-->
+                            <div id="shade" style="display:none"></div>
+                            <!--找回密码界面-->
+                            <div class="find-back-pwd" id="find-back-pwd" style="display:none">
+                                <!--关闭按钮-->
+                                <i class="icon icon-times" onclick="closeWindow(this)"></i>
+                                <span class="board-title-h1">我们给您的手机</span>
+                                <span class="board-title-h1 phone-num">189****3092</span><br/>
+                                <span class="board-title-h1">发送了一条验证码,请及时查收</span><br/>
+                                <!-- <span class="board-title-h1">请及时查收</span><br/> -->
+                                <!--验证码-->
+                                <div class="verify-zoom">
+                                    验证码：<input class="form-control" type="text" name="verifyCode" id=""/>
+                                    <a class="btn btn-primary btn-sm" href="#" onclick="setNewPwd()">验证</a>
+                                </div>
+                            </div>
+                            <!--设置新密码界面-->
+                            <div class="find-back-pwd" id="set-new-pwd" style="display:none">
+                                <!--关闭按钮-->
+                                <i class="icon icon-times" onclick="closeWindow(this)"></i>
+                                <!--新密码-->
+                                <div class="verify-zoom">
+                                    新密码：<input class="form-control" type="text" name="newPwd" id=""/>
+                                    确认密码：<input class="form-control" type="text" name="confirmedPwd" id=""/>
+                                </div>
+                                <button class="btn btn-primary btn-block" onclick="closeWindow(this)">确认设置</button>
+                            </div>
+                        </div><!--END 修改密码-->
+                        <!--绑定手机-->
+                        <div id="setting-3" style="display:none">
+                            <form action="" method="POST">
+                                <table>
+                                    <tr><td>原绑定手机号码</td><td>189****3092</td></tr>
+                                    <tr><td>新绑定手机号码</td><td><input type="text" name="newPhoneNum" id="" class="form-controll"></td></tr>
+                                    <tr><td>验证码</td>
+                                        <td><input type="text" name="verifyCode" id="" class="form-controll">
+                                            <button class="btn btn-primary" type="button">发送验证码</button>
+                                    </td></tr>
+                                </table>
+                                <button class="btn btn-primary btn-block">保存设置</button>                                
+                            </form>
+                        </div><!--END 绑定手机-->
+                        <script>
+                            function changeBtnValue(obj){
+                                console.log($(obj).html());
+                                if($(obj).html()=="修改"){
+                                    $(obj).html("保存");
+                                    $(obj).siblings("table:last").css("display","display");
+                                    $(obj).siblings("table:first").css("display","none");
+                                }
+                                else{
+                                    $(obj).html("修改");
+                                    $(obj).siblings("table:first").css("display","display");
+                                    $(obj).siblings("table:last").css("display","none");
+                                    $(obj).attr("type","button");
+                                } 
+                            }
+                            function changeBtnStyle(){
+                                // $(".directory-contain-list form .btn").attr("type","");
+                                console.log($(".directory-contain-list form .btn").attr("type"));
+                            }
+                            function findBackPwd(){
+                                $("#find-back-pwd").css("display","display");
+                                $("#shade").css("display","display");
+                            }
+                            function closeWindow(obj){
+                                $(obj).parent().css("display","none");
+                                $("#shade").css("display","none");
+                            }
+                            function setNewPwd(){
+                                $("#find-back-pwd").css("display","none");
+                                $("#set-new-pwd").css("display","display");
+                            }
+                        </script>
+                    </div>
+                </div>
+            </div><!--END 个人设置-->
+        </div>
+    </div>
+    <%@include file="footer.jsp" %>
+    <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
+    <script src="${ctx }js/jquery-1.11.0.min.js"></script>
+    <!-- ZUI Javascript组件 -->
+    <script src="${ctx }js/zui.min.js"></script>
+  </body>
+</html>

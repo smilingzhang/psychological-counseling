@@ -1,21 +1,7 @@
-<!DOCTYPE html>
-<html lang="zh-cn">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>footer</title>
-    <!-- zui -->
-    <link href="css/zui-theme.css" rel="stylesheet">
-    <link href="css/zui.css" rel="stylesheet">
-    <link href="css/mystyle.css" rel="stylesheet">
-    <script src="js/jquery-3.3.1.js"></script>
-    <script src="js/zui.js"></script> 
-    <script src="js/zui.lite.js"></script>
-  </head>
-  <body>
-    <!-- 在此处编码你的创意 -->
-    <div class="footer" id="footer">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<div class="footer" id="footer">
         <div class="container footer-contain">
             <div class="up-part" id="up-part">
                 <!--社交账号-->
@@ -81,7 +67,7 @@
         <button id="back-to-top-btn" class="btn btn-primary" type="button" onclick="toTop();" onmousemove="showText();" onmouseout="hideText()"><i class="icon icon-hand-up"></i></button>
         <script>
             function showText(){
-                $("#back-to-top-btn").html('回到顶部<i class="icon icon-hand-up"></i>');
+                $("#back-to-top-btn").html('回到顶部&nbsp;<i class="icon icon-hand-up"></i>');
             }
             function hideText(){
                 $("#back-to-top-btn").html('<i class="icon icon-hand-up"></i>');
@@ -113,5 +99,3 @@
     <script src="js/jquery-1.11.0.min.js"></script>
     <!-- ZUI Javascript组件 -->
     <script src="js/zui.min.js"></script>
-  </body>
-</html>
