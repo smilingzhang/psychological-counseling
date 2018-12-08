@@ -25,4 +25,19 @@
         <function-class>com.psychologicalcounseling.util.DateUtil</function-class>
         <function-signature>int compare(java.lang.String, java.lang.String)</function-signature>
     </function>
+    <function>
+        <name>sub</name>
+        <function-class>com.psychologicalcounseling.util.DateUtil</function-class>
+        <function-signature>long sub(java.lang.String, java.lang.String)</function-signature>
+    </function>
+    <function>
+        <name>getMinutes</name>
+        <function-class>com.psychologicalcounseling.util.DateUtil</function-class>
+        <function-signature>int getMinutes(long)</function-signature>
+    </function>
+    <function>
+        <name>formatDate</name>
+        <function-class>com.psychologicalcounseling.util.DateUtil</function-class>
+        <function-signature>java.lang.String formatDate(java.lang.String)</function-signature>
+    </function>
 </taglib>

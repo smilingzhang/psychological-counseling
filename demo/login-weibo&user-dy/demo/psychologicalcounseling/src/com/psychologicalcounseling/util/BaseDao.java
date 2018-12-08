@@ -1,4 +1,4 @@
-package com.util;
+package com.psychologicalcounseling.util;
 
 import java.io.Serializable;
 import java.util.List;
@@ -6,12 +6,13 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.jasper.tagplugins.jstl.core.Param;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.CriteriaSpecification;
 
-import com.entity.Page;
+import com.psychologicalcounseling.entity.Page;
 
 /**
  * 
@@ -25,7 +26,7 @@ public class BaseDao<T> {
 	 * 注入session工厂
 	 */
 	@Resource
-	private SessionFactory sessionFactory;
+	protected SessionFactory sessionFactory;
 
 	/**
 	 * 
@@ -314,8 +315,9 @@ public class BaseDao<T> {
 			SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sql);
 			query.setResultTransformer(CriteriaSpecification.ALIAS_TO_ENTITY_MAP);
 			if (params != null && params.length > 0) {
-				for (int i = 0; i < params.length; i++)
+				for (int i = 0; i < params.length; i++) {
 					query.setParameter(i, params[i]);
+				}
 			}
 			return query.list();
 		}

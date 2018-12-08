@@ -3,6 +3,7 @@
 <%@page import="com.psychologicalcounseling.util.*" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://janborn.wang/dateutil" prefix="dateutil"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-cn">
   <head>
@@ -11,14 +12,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>${userNickName }_个人中心</title>
     <!-- zui -->
-    <link href="css/zui-theme.css" rel="stylesheet">
-    <link href="css/zui.css" rel="stylesheet">
-    <script src="js/jquery-3.3.1.js"></script>
-    <script src="js/zui.js"></script> 
-    <script src="js/zui.lite.js"></script>
+    <link href="${ctx }css/zui-theme.css" rel="stylesheet">
+    <link href="${ctx }css/zui.css" rel="stylesheet">
+    <script src="${ctx }js/jquery-3.3.1.js"></script>
+    <script src="${ctx }js/zui.js"></script> 
+    <script src="${ctx }js/zui.lite.js"></script>
     <!--自定义-->
-    <link href="css/mystyle.css" rel="stylesheet">
-    <script src="js/change-state.js"></script>
+    <link href="${ctx }css/mystyle.css" rel="stylesheet">
+    <script src="${ctx }js/change-state.js"></script>
   </head>
   <body>
     <!-- 在此处编码你的创意 -->
@@ -58,14 +59,14 @@
         <div class="panel user">
             <div class="panel-body">
                 <!--头像 方形-->
-                <img src="${avatarLink }" alt="${userNickName }_头像"/>
+                <img src="${sessionScope.avatarLink }" alt="${sessionScope.userNickName }_头像"/>
                 <div class="intr">
                     <!--用户昵称-->
-                    <span class="user-name">${userNickName }</span><br/>
+                    <span class="user-name">${sessionScope.userNickName }</span><br/>
                     <!--个性签名-->
                     <span class="tag">
-                    	<c:if test="${!empty(description) }">${description }</c:if>
-                    	<c:if test="${empty(description) }">未填写</c:if>
+                    	<c:if test="${!empty(sessionScope.description) }">${sessionScope.description }</c:if>
+                    	<c:if test="${empty(sessionScope.description) }">未填写</c:if>
                     	</span>
                     <br/>
                     <!--日记-->
@@ -78,391 +79,214 @@
             <!-- 一般导航项目 -->
             <div class="panel-body">
                 <ul class="nav navbar-nav">
-                    <li onclick="changeNav(this,'directory-contain-')" id="1" class="active"><a href="#">我的咨询</a></li>
-                    <li onclick="changeNav(this,'directory-contain-')" id="2"><a href="#">我的课程</a></li>
-                    <li onclick="changeNav(this,'directory-contain-')" id="3"><a href="#">我的文章</a></li>
-                    <li onclick="changeNav(this,'directory-contain-')" id="4"><a href="#">个人设置</a></li>
+                    <li <c:if test='${empty(nav) || nav=="1" }'> class="active"</c:if>><a href="consultationRecord">我的咨询</a></li>
+                    <li <c:if test='${!empty(nav) && nav=="2" }'> class="active"</c:if>><a href="myCourse">我的课程</a></li>
+                    <li <c:if test='${!empty(nav) && nav=="3" }'> class="active"</c:if>><a href="myListen">我的倾听</a></li>
+                    <li <c:if test='${!empty(nav) && nav=="4" }'> class="active"</c:if>><a href="#">个人设置</a></li>
                 </ul>
             </div>
         </div><!--END 导航栏-->
+
         <!--信息栏-->
         <!--★★★注：以下1-3的“.directory-contain-list”中显示的内容均由查询给出-->
         <!--★★★注：jsp版本请将对应的导航中调用的changeNav()函数改成changeActive(this)函数 !!!-->
         <!--★★★注：切换效果由“我的咨询”板块给出，其它板块不再制作切换效果-->
-        <div class="info-conatin" style="display:display">
-            <!--1. 我的咨询-->
-            <div id="directory-contain-1" class="panel">
-                <div class="panel-body">
-                    <!--导航-->
-                    <div class="dir-nav">
-                        <ul class="nav nav-pills">
-                            <li onclick="changeNav(this,'dir-con-li-')" class="active"><a href="#">未开始</a></li>
-                            <li onclick="changeNav(this,'dir-con-li-')" class=""><a href="#">已完成</a></li>
-                            <li onclick="changeNav(this,'dir-con-li-')" class=""><a href="#">已取消</a></li>
-                        </ul>
-                    </div>
-                    <!--咨询列表-->
-                    <div class="directory-contain-list">
-                        <!--未完成表格-->
-                        <table id="dir-con-li-1">
-	                        <c:if test="${!empty(toDoList) && toDoList.size()>0 }">
-	                            <!--一个咨询-->
-	                            <c:forEach items="${toDoList }" var="consulter">
-		                            <tr>
-		                                <!--咨询师照片-->
-		                                <td><img src="${consulter.getTeacher().getUser().getUserHeadPath() }" alt="${consulter.getTeacher().getUser().getUserNickName() }"></td>
-		                                <td>
-		                                    <!--咨询师名字-->
-		                                    <span class="teacher catagory">咨询师：<a href="consulter.html">${consulter.getTeacher().getUser().getUserNickName() }</a></span><br/>
-		                                    <!--咨询费用-->
-		                                    <span>咨询费用：￥${consulter.getConsultationrecordPrice() }</span><br/>
-		                                    <!--咨询时间：精确到几点机几分-->
-		                                    <span>预约时间：${consulter.getConsultationrecordStartTime() }</span><br/>
-		                                    <!--咨询方式-->
-		                                    <c:if test="${consulter.getConsultationrecordMethod()==1 }">
-			                                    <span>咨询方式：面对面咨询</span><br/>
-		                                    	<!--若为线下面对面咨询，则显示咨询地点-->
-		                                    	<span class="place">线下地点：${consulter.getConsultationrecordLoc() }</span>
-		                                    </c:if>
-		                                    <c:if test="${consulter.getConsultationrecordMethod()==2 }">
-			                                    <span>咨询方式：线上音视频咨询</span><br/>
-		                                    </c:if>
-		                                    <c:if test="${consulter.getConsultationrecordMethod()==3 }">
-			                                    <span>咨询方式：线上语音咨询</span><br/>
-		                                    </c:if>
-		                                </td>
-		                                <td><span><button class="btn btn-link" type="button" onclick="showCancelDialog()">取消预约</button></span></td>
-		                                <script>
-		                                    function showCancelDialog(){
-		                                        $("#user-app-dialog").css("display","block");
-		                                        window.location.href = window.location.href+"?consultationId="+${consulter.getConsultationrecordId()};
-		                                    }
-		                                </script>
-		                                <%
-		                                	request.setAttribute("targetDate",com.psychologicalcounseling.util.DateUtil.addDate(com.psychologicalcounseling.util.DateUtil.getDate(),10*60*1000));
-		                                %>
-		                                <!--面对面咨询-->
-		                                <c:if test="${consulter.getConsultationrecordMethod()==1 }">
-			                                <td></td>
-		                                </c:if>
-		                                <!-- 非面对面咨询且没到规定时间 -->
-		                                <c:if test="${consulter.getConsultationrecordMethod()!=1 
-		                                				&& dateutil:compare(requestScope.targetDate,consulter.getConsultationrecordStartTime())==2 }">
-			                                <td><span class="disabled">进入咨询室</span></td>
-		                                </c:if>
-		                                <!-- 若是线上咨询，且离预约时间仅剩十分钟 -->
-		                                <c:if test="${consulter.getConsultationrecordMethod()!=1
-		                                				&& dateutil:compare(requestScope.targetDate,consulter.getConsultationrecordStartTime())==1
-		                                				&& dateutil:compare(dateutil:getDate(),consulter.getConsultationrecordEndTime())==2 }">
-			                                <td><span><a class="enter-room" href="room.html">进入咨询室</a></span></td>
-		                                </c:if>
-		                                <!-- 若是线上咨询，且已经结束 -->
-		                                <c:if test="${consulter.getConsultationrecordMethod()!=1
-		                                				&& dateutil:compare(dateutil:getDate(),consulter.getConsultationrecordEndTime())==1 }">
-			                                <td><span class="disabled">进入咨询室</span></td>
-		                                </c:if>
-		                            </tr>                            
-	                            </c:forEach>
-	                        </c:if>
-	                        <c:if test="${empty(toDoList) || toDoList.size()==0 }">
-	                        	<tr><td class="tag">您暂无预约的咨询,<a href="consult-list.html">去体验第一次心理咨询</a></td></tr>
-	                        </c:if>
-                        </table>
-                        
-                        <!--已完成表格-->
-                        <table id="dir-con-li-2" style="display:none">
-                        	<c:if test="${!empty(finishedList) && finishedList.size()>0 }">
-	                            <!--一个咨询-->
-	                            <c:forEach items="${finishedList }" var="consulter">
-		                            <tr>
-		                                <!--咨询师照片-->
-		                                <td><img src="${consulter.getTeacher().getUser().getUserHeadPath() }" alt="${consulter.getTeacher().getUser().getUserNickName() }"></td>
-		                                <td>
-		                                    <!--咨询师名字-->
-		                                    <span class="teacher catagory">咨询师：<a href="consulter.html">${consulter.getTeacher().getUser().getUserNickName() }</a></span><br/>
-		                                    <!--咨询费用-->
-		                                    <span>咨询费用：￥${consulter.getConsultationrecordPrice() }</span><br/>
-		                                    <!--咨询时间：精确到几点机几分-->
-		                                    <span>咨询时间：${consulter.getConsultationrecordStartTime() }~${consulter.getConsultationrecordEndTime() }</span><br/>
-		                                    <!--咨询方式-->
-		                                    <c:if test="${consulter.getConsultationrecordMethod()==1 }">
-			                                    <span>咨询方式：面对面咨询</span><br/>
-			                                    <!--若为线下面对面咨询，则显示咨询地点-->
-		                                    	<span class="place">线下地点：${consulter.getConsultationrecordLoc() }</span>
-		                                    </c:if>
-		                                    <c:if test="${consulter.getConsultationrecordMethod()==2 }">
-			                                    <span>咨询方式：线上音视频咨询</span><br/>
-		                                    </c:if>
-		                                    <c:if test="${consulter.getConsultationrecordMethod()==3 }">
-			                                    <span>咨询方式：线上语音咨询</span><br/>
-		                                    </c:if>
-		                                </td>
-		                            </tr>                            
-	                            </c:forEach>
-                        	</c:if>
-                        	<c:if test="${empty(finishedList) || finishedList.size()==0 }">
-                        		<tr><td class="tag">暂无已完成的咨询</td></tr>
-	                        </c:if>
-                        </table>
-                        <!--已取消表格-->
-                        <table id="dir-con-li-3" style="display:none">
-                        	<c:if test="${!empty(canceledList) && canceledList.size()>0 }">
-	                             <!--一个咨询-->
-	                             <c:forEach items="${canceledList }" var="consulter">
-		                            <tr>
-		                                <!--咨询师照片-->
-		                                <td><img src="${consulter.getTeacher().getUser().getUserHeadPath() }" alt="${consulter.getTeacher().getUser().getUserNickName() }"></td>
-		                                <td>
-		                                    <!--咨询师名字-->
-		                                    <span class="teacher catagory">咨询师：<a href="consulter.html">${consulter.getTeacher().getUser().getUserNickName() }</a></span><br/>
-		                                    <!--咨询费用-->
-		                                    <span>咨询费用：￥${consulter.getConsultationrecordPrice() }</span><br/>
-		                                    <!--咨询时间：精确到几点机几分-->
-		                                    <span>预约时间：${consulter.getConsultationrecordStartTime() }</span><br/>
-		                                    <!--咨询方式-->
-		                                    <c:if test="${consulter.getConsultationrecordMethod()==1 }">
-			                                    <span>咨询方式：面对面咨询</span><br/>
-			                                    <!--若为线下面对面咨询，则显示咨询地点-->
-		                                    	<span class="place">线下地点：${consulter.getConsultationrecordLoc() }</span>
-		                                    </c:if>
-		                                    <c:if test="${consulter.getConsultationrecordMethod()==2 }">
-			                                    <span>咨询方式：线上音视频咨询</span><br/>
-		                                    </c:if>
-		                                    <c:if test="${consulter.getConsultationrecordMethod()==3 }">
-			                                    <span>咨询方式：线上语音咨询</span><br/>
-		                                    </c:if>
-		                                </td>
-		                            </tr>                            
-	                            </c:forEach>
-                        	</c:if>
-                        	<c:if test="${empty(canceledList) || canceledList.size()==0 }">
-                        		<tr><td class="tag">没有被取消的咨询</td></tr>
-                        	</c:if>
-                        </table>
-                    </div>
-                    <!--分页器：一页最多显示10项。示例并没有超过10项，就把这段注释掉吧-->
-                    <!-- <div class="directory-contain-pager">
-                        <ul class="pager">
-                            <li class="previous"><a href="your/nice/url">«</a></li>
-                            <li><a href="your/nice/url">1</a></li>
-                            <li class="active"><a href="your/nice/url">2</a></li>
-                            <li><a href="your/nice/url">3</a></li>
-                            <li><a href="your/nice/url">4</a></li>
-                            <li><a href="your/nice/url">5</a></li>
-                            <li class="next"><a href="your/nice/url">»</a></li>
-                        </ul>
-                    </div> -->
-                </div><!--END 我的咨询-->
-            </div>
-            <!--2. 我的课程-->
-            <div id="directory-contain-2" class="panel" style="display:none">
-                <div class="panel-body">
-                    <!--导航-->
-                    <div class="dir-nav">
-                        <ul class="nav nav-pills">
-                            <li onclick="changeActive(this)" class="active"><a href="#">我的课程</a></li>
-                            <li onclick="changeActive(this)" class=""><a href="#">我的收藏</a></li>
-                        </ul>
-                    </div>
-                    <!--课程列表-->
-                    <div class="directory-contain-list">
-                        <!--一门课程-->
-                        <div class="course-block">
-                            <!--课程图片-->
-                            <img src="images/course.jpg" alt="心理咨询师职业认证课程（台湾博士2017版）">
-                            <!--课程名-->
-                            <a class="title" href="course-intr">心理咨询师职业认证课程（台湾博士2017版）</a><br/>
-                            <!--学习进度-->
-                            <span class="progress">已学习1/12</span><br/>
-                            <!--进入学习按钮-->
-                            <a class="btn btn-primary" href="course.html">进入学习</a>
-                        </div>
-                        <!--以下都是重复的-->
-                        <!--一门课程-->
-                        <div class="course-block">
-                            <!--课程图片-->
-                            <img src="images/course.jpg" alt="心理咨询师职业认证课程（台湾博士2017版）">
-                            <!--课程名-->
-                            <a class="title" href="course-intr">心理咨询师职业认证课程（台湾博士2017版）</a><br/>
-                            <!--学习进度-->
-                            <span class="progress">已学习1/12</span><br/>
-                            <!--进入学习按钮-->
-                            <a class="btn btn-primary" href="course.html">进入学习</a>
-                        </div>
-                        <!--一门课程-->
-                        <div class="course-block">
-                            <!--课程图片-->
-                            <img src="images/course.jpg" alt="心理咨询师职业认证课程（台湾博士2017版）">
-                            <!--课程名-->
-                            <a class="title" href="course-intr">心理咨询师职业认证课程（台湾博士2017版）</a><br/>
-                            <!--学习进度-->
-                            <span class="progress">已学习1/12</span><br/>
-                            <!--进入学习按钮-->
-                            <a class="btn btn-primary" href="course.html">进入学习</a>
-                        </div>
-                        <!--一门课程-->
-                        <div class="course-block">
-                            <!--课程图片-->
-                            <img src="images/course.jpg" alt="心理咨询师职业认证课程（台湾博士2017版）">
-                            <!--课程名-->
-                            <a class="title" href="course-intr">心理咨询师职业认证课程（台湾博士2017版）</a><br/>
-                            <!--学习进度-->
-                            <span class="progress">已学习1/12</span><br/>
-                            <!--进入学习按钮-->
-                            <a class="btn btn-primary" href="course.html">进入学习</a>
-                        </div>
-                        <!--一门课程-->
-                        <div class="course-block">
-                                <!--课程图片-->
-                                <img src="images/course.jpg" alt="心理咨询师职业认证课程（台湾博士2017版）">
-                                <!--课程名-->
-                                <a class="title" href="course-intr">心理咨询师职业认证课程（台湾博士2017版）</a><br/>
-                                <!--学习进度-->
-                                <span class="progress">已学习1/12</span><br/>
-                                <!--进入学习按钮-->
-                                <a class="btn btn-primary" href="course.html">进入学习</a>
-                            </div>
-                            <!--一门课程-->
-                            <div class="course-block">
-                                <!--课程图片-->
-                                <img src="images/course.jpg" alt="心理咨询师职业认证课程（台湾博士2017版）">
-                                <!--课程名-->
-                                <a class="title" href="course-intr">心理咨询师职业认证课程（台湾博士2017版）</a><br/>
-                                <!--学习进度-->
-                                <span class="progress">已学习1/12</span><br/>
-                                <!--进入学习按钮-->
-                                <a class="btn btn-primary" href="course.html">进入学习</a>
-                            </div>
-                            <!--一门课程-->
-                            <div class="course-block">
-                                <!--课程图片-->
-                                <img src="images/course.jpg" alt="心理咨询师职业认证课程（台湾博士2017版）">
-                                <!--课程名-->
-                                <a class="title" href="course-intr.html">心理咨询师职业认证课程（台湾博士2017版）</a><br/>
-                                <!--学习进度-->
-                                <span class="progress">已学习1/12</span><br/>
-                                <!--进入学习按钮-->
-                                <a class="btn btn-primary" href="course.html">进入学习</a>
-                            </div>
-                    </div>
-                    <!--分页器：一页最多显示10行。示例并没有超过10行，就把这段注释掉吧-->
-                    <!-- <div class="directory-contain-pager">
-                        <ul class="pager">
-                            <li class="previous"><a href="your/nice/url">«</a></li>
-                            <li><a href="your/nice/url">1</a></li>
-                            <li class="active"><a href="your/nice/url">2</a></li>
-                            <li><a href="your/nice/url">3</a></li>
-                            <li><a href="your/nice/url">4</a></li>
-                            <li><a href="your/nice/url">5</a></li>
-                            <li class="next"><a href="your/nice/url">»</a></li>
-                        </ul>
-                    </div> -->
-                </div>
-            </div><!--END 我的课程-->
-            <!--3. 我的文章-->
-            <div id="directory-contain-3" class="panel" style="display:none">
-                <div class="panel-body">
-                    <!--导航-->
-                    <div class="dir-nav">
-                        <ul class="nav nav-pills">
-                            <li onclick="changeActive(this)" class="active"><a href="#">我的文章</a></li>
-                            <li onclick="changeActive(this)" class=""><a href="#">我的收藏</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="directory-contain-list">
-                    <!--一篇文章-->
-                    <div class="passage-block">
-                        <!--文章图片-->
-                        <img src="images/passage.jpeg" alt="！！这里写文章的名字！！">
-                        <!--文章名-->
-                        <a class="title" href="">结婚前，听听咨询师给你的3个建议&nbsp;|&nbsp;心事博物馆</a><br/>
-                        <!--文章作者-->
-                        <a class="writer" href="consulter.html">黄小希</a><br/>
-                        <!--文章介绍-->
-                        <p>你和你的家人相处融洽，除了血亲之外，还有几十年的相处默契，她作为一个新加入的人，要让她用自己的节奏慢慢熟悉这个新的家庭。</p>
-                    </div>
-                    <!--以下都是重复的-->
-                    <!--一篇文章-->
-                    <div class="passage-block">
-                        <!--文章图片-->
-                        <img src="images/passage.jpeg" alt="！！这里写文章的名字！！">
-                        <!--文章名-->
-                        <a class="title" href="">结婚前，听听咨询师给你的3个建议&nbsp;|&nbsp;心事博物馆</a><br/>
-                        <!--文章作者-->
-                        <a class="writer" href="consulter.html">黄小希</a><br/>
-                        <!--文章介绍-->
-                        <p>你和你的家人相处融洽，除了血亲之外，还有几十年的相处默契，她作为一个新加入的人，要让她用自己的节奏慢慢熟悉这个新的家庭。</p>
-                    </div>
-                    <!--一篇文章-->
-                    <div class="passage-block">
-                        <!--文章图片-->
-                        <img src="images/passage.jpeg" alt="！！这里写文章的名字！！">
-                        <!--文章名-->
-                        <a class="title" href="">结婚前，听听咨询师给你的3个建议&nbsp;|&nbsp;心事博物馆</a><br/>
-                        <!--文章作者-->
-                        <a class="writer" href="consulter.html">黄小希</a><br/>
-                        <!--文章介绍-->
-                        <p>你和你的家人相处融洽，除了血亲之外，还有几十年的相处默契，她作为一个新加入的人，要让她用自己的节奏慢慢熟悉这个新的家庭。</p>
-                    </div>
-                    <!--一篇文章-->
-                    <div class="passage-block">
-                        <!--文章图片-->
-                        <img src="images/passage.jpeg" alt="！！这里写文章的名字！！">
-                        <!--文章名-->
-                        <a class="title" href="">结婚前，听听咨询师给你的3个建议&nbsp;|&nbsp;心事博物馆</a><br/>
-                        <!--文章作者-->
-                        <a class="writer" href="consulter.html">黄小希</a><br/>
-                        <!--文章介绍-->
-                        <p>你和你的家人相处融洽，除了血亲之外，还有几十年的相处默契，她作为一个新加入的人，要让她用自己的节奏慢慢熟悉这个新的家庭。</p>
-                    </div>
-                    <!--一篇文章-->
-                    <div class="passage-block">
-                        <!--文章图片-->
-                        <img src="images/passage.jpeg" alt="！！这里写文章的名字！！">
-                        <!--文章名-->
-                        <a class="title" href="">结婚前，听听咨询师给你的3个建议&nbsp;|&nbsp;心事博物馆</a><br/>
-                        <!--文章作者-->
-                        <a class="writer" href="consulter.html">黄小希</a><br/>
-                        <!--文章介绍-->
-                        <p>你和你的家人相处融洽，除了血亲之外，还有几十年的相处默契，她作为一个新加入的人，要让她用自己的节奏慢慢熟悉这个新的家庭。</p>
-                    </div>
-                    <!--一篇文章-->
-                    <div class="passage-block">
-                        <!--文章图片-->
-                        <img src="images/passage.jpeg" alt="！！这里写文章的名字！！">
-                        <!--文章名-->
-                        <a class="title" href="">结婚前，听听咨询师给你的3个建议&nbsp;|&nbsp;心事博物馆</a><br/>
-                        <!--文章作者-->
-                        <a class="writer" href="consulter.html">黄小希</a><br/>
-                        <!--文章介绍-->
-                        <p>你和你的家人相处融洽，除了血亲之外，还有几十年的相处默契，她作为一个新加入的人，要让她用自己的节奏慢慢熟悉这个新的家庭。</p>
-                    </div>
-                    <!--一篇文章-->
-                    <div class="passage-block">
-                        <!--文章图片-->
-                        <img src="images/passage.jpeg" alt="！！这里写文章的名字！！">
-                        <!--文章名-->
-                        <a class="title" href="">结婚前，听听咨询师给你的3个建议&nbsp;|&nbsp;心事博物馆</a><br/>
-                        <!--文章作者-->
-                        <a class="writer" href="consulter.html">黄小希</a><br/>
-                        <!--文章介绍-->
-                        <p>你和你的家人相处融洽，除了血亲之外，还有几十年的相处默契，她作为一个新加入的人，要让她用自己的节奏慢慢熟悉这个新的家庭。</p>
-                    </div>
-                    <!--分页器：一页最多显示10篇文章。示例并没有超过10篇，就把这段注释掉吧-->
-                    <!-- <div class="directory-contain-pager">
-                        <ul class="pager">
-                            <li class="previous"><a href="your/nice/url">«</a></li>
-                            <li><a href="your/nice/url">1</a></li>
-                            <li class="active"><a href="your/nice/url">2</a></li>
-                            <li><a href="your/nice/url">3</a></li>
-                            <li><a href="your/nice/url">4</a></li>
-                            <li><a href="your/nice/url">5</a></li>
-                            <li class="next"><a href="your/nice/url">»</a></li>
-                        </ul>
-                    </div> -->
-                </div>
-            </div><!--END 我的文章-->
+        <div class="info-contain" style="display:block">
+        	<c:if test='${empty(nav) || nav=="1" }'>
+	            <!--1. 我的咨询-->
+	            <div id="directory-contain-1" class="panel">
+	                <div class="panel-body">
+	                    <!--导航-->
+	                    <div class="dir-nav">
+	                        <ul class="nav nav-pills">
+	                            <li <c:if test='${empty(consultState) || consultState=="0" }'> class="active"</c:if>><a href="consultationRecord?consultState=0">未开始</a></li>
+	                            <li <c:if test='${!empty(consultState) and consultState=="1" }'> class="active"</c:if>><a href="consultationRecord?consultState=1">已完成</a></li>
+	                            <li <c:if test='${!empty(consultState) and consultState=="2" }'> class="active"</c:if>><a href="consultationRecord?consultState=2">已取消</a></li>
+	                        </ul>
+	                    </div>
+	                    <!--咨询列表-->
+	                    <div class="directory-contain-list">
+	                        <!--未完成表格-->
+	                        <table>
+		                        <c:if test="${!empty(crList) && crList.size()>0 }">
+		                            <!--一个咨询-->
+		                            <c:forEach items="${crList }" var="consulter">
+			                            <tr>
+			                                <!--咨询师照片-->
+			                                <td><img src="${consulter.getTeacher().getUser().getUserHeadPath() }" alt="${consulter.getTeacher().getUser().getUserNickName() }"></td>
+			                                <td>
+			                                    <!--咨询师名字-->
+			                                    <span class="teacher catagory">咨询师：<a href="consulter.html">${consulter.getTeacher().getUser().getUserNickName() }</a></span><br/>
+			                                    <!--咨询费用-->
+			                                    <span>咨询费用：￥${consulter.getConsultationrecordPrice() }</span><br/>
+			                                    <!--咨询时间：精确到几点机几分-->
+			                                    <span>预约时间：${dateutil:formatDate(consulter.getConsultationrecordStartTime()) }</span><br/>
+			                                    <!--咨询方式-->
+			                                    <c:if test="${consulter.getConsultationrecordMethod()==1 }">
+				                                    <span>咨询方式：面对面咨询</span><br/>
+			                                    	<!--若为线下面对面咨询，则显示咨询地点-->
+			                                    	<span class="place">线下地点：${consulter.getConsultationrecordLoc() }</span>
+			                                    </c:if>
+			                                    <c:if test="${consulter.getConsultationrecordMethod()==2 }">
+				                                    <span>咨询方式：线上音视频咨询</span><br/>
+			                                    </c:if>
+			                                    <c:if test="${consulter.getConsultationrecordMethod()==3 }">
+				                                    <span>咨询方式：线上语音咨询</span><br/>
+			                                    </c:if>
+			                                </td>
+			                                <c:if test="${consultState=='0'}">
+				                                <td><span><button class="btn btn-link" type="button" onclick="showCancelDialog()">取消预约</button></span></td>
+				                                <script>
+				                                    function showCancelDialog(){
+				                                        $("#user-app-dialog").css("display","block");
+				                                        window.location.href = window.location.href+"?consultationId="+${consulter.getConsultationrecordId()};
+				                                    }
+				                                </script>
+				                                <%
+				                                	request.setAttribute("targetDate",com.psychologicalcounseling.util.DateUtil.addDate(com.psychologicalcounseling.util.DateUtil.getDate(),10*60*1000));
+				                                %>
+				                                <!--面对面咨询-->
+				                                <c:if test="${consulter.getConsultationrecordMethod()==1 }">
+					                                <td></td>
+				                                </c:if>
+				                                <!-- 非面对面咨询且没到规定时间 -->
+				                                <c:if test="${consulter.getConsultationrecordMethod()!=1 
+				                                				&& dateutil:compare(requestScope.targetDate,consulter.getConsultationrecordStartTime())==2 }">
+					                                <td><span class="disabled">进入咨询室</span></td>
+				                                </c:if>
+				                                <!-- 若是线上咨询，且离预约时间仅剩十分钟 -->
+				                                <c:if test="${consulter.getConsultationrecordMethod()!=1
+				                                				&& dateutil:compare(requestScope.targetDate,consulter.getConsultationrecordStartTime())==1
+				                                				&& dateutil:compare(dateutil:getDate(),consulter.getConsultationrecordEndTime())==2 }">
+					                                <td><span><a class="enter-room" href="room.html">进入咨询室</a></span></td>
+				                                </c:if>
+				                                <!-- 若是线上咨询，且已经结束 -->
+				                                <c:if test="${consulter.getConsultationrecordMethod()!=1
+				                                				&& dateutil:compare(dateutil:getDate(),consulter.getConsultationrecordEndTime())==1 }">
+					                                <td><span class="disabled">进入咨询室</span></td>
+				                                </c:if>
+			                                </c:if>
+			                            </tr>                            
+		                            </c:forEach>
+		                        </c:if>
+		                        <c:if test="${consultState=='0' && empty(crList) }">
+		                        	<tr><td class="tag">您暂无预约的咨询,<a href="consult-list.html">去体验第一次心理咨询</a></td></tr>
+		                        </c:if>
+		                        <c:if test="${consultState=='1' && empty(crList) }">
+	                        		<tr><td class="tag">您暂无已完成的咨询</td></tr>
+		                        </c:if>
+		                        <c:if test="${consultState=='2' && empty(crList) }">
+	                        		<tr><td class="tag">您没有被取消的咨询</td></tr>
+		                        </c:if>
+	                        </table>
+	                    </div>
+	                    <!--分页器：一页最多显示10项。示例并没有超过10项，就把这段注释掉吧-->
+	                    <!-- <div class="directory-contain-pager">
+	                        <ul class="pager">
+	                            <li class="previous"><a href="your/nice/url">«</a></li>
+	                            <li><a href="your/nice/url">1</a></li>
+	                            <li class="active"><a href="your/nice/url">2</a></li>
+	                            <li><a href="your/nice/url">3</a></li>
+	                            <li><a href="your/nice/url">4</a></li>
+	                            <li><a href="your/nice/url">5</a></li>
+	                            <li class="next"><a href="your/nice/url">»</a></li>
+	                        </ul>
+	                    </div> -->
+	                </div>
+	            </div><!--END 我的咨询-->
+        	</c:if>
+        	
+        	<c:if test='${!empty(nav) && nav=="2"}'>
+	            <!--2. 我的课程-->
+	            <div id="directory-contain-2" class="panel">
+	                <div class="panel-body">
+	                    <!--导航-->
+	                    <div class="dir-nav">
+	                        <ul class="nav nav-pills">
+	                            <li <c:if test='${empty(courseType) or courseType=="0" }'> class="active"</c:if>><a href="myCourse">我的课程</a></li>
+	                            <li <c:if test='${!empty(courseType) and courseType=="1" }'> class="active"</c:if>><a href="myCourse?courseType=1">我的收藏</a></li>
+	                        </ul>
+	                    </div>
+	                    <!--课程列表-->
+	                    <div class="directory-contain-list">
+	                    	<c:forEach items="${courseList }" var="course">
+	                        <!--一门课程-->
+	                        <div class="course-block">
+	                            <!--课程图片-->
+	                            <a href="course-intr.html?courseId=${course.get('courseId')} "><img src="images/course.jpg" alt="${course.get('courseName') }"></a>
+	                            <!--课程名-->
+	                            <a class="title" href="course-intr.html?courseId=${course.get('courseId')}">${course.get('courseName') }</a><br/>
+	                            <!--教师名 -->
+	                            <a class="tag">${course.get('userRealName') }</a><br/>
+	                            <!--学习进度-->
+	                            <!-- <span class="progress">已学习1/12</span><br/> -->
+	                            <!--进入学习按钮-->
+	                            <a class="btn btn-primary" href="course.html?courseId=${course.get('courseId')}">进入学习</a>
+	                        </div>                    		
+	                    	</c:forEach>
+	                    </div>
+	                    <!--分页器：一页最多显示10行。示例并没有超过10行，就把这段注释掉吧-->
+	                    <!-- <div class="directory-contain-pager">
+	                        <ul class="pager">
+	                            <li class="previous"><a href="your/nice/url">«</a></li>
+	                            <li><a href="your/nice/url">1</a></li>
+	                            <li class="active"><a href="your/nice/url">2</a></li>
+	                            <li><a href="your/nice/url">3</a></li>
+	                            <li><a href="your/nice/url">4</a></li>
+	                            <li><a href="your/nice/url">5</a></li>
+	                            <li class="next"><a href="your/nice/url">»</a></li>
+	                        </ul>
+	                    </div> -->
+	                </div>
+	            </div><!--END 我的课程-->
+        	</c:if>
+            <!--3. 我的倾听-->
+            <c:if test="${!empty(nav) and nav=='3' }">
+	            <div id="directory-contain-3" class="panel">
+	                <div class="panel-body">
+		                <div class="directory-contain-list">
+		                    <table>
+		                        <c:if test="${!empty(listenList) && listenList.size()>0 }">
+		                            <!--一个咨询-->
+		                            <c:forEach items="${listenList }" var="listen">
+			                            <tr>
+			                                <!--倾听者头像-->
+			                                <td><a href="consulter.html?consulterId=${listen.get('teacherId') }"><img src="${listen.get('userHeadPath') }" alt="${listen.get('userRealName') }"></a></td>
+			                                <td>
+			                                    <!--倾听者名字-->
+			                                    <a href="consulter.html?consulterId=${listen.get('teacherId') }"><span class="teacher catagory">倾听者：${listen.get('userRealName') }</span></a><br/>
+			                                    <!-- 倾听时间 -->
+			                                    <span>倾听时间：${dateutil:formatDate(listen.get('listenrecordStartTime')) }&nbsp;~&nbsp;${dateutil:formatDate(listen.get('listenrecordEndTime')) }</span><br/>
+			                                    <!--倾听费用-->
+			                                    <span>倾听费用：￥${listen.get('listenrecordPrice') }</span><br/>
+			                            	<td>
+				                            	<!-- 倾听时长 -->
+				                            	<c:set var="startTime" value="${listen.get('listenrecordStartTime') }"/>
+				                            	<c:set var="endTime" value="${listen.get('listenrecordEndTime') }"/>
+				                            	
+				                            	<span class="min">总时长：${dateutil:getMinutes(dateutil:sub(listen.get('listenrecordStartTime'),listen.get('listenrecordEndTime'))) }分钟</span>
+			                            	</td>
+			                            </tr> 
+		                            </c:forEach>
+		                        </c:if>
+	                        </table>
+		                    
+		                    <!--分页器：一页最多显示10篇文章。示例并没有超过10篇，就把这段注释掉吧-->
+		                    <!-- <div class="directory-contain-pager">
+		                        <ul class="pager">
+		                            <li class="previous"><a href="your/nice/url">«</a></li>
+		                            <li><a href="your/nice/url">1</a></li>
+		                            <li class="active"><a href="your/nice/url">2</a></li>
+		                            <li><a href="your/nice/url">3</a></li>
+		                            <li><a href="your/nice/url">4</a></li>
+		                            <li><a href="your/nice/url">5</a></li>
+		                            <li class="next"><a href="your/nice/url">»</a></li>
+		                        </ul>
+		                    </div> -->
+		                </div>
+	                </div>
+	            </div><!--END 我的文章-->
+            </c:if>
             <!--4. 个人设置-->
             <div id="directory-contain-4" class="panel" style="display:none">
                 <div class="panel-body">
@@ -629,8 +453,8 @@
     </div>
     <%@include file="footer.jsp" %>
     <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
-    <script src="js/jquery-1.11.0.min.js"></script>
+    <script src="${ctx }js/jquery-1.11.0.min.js"></script>
     <!-- ZUI Javascript组件 -->
-    <script src="js/zui.min.js"></script>
+    <script src="${ctx }js/zui.min.js"></script>
   </body>
 </html>

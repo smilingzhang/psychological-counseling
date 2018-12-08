@@ -5,6 +5,7 @@ package com.psychologicalcounseling.user.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -16,7 +17,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.portlet.bind.annotation.ResourceMapping;
 
+import com.psychologicalcounseling.entity.ConsultationRecord;
 import com.psychologicalcounseling.entity.User;
 import com.psychologicalcounseling.user.service.UserService;
 
@@ -37,23 +41,50 @@ public class UserController {
 		// TODO Auto-generated constructor stub
 	}
 
-	@RequestMapping(value="/user.do",method=RequestMethod.GET)
-	public String gotoUser(HttpSession session,Model model) {
+	@RequestMapping(value="/user",method=RequestMethod.GET)
+	public void gotoUser(HttpSession session,HttpServletRequest req,HttpServletResponse resp,Model model) throws ServletException, IOException {
 		session.setAttribute("uid", "1");
 		//1. 获取用户id
 		int uid = Integer.parseInt((String) session.getAttribute("uid"));
 		//2. 获取用户实例
 		User user = userService.getUser(uid);
-		model.addAttribute("avatarLink", user.getUserHeadPath());
-		model.addAttribute("userNickName", user.getUserNickName());
-		model.addAttribute("description", user.getUserAutograph());
+		session.setAttribute("avatarLink", user.getUserHeadPath());
+		session.setAttribute("userNickName", user.getUserNickName());
+		session.setAttribute("description", user.getUserAutograph());
+		
+		String nav = (String)req.getAttribute("nav");
+		if(nav==null) {
+			req.getRequestDispatcher("consultationRecord").forward(req, resp);
+		}else req.getRequestDispatcher("user.jsp").forward(req, resp);
+	}
+	
+	@RequestMapping(value="/consultationRecord",method=RequestMethod.GET)
+	public String consultationRecord(Model model,HttpSession session,
+									HttpServletRequest req,HttpServletResponse resp) throws ServletException, IOException {
+		//1. 获取用户id
+		int uid = Integer.parseInt((String) session.getAttribute("uid"));
+		//2. 获取用户实例
+		User user = userService.getUser(uid);
 		//3. 将咨询记录按照状态拆分成三张表
 		userService.splitConsultList(user);
 		//4. 获取三张表
-		model.addAttribute("toDoList", userService.getToDoList());
-		model.addAttribute("finishedList", userService.getFinishedList());
-		model.addAttribute("canceledList", userService.getCanceledList());
-		
+		//获取咨询状态
+		String consultState = req.getParameter("consultState");
+		//默认为“未咨询”
+		if(consultState==null) consultState = ""+ConsultationRecord.TODO;
+		switch(Integer.parseInt(consultState)) {
+		case ConsultationRecord.TODO:
+			model.addAttribute("crList", userService.getToDoList());
+			break;
+		case ConsultationRecord.FINISHED:
+			model.addAttribute("crList", userService.getFinishedList());
+			break;
+		case ConsultationRecord.CANCELED:
+			model.addAttribute("crList", userService.getCanceledList());
+			break;
+		}
+		model.addAttribute("consultState",consultState);
+		model.addAttribute("nav",1);
 		return "user";
 	}
 	
@@ -67,7 +98,7 @@ public class UserController {
 	 *@return:void
 	 *@trhows
 	 */
-	@RequestMapping(value="/cancel.do",method=RequestMethod.GET)
+	@RequestMapping(value="/cancel",method=RequestMethod.GET)
 	public void cancleAppointment(HttpServletRequest req,HttpServletResponse resp,
 									HttpSession session) throws ServletException, IOException {
 		//消息
@@ -89,6 +120,55 @@ public class UserController {
 		//设置局部消息
 		req.setAttribute("cancelMsg", msg);
 		//转发请求
-		req.getRequestDispatcher("/user.do").forward(req, resp);
+		req.getRequestDispatcher("user.jsp").forward(req, resp);
+	}
+	
+	/**
+	 * 
+	 *@desc:个人中心“我的课程”
+	 *@return:void
+	 * @throws Exception 
+	 *@trhows
+	 */
+	@RequestMapping(value="/myCourse",method=RequestMethod.GET)
+	public String myCourse(HttpSession session,HttpServletRequest req,HttpServletResponse resp,
+							Model model) throws Exception {
+		//1. 获取用户id
+		String id = (String)session.getAttribute("uid");
+		//如果id为空，转至登录界面
+		if(id==null) return "login";
+		else {
+			int uid = Integer.parseInt(id);
+			//2. 获取展现类型：0 “我的课程” 1 “我的收藏”
+			String type = req.getParameter("courseType");
+			//默认展示“我的课程”
+			if(type==null) type = "0";
+			//3. 查询需要的数据
+			List<Map<String, Object>> list = userService.courseService(uid,type);
+			//4. 设置参数
+			model.addAttribute("courseList", list);
+			model.addAttribute("courseType",type);
+			model.addAttribute("nav",2);
+			return "user";
+//		req.getRequestDispatcher("user.jsp").forward(req, resp);
+		}
+	}
+	
+	@RequestMapping(value="myListen",method=RequestMethod.GET)
+	public String myListen(HttpSession session,HttpServletRequest req,HttpServletResponse resp,
+							Model model) throws Exception {
+		//1. 获取用户id
+		String id = (String)session.getAttribute("uid");
+		//如果id为空，跳转至登录界面
+		if(id==null) return "login";
+		else {
+			int uid = Integer.parseInt(id);
+			//2. 查询需要的数据
+			List<Map<String, Object>> list = userService.listenService(uid);
+			//3. 设置参数
+			model.addAttribute("listenList",list);
+			model.addAttribute("nav", 3);
+			return "user";
+		}
 	}
 }

@@ -5,6 +5,7 @@ package com.psychologicalcounseling.user.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -125,6 +126,82 @@ public class UserService {
 		}
 		//如果没有相关记录
 		return false;
+	}
+
+	/**
+	 *@desc:一句话描述
+	 *@return
+	 *@return:Object
+	 *@trhows
+	 */
+	public Object getCRList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 *@desc:个人中心，查询“我的课程”
+	 *@param uid
+	 *@return:List<Map<String, Object>>
+	 * @throws Exception 
+	 *@trhows
+	 */
+	public List<Map<String, Object>> queryCourse(int uid) throws Exception {
+		String sql = "select course.courseId,courseName,teacherId,userRealName from user,course,courserecord where teacherId=user.userId and course.courseId=courserecord.courseId and courserecord.userId="+uid;
+		return userDao.findBySql(sql, null);
+	}
+
+	/**
+	 *@desc:个人中心，查询“我的收藏（课程）”
+	 *@param uid
+	 *@return:List<Map<String, Object>>
+	 * @throws Exception 
+	 *@trhows
+	 */
+	public List<Map<String, Object>> queryFavoriteCourse(int uid) throws Exception {
+		String sql = "select course.courseId,courseName,teacherId,userRealName" + 
+				" from user,course,collection" + 
+				" where teacherId=user.userId and course.courseId=collection.courseId" + 
+				" and collection.userId="+uid;
+//		Object[] obj = {uid};
+		return userDao.findBySql(sql, null);
+	}
+
+	/**
+	 *@desc: 个人中心课程页
+	 *@param uid
+	 * @param type 
+	 *@return:List<Map<String, Object>>
+	 * @throws Exception 
+	 *@trhows
+	 */
+	public List<Map<String, Object>> courseService(int uid, String type) throws Exception {
+		//查询数据
+		//需要查询的数据：课程名，课程id，教师名，教师id
+		//将每个用户的对应数据以键值对形式放到map中，最终封装成一个list返回
+		switch(type) {
+		case "0":
+			return queryCourse(uid);
+		case "1":
+			return queryFavoriteCourse(uid);
+		default:
+			return null;
+		}
+	}
+
+	/**
+	 *@desc:查询倾听需要的数据
+	 *@param uid
+	 *@return
+	 *@return:List<Map<String,Object>>
+	 * @throws Exception 
+	 *@trhows
+	 */
+	public List<Map<String, Object>> listenService(int uid) throws Exception {
+		String sql = "select listenrecordStartTime,listenrecordEndTime,listenrecordPrice,teacherId,userHeadPath,userRealName"
+				+ " from user,listenrecord"
+				+ " where user.userId=listenrecord.teacherId and listenrecord.userId="+uid;
+		return userDao.findBySql(sql, null);
 	}
 	
 	

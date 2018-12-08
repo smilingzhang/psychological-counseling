@@ -13,7 +13,7 @@ import java.util.Date;
  *@date:2018年12月4日下午4:17:16
  */
 public class DateUtil {
-	private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+	private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm";
 	
 	public DateUtil() {	
 	}
@@ -85,8 +85,6 @@ public class DateUtil {
 	 *@trhows
 	 */
 	public static int compare(String date1,String date2) {
-		System.out.println("compare");
-		System.out.println("date1:"+date1+",date2="+date2);
 		if(date1!=null && date2!=null) {
 			Date d1 = stringToDate(date1);
 			Date d2 = stringToDate(date2);
@@ -99,5 +97,41 @@ public class DateUtil {
 		}else return -1;
 	}
 	
+	/**
+	 * 
+	 *@desc:计算两个日期的差值
+	 *@param d1
+	 *@param d2
+	 *@return:String 单位：毫秒
+	 *@trhows
+	 */
+	public static long sub(String d1, String d2) {
+		if(d1!=null && d2!=null) {
+			Date date1 = stringToDate(d1);
+			Date date2 = stringToDate(d2);
+			System.out.println("\nsub:"+(date2.getTime()-date1.getTime()));
+			return date2.getTime()-date1.getTime();
+		}else return 0;
+		
+	}
 	
+	/**
+	 * 
+	 *@desc:将毫秒转化为分钟
+	 *@param d
+	 *@return:int
+	 *@trhows
+	 */
+	@SuppressWarnings("deprecation")
+	public static int getMinutes(long d) {
+		if((""+d)!=null) {
+			return (int) (d/1000/60);
+		}else return 0;
+	}
+	
+	public static String formatDate(String d) {
+		 Date dNow = stringToDate(d);
+		 SimpleDateFormat ft = new SimpleDateFormat(DATE_FORMAT);
+		 return ft.format(dNow);
+	}
 }

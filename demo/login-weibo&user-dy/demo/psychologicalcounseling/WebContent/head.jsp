@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <header>
         <nav class="navbar contianer">
             <div class="container">
@@ -29,7 +30,18 @@
                             <button type="submit" class="btn btn-default">搜索</button>
                         </form>
                     </div>
-                    <li class="list" id="list"><a class="login" href="login.html">登录/注册</a></li>
+                    <c:if test="${!empty(sessionScope.uid) }">
+                    	<li class="dropdown list dropdown-hover" id="list-after-login">
+	                        <a href="#"  class="dropdown-toggle" data-toggle="dropdown"><img src="${sessionScope.avatarLink }" alt="头像"><b class="caret"></b></a>
+	                        <ul class="dropdown-menu" role="menu">
+	                            <li class="dropdown-list"><a href="user.html">个人中心</a></li>
+	                            <li class="dropdown-list"><a href="#">我的消息&nbsp;<span class="label label-badge label-success">4</span></a></li>
+	                        </ul>
+                    	</li>
+                    </c:if>
+                    <c:if test="${empty(sessisonScope.uid) }">
+	                    <li class="list" id="list"><a class="login" href="login.html">登录/注册</a></li>
+                    </c:if>
                 </ul>  
             </div>
         </nav>
