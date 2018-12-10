@@ -22,6 +22,16 @@ select{
     border-width: 0;
     text-shadow: none;
 }
+.btn:active,
+.btn:visited
+{
+	color:#d75455
+}
+.btn-default{
+	backgroud-color: #f2f2f2;
+	border-color: #bfbfbf;
+	color:#d75455;
+}
 a:hover{
     color: #d75455;
     text-decoration: none
