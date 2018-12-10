@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.psychologicalcounseling.entity.Article;
 import com.psychologicalcounseling.entity.Evaluate;
+import com.psychologicalcounseling.entity.User;
 import com.psychologicalcounseling.passage.dao.PassageDaoImpl;
 	
 @Service
@@ -25,6 +26,18 @@ public class PassageServiceImpl {
 	
 	public List<Evaluate> findEvaluateAll(int articleId){
 		return this.passageDaoImpl.list(articleId);
+	}
+	
+	public User findUserByUserId(int userId) {
+		return this.passageDaoImpl.selectUser(userId);
+	}
+	
+	public String findUserHeadPathById(int userId) {
+		return this.passageDaoImpl.selectUserHeadPath(userId);
+	}
+	
+	public String findUserRealNameById(int userId) {
+		return this.passageDaoImpl.selectUserRealName(userId);
 	}
 	
 	public void insertEvaluate(Evaluate evaluate) {

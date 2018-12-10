@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.psychologicalcounseling.entity.Article;
 import com.psychologicalcounseling.entity.Evaluate;
+import com.psychologicalcounseling.entity.User;
 
 @Repository
 public class PassageDaoImpl {
@@ -52,6 +53,43 @@ public class PassageDaoImpl {
 		return q.list();
 	}
 	/**
+	 * 查询用户
+	 * @param userId
+	 * @return
+	 */
+	public User selectUser(int userId) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Query q = session.createQuery("from User where userId = ?");
+		q.setInteger(0, userId);
+		User user = (User)q.uniqueResult();
+		return user;
+	}
+	/**
+	 * 查询用户的头像路径
+	 * @param userId
+	 * @return
+	 */
+	public String selectUserHeadPath(int userId) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Query q = session.createQuery("select userHeadPath from User where userId = ?");
+		q.setInteger(0, userId);
+		String userHeadPath = (String)q.uniqueResult();
+		return userHeadPath;
+	}
+	/**
+	 * 查询用户的名字
+	 * @param userId
+	 * @return
+	 */
+	public String selectUserRealName(int userId) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Query query = session.createQuery("select userRealName from User where userId = ?");
+		query.setInteger(0, userId);
+		String userRealName = (String)query.uniqueResult();
+		return userRealName;
+	}
+	
+	/**
 	 * 向数据库插入评论
 	 * @param evaluate
 	 */
@@ -80,7 +118,7 @@ public class PassageDaoImpl {
 	 */
 	public List<Evaluate> findByPage(int pageNum,int pageSize,int articleId){
 		Session session = this.sessionFactory.getCurrentSession();
-		Query q = session.createQuery("from Evaluate where evaluateWorkId = ?");
+		Query q = session.createQuery("from Evaluate where evaluateWorkId = ? order by evaluateTime desc");
 		q.setInteger(0, articleId);
 		q.setFirstResult((pageNum-1)*pageSize);
 		q.setMaxResults(pageSize);		

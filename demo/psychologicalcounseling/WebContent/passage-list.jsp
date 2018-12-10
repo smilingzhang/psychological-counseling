@@ -69,7 +69,7 @@
         <!--导航条-->
         <div class="nav-bar panel">
             <!-- 一般导航项目 -->
-            <div class="panel-body">
+            <div class="panel-body" style="text-align: center;">
                 <ul class="nav navbar-nav .dir-nav">
                 <c:forEach items="${ typeTablelist}" var="t">
                     <li onclick="changeActive(this)" id="1" class="active"><a href="PassageListControllerImpl?typetableId=${t.typetableId }&&businesstypeWorkType=5">${t.typetableName }</a></li>
@@ -99,19 +99,19 @@
                     <p>${p.articleIntroduction }</p>
                 </div>
             </c:forEach>  
-                <!--分页器：一页最多显示10篇文章。示例并没有超过10篇，就把这段注释掉吧-->
-                <div class="directory-contain-pager">
-                    <ul class="pager">
-                        <li class="previous"><a href="PassageListControllerImpl?pageNum=${page.prePageNum }&&businesstypeWorkType=5">«</a></li>
-                        <li><a href="PassageListControllerImpl?pageNum=1&&businesstypeWorkType=5">1</a></li>
-                        <li class="active"><a href="PassageListControllerImpl?pageNum =2&&businesstypeWorkType=5">2</a></li>
-                        <li><a href="PassageListControllerImpl?pageNum=3&&businesstypeWorkType=5">3</a></li>
-                        <li><a href="PassageListControllerImpl?pageNum=4&&businesstypeWorkType=5">4</a></li>
-                        <li><a href="PassageListControllerImpl?pageNum=5&&businesstypeWorkType=5">5</a></li>
-                        <li class="next"><a href="PassageListControllerImpl?pageNum=${page.nextPageNum }&&businesstypeWorkType=5">»</a></li>
-                    </ul>
-                </div> 
             </div>
+         <!--分页器：一页最多显示10篇文章。示例并没有超过10篇，就把这段注释掉吧-->
+            <div class="directory-contain-pager" style="text-align: center;">
+                <ul class="pager">
+                    <li class="previous"><a href="PassageListControllerImpl?pageNum=${passageList.prePageNum}&&businesstypeWorkType=5&&typetableId=${typetableId}">«</a></li>
+                    <li><a href="PassageListControllerImpl?pageNum=1&&businesstypeWorkType=5&&typetableId=${typetableId}">1</a></li>
+                    <li><a href="PassageListControllerImpl?pageNum=2&&businesstypeWorkType=5&&typetableId=${typetableId}">2</a></li>
+                    <li><a href="PassageListControllerImpl?pageNum=3&&businesstypeWorkType=5&&typetableId=${typetableId}">3</a></li>
+                    <li><a href="PassageListControllerImpl?pageNum=4&&businesstypeWorkType=5&&typetableId=${typetableId}">4</a></li>
+                    <li><a href="PassageListControllerImpl?pageNum=5&&businesstypeWorkType=5&&typetableId=${typetableId}">5</a></li>
+                    <li class="next"><a href="PassageListControllerImpl?pageNum=${passageList.nextPageNum}&&businesstypeWorkType=5&&typetableId=${typetableId}">»</a></li>
+                </ul>
+            </div> 
         </div>
     </div>
     <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
