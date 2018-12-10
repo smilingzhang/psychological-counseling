@@ -1529,6 +1529,7 @@ a:focus{
     padding: 10px;
     float: left;
     margin-right: 10px;
+    margin-bottom:20px;
     line-height: 1em;
 }
 .search-conatin .panel .result .result-block.consult-block .consult-block-contain .name{
@@ -1537,6 +1538,7 @@ a:focus{
 .search-conatin .panel .result .result-block.consult-block .consult-block-contain img{
     float: left;
     padding-right: 10px;
+   
 }
 .checkout-contain{
     width: 50%

@@ -86,7 +86,7 @@
                         <!--头像-->
                         <img class="avatar-round" src="<%=path %>/images/consultant2.png" style="float:left;width: 66px;"/>
                         <!--课程名称-->
-                        <span class="name">${course.courseName }</span>           
+                        <a href="<a href="<%=path%>/lesson/instr?id=${course.courseId }"</a>"><span class="name">${course.courseName }</span></a>     
                         <!--课程价格-->
                         <span class="intr">￥${course.coursePrice }元</span></br>
                     </div>

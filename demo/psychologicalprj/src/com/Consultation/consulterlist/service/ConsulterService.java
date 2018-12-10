@@ -122,4 +122,5 @@ public class ConsulterService extends SetPageUtil<Teacher> {
 	public List<Course> showTeacherCourse(int teacherId) {
 		return this.consultCourseDao.selectCourseByTeacherId(teacherId);
 	}
+
 }
