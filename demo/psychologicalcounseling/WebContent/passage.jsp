@@ -53,6 +53,7 @@
             </div>
             <!--文章正文-->
             <div class="passage-body">
+             ${a.articleContent }
             <!-- 
               <p>听别人的故事，解自己的疑惑，这里是由心理FM&壹心理咨询联合出品的心事博物馆，如果你有解不开的困惑，点击“心事铺”写下你的心事，听听咨询师们用专业且温暖的话给你一点点小建议。下载心理FM APP搜索“心事博物馆”就能找到我们的全部节目。<br/>
                 <p>今天我们邀请到心理咨询师广梅芳老师和我们一起倾听心事。</p>
@@ -119,21 +120,19 @@
                 editor.customConfig.menus = [
                     'emoticon'
                 ]
-                // editor.customConfig.color = ['#000000']
                 editor.create()
-                
-                 $("#submit").click(function(){
-                	var xmlhttp;
-                	var content=editor.txt.text();
-                	alert(content);
-           	 	 	if(window.XMLHttpRequest){
-              		xmlhttp = new XMLHttpRequest();
-                	}else{
-                		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                	}
-	              	xmlhttp.open("get","PassageControllerImpl?evaluateContent="+content+"&articleId=${articleId}",true);
-	               	xmlhttp.send();               	
-              		})
+           		$("#submit").click(function(){
+                 	var xmlhttp;
+                 	var content=editor.txt.html();
+            	 	 	if(window.XMLHttpRequest){
+               		xmlhttp = new XMLHttpRequest();
+                 	}else{
+                 		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                 	}
+ 	              	xmlhttp.open("POST","PassageControllerImpl",true);
+ 	              	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded;charset=UTF-8");
+ 	              	xmlhttp.send("articleId=${articleId}&evaluateContent="+content);
+           		})
                 </script>
         </div>
       <!--黑色遮罩-->
@@ -144,29 +143,31 @@
             <span class="board-title-h1">评论</span>
             <button type="button" class="btn btn-link to-comment" onclick="openCommentWindow()"><i class="icon icon-pencil"></i>参与讨论</button>
             <!--一条评论-->
+         <div id="pagescomment"> 
         <c:forEach items="${page.list }" var="p">    
             <div class="comment">
                 <div class="comment-header">
                     <!--用户头像-->
                     <img src="images/${p.user.userHeadPath }" alt="头像">
                     <!--用户昵称：点击跳转到用户个人页面-->
-                    <a href="#">远道。</a>
+                    <a href="#">${p.user.userRealName }</a>
                     <!--评论时间：精细到日即可-->
-                    <span class="tag">${p.evaluateTime }</span>
+                     <span class="tag">${p.evaluateTime }</span>
                 </div>
                 <!--评论内容-->
                 <p>${p.evaluateComment }</p>
             </div>
  		</c:forEach>
+ 		</div>
           </div>
           <!--分页器-->         
-          <div class="pager-bar">
+           <div class="pager-bar">
               <ul class="pager">
-                  <li class="previous"><a href="PassageControllerImpl?pageNum=${page.prePageNum}&&articleId=${articleId}">«</a></li>
-                  <li><a href="PassageControllerImpl?pageNum=1&&articleId=${articleId}">1</a></li>
-                  <li class="active"><a href="PassageControllerImpl?pageNum=2&&articleId=${articleId}">2</a></li>
-                  <li><a href="PassageControllerImpl?pageNum=3&&articleId=${articleId}">3</a></li>
-                  <li class="next"><a href="PassageControllerImpl?pageNum=${page.nextPageNum}&&articleId=${articleId}">»</a></li>
+                  <li class="previous"><a href="PassageControllerImpl?pageNum=${p.prePageNum }&&articleId=${articleId }">«</a></li>
+                  <li><a href="PassageControllerImpl?pageNum=1&&articleId=${articleId }">1</a></li>
+                  <li class="active"><a href="PassageControllerImpl?pageNum=2&&articleId=${articleId }">2</a></li>
+                  <li><a href="PassageControllerImpl?pageNum=3&&articleId=${articleId }">3</a></li>
+                  <li class="next"><a href="PassageControllerImpl?pageNum=${p.nextPageNum }&&articleId=${articleId }">»</a></li>
               </ul>
           </div>
         </div>
