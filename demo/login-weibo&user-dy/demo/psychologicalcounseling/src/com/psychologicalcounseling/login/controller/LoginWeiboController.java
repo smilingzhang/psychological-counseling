@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -44,14 +45,15 @@ public class LoginWeiboController {
 	public LoginWeiboController() {
 	}
 
-	@RequestMapping(value="/loginWeiboRequest.do",method=RequestMethod.GET)
+	@RequestMapping(value="/loginWeiboRequest",method=RequestMethod.GET)
 	public void loginRequest(HttpServletResponse resp) throws IOException, WeiboException {
 		Oauth oauth = new Oauth();
 		resp.sendRedirect(oauth.authorize("code"));
 	}
 	
-	@RequestMapping(value="/loginWeiboAuth2.do",method=RequestMethod.GET)
-	public String loginWeiboAuth(@RequestParam("code")String code,HttpSession session) {
+	@RequestMapping(value="/loginWeiboAuth2",method=RequestMethod.GET)
+	public void loginWeiboAuth(@RequestParam("code")String code,HttpSession session,
+									HttpServletRequest req,HttpServletResponse resp) throws ServletException, IOException {
 		Oauth oauth = new Oauth();
 		Log.logInfo("code: " + code);
 		try{
@@ -67,17 +69,17 @@ public class LoginWeiboController {
 				else session.setAttribute("uid", null);
 			} else {
 				session.setAttribute("uid", null);
-				return "login";
+				resp.sendRedirect("login.jsp");
 			}
 		} catch (WeiboException e) {
 			if(401 == e.getStatusCode()){
 				Log.logInfo("Unable to get the access token.");
-				return "login";
+				resp.sendRedirect("login.jsp");
 			}else{
 				e.printStackTrace();
 			}
 		}
-		return "index";
+		req.getRequestDispatcher("redirect").forward(req, resp);
 	}
 	
 	

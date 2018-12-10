@@ -17,22 +17,29 @@
     <script src="${ctx }js/jquery-3.3.1.js"></script>
     <script src="${ctx }js/zui.js"></script> 
     <script src="${ctx }js/zui.lite.js"></script>
+    <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
+    <script src="${ctx }js/jquery-1.11.0.min.js"></script>
+    <!-- ZUI Javascript组件 -->
+    <script src="${ctx }js/zui.min.js"></script>
     <!--自定义-->
     <link href="${ctx }css/mystyle.css" rel="stylesheet">
     <script src="${ctx }js/change-state.js"></script>
+    
   </head>
   <body>
     <!-- 在此处编码你的创意 -->
     <!-- 头部 -->
     <%@include file="head.jsp" %>
-    <c:if test="${!empty(cancelMsg) }">
+	<!-- 消息 -->    
+    <c:if test="${!empty(cancelMsg) and fn:length(cancelMsg)!=0}">
     	<script>
-    		window.onload = function(){
-    			new $.zui.Messager('${cancelMsg}', {
-    			    type: '${cancelMsgAttr}' // 定义颜色主题
+    		(function($){
+    			new $.zui.Messager('${sessionScope.cancelMsg}', {
+    			    type: '${sessionScope.cancelMsgAttr}' // 定义颜色主题
     			}).show();
-    		}
+    		}(jQuery))
     	</script>
+    	<c:set var="cancelMsg" value="" scope="session"/>
     </c:if>
      <div class="modal" id="user-app-dialog" style="display:none">
         <div class="modal-dialog">
@@ -44,7 +51,7 @@
                 </div>  
                 <div class="modal-footer">
                     <button onclick="hideCancelDialog()" type="button" class="btn btn-default" data-dismiss="modal">再想想</button>
-                    <a href="cancel.do?consultationId=${param.consultationId }" type="button" class="btn btn-primary">我要取消预约</a>
+                    <a id="cancel-btn" href="" class="btn btn-primary">我要取消预约</a>
                 </div>
             </div>
         </div>
@@ -52,6 +59,7 @@
     <script>
         function hideCancelDialog(){
             $("#user-app-dialog").css("display","none");
+            $("#shade").css("display","none");
         }
     </script>
     <div class="contains user-contain">
@@ -67,10 +75,10 @@
                     <span class="tag">
                     	<c:if test="${!empty(sessionScope.description) }">${sessionScope.description }</c:if>
                     	<c:if test="${empty(sessionScope.description) }">未填写</c:if>
-                    	</span>
-                    <br/>
+                   	</span>
+                    <br/><br/>
                     <!--日记-->
-                    <a class="btn btn-primary" href="your/url/">记录好时光<i class="icon icon-paint-brush"></i></a>
+                    <a class="btn btn-primary" href="#">记录好时光&nbsp;<i class="icon icon-paint-brush"></i></a>
                 </div>
             </div>
         </div><!--END 头部-->
@@ -80,9 +88,9 @@
             <div class="panel-body">
                 <ul class="nav navbar-nav">
                     <li <c:if test='${empty(nav) || nav=="1" }'> class="active"</c:if>><a href="consultationRecord">我的咨询</a></li>
-                    <li <c:if test='${!empty(nav) && nav=="2" }'> class="active"</c:if>><a href="myCourse">我的课程</a></li>
                     <li <c:if test='${!empty(nav) && nav=="3" }'> class="active"</c:if>><a href="myListen">我的倾听</a></li>
-                    <li <c:if test='${!empty(nav) && nav=="4" }'> class="active"</c:if>><a href="#">个人设置</a></li>
+                    <li <c:if test='${!empty(nav) && nav=="2" }'> class="active"</c:if>><a href="myCourse">我的课程</a></li>
+                    <li onclick="changeNav(this,'directory-contain-')" id="4"><a href="#">个人设置</a></li>
                 </ul>
             </div>
         </div><!--END 导航栏-->
@@ -135,11 +143,12 @@
 			                                    </c:if>
 			                                </td>
 			                                <c:if test="${consultState=='0'}">
-				                                <td><span><button class="btn btn-link" type="button" onclick="showCancelDialog()">取消预约</button></span></td>
+				                                <td><span><button class="btn btn-link" type="button" onclick="showCancelDialog(${consulter.getConsultationrecordId()})">取消预约</button></span></td>
 				                                <script>
-				                                    function showCancelDialog(){
+				                                    function showCancelDialog(id){
 				                                        $("#user-app-dialog").css("display","block");
-				                                        window.location.href = window.location.href+"?consultationId="+${consulter.getConsultationrecordId()};
+				                                        $("#shade").css("display","block");
+				                                        $("#cancel-btn").attr("href","cancel?consultationId="+id);
 				                                    }
 				                                </script>
 				                                <%
@@ -181,20 +190,56 @@
 	                        </table>
 	                    </div>
 	                    <!--分页器：一页最多显示10项。示例并没有超过10项，就把这段注释掉吧-->
-	                    <!-- <div class="directory-contain-pager">
-	                        <ul class="pager">
-	                            <li class="previous"><a href="your/nice/url">«</a></li>
-	                            <li><a href="your/nice/url">1</a></li>
-	                            <li class="active"><a href="your/nice/url">2</a></li>
-	                            <li><a href="your/nice/url">3</a></li>
-	                            <li><a href="your/nice/url">4</a></li>
-	                            <li><a href="your/nice/url">5</a></li>
-	                            <li class="next"><a href="your/nice/url">»</a></li>
-	                        </ul>
-	                    </div> -->
-	                </div>
+	                    <div class="button-pager">
+				            <!--说明-->
+				            <!--
+				        		每一次跳转都是一次get请求。
+				                url范例：/consult-list.html#page=2?page=2
+							                ★关键点：①#page={page} ②page={page}
+							                ①用于分页器js的定位，②用于建立请求，两者都必不可少！！！
+				            -->
+				            <!--
+								★注：以下为分页器导航栏的相关参数，需要朋友们动态地进行设置（在id为myPager的ul元素上）
+				             data-page:             初始状态页数
+				             data-rec-total：       总记录数
+				             data-max-nav-count：   导航最大块数
+				             data-rec-per-page：    每页的记录数 
+								★注：若内容不足一页，请不要显示分页器。
+				            -->
+				            <%
+				            	HttpServletRequest httpRequest = (HttpServletRequest)request;
+				            	//当前url
+				            	String url = "http://" + request.getServerName()
+				            					+ ":" + request.getServerPort()
+				            					+ httpRequest.getContextPath()
+				            					+ httpRequest.getServletPath();
+				            	//参数
+				            	String params = httpRequest.getQueryString();
+				            					
+				            %>
+				            <c:if test="${totalCount > pageSize }">
+					            <ul id="myPager" class="pager" data-elements="prev,nav,next" data-ride="pager"
+					                data-page="${pageNum }"
+					                data-rec-total="${totalCount }"
+					                data-max-nav-count="5"
+					                data-rec-per-page="${pageSize }"
+					                data-link-creator="${url}?page={page}<c:if test='${!empty(params) }'>&${params }</c:if>#page={page}"
+					            >
+					            </ul>
+					            <script>
+					                $('#myPager').pager({
+					                    linkCreator: function(page, pager) {
+					                        var url = window.location.href;
+					                        url = url.split("#")[0];
+					                        return url+'#page='+ page +'?page=' + page;
+					                    } 
+					                });
+					            </script>
+				            </c:if>
+				        </div>
+			        </div>
 	            </div><!--END 我的咨询-->
-        	</c:if>
+	       	</c:if>
         	
         	<c:if test='${!empty(nav) && nav=="2"}'>
 	            <!--2. 我的课程-->
@@ -225,18 +270,26 @@
 	                        </div>                    		
 	                    	</c:forEach>
 	                    </div>
-	                    <!--分页器：一页最多显示10行。示例并没有超过10行，就把这段注释掉吧-->
-	                    <!-- <div class="directory-contain-pager">
-	                        <ul class="pager">
-	                            <li class="previous"><a href="your/nice/url">«</a></li>
-	                            <li><a href="your/nice/url">1</a></li>
-	                            <li class="active"><a href="your/nice/url">2</a></li>
-	                            <li><a href="your/nice/url">3</a></li>
-	                            <li><a href="your/nice/url">4</a></li>
-	                            <li><a href="your/nice/url">5</a></li>
-	                            <li class="next"><a href="your/nice/url">»</a></li>
-	                        </ul>
-	                    </div> -->
+	                    <!-- 分页器 -->
+	                    <c:if test="${pageCount > pageSize }">
+				            <ul id="myPager" class="pager" data-elements="prev,nav,next" data-ride="pager"
+				                data-page="${pageNum }"
+				                data-rec-total="${totalCount }"
+				                data-max-nav-count="5"
+				                data-rec-per-page="${pageSize }"
+				                data-link-creator="${url}?page={page}<c:if test='${!empty(params) }'>&${params }</c:if>#page={page}"
+				            >
+				            </ul>
+				            <script>
+				                $('#myPager').pager({
+				                    linkCreator: function(page, pager) {
+				                        var url = window.location.href;
+				                        url = url.split("#")[0];
+				                        return url+'#page='+ page +'?page=' + page;
+				                    } 
+				                });
+				            </script>
+			            </c:if>
 	                </div>
 	            </div><!--END 我的课程-->
         	</c:if>
@@ -254,7 +307,7 @@
 			                                <td><a href="consulter.html?consulterId=${listen.get('teacherId') }"><img src="${listen.get('userHeadPath') }" alt="${listen.get('userRealName') }"></a></td>
 			                                <td>
 			                                    <!--倾听者名字-->
-			                                    <a href="consulter.html?consulterId=${listen.get('teacherId') }"><span class="teacher catagory">倾听者：${listen.get('userRealName') }</span></a><br/>
+			                                    <span class="teacher catagory">倾听者：<a href="consulter.html?consulterId=${listen.get('teacherId') }">${listen.get('userRealName') }</a></span><br/>
 			                                    <!-- 倾听时间 -->
 			                                    <span>倾听时间：${dateutil:formatDate(listen.get('listenrecordStartTime')) }&nbsp;~&nbsp;${dateutil:formatDate(listen.get('listenrecordEndTime')) }</span><br/>
 			                                    <!--倾听费用-->
@@ -272,17 +325,25 @@
 	                        </table>
 		                    
 		                    <!--分页器：一页最多显示10篇文章。示例并没有超过10篇，就把这段注释掉吧-->
-		                    <!-- <div class="directory-contain-pager">
-		                        <ul class="pager">
-		                            <li class="previous"><a href="your/nice/url">«</a></li>
-		                            <li><a href="your/nice/url">1</a></li>
-		                            <li class="active"><a href="your/nice/url">2</a></li>
-		                            <li><a href="your/nice/url">3</a></li>
-		                            <li><a href="your/nice/url">4</a></li>
-		                            <li><a href="your/nice/url">5</a></li>
-		                            <li class="next"><a href="your/nice/url">»</a></li>
-		                        </ul>
-		                    </div> -->
+		                    <c:if test="${pageCount > pageSize }">
+				            <ul id="myPager" class="pager" data-elements="prev,nav,next" data-ride="pager"
+				                data-page="${pageNum }"
+				                data-rec-total="${totalCount }"
+				                data-max-nav-count="5"
+				                data-rec-per-page="${pageSize }"
+				                data-link-creator="${url}?page={page}<c:if test='${!empty(params) }'>&${params }</c:if>#page={page}"
+				            >
+				            </ul>
+				            <script>
+				                $('#myPager').pager({
+				                    linkCreator: function(page, pager) {
+				                        var url = window.location.href;
+				                        url = url.split("#")[0];
+				                        return url+'#page='+ page +'?page=' + page;
+				                    } 
+				                });
+				            </script>
+			            </c:if>
 		                </div>
 	                </div>
 	            </div><!--END 我的文章-->
@@ -451,10 +512,7 @@
             </div><!--END 个人设置-->
         </div>
     </div>
+    <%@include file="back-to-top.jsp" %>
     <%@include file="footer.jsp" %>
-    <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
-    <script src="${ctx }js/jquery-1.11.0.min.js"></script>
-    <!-- ZUI Javascript组件 -->
-    <script src="${ctx }js/zui.min.js"></script>
   </body>
 </html>

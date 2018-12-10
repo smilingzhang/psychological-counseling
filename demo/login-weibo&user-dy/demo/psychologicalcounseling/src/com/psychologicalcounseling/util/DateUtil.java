@@ -27,7 +27,6 @@ public class DateUtil {
 	public static String getDate() {
 		 Date dNow = new Date();
 		 SimpleDateFormat ft = new SimpleDateFormat(DATE_FORMAT);
-		 System.out.println("\n\ngetDate():"+ft.format(dNow)+"\n\n");
 		 return ft.format(dNow);
 	}
 	
@@ -44,7 +43,6 @@ public class DateUtil {
 		Date cd = stringToDate(currentDate);
 		
 		if(cd!=null) {
-			System.out.println("\naddDate():"+ft.format(cd.getTime()+milisecond)+"\n");
 			return ft.format(cd.getTime()+milisecond);
 		}else return null;
 	}
@@ -109,7 +107,6 @@ public class DateUtil {
 		if(d1!=null && d2!=null) {
 			Date date1 = stringToDate(d1);
 			Date date2 = stringToDate(d2);
-			System.out.println("\nsub:"+(date2.getTime()-date1.getTime()));
 			return date2.getTime()-date1.getTime();
 		}else return 0;
 		

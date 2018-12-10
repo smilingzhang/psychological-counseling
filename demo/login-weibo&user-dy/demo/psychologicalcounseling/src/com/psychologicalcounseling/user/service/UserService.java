@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.psychologicalcounseling.entity.ConsultationRecord;
 import com.psychologicalcounseling.entity.User;
 import com.psychologicalcounseling.user.dao.UserDao;
+import com.psychologicalcounseling.user.entity.UserPage;
 
 /**
  *@desc:一句话被描述
@@ -34,6 +35,9 @@ public class UserService {
 	private List<ConsultationRecord> finishedList = null;
 	//已取消
 	private List<ConsultationRecord> canceledList = null;
+	
+	//分页一个页面大小
+	private static final int PAGE_SIZE = 5;
 	
 	/**
 	 *@desc:获取User实例对应的未开始咨询实例
@@ -101,6 +105,19 @@ public class UserService {
 	public List<ConsultationRecord> getCanceledList() {
 		return canceledList;
 	}
+	
+	public List<ConsultationRecord> getToDoListWithPaging(int pageNum) {
+		return userDao.paging(toDoList, pageNum, PAGE_SIZE);
+	}
+
+	public List<ConsultationRecord> getFinishedListWithPaging(int pageNum) {
+		return userDao.paging(finishedList, pageNum, PAGE_SIZE);
+	}
+
+	public List<ConsultationRecord> getCanceledListWithPaging(int pageNum) {
+		return userDao.paging(canceledList, pageNum, PAGE_SIZE);
+	}
+	
 
 	/**
 	 *@desc:修改咨询状态
@@ -128,16 +145,6 @@ public class UserService {
 		return false;
 	}
 
-	/**
-	 *@desc:一句话描述
-	 *@return
-	 *@return:Object
-	 *@trhows
-	 */
-	public Object getCRList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	/**
 	 *@desc:个人中心，查询“我的课程”
@@ -147,9 +154,29 @@ public class UserService {
 	 *@trhows
 	 */
 	public List<Map<String, Object>> queryCourse(int uid) throws Exception {
-		String sql = "select course.courseId,courseName,teacherId,userRealName from user,course,courserecord where teacherId=user.userId and course.courseId=courserecord.courseId and courserecord.userId="+uid;
-		return userDao.findBySql(sql, null);
+		String sql = "select course.courseId,courseName,teacherId,userRealName from user,course,courserecord where teacherId=user.userId and course.courseId=courserecord.courseId and courserecord.userId=?";
+		Integer[] obj = new Integer[] {new Integer(uid)};
+		return userDao.findBySql(sql, obj);
 	}
+
+	/**
+	 * 
+	 *@desc: 个人中心，查询“我的课程”（分页）
+	 *@param uid
+	 *@param pageNum
+	 *@return
+	 *@throws Exception
+	 *@return:List<Map<String,Object>>
+	 *@trhows
+	 */
+	public List<Map<String, Object>> queryCourseWithPaging(int uid, int pageNum) throws Exception {
+		String sql = "select course.courseId,courseName,teacherId,userRealName from user,course,courserecord where teacherId=user.userId and course.courseId=courserecord.courseId and courserecord.userId=?";
+		String sql4count = "select count(*) from user,course,courserecord where teacherId=user.userId and course.courseId=courserecord.courseId and courserecord.userId=?";
+		Integer[] obj = new Integer[] {new Integer(uid)};
+		UserPage page = userDao.initPageInstanceBySql(PAGE_SIZE, pageNum, sql4count, obj);
+		return userDao.getPageBySql(sql, page, obj);
+	}
+	
 
 	/**
 	 *@desc:个人中心，查询“我的收藏（课程）”
@@ -162,9 +189,33 @@ public class UserService {
 		String sql = "select course.courseId,courseName,teacherId,userRealName" + 
 				" from user,course,collection" + 
 				" where teacherId=user.userId and course.courseId=collection.courseId" + 
-				" and collection.userId="+uid;
-//		Object[] obj = {uid};
-		return userDao.findBySql(sql, null);
+				" and collection.userId=?";
+		Integer[] obj = new Integer[]{new Integer(uid)};
+		return userDao.findBySql(sql, obj);
+	}
+	
+	/**
+	 * 
+	 *@desc: 个人中心，查询“我的收藏（课程）”（分页）
+	 *@param uid
+	 *@param pageNum
+	 *@return
+	 *@throws Exception
+	 *@return:List<Map<String,Object>>
+	 *@trhows
+	 */
+	public List<Map<String, Object>> queryFavoriteCourseWithPaging(int uid, int pageNum) throws Exception {
+		String sql = "select course.courseId,courseName,teacherId,userRealName" + 
+				" from user,course,collection" + 
+				" where teacherId=user.userId and course.courseId=collection.courseId" + 
+				" and collection.userId=?";
+		String sql4count = "select count(*)" + 
+				" from user,course,collection" + 
+				" where teacherId=user.userId and course.courseId=collection.courseId" + 
+				" and collection.userId=?";
+		Integer[] obj = new Integer[] {new Integer(uid)};
+		UserPage page = userDao.initPageInstanceBySql(PAGE_SIZE, pageNum, sql4count, obj);
+		return userDao.getPageBySql(sql, page, obj);
 	}
 
 	/**
@@ -188,9 +239,34 @@ public class UserService {
 			return null;
 		}
 	}
+	
+	/**
+	 * 
+	 *@desc: 个人中心课程页（分页）
+	 *@param uid
+	 *@param type
+	 *@param pageNum
+	 *@return
+	 *@throws Exception
+	 *@return:List<Map<String,Object>>
+	 *@trhows
+	 */
+	public List<Map<String, Object>> courseServiceWithPaging(int uid, String type, int pageNum) throws Exception {
+		//查询数据
+		//需要查询的数据：课程名，课程id，教师名，教师id
+		//将每个用户的对应数据以键值对形式放到map中，最终封装成一个list返回
+		switch(type) {
+		case "0":
+			return queryCourseWithPaging(uid, pageNum);
+		case "1":
+			return queryFavoriteCourseWithPaging(uid, pageNum);
+		default:
+			return null;
+		}
+	}
 
 	/**
-	 *@desc:查询倾听需要的数据
+	 *@desc:查询倾听模块需要的数据
 	 *@param uid
 	 *@return
 	 *@return:List<Map<String,Object>>
@@ -200,9 +276,32 @@ public class UserService {
 	public List<Map<String, Object>> listenService(int uid) throws Exception {
 		String sql = "select listenrecordStartTime,listenrecordEndTime,listenrecordPrice,teacherId,userHeadPath,userRealName"
 				+ " from user,listenrecord"
-				+ " where user.userId=listenrecord.teacherId and listenrecord.userId="+uid;
-		return userDao.findBySql(sql, null);
+				+ " where user.userId=listenrecord.teacherId and listenrecord.userId=?";
+		Integer[] obj = new Integer[] {new Integer(uid)};
+		return userDao.findBySql(sql, obj);
 	}
 	
+	/**
+	 *@desc:查询倾听模块需要的数据（分页）
+	 *@param uid
+	 *@return
+	 *@return:List<Map<String,Object>>
+	 * @throws Exception 
+	 *@trhows
+	 */
+	public List<Map<String, Object>> listenServiceWithPaging(int uid, int pageNum) throws Exception {
+		String sql = "select listenrecordStartTime,listenrecordEndTime,listenrecordPrice,teacherId,userHeadPath,userRealName"
+				+ " from user,listenrecord"
+				+ " where user.userId=listenrecord.teacherId and listenrecord.userId=?";
+		String sql4count = "select count(*)"
+				+ " from user,listenrecord"
+				+ " where user.userId=listenrecord.teacherId and listenrecord.userId=?";
+		Object[] obj = new Object[] {uid};
+		UserPage page = userDao.initPageInstanceBySql(PAGE_SIZE, pageNum, sql4count, obj);
+		return userDao.getPageBySql(sql, page, obj);
+	}
 	
+	public UserPage getPageInstance() {
+		return userDao.getPageInstance();
+	}
 }
