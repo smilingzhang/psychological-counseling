@@ -22,6 +22,7 @@ import org.springframework.web.portlet.bind.annotation.ResourceMapping;
 
 import com.psychologicalcounseling.entity.ConsultationRecord;
 import com.psychologicalcounseling.entity.User;
+import com.psychologicalcounseling.user.entity.UserPage;
 import com.psychologicalcounseling.user.service.UserService;
 
 /**
@@ -57,6 +58,7 @@ public class UserController {
 
 	@RequestMapping(value="/user",method=RequestMethod.GET)
 	public void gotoUser(HttpSession session,HttpServletRequest req,HttpServletResponse resp,Model model) throws ServletException, IOException {
+		//要删掉
 		session.setAttribute("uid", "1");
 		//1. 获取用户id
 		if(isLogin(session)) {
@@ -92,19 +94,23 @@ public class UserController {
 			String consultState = req.getParameter("consultState");
 			//默认为“未咨询”
 			if(consultState==null) consultState = ""+ConsultationRecord.TODO;
+			//获取页码
+			int pageNum = this.getParamPage((String)req.getParameter("page"));
 			switch(Integer.parseInt(consultState)) {
 			case ConsultationRecord.TODO:
-				model.addAttribute("crList", userService.getToDoList());
+				model.addAttribute("crList", userService.getToDoListWithPaging(pageNum));
 				break;
 			case ConsultationRecord.FINISHED:
-				model.addAttribute("crList", userService.getFinishedList());
+				model.addAttribute("crList", userService.getFinishedListWithPaging(pageNum));
 				break;
 			case ConsultationRecord.CANCELED:
-				model.addAttribute("crList", userService.getCanceledList());
+				model.addAttribute("crList", userService.getCanceledListWithPaging(pageNum));
 				break;
 			}
 			model.addAttribute("consultState",consultState);
 			model.addAttribute("nav",1);
+			//设置页码
+			this.setPage(model,userService.getPageInstance());
 			return "user";
 		}else {
 			session.setAttribute("backToUrl", "user");
@@ -112,6 +118,19 @@ public class UserController {
 		}
 	}
 	
+	/**
+	 *@desc: 设置分页器属性
+	 *@param model
+	 *@param pageInstance
+	 *@return:void
+	 *@trhows
+	 */
+	private void setPage(Model model, UserPage pageInstance) {
+		model.addAttribute("pageNum",pageInstance.getPageNum());
+		model.addAttribute("totalCount",pageInstance.getTotalCount());
+		model.addAttribute("pageSize",pageInstance.getPageSize());
+	}
+
 	/**
 	 * 
 	 *@desc:取消预约咨询
@@ -165,16 +184,20 @@ public class UserController {
 		}
 		else {
 			int uid = Integer.parseInt((String)session.getAttribute("uid"));
-			//2. 获取展现类型：0 “我的课程” 1 “我的收藏”
+			//2. 获取数据 
+			//获取展现类型：0 “我的课程” 1 “我的收藏”
 			String type = req.getParameter("courseType");
+			//获取当前页
+			int pageNum = this.getParamPage((String)req.getParameter("page"));
 			//默认展示“我的课程”
 			if(type==null) type = "0";
-			//3. 查询需要的数据
-			List<Map<String, Object>> list = userService.courseService(uid,type);
+			//3. 查询需要的数据（分页）
+			List<Map<String, Object>> list = userService.courseServiceWithPaging(uid, type, pageNum); 
 			//4. 设置参数
 			model.addAttribute("courseList", list);
 			model.addAttribute("courseType",type);
 			model.addAttribute("nav",2);
+			this.setPage(model,userService.getPageInstance());
 			return "user";
 		}
 	}
@@ -182,18 +205,22 @@ public class UserController {
 	@RequestMapping(value="myListen",method=RequestMethod.GET)
 	public String myListen(HttpSession session,HttpServletRequest req,HttpServletResponse resp,
 							Model model) throws Exception {
-		//1. 获取用户id
-		//如果id为空，跳转至登录界面
+		//判断是否登录：如果id为空，跳转至登录界面
 		if(!isLogin(session)) {
 			session.setAttribute("backToUrl", "user");
 			return "login";
 		}else {
+			//1. 获取信息
+			//获取页码
+			int pageNum = this.getParamPage((String)req.getParameter("page"));
+			//获取用户id
 			int uid = Integer.parseInt((String)session.getAttribute("uid"));
 			//2. 查询需要的数据
-			List<Map<String, Object>> list = userService.listenService(uid);
+			List<Map<String, Object>> list = userService.listenServiceWithPaging(uid, pageNum); 
 			//3. 设置参数
 			model.addAttribute("listenList",list);
 			model.addAttribute("nav", 3);
+			this.setPage(model,userService.getPageInstance());
 			return "user";
 		}
 	}
@@ -206,5 +233,18 @@ public class UserController {
 		session.removeAttribute("description");
 		
 		return "index";
+	}
+	
+	/**
+	 * 
+	 *@desc: 获取当前页码
+	 *@param page
+	 *@return
+	 *@return:int 默认为第一页
+	 *@trhows
+	 */
+	public int getParamPage(String page) {
+		if(page==null) return 1;
+		else return Integer.parseInt(page);
 	}
 }

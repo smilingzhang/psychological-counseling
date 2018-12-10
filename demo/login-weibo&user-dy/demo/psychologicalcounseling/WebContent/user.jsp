@@ -59,6 +59,7 @@
     <script>
         function hideCancelDialog(){
             $("#user-app-dialog").css("display","none");
+            $("#shade").css("display","none");
         }
     </script>
     <div class="contains user-contain">
@@ -146,6 +147,7 @@
 				                                <script>
 				                                    function showCancelDialog(id){
 				                                        $("#user-app-dialog").css("display","block");
+				                                        $("#shade").css("display","block");
 				                                        $("#cancel-btn").attr("href","cancel?consultationId="+id);
 				                                    }
 				                                </script>
@@ -188,20 +190,56 @@
 	                        </table>
 	                    </div>
 	                    <!--分页器：一页最多显示10项。示例并没有超过10项，就把这段注释掉吧-->
-	                    <!-- <div class="directory-contain-pager">
-	                        <ul class="pager">
-	                            <li class="previous"><a href="your/nice/url">«</a></li>
-	                            <li><a href="your/nice/url">1</a></li>
-	                            <li class="active"><a href="your/nice/url">2</a></li>
-	                            <li><a href="your/nice/url">3</a></li>
-	                            <li><a href="your/nice/url">4</a></li>
-	                            <li><a href="your/nice/url">5</a></li>
-	                            <li class="next"><a href="your/nice/url">»</a></li>
-	                        </ul>
-	                    </div> -->
-	                </div>
+	                    <div class="button-pager">
+				            <!--说明-->
+				            <!--
+				        		每一次跳转都是一次get请求。
+				                url范例：/consult-list.html#page=2?page=2
+							                ★关键点：①#page={page} ②page={page}
+							                ①用于分页器js的定位，②用于建立请求，两者都必不可少！！！
+				            -->
+				            <!--
+								★注：以下为分页器导航栏的相关参数，需要朋友们动态地进行设置（在id为myPager的ul元素上）
+				             data-page:             初始状态页数
+				             data-rec-total：       总记录数
+				             data-max-nav-count：   导航最大块数
+				             data-rec-per-page：    每页的记录数 
+								★注：若内容不足一页，请不要显示分页器。
+				            -->
+				            <%
+				            	HttpServletRequest httpRequest = (HttpServletRequest)request;
+				            	//当前url
+				            	String url = "http://" + request.getServerName()
+				            					+ ":" + request.getServerPort()
+				            					+ httpRequest.getContextPath()
+				            					+ httpRequest.getServletPath();
+				            	//参数
+				            	String params = httpRequest.getQueryString();
+				            					
+				            %>
+				            <c:if test="${totalCount > pageSize }">
+					            <ul id="myPager" class="pager" data-elements="prev,nav,next" data-ride="pager"
+					                data-page="${pageNum }"
+					                data-rec-total="${totalCount }"
+					                data-max-nav-count="5"
+					                data-rec-per-page="${pageSize }"
+					                data-link-creator="${url}?page={page}<c:if test='${!empty(params) }'>&${params }</c:if>#page={page}"
+					            >
+					            </ul>
+					            <script>
+					                $('#myPager').pager({
+					                    linkCreator: function(page, pager) {
+					                        var url = window.location.href;
+					                        url = url.split("#")[0];
+					                        return url+'#page='+ page +'?page=' + page;
+					                    } 
+					                });
+					            </script>
+				            </c:if>
+				        </div>
+			        </div>
 	            </div><!--END 我的咨询-->
-        	</c:if>
+	       	</c:if>
         	
         	<c:if test='${!empty(nav) && nav=="2"}'>
 	            <!--2. 我的课程-->
@@ -232,18 +270,26 @@
 	                        </div>                    		
 	                    	</c:forEach>
 	                    </div>
-	                    <!--分页器：一页最多显示10行。示例并没有超过10行，就把这段注释掉吧-->
-	                    <!-- <div class="directory-contain-pager">
-	                        <ul class="pager">
-	                            <li class="previous"><a href="your/nice/url">«</a></li>
-	                            <li><a href="your/nice/url">1</a></li>
-	                            <li class="active"><a href="your/nice/url">2</a></li>
-	                            <li><a href="your/nice/url">3</a></li>
-	                            <li><a href="your/nice/url">4</a></li>
-	                            <li><a href="your/nice/url">5</a></li>
-	                            <li class="next"><a href="your/nice/url">»</a></li>
-	                        </ul>
-	                    </div> -->
+	                    <!-- 分页器 -->
+	                    <c:if test="${pageCount > pageSize }">
+				            <ul id="myPager" class="pager" data-elements="prev,nav,next" data-ride="pager"
+				                data-page="${pageNum }"
+				                data-rec-total="${totalCount }"
+				                data-max-nav-count="5"
+				                data-rec-per-page="${pageSize }"
+				                data-link-creator="${url}?page={page}<c:if test='${!empty(params) }'>&${params }</c:if>#page={page}"
+				            >
+				            </ul>
+				            <script>
+				                $('#myPager').pager({
+				                    linkCreator: function(page, pager) {
+				                        var url = window.location.href;
+				                        url = url.split("#")[0];
+				                        return url+'#page='+ page +'?page=' + page;
+				                    } 
+				                });
+				            </script>
+			            </c:if>
 	                </div>
 	            </div><!--END 我的课程-->
         	</c:if>
@@ -279,17 +325,25 @@
 	                        </table>
 		                    
 		                    <!--分页器：一页最多显示10篇文章。示例并没有超过10篇，就把这段注释掉吧-->
-		                    <!-- <div class="directory-contain-pager">
-		                        <ul class="pager">
-		                            <li class="previous"><a href="your/nice/url">«</a></li>
-		                            <li><a href="your/nice/url">1</a></li>
-		                            <li class="active"><a href="your/nice/url">2</a></li>
-		                            <li><a href="your/nice/url">3</a></li>
-		                            <li><a href="your/nice/url">4</a></li>
-		                            <li><a href="your/nice/url">5</a></li>
-		                            <li class="next"><a href="your/nice/url">»</a></li>
-		                        </ul>
-		                    </div> -->
+		                    <c:if test="${pageCount > pageSize }">
+				            <ul id="myPager" class="pager" data-elements="prev,nav,next" data-ride="pager"
+				                data-page="${pageNum }"
+				                data-rec-total="${totalCount }"
+				                data-max-nav-count="5"
+				                data-rec-per-page="${pageSize }"
+				                data-link-creator="${url}?page={page}<c:if test='${!empty(params) }'>&${params }</c:if>#page={page}"
+				            >
+				            </ul>
+				            <script>
+				                $('#myPager').pager({
+				                    linkCreator: function(page, pager) {
+				                        var url = window.location.href;
+				                        url = url.split("#")[0];
+				                        return url+'#page='+ page +'?page=' + page;
+				                    } 
+				                });
+				            </script>
+			            </c:if>
 		                </div>
 	                </div>
 	            </div><!--END 我的文章-->
@@ -458,6 +512,7 @@
             </div><!--END 个人设置-->
         </div>
     </div>
+    <%@include file="back-to-top.jsp" %>
     <%@include file="footer.jsp" %>
   </body>
 </html>

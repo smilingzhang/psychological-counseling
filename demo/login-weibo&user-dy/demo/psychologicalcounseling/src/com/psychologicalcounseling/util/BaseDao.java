@@ -1,6 +1,7 @@
 package com.psychologicalcounseling.util;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 
@@ -224,7 +225,7 @@ public class BaseDao<T> {
 	 * @return 数据数量
 	 * @throws Exception
 	 */
-	public Long findCount(String hql, Object[] ... params) throws Exception {
+	public Long findCount(String hql, Object ... params) throws Exception {
 		Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
 		if (params != null && params.length > 0) {
 			for (int i = 0; i < params.length; i++)
@@ -240,7 +241,7 @@ public class BaseDao<T> {
 	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Object[]> findByProjection(String hql, Object[] ... params) throws Exception {
+	public List<Object[]> findByProjection(String hql, Object ... params) throws Exception {
 		Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
 		if (params != null && params.length > 0) {
 			for (int i = 0; i < params.length; i++)
@@ -258,7 +259,7 @@ public class BaseDao<T> {
 	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Object[]> findByProjection(int pageNum, int pageSize, String hql, Object[] ... params) throws Exception {
+	public List<Object[]> findByProjection(int pageNum, int pageSize, String hql, Object ... params) throws Exception {
 		Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
 		if (params != null && params.length > 0) {
 			for (int i = 0; i < params.length; i++)
@@ -276,7 +277,7 @@ public class BaseDao<T> {
 		 * @return 执行sql语句所影响的行数
 		 * @throws Exception
 		 */
-		public int excuteBySql(String sql, Object[] ... params) throws Exception {
+		public int excuteBySql(String sql, Object ... params) throws Exception {
 			SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sql);
 			if (params != null && params.length > 0) {
 				for (int i = 0; i < params.length; i++)
@@ -293,7 +294,7 @@ public class BaseDao<T> {
 		 * @throws Exception
 		 */
 		@SuppressWarnings("unchecked")
-		public Map<String, Object> findOneBySql(String sql, Object[] ... params) throws Exception {
+		public Map<String, Object> findOneBySql(String sql, Object ... params) throws Exception {
 			SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sql);
 			query.setResultTransformer(CriteriaSpecification.ALIAS_TO_ENTITY_MAP);
 			if (params != null && params.length > 0) {
@@ -311,7 +312,7 @@ public class BaseDao<T> {
 		 * @throws Exception
 		 */
 		@SuppressWarnings("unchecked")
-		public List<Map<String, Object>> findBySql(String sql, Object[] ... params) throws Exception {
+		public List<Map<String, Object>> findBySql(String sql, Object ... params) throws Exception {
 			SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sql);
 			query.setResultTransformer(CriteriaSpecification.ALIAS_TO_ENTITY_MAP);
 			if (params != null && params.length > 0) {
@@ -335,7 +336,8 @@ public class BaseDao<T> {
 				for (int i = 0; i < params.length; i++)
 					query.setParameter(i, params[i]);
 			}
-			return (Long) query.uniqueResult();
+			BigInteger countResult = (BigInteger) query.uniqueResult();
+			return Long.valueOf(countResult.toString());
 		}
 
 		/**
@@ -348,13 +350,14 @@ public class BaseDao<T> {
 		 * @throws Exception
 		 */
 		@SuppressWarnings("unchecked")
-		public List<Map<String, Object>> findBySql(int pageNum, int pageSize, String sql, Object[] ... params)
+		public List<Map<String, Object>> findBySql(int pageNum, int pageSize, String sql, Object... params)
 				throws Exception {
 			SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sql);
 			query.setResultTransformer(CriteriaSpecification.ALIAS_TO_ENTITY_MAP);
 			if (params != null && params.length > 0) {
-				for (int i = 0; i < params.length; i++)
+				for (int i = 0; i < params.length; i++) {
 					query.setParameter(i, params[i]);
+				}
 			}
 			query.setFirstResult((pageNum - 1) * pageSize);
 			query.setMaxResults(pageSize);
@@ -368,7 +371,7 @@ public class BaseDao<T> {
 		 * @throws Exception
 		 */
 		@SuppressWarnings("unchecked")
-		public T findOne(String hql, Object[] ... params) throws Exception {
+		public T findOne(String hql, Object ... params) throws Exception {
 			Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
 			if (params != null && params.length > 0) {
 				for (int i = 0; i < params.length; i++)
@@ -404,7 +407,7 @@ public class BaseDao<T> {
 		 * @throws Exception
 		 */
 		public Page<Object[]> findPageByProjection(int pageNum, int pageSize, String hqlCount, String hqlList,
-				Object[]  ... params) throws Exception {
+				Object ... params) throws Exception {
 			long total = findCount(hqlCount, params);
 			List<Object[]> rows = findByProjection(pageNum, pageSize, hqlList, params);
 			return new Page<Object[]>(pageNum, pageSize, (int) total, rows);
