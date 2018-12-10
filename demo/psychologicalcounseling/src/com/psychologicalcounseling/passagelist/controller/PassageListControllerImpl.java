@@ -38,18 +38,17 @@ public class PassageListControllerImpl {
 		TypeTable typeTable = this.passageListServiceImpl.findTypeTable(typetableId);  //查询出类别为typetableId的typeTable
 		
 		String pageNum = request.getParameter("pageNum");    //获取页数
-		System.out.println("------pageNum-----"+pageNum);
+		System.out.println("这是第"+pageNum+"页");
 		
 		int num = 0;
 		if(pageNum==null || pageNum.equals("")) {
-			num = 0;
+			num = 1;
 		}else {
 			num = Integer.parseInt(pageNum);
 		}
-		int count = this.passageListServiceImpl.findCount(businesstypeWorkType, typeTable);
-		List<BusinessType> list = this.passageListServiceImpl.findBusinessTypeByPage(num, 5, businesstypeWorkType, typeTable);
-		
-//		List<BusinessType> list = this.passageListServiceImpl.findBusinessType(businesstypeWorkType, typeTable);
+		int count = this.passageListServiceImpl.findCount(businesstypeWorkType, typeTable);         //查询出共有多少条数据
+		System.out.println("总共有"+count+"条数据");
+		List<BusinessType> list = this.passageListServiceImpl.findBusinessTypeByPage(num, 4, businesstypeWorkType, typeTable);  //分页查询出文章列表
 		 
 		List<Article> list1 = new ArrayList<Article>();
 		for(int i = 0;i<list.size();i++) {
@@ -61,11 +60,12 @@ public class PassageListControllerImpl {
 			System.out.println(article.getTeacher().getUser().getUserRealName());
 			list1.add(article);
 		}
-		System.out.println("Article----list1----"+list1.size());
-		Page<Article> page = new Page<Article>(num,5);
+		System.out.println("这个文章列表有"+list1.size()+"篇文章");
+		Page<Article> page = new Page<Article>(num,4);
 		page.setList(list1);
 		page.setTotalCount(count);
 		
+		request.setAttribute("typetableId", id2);
 		request.getServletContext().setAttribute("typeTablelist",typeTablelist);
 		request.setAttribute("id1", id1);
 		request.getServletContext().setAttribute("passageList", page);

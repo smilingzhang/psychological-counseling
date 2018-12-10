@@ -6,10 +6,13 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.psychologicalcounseling.entity.Article;
 import com.psychologicalcounseling.entity.Evaluate;
 import com.psychologicalcounseling.entity.Page;
@@ -30,6 +33,7 @@ public class PassageControllerImpl {
 		int articleId = Integer.parseInt(id);
 		
 		Article article = this.passageServiceImpl.findArticle(articleId);     //根据articleId获取文章
+		System.out.println(article.getArticleContent());
 		List<Article> list = new ArrayList<Article>();
 		list.add(article);
 		
@@ -53,8 +57,8 @@ public class PassageControllerImpl {
 		if(evaluateComment==null) {               //如果评论为空，那么只显示他人的评论内容		
 			
 			int count = this.passageServiceImpl.findCount(articleId);  //得到评论的条数
-			List<Evaluate> list1 = this.passageServiceImpl.findEvaluateByPage(num, 7, articleId);  //分页查询每页的评论
-			Page<Evaluate> page = new Page<Evaluate>(num,7);
+			List<Evaluate> list1 = this.passageServiceImpl.findEvaluateByPage(num, 4, articleId);  //分页查询每页的评论
+			Page<Evaluate> page = new Page<Evaluate>(num,4);
 			page.setList(list1);
 			page.setTotalCount(count);
 			
@@ -68,14 +72,17 @@ public class PassageControllerImpl {
 			evaluate.setEvaluateWorkId(articleId);
 			evaluate.setEvaluateComment(evaluateComment);
 			evaluate.setEvaluateTime(new Date());
-//			evaluate.setEvaluateStar(evaluateStar);
-			User user = new User();           //先new 一个User,等登录页面做好后再获取User具体的内容
+
+			
+//			String Id2 = request.getParameter("userId");
+//			int userId = Integer.parseInt(Id2);
+			User user = this.passageServiceImpl.findUserByUserId(2);
 			evaluate.setUser(user);
 			this.passageServiceImpl.insertEvaluate(evaluate);     //将用户的评论插入数据库
 			
 			int count = this.passageServiceImpl.findCount(articleId);  //得到评论的条数
-			List<Evaluate> list1 = this.passageServiceImpl.findEvaluateByPage(num, 7, articleId);  //分页查询每页的评论
-			Page<Evaluate> page = new Page<Evaluate>(num,7);
+			List<Evaluate> list1 = this.passageServiceImpl.findEvaluateByPage(num, 4, articleId);  //分页查询每页的评论
+			Page<Evaluate> page = new Page<Evaluate>(num,4);
 			page.setList(list1);
 			page.setTotalCount(count);
 			
@@ -84,10 +91,6 @@ public class PassageControllerImpl {
 			request.getServletContext().setAttribute("article", list);	
 			return "passage";
 		}	
-		
-//		request.setAttribute("Evaluate", list1);
-//		request.setAttribute("articleId", articleId);
-//		request.setAttribute("article", list);
-//		return "passage";
 	} 
+
 }
