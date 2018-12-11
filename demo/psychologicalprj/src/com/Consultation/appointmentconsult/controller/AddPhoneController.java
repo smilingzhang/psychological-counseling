@@ -8,7 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.Consultation.appointmentconsult.service.ConsultOrderService;
-
+/**
+ * 
+ *@desc:向数据库中加入用户的手机号
+ *@author chunhui
+ *@date:Dec 7, 20182:48:22 PM
+ */
 @Controller
 public class AddPhoneController {
 	@Resource

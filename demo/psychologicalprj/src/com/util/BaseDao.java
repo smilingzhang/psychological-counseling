@@ -148,7 +148,7 @@ public class BaseDao<T> {
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 
 		for (int i = 0, len = params.length; i < len; i++) {
-			query.setParameter(i + "", params[i]);
+			query.setParameter(i, params[i]);
 		}
 		return query.list();
 	}

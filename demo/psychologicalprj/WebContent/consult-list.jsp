@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<% String path = request.getContextPath(); %>
 <c:set var="ctx" value="${pageContext.request.contextPath }"></c:set>
+<% String path = request.getContextPath(); %>
 
 <!DOCTYPE html>
 <html lang="zh-cn">
@@ -36,10 +36,15 @@
                   <form action="<%=path %>/consult/show" method="post">
                   <span class="tag">分类</span>
 		                <select name="fenlei">
-		                	<option value="01">婚姻</option>
-		                	<option value="02">亲子</option>
-		                	<option value="03">职场</option>
-		                	<option value="04">健康</option>
+		                
+		                	<option value="01" <c:if test="${fenlei==1 }">selected="selected"</c:if>>婚姻</option>
+		              
+		                	<option value="02" <c:if test="${fenlei==2 }">selected="selected"</c:if>>亲子</option>
+		                
+		                	<option value="03" <c:if test="${fenlei==3 }">selected="selected"</c:if>>职场</option>
+		                
+		                	<option value="04" <c:if test="${fenlei==4 }">selected="selected"</c:if>>健康</option>
+		                	
 		                </select>
                     <!-- <br/> -->&nbsp;
                    

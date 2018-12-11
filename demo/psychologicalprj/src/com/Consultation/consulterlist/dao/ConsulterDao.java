@@ -80,7 +80,7 @@ public class ConsulterDao extends BaseDao<Teacher> {
 
 	/**
 	 * 
-	 * @desc:检索所有的咨询师，一页展示6个
+	 * @desc:检索所有的咨询师
 	 * @return
 	 * @return:List<Teacher>
 	 * @trhows
