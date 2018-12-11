@@ -35,7 +35,7 @@ public class IndexFilter implements Filter {
 	 */
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
 		if(req.getParameter("code")!=null)
-			req.getRequestDispatcher("loginWeiboAuth2.do").forward(req, resp);
+			req.getRequestDispatcher("loginWeiboAuth2").forward(req, resp);
 		else req.getRequestDispatcher("index.jsp").forward(req, resp);
 	}
 

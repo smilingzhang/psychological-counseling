@@ -17,11 +17,6 @@ select{
 .btn-link:hover{
     color: #fff;
 }
-.btn{
-    border-radius: 5px;
-    border-width: 0;
-    text-shadow: none;
-}
 a:hover{
     color: #d75455;
     text-decoration: none
@@ -232,24 +227,16 @@ a:focus{
     margin: 20px;
 }
 .login-contains .loginpanel .login-other{
-    /* margin: auto;  position: absolute;  top: 0; left: 0; bottom: 0; right: 0; */
-    height: 80px;
-    padding-left:20%;
-    padding-right: 20%;
-}
-.login-contains .loginpanel .login-other .img{
-    /* display: block; */
     width: 50%;
-    float: left;
-    padding-right: 20px;
 }
 .login-contains .loginpanel .login-other img{
+    width: 33%;
+    margin: 10px;
     border-radius: 10px;
-    width: 100%;
 }
 .login-contains .loginpanel .login-other img:hover{
     /* box-sshadow: ; */
-    box-shadow: #db96969c  0 0 15px 0px;
+    box-shadow: #db96969c  0 0 5px 0px;
 }
 .head{
     display: block;
@@ -1100,7 +1087,7 @@ a:focus{
     color: #fff
 }
 #shade{
-    z-index: 1010;
+    z-index: 100;
     width: 100%;
     height: 100%;
     background-color: #97929257;

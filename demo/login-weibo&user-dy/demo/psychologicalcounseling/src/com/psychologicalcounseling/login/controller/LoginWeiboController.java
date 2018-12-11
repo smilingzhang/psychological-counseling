@@ -3,9 +3,7 @@
  */
 package com.psychologicalcounseling.login.controller;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -18,16 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.psychologicalcounseling.login.service.IsNewPhoneDaoImpl;
+import com.psychologicalcounseling.entity.User;
 import com.psychologicalcounseling.login.service.LoginWeiboService;
-import com.psychologicalcounseling.login.service.RegistServiceImpl;
-import com.psychologicalcounseling.login.service.VerifyPwdServiceImpl;
 
 import com.psychologicalcounseling.login.weibo4j.Oauth;
 import com.psychologicalcounseling.login.weibo4j.http.AccessToken;
 import com.psychologicalcounseling.login.weibo4j.Log;
 import com.psychologicalcounseling.login.weibo4j.model.WeiboException;
-import com.psychologicalcounseling.login.weibo4j.util.BareBonesBrowserLaunch;
 
 /**
  *@desc:微博第三方登录
@@ -58,14 +53,18 @@ public class LoginWeiboController {
 		Log.logInfo("code: " + code);
 		try{
 			AccessToken at = oauth.getAccessTokenByCode(code);
-			System.out.println(at);
 			String accessToken = at.getAccessToken();
 			String weiboUid = at.getUid();
 			//调用服务进行登录，若登录成功，将用户id存入session。
 			//若登录失败，uid值为null
 			if(accessToken!=null && weiboUid!=null) {
-				int uid = loginWeiboService.login(accessToken,weiboUid);
-				if(uid > 0) session.setAttribute("uid", uid);
+				User user = loginWeiboService.login(accessToken,Long.parseLong(weiboUid));
+				if(user != null) {
+					session.setAttribute("uid", user.getUserId());
+					session.setAttribute("userNickName", user.getUserNickName());
+					session.setAttribute("description", user.getUserAutograph());
+					session.setAttribute("avatarLink", user.getUserHeadPath());
+				}
 				else session.setAttribute("uid", null);
 			} else {
 				session.setAttribute("uid", null);
@@ -74,10 +73,13 @@ public class LoginWeiboController {
 		} catch (WeiboException e) {
 			if(401 == e.getStatusCode()){
 				Log.logInfo("Unable to get the access token.");
-				resp.sendRedirect("login.jsp");
 			}else{
+				session.setAttribute("loginMsg", "非常抱歉，暂时无法使用微博账号登录");
+				session.setAttribute("loginMsgAttr", "warning");
+				
 				e.printStackTrace();
 			}
+			resp.sendRedirect("login.jsp");
 		}
 		req.getRequestDispatcher("redirect").forward(req, resp);
 	}

@@ -38,6 +38,9 @@ public class LoginController {
 		String backToUrl = (String)session.getAttribute("backToUrl");
 		if(backToUrl!=null) {
 			req.getRequestDispatcher(backToUrl).forward(req, resp);
-		}else req.getRequestDispatcher("index.html").forward(req, resp);
+		}else{
+			req.getRequestDispatcher("index.jsp").forward(req, resp);
+		}
+		
 	}
 }

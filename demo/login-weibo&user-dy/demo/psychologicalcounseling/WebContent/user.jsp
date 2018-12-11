@@ -181,6 +181,9 @@
 		                        <c:if test="${consultState=='0' && empty(crList) }">
 		                        	<tr><td class="tag">您暂无预约的咨询,<a href="consult-list.html">去体验第一次心理咨询</a></td></tr>
 		                        </c:if>
+		                        <c:if test="${empty(consultState) && empty(crList) }">
+		                        	<tr><td class="tag">您暂无预约的咨询,<a href="consult-list.html">去体验第一次心理咨询</a></td></tr>
+		                        </c:if>
 		                        <c:if test="${consultState=='1' && empty(crList) }">
 	                        		<tr><td class="tag">您暂无已完成的咨询</td></tr>
 		                        </c:if>
@@ -254,6 +257,7 @@
 	                    </div>
 	                    <!--课程列表-->
 	                    <div class="directory-contain-list">
+	                    <c:if test="${!empty(courseList) }">
 	                    	<c:forEach items="${courseList }" var="course">
 	                        <!--一门课程-->
 	                        <div class="course-block">
@@ -269,6 +273,10 @@
 	                            <a class="btn btn-primary" href="course.html?courseId=${course.get('courseId')}">进入学习</a>
 	                        </div>                    		
 	                    	</c:forEach>
+	                    </c:if>
+	                    <c:if test="${empty(consultState) && empty(crList) }">
+                        	<span class="tag">您暂无添加任何课程,<a href="course-list.html">去看看什么课程适合您</a></span>
+                        </c:if>
 	                    </div>
 	                    <!-- 分页器 -->
 	                    <c:if test="${pageCount > pageSize }">
@@ -300,7 +308,7 @@
 		                <div class="directory-contain-list">
 		                    <table>
 		                        <c:if test="${!empty(listenList) && listenList.size()>0 }">
-		                            <!--一个咨询-->
+		                            <!--一个倾听-->
 		                            <c:forEach items="${listenList }" var="listen">
 			                            <tr>
 			                                <!--倾听者头像-->
@@ -321,6 +329,9 @@
 			                            	</td>
 			                            </tr> 
 		                            </c:forEach>
+		                        </c:if>
+		                        <c:if test="${empty(listenList)}">
+		                        	<tr><td class="tag">您暂无倾听历史,<a href="listen-list.html">或许您有话想说</a></td></tr>
 		                        </c:if>
 	                        </table>
 		                    
@@ -346,7 +357,7 @@
 			            </c:if>
 		                </div>
 	                </div>
-	            </div><!--END 我的文章-->
+	            </div><!--END 我的倾听-->
             </c:if>
             <!--4. 个人设置-->
             <div id="directory-contain-4" class="panel" style="display:none">

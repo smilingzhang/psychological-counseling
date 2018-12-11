@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-cn">
   <head>
@@ -12,11 +13,12 @@
     <!-- zui -->
     <link href="${ctx }css/zui-theme.css" rel="stylesheet">
     <link href="${ctx }css/zui.css" rel="stylesheet">
-    <link href="${ctx }css/mystyle.css" rel="stylesheet">
     <script src="${ctx }js/jquery-3.3.1.js"></script>
-    <script src="${ctx }js/verify.js"></script> 
     <script src="${ctx }js/zui.js"></script> 
-    <script src="${ctx }js/zui.lite.js"></script> 
+    <script src="${ctx }js/zui.lite.js"></script>
+    <!-- 自定义 --> 
+    <link href="${ctx }css/mystyle.css" rel="stylesheet">
+    <script src="${ctx }js/verify.js"></script> 
   </head>
   <body>
   	<%--资源在assets目录对应的文件夹下 --%>
@@ -42,7 +44,16 @@
     <!-- 在此处编码你的创意 -->
     <!-- 头部 -->
     <%@include file="head.jsp" %>
-    
+    <c:if test="${!empty(loginMsg) and fn:length(loginMsg)!=0}">
+    	<script>
+    		(function($){
+    			new $.zui.Messager('${sessionScope.loginMsg}', {
+    			    type: '${sessionScope.loginMsgAttr}' // 定义颜色主题
+    			}).show();
+    		}(jQuery))
+    	</script>
+    	<c:set var="loginMsg" value="" scope="session"/>
+    </c:if>
     <div class="login-contains center-block">
         <div class="head">
             <!-- <img src="images/logo.png"/> -->
@@ -100,16 +111,17 @@
                 </form>
                 <!--第三方登录接口-->
                 <div class="login-tag">
-                    <span class="tag">------------------</span>
+                    <span class="tag">---------------------</span>
                     <span class="tag">第三方登录</span>
-                    <span class="tag">------------------</span>
+                    <span class="tag">--------------------</span>
                 </div>
-                <div class="login-other">
-                        <!--支付宝-->
-                        <div class="img"><a href="#"><img src="images/alipay.png" alt=""></a></div>
-                        <!--微博-->
-                        <div class="img"><a href="loginWeiboRequest"><img src="images/weibo.png" alt=""></a></div>
-                    </div>
+                <div class="login-other center-block">
+                    <!--原生icon-->
+                    <!--支付宝-->
+                    <a href="#"><img src="images/alipay.png" alt=""></a>
+                    <!--微博-->
+                    <a href="loginWeiboRequest"><img src="images/weibo.png" alt=""></a>
+                </div>
             </div>
         </div>
     </div> 
