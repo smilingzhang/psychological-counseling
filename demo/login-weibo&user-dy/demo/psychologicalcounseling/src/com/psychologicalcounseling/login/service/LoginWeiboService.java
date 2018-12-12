@@ -39,7 +39,7 @@ public class LoginWeiboService {
 	 *				<li>否则，返回-1</li></ul>
 	 *@trhows
 	 */
-	public com.psychologicalcounseling.entity.User login(String accessToken,long weiboUid) {
+	public com.psychologicalcounseling.entity.User login(String accessToken,String weiboUid) {
 		int uid = 0;
 		//实例化一个项目内的User对象（com.psychologicalcounseling.entity）
 		com.psychologicalcounseling.entity.User user = new com.psychologicalcounseling.entity.User();
@@ -62,7 +62,7 @@ public class LoginWeiboService {
 			
 			//进行信息的设置
 			user.setUserIdentity(user.IDENTITY_USER);
-			user.setWeiboUid(weiboUid);
+			user.setWeiboUid(""+weiboUid);
 			setInfo(user,weiboUser);
 			//将新建的用户插入数据库
 			loginWeiboDao.save(user);
@@ -112,7 +112,7 @@ public class LoginWeiboService {
 	 *@return:String
 	 *@trhows
 	 */
-	private int getId(long weiboUid) {
+	private int getId(String weiboUid) {
 		return loginWeiboDao.getId(weiboUid);
 	}
 
@@ -122,7 +122,7 @@ public class LoginWeiboService {
 	 *@return:boolean
 	 *@trhows
 	 */
-	private boolean isRegist(long weiboUid) {
+	private boolean isRegist(String weiboUid) {
 		return loginWeiboDao.isRegist(weiboUid);
 	}
 

@@ -1672,3 +1672,10 @@ a:focus{
 #back-to-top-btn i{
     font-size: 20px;
 }
+.table-head td{
+	text-align: center;
+	line-height:1.5em;
+	font-size:20px;
+	color: #6e0706;
+	background-color: #faf1f1;
+}

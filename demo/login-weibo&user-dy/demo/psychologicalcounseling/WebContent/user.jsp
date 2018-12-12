@@ -115,16 +115,29 @@
 	                    <!--咨询列表-->
 	                    <div class="directory-contain-list">
 	                        <!--未完成表格-->
-	                        <table>
+	                        <table style="table-layout:fixed">
 		                        <c:if test="${!empty(crList) && crList.size()>0 }">
 		                            <!--一个咨询-->
+	                            	<tr class="table-head">
+	                            		<td class="tag"  width="25%">咨询师信息</td>
+	                            		<td class="tag" width="45%">咨询信息</td>
+	                            		<td width="15%"></td><td width="15%"></td>
+	                            	</tr>
 		                            <c:forEach items="${crList }" var="consulter">
 			                            <tr>
 			                                <!--咨询师照片-->
-			                                <td><img src="${consulter.getTeacher().getUser().getUserHeadPath() }" alt="${consulter.getTeacher().getUser().getUserNickName() }"></td>
 			                                <td>
-			                                    <!--咨询师名字-->
-			                                    <span class="teacher catagory">咨询师：<a href="consulter.html">${consulter.getTeacher().getUser().getUserNickName() }</a></span><br/>
+			                                	<img style="float:left;margin-right:20px;" src="${consulter.getTeacher().getUser().getUserHeadPath() }" alt="${consulter.getTeacher().getUser().getUserNickName() }">
+			                                	<div>
+				                                    <!--咨询师名字-->
+				                                    <span class=""><a href="consulter.html">${consulter.getTeacher().getUser().getUserRealName() }</a></span><br/>
+				                                    <!-- 咨询师性别/年龄 -->
+				                                    <span class="tag">${consulter.getTeacher().getUser().getUserSex() }/${consulter.getTeacher().getTeacherAge() }岁</span><br/>
+				                                    <!-- 咨询师资质 -->
+				                                    <span class="tag">${fn:split(consulter.getTeacher().getAuthenticationAptitudeName(),' ')[0] }</span>
+			                                	</div>
+		                                	</td>
+			                                <td>
 			                                    <!--咨询费用-->
 			                                    <span>咨询费用：￥${consulter.getConsultationrecordPrice() }</span><br/>
 			                                    <!--咨询时间：精确到几点机几分-->
@@ -167,7 +180,7 @@
 				                                <c:if test="${consulter.getConsultationrecordMethod()!=1
 				                                				&& dateutil:compare(requestScope.targetDate,consulter.getConsultationrecordStartTime())==1
 				                                				&& dateutil:compare(dateutil:getDate(),consulter.getConsultationrecordEndTime())==2 }">
-					                                <td><span><a class="enter-room" href="room.html">进入咨询室</a></span></td>
+					                                <td width="15%"><span><a class="enter-room" href="room.html">进入咨询室</a></span></td>
 				                                </c:if>
 				                                <!-- 若是线上咨询，且已经结束 -->
 				                                <c:if test="${consulter.getConsultationrecordMethod()!=1
@@ -175,6 +188,7 @@
 					                                <td><span class="disabled">进入咨询室</span></td>
 				                                </c:if>
 			                                </c:if>
+			                                <c:if test="${consultState!='0'}"><td></td><td></td></c:if>
 			                            </tr>                            
 		                            </c:forEach>
 		                        </c:if>

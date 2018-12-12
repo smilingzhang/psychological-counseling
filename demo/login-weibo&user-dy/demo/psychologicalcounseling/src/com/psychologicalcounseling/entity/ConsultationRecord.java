@@ -121,6 +121,9 @@ public class ConsultationRecord {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+	@Override
+	public String toString() {
+		return "[startTime="+consultationrecordStartTime+"]";
+	}
 	
 }

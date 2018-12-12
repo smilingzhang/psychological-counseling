@@ -27,7 +27,7 @@ public class User {
 	//---------------增加 By 邓旸
 	public static final int IDENTITY_USER = 1;
 	public static final int IDENTITY_CONSULTER = 2;
-	private long weiboUid;
+	private String weiboUid;
 	//----------------
 	
 	private int userId;
@@ -128,10 +128,10 @@ public class User {
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
-	public long getWeiboUid() {
+	public String getWeiboUid() {
 		return weiboUid;
 	}
-	public void setWeiboUid(long weiboUid) {
+	public void setWeiboUid(String weiboUid) {
 		this.weiboUid = weiboUid;
 	}
 	@OneToMany(mappedBy="user",targetEntity=UserLabel.class,cascade=CascadeType.ALL)

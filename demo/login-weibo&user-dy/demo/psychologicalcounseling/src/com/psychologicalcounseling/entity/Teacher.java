@@ -29,13 +29,21 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name="teacher")
 public class Teacher {
+	//--------增加 by邓旸
+	private int teacherAge;
+	//--------
+	//--------增加 by张春辉
+	private String authenticationAptitudeName;
+	//--------
+	//--------删除 by张春辉
+	private Set<Authentication> authentications = new HashSet<Authentication>();
+	//--------
 	private int teacherId;
 	private int teacherWorkTime;
 	private float teacherPraiseRate;
 	private float teacherPrice;
 	private String teacherIntroduction;
 	private int teacherListenTime;
-	private Set<Authentication> authentications = new HashSet<Authentication>();
 	private Set<GoodAt> goodats = new HashSet<GoodAt>();
 	private Set<ConsultObject> consultobjects = new HashSet<ConsultObject>();
 	private Set<TeacherTime>teacherTimes = new HashSet<TeacherTime>();
@@ -81,6 +89,18 @@ public class Teacher {
 	}
 	public void setTeacherListenTime(int teacherListenTime) {
 		this.teacherListenTime = teacherListenTime;
+	}
+	public int getTeacherAge() {
+		return teacherAge;
+	}
+	public void setTeacherAge(int teacherAge) {
+		this.teacherAge = teacherAge;
+	}
+	public String getAuthenticationAptitudeName() {
+		return authenticationAptitudeName;
+	}
+	public void setAuthenticationAptitudeName(String authenticationAptitudeName) {
+		this.authenticationAptitudeName = authenticationAptitudeName;
 	}
 	@OneToMany(targetEntity=Authentication.class,cascade=CascadeType.ALL)
 	@JoinColumn(name="teacherId")

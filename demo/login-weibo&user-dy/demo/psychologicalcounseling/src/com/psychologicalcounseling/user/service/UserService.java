@@ -17,6 +17,7 @@ import com.psychologicalcounseling.entity.ConsultationRecord;
 import com.psychologicalcounseling.entity.User;
 import com.psychologicalcounseling.user.dao.UserDao;
 import com.psychologicalcounseling.user.entity.UserPage;
+import com.psychologicalcounseling.util.DateUtil;
 
 /**
  *@desc:一句话被描述
@@ -51,8 +52,10 @@ public class UserService {
 		clearList();
 		//1. 获取用户的咨询集合
 		Set<ConsultationRecord> consultationRecords = user.getConsultationRecords();
-		//2. 遍历集合，根据consultState字段拆分表
-		for(ConsultationRecord record : consultationRecords) {
+		//2. 将元素按照预约时间排序
+		List<ConsultationRecord> list = sortConsultList(consultationRecords);
+		//3. 遍历集合，根据consultState字段拆分表
+		for(ConsultationRecord record : list) {
 			switch(record.getConsultState()) {
 			case ConsultationRecord.TODO:
 				toDoList.add(record);
@@ -69,8 +72,38 @@ public class UserService {
 	}
 
 	/**
-	 *@desc:一句话描述
-	 *@return:清空三个表
+	 *@desc: 将预约列表按时间排序
+	 *@param consultationRecords
+	 *@return
+	 *@return:List<ConsultationRecord>
+	 *@trhows
+	 */
+	private List<ConsultationRecord> sortConsultList(Set<ConsultationRecord> consultationRecords) {
+		List<ConsultationRecord> list = new ArrayList<>();
+		for(ConsultationRecord e: consultationRecords) {
+			int pos = 0;
+			if(list.size()!=0) { 
+				for(ConsultationRecord cre:list) {
+					int rs = DateUtil.compare(e.getConsultationrecordStartTime(), cre.getConsultationrecordStartTime());
+					if(rs!=-1 && rs!=1) {
+						pos = list.indexOf(cre);
+						break;
+					}else if(rs==1 && list.indexOf(cre)==(list.size()-1)) {
+						pos = -1;
+						break;
+					}
+				}
+			}
+			if(pos==-1)
+				list.add(e);
+			else list.add(pos,e);
+		}
+		return list;
+	}
+
+	/**
+	 *@desc:清空三个表
+	 *@return:
 	 *@trhows
 	 */
 	private void clearList() {

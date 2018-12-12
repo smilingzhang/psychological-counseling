@@ -58,7 +58,7 @@ public class LoginWeiboController {
 			//调用服务进行登录，若登录成功，将用户id存入session。
 			//若登录失败，uid值为null
 			if(accessToken!=null && weiboUid!=null) {
-				User user = loginWeiboService.login(accessToken,Long.parseLong(weiboUid));
+				User user = loginWeiboService.login(accessToken,weiboUid);
 				if(user != null) {
 					session.setAttribute("uid", user.getUserId());
 					session.setAttribute("userNickName", user.getUserNickName());
