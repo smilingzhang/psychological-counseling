@@ -56,10 +56,13 @@ public class UserController {
 		else return false;
 	}
 
+	@RequestMapping(value="/goToUser",method=RequestMethod.GET)
+	public void goToUser(HttpSession session,HttpServletResponse resp) throws IOException {
+		session.setAttribute("uid", 1);
+		resp.sendRedirect("user");
+	}
 	@RequestMapping(value="/user",method=RequestMethod.GET)
-	public void gotoUser(HttpSession session,HttpServletRequest req,HttpServletResponse resp,Model model) throws ServletException, IOException {
-		//要删掉
-//		session.setAttribute("uid", "1");
+	public void user(HttpSession session,HttpServletRequest req,HttpServletResponse resp,Model model) throws ServletException, IOException {
 		//1. 获取用户id
 		if(isLogin(session)) {
 			int uid = this.getParamId((Integer)session.getAttribute("uid")); 
