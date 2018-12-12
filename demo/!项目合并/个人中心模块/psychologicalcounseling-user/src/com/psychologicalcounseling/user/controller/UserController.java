@@ -75,6 +75,7 @@ public class UserController {
 			session.setAttribute("avatarLink", user.getUserHeadPath());
 			session.setAttribute("userNickName", user.getUserNickName());
 			session.setAttribute("description", user.getUserAutograph());
+			session.setAttribute("user", user);
 			
 			String nav = (String)req.getAttribute("nav");
 			if(nav==null) {

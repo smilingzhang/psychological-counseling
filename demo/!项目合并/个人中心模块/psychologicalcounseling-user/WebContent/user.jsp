@@ -23,10 +23,10 @@
     <script src="${ctx }js/zui.min.js"></script>
     <!--自定义-->
     <link href="${ctx }css/mystyle.css" rel="stylesheet">
+    <script src="${ctx }js/user.js"></script>
     <script src="${ctx }js/change-state.js"></script>
-    <script src="${ctx }/js/verifyCode.js"></script>
-    <script src="${ctx }/js/city.js"></script>
-    <script src="${ctx }/js/user.js"></script>
+    <script src="${ctx }js/verifyCode.js"></script>
+    <script src="${ctx }js/city.js"></script>
   </head>
   <body>
     <!-- 在此处编码你的创意 -->
@@ -396,19 +396,19 @@
                                 <span class="board-title-h1">基本信息</span>
                                 <button class="btn btn-mini " type="button" onclick="changeBtnValue(this)" id="essentialInfo">修改</button>
                                 <table>
-                                    <tr><td>昵称</td><td id="userNickName">${User.userNickName }</td></tr>
-                                    <tr><td>性别</td><td id="userSex">${User.userSex }</td></tr>
-                                    <tr><td>所在地</td><td id="userProvince">${User.userProvince }&nbsp;${User.userCity }</td></tr>
-                                    <tr><td>签名</td><td id="userAutograph">${User.userAutograph }</td></tr>
+                                    <tr><td>昵称</td><td id="userNickName">${user.getUserNickName() }</td></tr>
+                                    <tr><td>性别</td><td id="userSex">${user.getUserSex() }</td></tr>
+                                    <tr><td>所在地</td><td id="userProvince">${user.getUserProvince() }&nbsp;${user.getUserCity() }</td></tr>
+                                    <tr><td>签名</td><td id="userAutograph">${user.getUserAutograph() }</td></tr>
                                 </table>
                                 <!-- 隐藏的修改项 -->
                                 <!--两个隐藏的div，隐藏的信息是用户在数据库里的省和市的信息  -->
-                                <div style="display:none" id="select-province" class="${User.userProvince }"></div>
-                                <div style="display:none" id="select-city" class="${User.userCity }"></div>
+                                <div style="display:none" id="select-province" class="${user.getUserProvince() }"></div>
+                                <div style="display:none" id="select-city" class="${user.getUserCity() }"></div>
                                 <table style="display:none">
-                                    <tr><td>昵称</td><td><input onblur="changeBtnStyle()" class="form-control" name="nicoName" type="text" value="${User.userNickName }"/></td></tr>
+                                    <tr><td>昵称</td><td><input onblur="changeBtnStyle()" class="form-control" name="nicoName" type="text" value="${user.getUserNickName() }"/></td></tr>
                                     <tr><td>性别</td>
-                                        <input type="hidden"  id="hiddenUserSex" class="${User.userSex }">
+                                        <input type="hidden"  id="hiddenUserSex" class="${user.getUserSex() }">
                                         <td><input onblur="changeBtnStyle()" type="radio" name="gender" id="male" value="male" />男
                                             <input onblur="changeBtnStyle()" type="radio" name="gender" id="female" value="female"/>女
                                         </td>
@@ -428,7 +428,7 @@
                                             </select>
                                         </td>
                                     </tr>
-                                    <tr><td>签名</td><td><input onblur="changeBtnStyle()" class="self-intr form-control" type="text" name="userAutograph" id="" value="${User.userAutograph }"/></td></tr>
+                                    <tr><td>签名</td><td><input onblur="changeBtnStyle()" class="self-intr form-control" type="text" name="userAutograph" id="" value="${user.getUserAutograph() }"/></td></tr>
                                 </table>
                             </form>
                             <!--实名信息-->
@@ -440,26 +440,26 @@
                                 <table>
                                     <tr><td>姓名</td><td id="userRealName">
                                       
-                                      <c:if test="${empty User.userRealName }">未实名</c:if>
-                                      <c:if test="${User.userRealName!=null }">${User.userRealName }</c:if>
+                                      <c:if test="${empty(user.getUserRealName()) }">未实名</c:if>
+                                      <c:if test="${!empty(user.getUserRealName()) }">${user.getUserRealName() }</c:if>
                                      </td></tr>
                                     <tr><td>证件号</td><td id="userIdNumber">
-                                      <c:if test="${empty User.userIdNumber }">未实名</c:if>
-                                      <c:if test="${User.userIdNumber!=null }">${User.userIdNumber.substring(0,6)}*********${User.userIdNumber.substring(14,18) }</c:if>
+                                      <c:if test="${empty(user.getUserIdNumber()) }">未实名</c:if>
+                                      <c:if test="${!empty(user.getUserIdNumber()) }">${user.getUserIdNumber() }</c:if>
                                     </td></tr>
                                   
                                 </table>
                                 <table style="display:none">
                                     <tr><td>姓名</td>
                                     <td>
-	                                    <input onblur="changeBtnStyle()" class="form-control" name="idName" type="text" onkeyup="isLegal()" value="${User.userRealName }"/>
+	                                    <input onblur="changeBtnStyle()" class="form-control" name="idName" type="text" onkeyup="isLegal()" value="${user.getUserRealName() }"/>
 	                                    <!--★★★ 错误信息 -->
 	                                    <div id="errorMsg4Name" style="float:left;"></div>
                                     </td></tr>
                                     <tr>
 	                                    <td>证件号</td>
 	                                    <td>
-	                                    	<input onblur="changeBtnStyle()" class="form-control" name="idNum" type="text" onkeyup="isLegal()" value="${User.userIdNumber.substring(0,6)}*********${User.userIdNumber.substring(14,18) }"/>
+	                                    	<input onblur="changeBtnStyle()" class="form-control" name="idNum" type="text" onkeyup="isLegal()" value="${user.getUserIdNumber() }"/>
 		                                    <!--★★★ 错误信息 -->
 		                                    <div id="errorMsg4IdNum" style="float:left;"></div>
 	                                    </td>
@@ -478,7 +478,7 @@
                                     <tr><td>确认密码</td><td><input onblur="changeBtnStyle()" type="password" class="form-control" name="confirmPwd"  onkeyup="confirm4Pwd()"/><!--★★★ 错误信息 --><div id="errorMsg-confirmPwd"></div></td></tr>
                                 </table>
                                 <span>忘记密码了？<a href="#" onclick="findBackPwd();sendCode4Pwd();">找回密码</a></span><br/>
-                                <div id="user-phoneNum-Pwd" style="display:none" class="${User.userPhone }"></div>
+                                <div id="user-phoneNum-Pwd" style="display:none" class="${user.getUserPhone() }"></div>
                                 <!--★★★ 修改成功信息，这里的字的颜色区别错误的信息 -->
                                 <div id="successMsg4Pwd"></div>
                                 <!-- 这里finalButton是最后一个按钮，因为是这一页的最后一个，故为final。也就是开始为灰色，后来才变红的按钮 -->
@@ -491,7 +491,7 @@
                                 <!--关闭按钮-->
                                 <i class="icon icon-times" onclick="closeWindow(this)"></i>
                                 <span class="board-title-h1">我们给您的手机</span>
-                                <span class="board-title-h1 phone-num" id="send-phone-pwd">${User.userPhone.substring(0,3)}****${User.userPhone.substring(7,11)}</span><br/>
+                                <span class="board-title-h1 phone-num" id="send-phone-pwd">${user.getUserPhone().substring(0,3)}****${user.getUserPhone().substring(7,11)}</span><br/>
                                 <span class="board-title-h1">发送了一条验证码,请及时查收</span><br/>
                                 <!-- <span class="board-title-h1">请及时查收</span><br/> -->
                                 <!--验证码-->
@@ -522,7 +522,7 @@
                         <div id="setting-3" style="display:none">
                             <form action="" method="POST">
                                 <table>
-                                    <tr><td>原绑定手机号码</td><td id="show-old-phone">${User.userPhone.substring(0,3)}****${User.userPhone.substring(7,11)}</td></tr>
+                                    <tr><td>原绑定手机号码</td><td id="show-old-phone">${user.getUserPhone()}</td></tr>
                                     <tr><td>新绑定手机号码</td><td><input id="phoneNum" name="phoneNum" type="text" class="form-control" placeholder="11位手机号" style="width: 150px;display: block; width: 300px;float: left;" onkeyup="loginVerifyPhone4Alert()">
                                      <!--★★★ 错误信息，新绑定手机号发是否合法 -->
                                     <font name="loginErrMsg4Phone" id="loginErrMsg4Phone" class=""></font></td></tr>
