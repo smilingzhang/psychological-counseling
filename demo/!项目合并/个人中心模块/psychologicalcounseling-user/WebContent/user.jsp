@@ -24,7 +24,9 @@
     <!--自定义-->
     <link href="${ctx }css/mystyle.css" rel="stylesheet">
     <script src="${ctx }js/change-state.js"></script>
-    
+    <script src="${ctx }/js/verifyCode.js"></script>
+    <script src="${ctx }/js/city.js"></script>
+    <script src="${ctx }/js/user.js"></script>
   </head>
   <body>
     <!-- 在此处编码你的创意 -->
@@ -392,57 +394,76 @@
                             <!--基本信息-->
                             <form action="" method="POST">
                                 <span class="board-title-h1">基本信息</span>
-                                <button class="btn btn-mini " type="button" onclick="changeBtnValue(this)">修改</button>
+                                <button class="btn btn-mini " type="button" onclick="changeBtnValue(this)" id="essentialInfo">修改</button>
                                 <table>
-                                    <tr><td>昵称</td><td>张三</td></tr>
-                                    <tr><td>性别</td><td>男</td></tr>
-                                    <tr><td>所在地</td><td>某某省&nbsp;某某市</td></tr>
-                                    <tr><td>签名</td><td>这世上本没有路，走的人多了，便成了路。</td></tr>
+                                    <tr><td>昵称</td><td id="userNickName">${User.userNickName }</td></tr>
+                                    <tr><td>性别</td><td id="userSex">${User.userSex }</td></tr>
+                                    <tr><td>所在地</td><td id="userProvince">${User.userProvince }&nbsp;${User.userCity }</td></tr>
+                                    <tr><td>签名</td><td id="userAutograph">${User.userAutograph }</td></tr>
                                 </table>
+                                <!-- 隐藏的修改项 -->
+                                <!--两个隐藏的div，隐藏的信息是用户在数据库里的省和市的信息  -->
+                                <div style="display:none" id="select-province" class="${User.userProvince }"></div>
+                                <div style="display:none" id="select-city" class="${User.userCity }"></div>
                                 <table style="display:none">
-                                    <tr><td>昵称</td><td><input onblur="changeBtnStyle()" class="form-control" name="nicoName" type="text" value="张三"/></td></tr>
+                                    <tr><td>昵称</td><td><input onblur="changeBtnStyle()" class="form-control" name="nicoName" type="text" value="${User.userNickName }"/></td></tr>
                                     <tr><td>性别</td>
-                                        <td><input onblur="changeBtnStyle()" type="radio" name="gender" id="" value="male" checked="checked"/>男
-                                            <input onblur="changeBtnStyle()" type="radio" name="gender" id="" value="female"/>女
+                                        <input type="hidden"  id="hiddenUserSex" class="${User.userSex }">
+                                        <td><input onblur="changeBtnStyle()" type="radio" name="gender" id="male" value="male" />男
+                                            <input onblur="changeBtnStyle()" type="radio" name="gender" id="female" value="female"/>女
                                         </td>
                                     </tr>
                                     <tr><td>省份</td>
                                         <td>
-                                            <select name="province" id="">
+                                            <select name="province" id="province">
                                                 <!--★★★注：第一个option填数据库中字段-->
-                                                <option value="province1">请选择</option>
-                                                <option value="province1">province1</option>
-                                                <option value="province1">province2</option>
-                                                <option value="province1">province3</option>
                                             </select>
                                         </td>
                                     </tr>
                                     <tr><td>城市</td>
                                         <td>
-                                            <select name="province" id="">
+                                            <select name="city" id="city" >
                                                 <!--★★★注：第一个option填数据库中字段-->
-                                                <option value="city1">请选择</option>
-                                                <option value="city1">city1</option>
-                                                <option value="city1">city2</option>
-                                                <option value="city1">city3</option>
+                                               <!-- <option value="city1">请选择</option> --> 
                                             </select>
                                         </td>
                                     </tr>
-                                    <tr><td>签名</td><td><input onblur="changeBtnStyle()" class="self-intr form-control" type="text" name="intr" id="" value="这世上本没有路，走的人多了，便成了路。"/></td></tr>
+                                    <tr><td>签名</td><td><input onblur="changeBtnStyle()" class="self-intr form-control" type="text" name="userAutograph" id="" value="${User.userAutograph }"/></td></tr>
                                 </table>
                             </form>
                             <!--实名信息-->
                             <form action="" method="POST">
                                 <span class="board-title-h1">实名信息</span>
-                                <button class="btn btn-mini " type="button" onclick="changeBtnValue(this)">修改</button>
+                                
+                                <button class="btn btn-mini " type="button" onclick="changeBtnValue(this)" id="realName">修改</button> 
                                 <!--★★★注：若数据库中该字段为空，请帮忙填上“未实名”-->
                                 <table>
-                                    <tr><td>姓名</td><td>未实名</td></tr>
-                                    <tr><td>证件号</td><td>未实名</td></tr>
+                                    <tr><td>姓名</td><td id="userRealName">
+                                      
+                                      <c:if test="${empty User.userRealName }">未实名</c:if>
+                                      <c:if test="${User.userRealName!=null }">${User.userRealName }</c:if>
+                                     </td></tr>
+                                    <tr><td>证件号</td><td id="userIdNumber">
+                                      <c:if test="${empty User.userIdNumber }">未实名</c:if>
+                                      <c:if test="${User.userIdNumber!=null }">${User.userIdNumber.substring(0,6)}*********${User.userIdNumber.substring(14,18) }</c:if>
+                                    </td></tr>
+                                  
                                 </table>
                                 <table style="display:none">
-                                    <tr><td>姓名</td><td><input onblur="changeBtnStyle()" class="form-control" name="idName" type="text"/></td></tr>
-                                    <tr><td>证件号</td><td><input onblur="changeBtnStyle()" class="form-control" name="idNum" type="text"/></td></tr>
+                                    <tr><td>姓名</td>
+                                    <td>
+	                                    <input onblur="changeBtnStyle()" class="form-control" name="idName" type="text" onkeyup="isLegal()" value="${User.userRealName }"/>
+	                                    <!--★★★ 错误信息 -->
+	                                    <div id="errorMsg4Name" style="float:left;"></div>
+                                    </td></tr>
+                                    <tr>
+	                                    <td>证件号</td>
+	                                    <td>
+	                                    	<input onblur="changeBtnStyle()" class="form-control" name="idNum" type="text" onkeyup="isLegal()" value="${User.userIdNumber.substring(0,6)}*********${User.userIdNumber.substring(14,18) }"/>
+		                                    <!--★★★ 错误信息 -->
+		                                    <div id="errorMsg4IdNum" style="float:left;"></div>
+	                                    </td>
+                                    </tr>
                                 </table>
                             </form>
                         </div><!--END 个人信息-->
@@ -451,12 +472,17 @@
                             <!--基本信息-->
                             <form action="" method="POST">
                                 <table>
-                                    <tr><td>原始密码</td><td><input onblur="changeBtnStyle()" class="form-control" name="oldPwd" type="text" value="张三"/></td></tr>
-                                    <tr><td>新密码</td><td><input onblur="changeBtnStyle()" class="form-control" type="text" name="newPwd"/></td></tr>
-                                    <tr><td>确认密码</td><td><input onblur="changeBtnStyle()" type="text" class="form-control" name="confirmedPwd" id=""></td></tr>
+                                    <!--★★★ 错误信息 -->
+                                    <tr><td>原始密码</td><td><input onblur="changeBtnStyle()" class="form-control" name="oldPwd" type="password" onkeyup="verifyOldPwd()"/><!--★★★ 错误信息 --><div id="errorMsg-oldPwd"></div></td></tr>
+                                    <tr><td>新密码</td><td><input onblur="changeBtnStyle()" class="form-control" type="password" name="newPwd" onkeyup="checkNewPwd()"/><!--★★★ 错误信息 --><div id="errorMsg-newPwd"></td></tr>
+                                    <tr><td>确认密码</td><td><input onblur="changeBtnStyle()" type="password" class="form-control" name="confirmPwd"  onkeyup="confirm4Pwd()"/><!--★★★ 错误信息 --><div id="errorMsg-confirmPwd"></div></td></tr>
                                 </table>
-                                <span>忘记密码了？<a href="#" onclick="findBackPwd()">找回密码</a></span><br/>
-                                <button class="btn btn-block " type="button" onclick="changeBtnValue(this)">修改</button>
+                                <span>忘记密码了？<a href="#" onclick="findBackPwd();sendCode4Pwd();">找回密码</a></span><br/>
+                                <div id="user-phoneNum-Pwd" style="display:none" class="${User.userPhone }"></div>
+                                <!--★★★ 修改成功信息，这里的字的颜色区别错误的信息 -->
+                                <div id="successMsg4Pwd"></div>
+                                <!-- 这里finalButton是最后一个按钮，因为是这一页的最后一个，故为final。也就是开始为灰色，后来才变红的按钮 -->
+                                <button class="btn btn-block " type="button" onclick="finalButton4Pwd(this)" disabled="disabled" id="RevisePwdButton">修改</button>
                             </form>
                             <!--黑色遮罩层-->
                             <div id="shade" style="display:none"></div>
@@ -465,13 +491,15 @@
                                 <!--关闭按钮-->
                                 <i class="icon icon-times" onclick="closeWindow(this)"></i>
                                 <span class="board-title-h1">我们给您的手机</span>
-                                <span class="board-title-h1 phone-num">189****3092</span><br/>
+                                <span class="board-title-h1 phone-num" id="send-phone-pwd">${User.userPhone.substring(0,3)}****${User.userPhone.substring(7,11)}</span><br/>
                                 <span class="board-title-h1">发送了一条验证码,请及时查收</span><br/>
                                 <!-- <span class="board-title-h1">请及时查收</span><br/> -->
                                 <!--验证码-->
                                 <div class="verify-zoom">
-                                    验证码：<input class="form-control" type="text" name="verifyCode" id=""/>
-                                    <a class="btn btn-primary btn-sm" href="#" onclick="setNewPwd()">验证</a>
+                                  	  验证码：<input class="form-control" type="text" name="verifyCode" id="pwd-code" onkeyup="PwdVerifyCode()"/>
+                                    <!--★★★ 错误信息，验证码是否正确 -->
+                                    <div id="error-msg-code"></div>
+                                    <a class="btn btn-primary btn-sm" href="#" onclick="setNewPwd()" disabled="disabled" id="verify-code-pwd">验证</a>
                                 </div>
                             </div>
                             <!--设置新密码界面-->
@@ -480,58 +508,43 @@
                                 <i class="icon icon-times" onclick="closeWindow(this)"></i>
                                 <!--新密码-->
                                 <div class="verify-zoom">
-                                    新密码：<input class="form-control" type="text" name="newPwd" id=""/>
-                                    确认密码：<input class="form-control" type="text" name="confirmedPwd" id=""/>
+                                 	   新密码：<input class="form-control" type="text" name="newPwdWithPhone" id="" onkeyup="checkNewPwdWithPhone()"/>
+                                    <!--★★★ 错误信息 -->
+                                    <div id="errorMsg-newPwd-phone"></div>
+                                 	   确认密码：<input class="form-control" type="text" name="confirmPwdWithPhone" id="" onkeyup="confirm4PwdWithPhone()"/>
+                                     <!--★★★ 错误信息，两次密码是否一致 -->
+                                    <div id="errorMsg-confirmPwd-phone"></div>
                                 </div>
-                                <button class="btn btn-primary btn-block" onclick="closeWindow(this)">确认设置</button>
+                                <button class="btn btn-primary btn-block" onclick="closeWindow(this);finalButton4Pwd(this)" disabled="disabled" id="RevisePwdButtonWithPhone">确认设置</button>
                             </div>
                         </div><!--END 修改密码-->
                         <!--绑定手机-->
                         <div id="setting-3" style="display:none">
                             <form action="" method="POST">
                                 <table>
-                                    <tr><td>原绑定手机号码</td><td>189****3092</td></tr>
-                                    <tr><td>新绑定手机号码</td><td><input type="text" name="newPhoneNum" id="" class="form-controll"></td></tr>
+                                    <tr><td>原绑定手机号码</td><td id="show-old-phone">${User.userPhone.substring(0,3)}****${User.userPhone.substring(7,11)}</td></tr>
+                                    <tr><td>新绑定手机号码</td><td><input id="phoneNum" name="phoneNum" type="text" class="form-control" placeholder="11位手机号" style="width: 150px;display: block; width: 300px;float: left;" onkeyup="loginVerifyPhone4Alert()">
+                                     <!--★★★ 错误信息，新绑定手机号发是否合法 -->
+                                    <font name="loginErrMsg4Phone" id="loginErrMsg4Phone" class=""></font></td></tr>
+                                    
                                     <tr><td>验证码</td>
-                                        <td><input type="text" name="verifyCode" id="" class="form-controll">
-                                            <button class="btn btn-primary" type="button">发送验证码</button>
+                                        <td><input id="verifyCode" name="verifyCode" type="text" class="form-control" placeholder="验证码" onkeyup="loginVerifyCode()" style="width: 150px;display: block;float: left;">
+                                            <!-- 这里的onclick解释，settime(this):倒计时功能，sendVerifyCode():验证码是否正确 -->
+                                            <a class="btn btn-primarys" id="login-send-verifyCode"  onclick="settime(this);sendVerifyCode()" disabled="disabled">发送验证码</a>
+                                         <!--★★★ 错误信息，验证码是否正确 -->
+                                        <font name="loginErrMsg4Code" id="loginErrMsg4Code" class=""></font>
                                     </td></tr>
+                                    <!-- 之所以写用户协议是为了重用JS代码，因为在JS中isFirst()判断时要有checkbox的判断（注册时需要） -->
+                                    <label id="checkbox" onclick="verifyAccord()" style="display:none;">
+	                           			 <input type="checkbox" name="isAgreeProtocal"  > 同意《XXX用户注册协议》
+	                        		</label>
+	                        		<!-- 上面用户协议结束 -->
                                 </table>
-                                <button class="btn btn-primary btn-block">保存设置</button>                                
+                                <button class="btn btn-block" id="login-form-submit-button" disabled="disabled" onclick="savePhone()">保存设置</button>  
+                                 <!--★★★ 成功信息 -->
+                                <font name="successMsg-revise-phone" id="successMsg-revise-phone" class=""></font>                              
                             </form>
                         </div><!--END 绑定手机-->
-                        <script>
-                            function changeBtnValue(obj){
-                                console.log($(obj).html());
-                                if($(obj).html()=="修改"){
-                                    $(obj).html("保存");
-                                    $(obj).siblings("table:last").css("display","display");
-                                    $(obj).siblings("table:first").css("display","none");
-                                }
-                                else{
-                                    $(obj).html("修改");
-                                    $(obj).siblings("table:first").css("display","display");
-                                    $(obj).siblings("table:last").css("display","none");
-                                    $(obj).attr("type","button");
-                                } 
-                            }
-                            function changeBtnStyle(){
-                                // $(".directory-contain-list form .btn").attr("type","");
-                                console.log($(".directory-contain-list form .btn").attr("type"));
-                            }
-                            function findBackPwd(){
-                                $("#find-back-pwd").css("display","display");
-                                $("#shade").css("display","display");
-                            }
-                            function closeWindow(obj){
-                                $(obj).parent().css("display","none");
-                                $("#shade").css("display","none");
-                            }
-                            function setNewPwd(){
-                                $("#find-back-pwd").css("display","none");
-                                $("#set-new-pwd").css("display","display");
-                            }
-                        </script>
                     </div>
                 </div>
             </div><!--END 个人设置-->
