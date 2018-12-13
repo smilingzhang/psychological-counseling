@@ -1,7 +1,6 @@
 package com.controller;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -12,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.dao.TeacherDaoImpl;
 import com.entity.Course;
 import com.entity.Teacher;
 import com.service.CourseServiceImpl;
