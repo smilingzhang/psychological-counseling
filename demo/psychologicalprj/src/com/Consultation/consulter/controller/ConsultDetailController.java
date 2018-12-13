@@ -25,13 +25,12 @@ public class ConsultDetailController {
 	private ConsulterService consulterService;
 	@RequestMapping("/showdetail")
 	public String showDetailConsult(@RequestParam("teacherId") String teacherId,HttpServletRequest request) {
-		int id=Integer.parseInt(teacherId);
-		Teacher teacher=this.consulterService.findById(id);
-		String[] aStrings=teacher.getAuthenticationAptitudeName().split(" ");
-		
-		List<Course>courses =this.consulterService.findCourseByTeacherId(id);
-		request.setAttribute("aStrings", aStrings);
+	
+		Teacher teacher =this.consulterService.showConsultDetail(Integer.parseInt(teacherId));
 		request.setAttribute("teacher", teacher);
+		String[] aStrings=teacher.getAuthenticationAptitudeName().split(" ");
+		request.setAttribute("aStrings", aStrings);
+		List<Course>courses =this.consulterService.showTeacherCourse(Integer.parseInt(teacherId));
 		request.setAttribute("courses", courses);
 		return "consulter";
 	}

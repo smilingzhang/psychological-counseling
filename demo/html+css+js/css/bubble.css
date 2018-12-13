@@ -1,0 +1,37 @@
+.bubble{
+    border: 0 solid;
+    border-radius: 30px;
+    padding: 0.5em 1em 0.5em 1em;
+    margin: 10px;
+}
+.left-bubble{
+    background-color: #ec6a6b;
+    float: left;
+}
+.right-bubble{
+    background-color: #ffa1a2;
+    float: right;
+}
+ul{
+    width: 20%;
+    border: 1px solid teal;
+    display: block;
+    background-color: #f5eeee;
+}
+li{
+    list-style: none;
+    display: block;
+    clear: both;
+    color: #fff;
+}
+.time{
+    display: block;
+    color: #979292;
+    text-align: center;
+    border: 0 solid #e6d6d6;
+    border-radius: 8px;
+    background-color: #e7d8d8;
+    width: 5em;
+    font-size: 12px;
+}
+

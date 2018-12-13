@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <% String path = request.getContextPath(); %>
- 
+<% String path = request.getContextPath(); %>
 <!DOCTYPE html>
 <html lang="zh-cn">
   <head>
@@ -16,40 +15,6 @@
     <script src="<%=path %>/js/jquery-3.3.1.js"></script>
     <script src="<%=path %>/js/zui.js"></script> 
     <script src="<%=path %>/js/zui.lite.js"></script>
-    
-    <script type="text/javascript">
-	function checkName(){
-		alert("失败");
-		//var name=document.getElementById("username").value;  //先拿到文本框里的名字
-		var xmlhttp;//构造xml对象
-		if (window.XMLHttpRequest)
-		{
-		    //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
-		    xmlhttp=new XMLHttpRequest();
-		}
-		else
-		{
-		    // IE6, IE5 浏览器执行代码
-		    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-		}
-		//发请求
-		xmlhttp.open("POST","insertorder",true);//第一个参数为请求方式，第二个参数为servlet地址，第三个参数为是否异步
-		xmlhttp.send();
-		//回调函数，请求响应完成之后自动调用的函数
-		xmlhttp.onreadystatechange=function()
-		{
-		    if (xmlhttp.readyState==4 && xmlhttp.status==200)//4代表请求响应结束,responseText为服务器响应回来的数据文本
-		    {
-		        var res=xmlhttp.responseText;
-		        if(res=="false"){
-		        	alert("没有电话");	
-		        }else{
-		        	alert("有电话");
-		        }
-		    }
-		}
-	}
-</script>
   </head>
   <body>
     <!-- 在此处编码你的创意 -->
@@ -64,10 +29,9 @@
                 <img src="<%=path %>/images/consultant.png" />
                 <!--咨询师姓名-->
                 <a href="#">${teacherName }</a><br/>
-               
+                <!--咨询师资质-->
                 <span class="tag">${autograph }</span><br/>
               
-                <!-- span class="label label-primary">婚姻家庭</span -->
               </div>
             </div>
             <!--支付金额-->
@@ -78,8 +42,8 @@
               </div>
             </div>
             <!--小贴士-->
-                <form action="<%=path %>/insertorder" method="POST">
-                <input type="hidden" value="${teacherId }" name="teacherId"/>
+            <form action="<%=path %>/insertorder" method="POST">
+             <input type="hidden" value="${teacherId }" name="teacherId"/>
                 <input type="hidden" value="${teacherPrice }" name="teacherPrice">
                 <input type="hidden" value="${date }" name="date"/>
                 <input type="hidden" value="${content }" name="content"/>
@@ -92,22 +56,31 @@
                     <!--咨询方式-->
                     <p  class="info-contain"><span>咨询方式：</span>
                       <!--在线语音-->
-                      <input type="radio" name="type" value="audio">在线语音&nbsp;
+                      <input id="audio" type="radio" name="type" value="audio">在线语音&nbsp;
                       <!--在线视频-->
-                      <input type="radio" name="type" id="" value="vedio">在线视频&nbsp;
+                      <input id="vedio" type="radio" name="type" id="" value="vedio">在线视频&nbsp;
                       <!--线下面对面-->
-                      <input type="radio" name="type" id="" value="faceToFace">线下面对面&nbsp;
+                      <input id="faceToFace" type="radio" name="type" id="" value="faceToFace">线下面对面&nbsp;
                     </p>
                     <!-- <p>记得按时来参加咨询哦。</p> -->
                     <div class="protocal">
-                      <input type="checkbox" value="protocal1" name="protocal"/>已阅读并同意上文所述&nbsp;
-                      <input type="checkbox" value="protocal1" name="protocal"/>已阅读并同意《相关协议》
+                      <input id="pro1" type="checkbox" value="protocal1" name="protocal"/>已阅读并同意上文所述&nbsp;
+                      <input id="pro2" type="checkbox" value="protocal1" name="protocal"/>已阅读并同意《相关协议》
                     </div>
+                  </div>
                 </div>
-             </div>            
-                    <button class="btn btn-block ">确认并前往支付&nbsp;<i class="icon icon-smile"></i></button>
-  
-                </form>
+                <button id="confirmed-btn" class="btn btn-block " disabled="disabled" >确认并前往支付&nbsp;<i class="icon icon-smile"></i></button>
+            </form>
+            <script>
+              $("input").click( function(){
+                if(($("#audio").is(":checked")
+                   || $("#vedio").is(":checked")
+                   || $("#faceToFace").is(":checked"))
+                    && ($("#pro1").is(":checked") && $("#pro2").is(":checked"))){
+                      $("#confirmed-btn").removeAttr("disabled");
+                    }
+              })
+            </script>
         </div>
     </div>
     <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->

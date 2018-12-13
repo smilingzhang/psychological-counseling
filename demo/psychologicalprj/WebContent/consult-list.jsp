@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<c:set var="ctx" value="${pageContext.request.contextPath }"></c:set>
 <% String path = request.getContextPath(); %>
 
 <!DOCTYPE html>
@@ -35,10 +36,15 @@
                   <form action="<%=path %>/consult/show" method="post">
                   <span class="tag">分类</span>
 		                <select name="fenlei">
-		                	<option value="01">婚姻</option>
-		                	<option value="02">亲子</option>
-		                	<option value="03">职场</option>
-		                	<option value="04">健康</option>
+		                
+		                	<option value="01" <c:if test="${fenlei==1 }">selected="selected"</c:if>>婚姻</option>
+		              
+		                	<option value="02" <c:if test="${fenlei==2 }">selected="selected"</c:if>>亲子</option>
+		                
+		                	<option value="03" <c:if test="${fenlei==3 }">selected="selected"</c:if>>职场</option>
+		                
+		                	<option value="04" <c:if test="${fenlei==4 }">selected="selected"</c:if>>健康</option>
+		                	
 		                </select>
                     <!-- <br/> -->&nbsp;
                    
@@ -113,8 +119,8 @@
                         	<c:if test="${timelist.time9==0 }">
                             <span class="time-cell-disable">9:00</span>
                         	 </c:if>
-                        	  	
-                        	 	<c:if test="${timelist.time10==1 }">
+     	  	
+                        	 <c:if test="${timelist.time10==1 }">
                             <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=10:00-11:00">10:00</a></span>
                        		 </c:if>
                         	<c:if test="${timelist.time10==0 }">
@@ -323,34 +329,47 @@
         <!--分页-->
         <c:if test="${empty date }">
         <div class="button-pager">
-            <ul class="pager pager-loose pager-pills">
-                <li class="previous disabled"><a href="<%=path %>/consult/default?pageNum=${page.prePageNum }">«</a></li>
-                <c:forEach var ="i" begin="1" end="${page.totalPageCount }">
-                	 <li><a href="<%=path %>/consult/default?pageNum=${i }" >${i }</a></li>    
-                </c:forEach> 
-                <c:if test="${page.pageNum==page.totalPageCount}">
-                <li class="next"><a href="<%=path %>/consult/default?pageNum=${page.totalPageCount }" >»</a></li>
-                </c:if>
-                <c:if test="${page.pageNum!=page.totalPageCount }">
-                <li class="next"><a href="<%=path %>/consult/default?pageNum=${page.nextPageNum }">»</a></li>
-                </c:if>
+        <form action="<%=path %>consult/default?pageNum=${pager.page }" method="post">
+             <ul id="myPager" class="pager" data-elements="prev,nav,next" data-ride="pager"
+                data-page=${page.pageNum }
+                data-rec-total=${page.totalCount }
+                data-max-nav-count="3"
+                data-rec-per-page=${page.pageSize }
+                data-link-creator="consult/default?pageNum={page}"
+            >
             </ul>
+         </form>
+            <script>
+                $('#myPager').pager({
+                    linkCreator: function(page, pager) {
+                        var url = window.location.href;
+                        url = url.split("?")[0];
+                        return url+'?pageNum='+page;
+                    } 
+                });
+            </script>
         </div>
         </c:if>
         <c:if test="${not empty date }">
         	<div class="button-pager">
-            <ul class="pager pager-loose pager-pills">
-                <li class="previous disabled"><a href="<%=path %>/consult/show?pageNum=${page.prePageNum }&fenlei=${fenlei }&shijian=${date }">«</a></li>
-             	 <c:forEach var ="i" begin="1" end="${page.totalPageCount }">
-                	  <li><a href="<%=path %>/consult/show?pageNum=${i }&fenlei=${fenlei }&shijian=${date }">${i }</a></li>  
-                </c:forEach> 
-                <c:if test="${page.pageNum==page.totalPageCount}">
-                <li class="next"><a href="<%=path %>/consult/show?pageNum=${page.totalPageCount }&fenlei=${fenlei }&shijian=${date }">»</a></li>
-                </c:if>
-                <c:if test="${page.pageNum!=page.totalPageCount}">
-                   <li class="next"><a href="<%=path %>/consult/show?pageNum=${page.nextPageNum }&fenlei=${fenlei }&shijian=${date }">»</a></li>
-                </c:if>
+        	
+           	  <ul id="myPager" class="pager" data-elements="prev,nav,next" data-ride="pager"
+                data-page=${page.pageNum }
+                data-rec-total=${page.totalCount }
+                data-max-nav-count="3"
+                data-rec-per-page=${page.pageSize }
+                data-link-creator="consult/default?pageNum={page}&fenlei=${fenlei }&shijian=${date }"
+            >
             </ul>
+            <script>
+                $('#myPager').pager({
+                    linkCreator: function(page, pager) {
+                        var url = window.location.href;
+                        url = url.split("?")[0];
+                        return url+'?pageNum='+page+'&fenlei='+'${fenlei }'+'&shijian='+'${date }';
+                    } 
+                });
+            </script>
         </div>
         </c:if>
     </div><!--内容结束-->

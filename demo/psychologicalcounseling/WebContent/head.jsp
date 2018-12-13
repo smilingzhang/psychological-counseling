@@ -17,7 +17,7 @@
   </head>
   <body>
     <!-- 在此处编码你的创意 -->
-    <header>
+    <header> 
         <nav class="navbar contianer">
             <div class="container">
                 <input type="checkbox" id="nav-toggle" class="nav-toggle"/>

@@ -17,6 +17,27 @@
   </head>
   <body>
     <!-- 在此处编码你的创意 -->
+    <div class="modal" id="user-app-dialog" style="display:none">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                </div>
+                <div class="modal-body">
+                    <h4 class="modal-title">好不容易预约到的，真的要取消吗？</h4>
+                </div>  
+                <div class="modal-footer">
+                    <button onclick="hideCancelDialog()" type="button" class="btn btn-default" data-dismiss="modal">再想想</button>
+                    <a type="button" class="btn btn-primary">我要取消预约</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function hideCancelDialog(){
+            $("#user-app-dialog").css("display","none");
+        }
+    </script>
+
     <div class="contains user-contain">
         <!--头部-->
         <div class="panel user">
@@ -50,7 +71,7 @@
         <!--★★★注：以下1-3的“.directory-contain-list”中显示的内容均由查询给出-->
         <!--★★★注：jsp版本请将对应的导航中调用的changeNav()函数改成changeActive(this)函数 !!!-->
         <!--★★★注：切换效果由“我的咨询”板块给出，其它板块不再制作切换效果-->
-        <div class="info-conatin" style="display:display">
+        <div class="info-conatin" style="display:block">
             <!--1. 我的咨询-->
             <div id="directory-contain-1" class="panel">
                 <div class="panel-body">
@@ -84,7 +105,12 @@
                                 <td><span><a href="room.html">进入咨询室</a></span></td>
                                 <!--如果是线下面对面咨询，请使用以下这一行替代上面那一行👇-->
                                 <!-- <td><span class="disabled">进入咨询室</span></td> -->
-                                <td><span><a href="#">取消咨询</a></span></td>
+                                <td><span><button class="btn btn-link" type="button" onclick="showCancelDialog()">取消预约</button></span></td>
+                                <script>
+                                    function showCancelDialog(){
+                                        $("#user-app-dialog").css("display","block");
+                                    }
+                                </script>
                             </tr>                            
                             <!--以下都是重复的-->
                             <!--一个咨询-->
