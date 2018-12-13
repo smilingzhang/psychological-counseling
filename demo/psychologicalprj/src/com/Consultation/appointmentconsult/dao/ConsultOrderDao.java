@@ -20,8 +20,7 @@ import com.util.BaseDao;
  */
 @Repository
 public class ConsultOrderDao extends BaseDao<ConsultationRecord>{
-	@Resource
-	private SessionFactory sessionFactory;
+	
 	/**
 	 * 
 	 *@desc:生成订单，向咨询订单表插入数据并返回主键值

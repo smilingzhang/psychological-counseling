@@ -25,7 +25,7 @@ public class BaseDao<T> {
 	 * 注入session工厂
 	 */
 	@Resource
-	private SessionFactory sessionFactory;
+	protected SessionFactory sessionFactory;
 
 	/**
 	 * 

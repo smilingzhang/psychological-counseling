@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.Consultation.consulterlist.service.ConsulterService;
 import com.entity.Article;
 import com.entity.Course;
 import com.entity.Page;
