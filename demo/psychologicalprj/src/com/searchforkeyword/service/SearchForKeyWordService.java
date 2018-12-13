@@ -8,10 +8,13 @@ import javax.annotation.Resource;
 import org.apache.el.parser.ParseException;
 import org.springframework.stereotype.Service;
 
+import com.Consultation.consulterlist.dao.ConsulterDao;
 import com.entity.Article;
 import com.entity.ArticleIndexSearch;
+import com.entity.ConsulterIndexSearch;
 import com.entity.Course;
 import com.entity.CourseIndexSearcher;
+import com.entity.Teacher;
 import com.searcharticle.dao.SearchArticleDao;
 import com.searchcourse.dao.SearchCourseDao;
 import com.searchforkeyword.dao.SearchForKeyWordDao;
@@ -26,11 +29,17 @@ public class SearchForKeyWordService extends TestLucene{
 	private SearchCourseDao searchCourseDao;
 	@Resource
 	private SearchArticleDao searchArticleDao;
+	@Resource
+	private ConsulterDao consulterDao;
 	public List<CourseIndexSearcher> getSearchTeacherName(String searchContent) throws IOException, ParseException, org.apache.lucene.queryParser.ParseException{
-		
+		if(searchContent==null||searchContent.equals("")) {
+			String aString=new String("心理");
+			searchContent=aString;
+		}
 		List<Course> searchCourse=this.searchCourseDao.searchAllCourses();
 		List<Article> searchArticle=this.searchArticleDao.searchAllArticles();
-		createIndex(searchCourse,searchArticle);
+		List<Teacher> searchTeacher=this.consulterDao.selectDefault();
+		createIndex(searchCourse,searchArticle,searchTeacher);
 		List<CourseIndexSearcher> courseIndexSearchers=seacher(searchContent);
 		List<String> searchedTeacherName= this.searchForKeyWordDao.selectSearchTeachersName(courseIndexSearchers);
 		for(int i=0;i<courseIndexSearchers.size();i++) {
@@ -46,5 +55,8 @@ public class SearchForKeyWordService extends TestLucene{
 		}
 		return articleIndexSearchers;
 	}
-
+	public List<ConsulterIndexSearch> getConsulterIndexSearch(String searchContent) throws IOException, ParseException, org.apache.lucene.queryParser.ParseException{
+		List<ConsulterIndexSearch> consulterIndexSearchs=seacherConsulter(searchContent);
+		return consulterIndexSearchs;
+	}
 }

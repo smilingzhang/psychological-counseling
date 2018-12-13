@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.entity.Course;
-import com.entity.Page;
 import com.searchcourse.dao.SearchCourseDao;
+import com.util.Page;
 import com.util.SetPageUtil;
 
 @Service
