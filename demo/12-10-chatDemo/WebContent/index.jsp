@@ -17,3 +17,27 @@
 	</body>
 </html>
 
+<!-- 
+
+session : 
+User my , Uesr other
+consultationrecordId
+listenRecordId
+type 
+videoChatAddress
+audioChatAddress
+listenRecords
+consultationRecords
+筛选时：
+gender
+age
+
+
+application: 
+allUnusedListenRecords
+allUnusedConsultationRecords
+videoAddress2messages
+audioAddress2messages
+
+
+ -->
