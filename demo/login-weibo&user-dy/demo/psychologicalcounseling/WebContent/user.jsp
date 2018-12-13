@@ -115,16 +115,29 @@
 	                    <!--咨询列表-->
 	                    <div class="directory-contain-list">
 	                        <!--未完成表格-->
-	                        <table>
+	                        <table style="table-layout:fixed">
 		                        <c:if test="${!empty(crList) && crList.size()>0 }">
 		                            <!--一个咨询-->
+	                            	<tr class="table-head">
+	                            		<td class="tag"  width="25%">咨询师信息</td>
+	                            		<td class="tag" width="45%">咨询信息</td>
+	                            		<td width="15%"></td><td width="15%"></td>
+	                            	</tr>
 		                            <c:forEach items="${crList }" var="consulter">
 			                            <tr>
 			                                <!--咨询师照片-->
-			                                <td><img src="${consulter.getTeacher().getUser().getUserHeadPath() }" alt="${consulter.getTeacher().getUser().getUserNickName() }"></td>
 			                                <td>
-			                                    <!--咨询师名字-->
-			                                    <span class="teacher catagory">咨询师：<a href="consulter.html">${consulter.getTeacher().getUser().getUserNickName() }</a></span><br/>
+			                                	<img style="float:left;margin-right:20px;" src="${consulter.getTeacher().getUser().getUserHeadPath() }" alt="${consulter.getTeacher().getUser().getUserNickName() }">
+			                                	<div>
+				                                    <!--咨询师名字-->
+				                                    <span class=""><a href="consulter.html">${consulter.getTeacher().getUser().getUserRealName() }</a></span><br/>
+				                                    <!-- 咨询师性别/年龄 -->
+				                                    <span class="tag">${consulter.getTeacher().getUser().getUserSex() }/${consulter.getTeacher().getTeacherAge() }岁</span><br/>
+				                                    <!-- 咨询师资质 -->
+				                                    <span class="tag">${fn:split(consulter.getTeacher().getAuthenticationAptitudeName(),' ')[0] }</span>
+			                                	</div>
+		                                	</td>
+			                                <td>
 			                                    <!--咨询费用-->
 			                                    <span>咨询费用：￥${consulter.getConsultationrecordPrice() }</span><br/>
 			                                    <!--咨询时间：精确到几点机几分-->
@@ -167,7 +180,7 @@
 				                                <c:if test="${consulter.getConsultationrecordMethod()!=1
 				                                				&& dateutil:compare(requestScope.targetDate,consulter.getConsultationrecordStartTime())==1
 				                                				&& dateutil:compare(dateutil:getDate(),consulter.getConsultationrecordEndTime())==2 }">
-					                                <td><span><a class="enter-room" href="room.html">进入咨询室</a></span></td>
+					                                <td width="15%"><span><a class="enter-room" href="room.html">进入咨询室</a></span></td>
 				                                </c:if>
 				                                <!-- 若是线上咨询，且已经结束 -->
 				                                <c:if test="${consulter.getConsultationrecordMethod()!=1
@@ -175,10 +188,14 @@
 					                                <td><span class="disabled">进入咨询室</span></td>
 				                                </c:if>
 			                                </c:if>
+			                                <c:if test="${consultState!='0'}"><td></td><td></td></c:if>
 			                            </tr>                            
 		                            </c:forEach>
 		                        </c:if>
 		                        <c:if test="${consultState=='0' && empty(crList) }">
+		                        	<tr><td class="tag">您暂无预约的咨询,<a href="consult-list.html">去体验第一次心理咨询</a></td></tr>
+		                        </c:if>
+		                        <c:if test="${empty(consultState) && empty(crList) }">
 		                        	<tr><td class="tag">您暂无预约的咨询,<a href="consult-list.html">去体验第一次心理咨询</a></td></tr>
 		                        </c:if>
 		                        <c:if test="${consultState=='1' && empty(crList) }">
@@ -254,6 +271,7 @@
 	                    </div>
 	                    <!--课程列表-->
 	                    <div class="directory-contain-list">
+	                    <c:if test="${!empty(courseList) }">
 	                    	<c:forEach items="${courseList }" var="course">
 	                        <!--一门课程-->
 	                        <div class="course-block">
@@ -269,6 +287,10 @@
 	                            <a class="btn btn-primary" href="course.html?courseId=${course.get('courseId')}">进入学习</a>
 	                        </div>                    		
 	                    	</c:forEach>
+	                    </c:if>
+	                    <c:if test="${empty(consultState) && empty(crList) }">
+                        	<span class="tag">您暂无添加任何课程,<a href="course-list.html">去看看什么课程适合您</a></span>
+                        </c:if>
 	                    </div>
 	                    <!-- 分页器 -->
 	                    <c:if test="${pageCount > pageSize }">
@@ -300,7 +322,7 @@
 		                <div class="directory-contain-list">
 		                    <table>
 		                        <c:if test="${!empty(listenList) && listenList.size()>0 }">
-		                            <!--一个咨询-->
+		                            <!--一个倾听-->
 		                            <c:forEach items="${listenList }" var="listen">
 			                            <tr>
 			                                <!--倾听者头像-->
@@ -321,6 +343,9 @@
 			                            	</td>
 			                            </tr> 
 		                            </c:forEach>
+		                        </c:if>
+		                        <c:if test="${empty(listenList)}">
+		                        	<tr><td class="tag">您暂无倾听历史,<a href="listen-list.html">或许您有话想说</a></td></tr>
 		                        </c:if>
 	                        </table>
 		                    
@@ -346,7 +371,7 @@
 			            </c:if>
 		                </div>
 	                </div>
-	            </div><!--END 我的文章-->
+	            </div><!--END 我的倾听-->
             </c:if>
             <!--4. 个人设置-->
             <div id="directory-contain-4" class="panel" style="display:none">

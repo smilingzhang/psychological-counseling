@@ -51,18 +51,21 @@ public class UserController {
 	 *@trhows
 	 */
 	public boolean isLogin(HttpSession session) {
-		String id = (String)session.getAttribute("uid");
+		Integer id = (Integer) session.getAttribute("uid");
 		if(id!=null) return true;
 		else return false;
 	}
 
+	@RequestMapping(value="/goToUser",method=RequestMethod.GET)
+	public void goToUser(HttpSession session,HttpServletResponse resp) throws IOException {
+		session.setAttribute("uid", 1);
+		resp.sendRedirect("user");
+	}
 	@RequestMapping(value="/user",method=RequestMethod.GET)
-	public void gotoUser(HttpSession session,HttpServletRequest req,HttpServletResponse resp,Model model) throws ServletException, IOException {
-		//要删掉
-		session.setAttribute("uid", "1");
+	public void user(HttpSession session,HttpServletRequest req,HttpServletResponse resp,Model model) throws ServletException, IOException {
 		//1. 获取用户id
 		if(isLogin(session)) {
-			int uid = Integer.parseInt((String) session.getAttribute("uid"));
+			int uid = this.getParamId((Integer)session.getAttribute("uid")); 
 			//2. 获取用户实例
 			User user = userService.getUser(uid);
 			session.setAttribute("avatarLink", user.getUserHeadPath());
@@ -84,7 +87,7 @@ public class UserController {
 									HttpServletRequest req,HttpServletResponse resp) throws ServletException, IOException {
 		//1. 获取用户id
 		if(isLogin(session)) {
-			int uid = Integer.parseInt((String)session.getAttribute("uid"));
+			int uid = this.getParamId((Integer)session.getAttribute("uid"));
 			//2. 获取用户实例
 			User user = userService.getUser(uid);
 			//3. 将咨询记录按照状态拆分成三张表
@@ -149,7 +152,7 @@ public class UserController {
 		//获取咨询记录id
 		int cid = Integer.parseInt(req.getParameter("consultationId"));
 		//获取用户id
-		int uid = Integer.parseInt((String) session.getAttribute("uid"));
+		int uid = this.getParamId((Integer)session.getAttribute("uid"));
 		//修改咨询状态
 		if(userService.changeAppointmentState(cid,uid)) {
 			msg = "咨询取消成功！您支付的金额将在1~3个工作日内原路返回。";
@@ -183,7 +186,7 @@ public class UserController {
 			return "login";
 		}
 		else {
-			int uid = Integer.parseInt((String)session.getAttribute("uid"));
+			int uid = this.getParamId((Integer)session.getAttribute("uid"));
 			//2. 获取数据 
 			//获取展现类型：0 “我的课程” 1 “我的收藏”
 			String type = req.getParameter("courseType");
@@ -214,7 +217,7 @@ public class UserController {
 			//获取页码
 			int pageNum = this.getParamPage((String)req.getParameter("page"));
 			//获取用户id
-			int uid = Integer.parseInt((String)session.getAttribute("uid"));
+			int uid = this.getParamId((Integer)session.getAttribute("uid"));
 			//2. 查询需要的数据
 			List<Map<String, Object>> list = userService.listenServiceWithPaging(uid, pageNum); 
 			//3. 设置参数
@@ -246,5 +249,10 @@ public class UserController {
 	public int getParamPage(String page) {
 		if(page==null) return 1;
 		else return Integer.parseInt(page);
+	}
+	
+	public int getParamId(Integer id) {
+		if(id==null) return -1;
+		else return id;
 	}
 }

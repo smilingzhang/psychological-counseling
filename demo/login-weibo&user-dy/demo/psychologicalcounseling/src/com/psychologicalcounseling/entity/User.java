@@ -24,6 +24,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name="user")
 public class User {
+	//---------------增加 By 邓旸
+	public static final int IDENTITY_USER = 1;
+	public static final int IDENTITY_CONSULTER = 2;
+	private String weiboUid;
+	//----------------
+	
 	private int userId;
 	private String userHeadPath;
 	private String userNickName;
@@ -37,12 +43,6 @@ public class User {
 	private int userIdentity;
 	private String userCity;
 	private String userEmail;
-	
-	//---------------
-	private String weiboUid;
-	private String weiboAccessToken;
-	//----------------
-	
 	
 	private Set<UserLabel> userLabels= new HashSet<UserLabel>();
 	private Set<ConsultationRecord> consultationRecords = new HashSet<ConsultationRecord>();
@@ -133,12 +133,6 @@ public class User {
 	}
 	public void setWeiboUid(String weiboUid) {
 		this.weiboUid = weiboUid;
-	}
-	public String getWeiboAccessToken() {
-		return weiboAccessToken;
-	}
-	public void setWeiboAccessToken(String weiboAccessToken) {
-		this.weiboAccessToken = weiboAccessToken;
 	}
 	@OneToMany(mappedBy="user",targetEntity=UserLabel.class,cascade=CascadeType.ALL)
 	public Set<UserLabel> getUserLabels() {
