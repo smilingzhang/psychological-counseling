@@ -17,10 +17,7 @@ public class ConsultOrderTeacherDao extends BaseDao<Teacher>{
 	 */
 	public Teacher selectTeacherById(int teacherId) {
 		return get(Teacher.class, teacherId);
-		/*Session session=sessionFactory.getCurrentSession();
-		Query query=session.createQuery("from Teacher t where t.teacherId=?");
-		query.setParameter(0, teacherId);
-		return (Teacher) query.list().get(0);*/
+		
 	}
 
 }

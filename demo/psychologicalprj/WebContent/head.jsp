@@ -23,9 +23,9 @@
                     <li onclick="changeActive(this)" class="list"><a href="#">倾听</a></li>
                     <li onclick="changeActive(this)" class="list"><a href="#">阅读</a></li>
                     <div class="search">
-                        <form class="navbar-form navbar-left" role="search">
+                        <form class="navbar-form navbar-left" role="search" action="<%=p %>/searchkeyword/coursekeyword" method="post">
                             <div class="form-group">
-                                    <input id="inputSearchExample3" type="search" class="form-control search-input" placeholder="搜索">
+                                    <input id="inputSearchExample3" type="search" class="form-control search-input" placeholder="搜索" name="searchContent">
                                     <label for="inputSearchExample3" class="input-control-icon-left search-icon"><i class="icon icon-search"></i></label>
                             </div>
                             <button type="submit" class="btn btn-default">搜索</button>

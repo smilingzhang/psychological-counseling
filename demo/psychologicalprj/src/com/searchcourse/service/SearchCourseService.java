@@ -55,5 +55,15 @@ public class SearchCourseService extends SetPageUtil<Course>{
 		List<Course> list=searchCourseDao.searchAllCourses();
 		return list.size();
 	}
+	/**
+	 * 
+	 *@desc:返回所有课程实体
+	 *@return
+	 *@return:List<Course>
+	 *@trhows
+	 */
+	public List<Course> getAllCousers() {
+		return this.searchCourseDao.searchAllCourses();
+	}
 
 }

@@ -56,8 +56,13 @@
               <c:if test="${flag==3 }">
                <span class="result-sum tag">为您找到${consultersCount }条结果</span>
               </c:if>
+              <c:if test="${flag==4 }">
+               <span class="result-sum tag">为您找到${totalCount }条结果</span>
+              </c:if>
               <div class="result">
-                <!--咨询师/倾听师的示例 ：在“全部”筛选下，将咨询师放在最上方一排-->
+              
+              
+                <!--3.咨询师/倾听师的示例 ：在“全部”筛选下，将咨询师放在最上方一排-->
                 <c:if test="${flag==3 }">
                 <div class="result-block consult-block">
                     <!--类型 循环展示-->
@@ -78,6 +83,8 @@
                   </c:forEach>           
                 </div>
                 </c:if>
+                
+                
                 <!--1. 课程的示例   循环展示-->
                 <c:if test="${flag==1 }">
                 <c:forEach var="courses" items="${listSearchCourses }">
@@ -85,7 +92,7 @@
                   <!--类型-->
                   <span class="type">课程</span>
                   <!--名称_发布人-->
-                  <a href="<a href="${ctx }/lesson/instr?id=${courses.courseId }"</a>">${courses.courseName }_${courses.teacher.user.userRealName }</a>
+                  <a href="${ctx }/lesson/instr?id=${courses.courseId }">${courses.courseName }_${courses.teacher.user.userRealName }</a>
                   <!--发布时间-->
                   <!--课程没有发布时间-->
                   <!-- <span></span> -->
@@ -94,6 +101,9 @@
                 </div>
                </c:forEach>
                 </c:if>
+                
+                
+                
                 <!--2. 文章的示例   循环展示-->
                 <c:if test="${flag==2 }">
                 <c:forEach var="articles" items="${listSearchArticles }">
@@ -108,6 +118,39 @@
                     <p>${articles.articleIntroduction }</p>
                 </div>
                 </c:forEach>
+               </c:if>
+               
+               <!-- 4.按照关键字搜索全部 -->
+               <c:if test="${flag==4 }">
+               	  <c:forEach var="coursesIndex" items="${courseIndexSearchers }">
+               	  	<!--  c:forEach var="tname" items="${searchedTeacherName }"-->
+                  <div class="result-block">
+                  <!--类型-->
+                  <span class="type">课程</span>
+                  <!--名称_发布人-->
+                  <a href="${ctx }/lesson/instr?id=${coursesIndex.courseId }">${coursesIndex.courseTitle }_${coursesIndex.teacherName }</a>
+                  <!--发布时间-->
+                  <!--课程没有发布时间-->
+                  <!-- <span></span> -->
+                  <!--介绍-->
+                  <p>${coursesIndex.courseSynopsis }</p>
+                  </div>
+                  </c:forEach>
+                  
+                  <c:forEach var="articleIndex" items="${articleIndexSearchers }">
+                  	<div class="result-block">
+                    <!--类型-->
+                    <span class="type">文章</span>
+                    <!--名称_发布人-->
+                    <a href="PassageControllerImpl?articleId=${articleIndex.articleId }">${articleIndex.articleTitle }_${articleIndex.teacherName }</a><br/>
+                    <!--发布时间-->
+                    <span class="tag">${articleIndex.publicationTime }</span>
+                    <!--介绍-->
+                    <p>${articleIndex.articleContent }</p>
+               	    </div>
+                  </c:forEach>
+                  
+                  
                </c:if>
               </div>
               <!--分页器-->
