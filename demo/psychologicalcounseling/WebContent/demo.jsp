@@ -114,9 +114,10 @@
 		        'tolowercase', //字母小写
 		        'background', //背景
 		         'inserttable', //插入表格
-		          'charts', // 图表
+		          'charts', // 图表2
     		]
-    	]
+    	],
+    	initialFrameWidth: null , autoHeightEnabled: false
     });
 
 /*    function getContent() {

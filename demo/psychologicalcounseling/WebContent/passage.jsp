@@ -122,16 +122,63 @@
                 ]
                 editor.create()
            		$("#submit").click(function(){
-                 	var xmlhttp;
-                 	var content=editor.txt.html();
-            	 	 	if(window.XMLHttpRequest){
-               		xmlhttp = new XMLHttpRequest();
-                 	}else{
-                 		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                 	}
- 	              	xmlhttp.open("POST","PassageControllerImpl",true);
- 	              	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded;charset=UTF-8");
- 	              	xmlhttp.send("articleId=${articleId}&evaluateContent="+content);
+           			var id = ${article[0].articleId}
+           			alert(id);
+           			var htmls = "";
+           	    	var html = "";
+           	    	var content=editor.txt.html();
+           			var xmlhttp;
+           	    	if (window.XMLHttpRequest){
+           		         xmlhttp=new XMLHttpRequest();
+           		   }
+           		   else{
+           		         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+           		   }
+           		   xmlhttp.open("post","logincomment",true);
+           		   xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded;charset=UTF-8");
+	               xmlhttp.send("articleid="+id+"&evaluateContent="+content);
+           		   
+           		xmlhttp.onreadystatechange=function(){
+        		    if (xmlhttp.readyState==4 && xmlhttp.status==200){
+        		    	 var res=xmlhttp.responseText;
+        		    	 var endlesson = JSON.parse(res);
+        			     console.log(endlesson);
+        			        var key;
+        			        var value;
+        			        var keys;
+        			        var values;
+        			        for(var p in endlesson){
+        			        	key = p;
+        			        	value = endlesson[p];
+        			        }
+        			        keys = JSON.parse(key);
+        			        values = JSON.parse(value);
+        			        var totalNum = values.totalCount;
+        			    	var pageNum = values.pageNum;
+        			        var courses = values.list;
+        			        totalPageNum = values.totalPageNum;
+        			        var pageNum = values.pageNum;
+        			        var pages =[] ;
+        			        var i = (Math.floor((pageNum-1) / 4))*4+1;
+        			        var temp = i;
+        			        var numss = i-1;
+        			        for(;i<=totalPageNum&&i<=temp+3;i++){
+        			        	pages.push(i);
+        			        }
+        			        var num = i;
+        			        
+        			        htmls ="<div class='pager-bar'><ul class='pager'><li class='previous' id='pagePre'><a pagenum='"+numss+"' href='javascript:void(0)' onclick='showLeftComment(this)'>«</a>";
+                            for(var i=0;i<courses.length;i++){
+                            	html += "<div class='comment'><div class='comment-header'><img src='images/"+keys[i].userHeadPath+"' alt='头像'><a href='#''>"+keys[i].userNickName
+                            	+"</a><span class='tag'>"+courses[i].evaluateTime+"</span></div><p>"+courses[i].evaluateComment+"</p></div>";
+                            }
+                            for(var i = 0;i<pages.length;i++){
+                		    	htmls += "<li><a href='javascript:void(0)' class='firesun' onclick='showComment(this);' pagenum="+pages[i]+">"+pages[i]+"</a>";
+                		    }
+                		    htmls += "<li class='next' id='pageNext'><a pagenum='"+num+"' href='javascript:void(0)' onclick='showRightComment(this);'>»</a></ul></div>";
+            		    	document.getElementById("pageses").innerHTML = html + htmls;
+        		   }
+        	   }  
            		})
                 </script>
         </div>
@@ -143,7 +190,7 @@
             <span class="board-title-h1">评论</span>
             <button type="button" class="btn btn-link to-comment" onclick="openCommentWindow()"><i class="icon icon-pencil"></i>参与讨论</button>
             <!--一条评论-->
-         <div id="pagescomment"> 
+         <div class="pagescomment" id="pageses"> 
         <c:forEach items="${page.list }" var="p">    
             <div class="comment">
                 <div class="comment-header">
@@ -158,23 +205,205 @@
                 <p>${p.evaluateComment }</p>
             </div>
  		</c:forEach>
- 		</div>
-          </div>
           <!--分页器-->         
            <div class="pager-bar">
-              <ul class="pager">
-                  <li class="previous"><a href="PassageControllerImpl?pageNum=${p.prePageNum }&&articleId=${articleId }">«</a></li>
-                  <li><a href="PassageControllerImpl?pageNum=1&&articleId=${articleId }">1</a></li>
-                  <li class="active"><a href="PassageControllerImpl?pageNum=2&&articleId=${articleId }">2</a></li>
-                  <li><a href="PassageControllerImpl?pageNum=3&&articleId=${articleId }">3</a></li>
-                  <li class="next"><a href="PassageControllerImpl?pageNum=${p.nextPageNum }&&articleId=${articleId }">»</a></li>
-              </ul>
-          </div>
+                    <ul class="pager">
+                        <li class="previous" id="pagePre"><a href="javascript:void(0)" onclick="showLeftComment(this)" pagenum="0">«</a>
+                        <c:set  var="count" value="${page.totalPageNum}"  />
+                        <c:set  var="nownum" value="${page.pageNum }"></c:set>
+                        <c:forEach items="${pages }" var ="temp" begin="${nownum-1 }" end="${nownum+2 }">
+                           <li><a href="javascript:void(0)" onclick="showComment(this);" pagenum="${temp }" class="firesun">${temp }</a>
+                        </c:forEach>
+                        <li class="next" id="pageNext"><a href="javascript:void(0)" onclick="showRightComment(this);" pagenum="5">»</a>
+                    </ul>
+                </div>
+
         </div>
     </div>
     <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
     <script src="js/jquery-1.11.0.min.js"></script>
     <!-- ZUI Javascript组件 -->
     <script src="js/zui.min.js"></script>
+    <script type="text/javascript">
+    var totalPageNum = ${page.totalPageNum}
+    var articleId =${article[0].articleId};
+    function showComment(obj){
+   
+    	var pageNum = obj.getAttribute("pagenum");
+    	var htmls = "";
+    	var html = "";
+    	var xmlhttp;
+    	if (window.XMLHttpRequest){
+	         xmlhttp=new XMLHttpRequest();
+	   }
+	   else{
+	         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	   }
+	   xmlhttp.open("POST","showcomment",true);
+	   xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded;charset=UTF-8");
+	   xmlhttp.send("articleid="+articleId+"&&pagenum="+pageNum);  
+	   xmlhttp.onreadystatechange=function(){
+		    if (xmlhttp.readyState==4 && xmlhttp.status==200){
+		    	 var res=xmlhttp.responseText;
+		    	 var endlesson = JSON.parse(res);
+			     console.log(endlesson);
+			        var key;
+			        var value;
+			        var keys;
+			        var values;
+			        for(var p in endlesson){
+			        	key = p;
+			        	value = endlesson[p];
+			        }
+			        keys = JSON.parse(key);
+			        values = JSON.parse(value);
+			        var totalNum = values.totalCount;
+			    	var pageNum = values.pageNum;
+			        var courses = values.list;
+			        totalPageNum = values.totalPageNum;
+			        var pageNum = values.pageNum;
+			        var pages =[] ;
+			        var i = (Math.floor((pageNum-1) / 4))*4+1;
+			        var temp = i;
+			        var numss = i-1;
+			        for(;i<=totalPageNum&&i<=temp+3;i++){
+			        	pages.push(i);
+			        }
+			        var num = i;
+			        
+			        htmls ="<div class='pager-bar'><ul class='pager'><li class='previous' id='pagePre'><a pagenum='"+numss+"' href='javascript:void(0)' onclick='showLeftComment(this)'>«</a>";
+                    for(var i=0;i<courses.length;i++){
+                    	html += "<div class='comment'><div class='comment-header'><img src='images/"+keys[i].userHeadPath+"' alt='头像'><a href='#''>"+keys[i].userNickName
+                    	+"</a><span class='tag'>"+courses[i].evaluateTime+"</span></div><p>"+courses[i].evaluateComment+"</p></div>";
+                    }
+                    for(var i = 0;i<pages.length;i++){
+        		    	htmls += "<li><a href='javascript:void(0)' class='firesun' onclick='showComment(this);' pagenum="+pages[i]+">"+pages[i]+"</a>";
+        		    }
+        		    htmls += "<li class='next' id='pageNext'><a pagenum='"+num+"' href='javascript:void(0)' onclick='showRightComment(this);'>»</a></ul></div>";
+    		    	document.getElementById("pageses").innerHTML = html + htmls;
+		   }
+	   }  
+    }
+    
+    
+    function showLeftComment(obj){
+    	var prePageNum = obj.getAttribute("pagenum");
+    	var htmls = "";
+    	var html = "";
+    	//alert(aftPageNum);
+    	if(prePageNum >=4 ){
+    		var xmlhttp;
+        	if (window.XMLHttpRequest){
+    	         xmlhttp=new XMLHttpRequest();
+    	   }
+    	   else{
+    	         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    	   }
+    	   xmlhttp.open("POST","showcomment",true);
+    	   xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded;charset=UTF-8");
+    	   xmlhttp.send("articleid="+articleId+"&&pagenum="+prePageNum);  
+    	   xmlhttp.onreadystatechange=function(){
+   		    if (xmlhttp.readyState==4 && xmlhttp.status==200){
+   		    	 var res=xmlhttp.responseText;
+   		    	 var endlesson = JSON.parse(res);
+   			     console.log(endlesson);
+   			        var key;
+   			        var value;
+   			        var keys;
+   			        var values;
+   			        for(var p in endlesson){
+   			        	key = p;
+   			        	value = endlesson[p];
+   			        }
+   			        keys = JSON.parse(key);
+   			        values = JSON.parse(value);
+   			        var totalNum = values.totalCount;
+   			    	var pageNum = values.pageNum;
+   			        var courses = values.list;
+   			        totalPageNum = values.totalPageNum;
+   		            var pageNum = values.pageNum;
+   		            var pages =[] ;
+   		            for(i=prePageNum-3;i<=totalPageNum&&i<=prePageNum;i++){
+   		            	pages.push(i);
+   		            }
+   		            var numss = prePageNum-4;
+   		            var num = i;
+   		         htmls ="<div class='pager-bar'><ul class='pager'><li class='previous' id='pagePre'><a pagenum='"+numss+"' href='javascript:void(0)' onclick='showLeftComment(this)'>«</a>";
+                 for(var i=0;i<courses.length;i++){
+                 	html += "<div class='comment'><div class='comment-header'><img src='images/"+keys[i].userHeadPath+"' alt='头像'><a href='#''>"+keys[i].userNickName
+                 	+"</a><span class='tag'>"+courses[i].evaluateTime+"</span></div><p>"+courses[i].evaluateComment+"</p></div>";
+                 }
+                 for(var i = 0;i<pages.length;i++){
+     		    	htmls += "<li><a href='javascript:void(0)' class='firesun' onclick='showComment(this);' pagenum="+pages[i]+">"+pages[i]+"</a>";
+     		    }
+     		      htmls += "<li class='next' id='pageNext'><a pagenum='"+num+"' href='javascript:void(0)' onclick='showRightComment(this);'>»</a></ul></div>";
+ 		    	document.getElementById("pageses").innerHTML = html + htmls;
+   		            
+   		    }
+   	  }
+    }
+  }
+    
+    
+    
+    function showRightComment(obj){
+    	var aftPageNum = obj.getAttribute("pagenum");
+    	var htmls = "";
+    	var html = "";
+    	//alert(aftPageNum);
+    	if(aftPageNum <= totalPageNum ){
+    		var xmlhttp;
+        	if (window.XMLHttpRequest){
+    	         xmlhttp=new XMLHttpRequest();
+    	   }
+    	   else{
+    	         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    	   }
+    	   xmlhttp.open("POST","showcomment",true);
+    	   xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded;charset=UTF-8");
+    	   xmlhttp.send("articleid="+articleId+"&&pagenum="+aftPageNum);  
+    	   xmlhttp.onreadystatechange=function(){
+   		    if (xmlhttp.readyState==4 && xmlhttp.status==200){
+   		    	 var res=xmlhttp.responseText;
+   		    	 var endlesson = JSON.parse(res);
+   			     console.log(endlesson);
+   			        var key;
+   			        var value;
+   			        var keys;
+   			        var values;
+   			        for(var p in endlesson){
+   			        	key = p;
+   			        	value = endlesson[p];
+   			        }
+   			        keys = JSON.parse(key);
+   			        values = JSON.parse(value);
+   			        var totalNum = values.totalCount;
+   			    	var pageNum = values.pageNum;
+   			        var courses = values.list;
+   			        totalPageNum = values.totalPageNum;
+   		            var pageNum = values.pageNum;
+   		            var pages =[] ;
+   		            for(i=aftPageNum;i<=totalPageNum&&i<=aftPageNum+3;i++){
+   		            	pages.push(i);
+   		            }
+   		            var numss = aftPageNum-1;
+   		            var num = i;
+   		         htmls ="<div class='pager-bar'><ul class='pager'><li class='previous' id='pagePre'><a pagenum='"+numss+"' href='javascript:void(0)' onclick='showLeftComment(this)'>«</a>";
+                 for(var i=0;i<courses.length;i++){
+                 	html += "<div class='comment'><div class='comment-header'><img src='images/"+keys[i].userHeadPath+"' alt='头像'><a href='#''>"+keys[i].userNickName
+                 	+"</a><span class='tag'>"+courses[i].evaluateTime+"</span></div><p>"+courses[i].evaluateComment+"</p></div>";
+                 }
+                 for(var i = 0;i<pages.length;i++){
+     		    	htmls += "<li><a href='javascript:void(0)' class='firesun' onclick='showComment(this);' pagenum="+pages[i]+">"+pages[i]+"</a>";
+     		    }
+     		    htmls += "<li class='next' id='pageNext'><a pagenum='"+num+"' href='javascript:void(0)' onclick='showRightComment(this);'>»</a></ul></div>";
+ 		    	document.getElementById("pageses").innerHTML = html + htmls;
+   		            
+   		    }
+   	  }
+    }
+  }
+            
+    </script>
   </body>
 </html>

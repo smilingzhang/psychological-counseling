@@ -87,33 +87,52 @@
         <div class="passage-list-body panel">
             <div class="panel-body">
                 <!--一篇文章-->
-            <c:forEach items="${passageList.list }" var="p">
-                <div class="passage-block">
-                    <!--文章图片-->
-                    <img src="images/${p.articleImgPath }" alt="！！这里写文章的名字！！">
-                    <!--文章名-->
-                    <a class="title" href="PassageControllerImpl?articleId=${p.articleId }">${p.articleName }&nbsp;|&nbsp;心事博物馆</a><br/>
-                    <!--文章作者-->
-                    <a class="writer" href="TeacherControllerImpl?teacherId=${p.teacher.user.userId }">${p.teacher.user.userRealName }</a><br/>
-                    <!--文章介绍-->
-                    <p>${p.articleIntroduction }</p>
-                </div>
-            </c:forEach>  
+	            <c:forEach items="${passageList.list }" var="p">
+	                <div class="passage-block">
+	                    <!--文章图片-->
+	                    <img src="images/${p.articleImgPath }" alt="！！这里写文章的名字！！">
+	                    <!--文章名-->
+	                    <a class="title" href="PassageControllerImpl?articleId=${p.articleId }">${p.articleName }&nbsp;|&nbsp;心事博物馆</a><br/>
+	                    <!--文章作者-->
+	                    <a class="writer" href="TeacherControllerImpl?teacherId=${p.teacher.user.userId }">${p.teacher.user.userRealName }</a><br/>
+	                    <!--文章介绍-->
+	                    <p>${p.articleIntroduction }</p>
+	                </div>
+	            </c:forEach>  
             </div>
          <!--分页器：一页最多显示10篇文章。示例并没有超过10篇，就把这段注释掉吧-->
-            <div class="directory-contain-pager" style="text-align: center;">
-                <ul class="pager">
-                    <li class="previous"><a href="PassageListControllerImpl?pageNum=${passageList.prePageNum}&&businesstypeWorkType=5&&typetableId=${typetableId}">«</a></li>
-                    <li><a href="PassageListControllerImpl?pageNum=1&&businesstypeWorkType=5&&typetableId=${typetableId}">1</a></li>
-                    <li><a href="PassageListControllerImpl?pageNum=2&&businesstypeWorkType=5&&typetableId=${typetableId}">2</a></li>
-                    <li><a href="PassageListControllerImpl?pageNum=3&&businesstypeWorkType=5&&typetableId=${typetableId}">3</a></li>
-                    <li><a href="PassageListControllerImpl?pageNum=4&&businesstypeWorkType=5&&typetableId=${typetableId}">4</a></li>
-                    <li><a href="PassageListControllerImpl?pageNum=5&&businesstypeWorkType=5&&typetableId=${typetableId}">5</a></li>
-                    <li class="next"><a href="PassageListControllerImpl?pageNum=${passageList.nextPageNum}&&businesstypeWorkType=5&&typetableId=${typetableId}">»</a></li>
-                </ul>
-            </div> 
-        </div>
-    </div>
+         <div class="button-pager">   
+           <%
+				HttpServletRequest httpRequest = (HttpServletRequest)request;
+				//当前url
+				String url = "http://" + request.getServerName()
+								+ ":" + request.getServerPort()
+								+ httpRequest.getContextPath()
+								+ httpRequest.getServletPath();
+				//参数
+				String params = httpRequest.getQueryString();
+								
+			%>
+			<c:if test="${passageList.totalCount > passageList.pageSize }">
+				<ul id="myPager" class="pager" data-elements="prev,nav,next" data-ride="pager"
+					data-page="${passageList.PageNum }"
+					data-rec-total="${passageList.totalCount }"
+					data-max-nav-count="5"
+					data-rec-per-page="${passageList.pageSize }"
+					data-link-creator="${url}?page={page}<c:if test='${!empty(params) }'>&${params }</c:if>#page={page}"
+				>
+				</ul>
+				<script>
+					$('#myPager').pager({
+						linkCreator: function(page, pager) {
+							var url = window.location.href;
+							url = url.split("#")[0];
+							return url+'#page='+ page +'?page=' + page;
+						} 
+					});
+				</script>
+			</c:if>  
+   	</div>
     <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
     <script src="js/jquery-1.11.0.min.js"></script>
     <!-- ZUI Javascript组件 -->

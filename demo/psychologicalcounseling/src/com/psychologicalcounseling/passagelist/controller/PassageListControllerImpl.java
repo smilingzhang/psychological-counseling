@@ -48,26 +48,27 @@ public class PassageListControllerImpl {
 		}
 		int count = this.passageListServiceImpl.findCount(businesstypeWorkType, typeTable);         //查询出共有多少条数据
 		System.out.println("总共有"+count+"条数据");
-		List<BusinessType> list = this.passageListServiceImpl.findBusinessTypeByPage(num, 4, businesstypeWorkType, typeTable);  //分页查询出文章列表
+		List<BusinessType> list = this.passageListServiceImpl.findBusinessTypeByPage(num, 8, businesstypeWorkType, typeTable);  //分页查询出文章列表
 		 
 		List<Article> list1 = new ArrayList<Article>();
 		for(int i = 0;i<list.size();i++) {
 			int businesstypeWorkId = list.get(i).getBusinesstypeWorkId();
 			System.out.println(" businesstypeWorkId----------"+ businesstypeWorkId);
 			Article article = this.passageListServiceImpl.findArticle(businesstypeWorkId);
-			System.out.println("article---"+article.getArticleImgPath());
-			System.out.println(article.getArticleIntroduction());
-			System.out.println(article.getTeacher().getUser().getUserRealName());
+//			System.out.println("article---"+article.getArticleImgPath());
+//			System.out.println(article.getArticleIntroduction());
+//			System.out.println(article.getTeacher().getUser().getUserRealName());
 			list1.add(article);
 		}
 		System.out.println("这个文章列表有"+list1.size()+"篇文章");
-		Page<Article> page = new Page<Article>(num,4);
+		Page<Article> page = new Page<Article>(num,8);
 		page.setList(list1);
 		page.setTotalCount(count);
 		
 		request.setAttribute("typetableId", id2);
 		request.getServletContext().setAttribute("typeTablelist",typeTablelist);
 		request.setAttribute("id1", id1);
+		System.out.println(page.toString());
 		request.getServletContext().setAttribute("passageList", page);
 		return "passage-list";
 	}

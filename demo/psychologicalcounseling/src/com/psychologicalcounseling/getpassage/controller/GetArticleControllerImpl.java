@@ -60,7 +60,7 @@ public class GetArticleControllerImpl {
 		 */
 		String articleIntroduction = request.getParameter("articleIntroduction");	 //获取文章的简介
 		System.out.println(articleIntroduction);
-		String articleContent = request.getParameter("articleContent");
+		String articleContent = request.getParameter("articleContent");        
 		System.out.println(articleContent);
 		
 		Article article = new Article();
