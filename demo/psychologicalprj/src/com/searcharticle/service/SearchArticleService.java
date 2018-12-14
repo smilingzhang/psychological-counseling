@@ -8,8 +8,8 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.entity.Article;
-import com.entity.Page;
 import com.searcharticle.dao.SearchArticleDao;
+import com.util.Page;
 import com.util.SetPageUtil;
 
 @Service

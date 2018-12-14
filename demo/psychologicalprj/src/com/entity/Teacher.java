@@ -1,16 +1,12 @@
 package com.entity;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -40,9 +36,10 @@ public class Teacher {
 	private int teacherListenTime;
 	private String authenticationAptitudeName ;
 	private String goodats;
-	private Set<ConsultObject> consultobjects = new HashSet<ConsultObject>();
 	private List<TeacherTime> teacherTimes = new ArrayList<>();
 	private User user;
+	private int age;
+	private int canListen;
 	
 	
 	@Id
@@ -86,16 +83,6 @@ public class Teacher {
 		this.teacherListenTime = teacherListenTime;
 	}
 	
-	@OneToMany(targetEntity=ConsultObject.class,cascade=CascadeType.ALL)
-	@JoinColumn(name="teacherId")
-	public Set<ConsultObject> getConsultobjects() {
-		return consultobjects;
-	}
-	public void setConsultobjects(Set<ConsultObject> consultobjects) {
-		this.consultobjects = consultobjects;
-	}
-	
-	
 	@OneToOne(cascade=CascadeType.ALL)
 	@PrimaryKeyJoinColumn(name="teacherId")
 	public User getUser() {
@@ -123,11 +110,18 @@ public class Teacher {
 	public void setGoodats(String goodats) {
 		this.goodats = goodats;
 	}
-	
-	
-	
-	
-	
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public int getCanListen() {
+		return canListen;
+	}
+	public void setCanListen(int canListen) {
+		this.canListen = canListen;
+	}
 	
 	
 }

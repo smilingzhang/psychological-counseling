@@ -10,7 +10,6 @@ import com.util.BaseDao;
 @Repository
 public class UserDaoImpl extends BaseDao<User>{
 
-	
 	public User findUserByUserNickName(String userNickName) {
 		
 		Session session = sessionFactory.getCurrentSession();

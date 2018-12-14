@@ -103,9 +103,10 @@ public class OrderTimeCheckController {
 		}
 		
 		
-		
+		// 原来登录时做的操作
 		
 		User user = (User) session.getAttribute("user");
+		
 		int identity = user.getUserIdentity();
 		// session 中放入该用户的所有未咨询的订单，以便后来通过日期筛选。
 //		List<ConsultationRecord> consultationRecords;
@@ -133,8 +134,8 @@ public class OrderTimeCheckController {
 		session.setAttribute("consultationRecords", consultationRecords);
 		
 		
-		// session 中放入该用户的所有未咨询的订单，以便后来通过日期筛选。
-//		List<ListenRecord> listenRecords;
+		// session 中放入该用户的所有未倾听的订单，以便后来通过日期筛选。
+		//		List<ListenRecord> listenRecords;
 			
 		// 用户如果是普通用户则通过userId查询，如果是teacher则通过teacherId查询;
 		if(identity == 1) {

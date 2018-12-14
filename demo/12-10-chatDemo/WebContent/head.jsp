@@ -38,14 +38,14 @@
 					<li onclick="changeActive(this)" class="list active"><a
 						href="index.html">首页</a></li>
 					<li onclick="changeActive(this)" class="list"><a
-						href="consult-list.html">咨询</a></li>
+						href="http://10.7.84.212:8080/psychologicalprj/consult/default?pageNum=1">咨询</a></li>
 					<li onclick="changeActive(this)" class="list"><a
 						href="listenList">倾听</a></li>
 					<li onclick="changeActive(this)" class="list"><a
 						href="course-list.html">课程</a></li>
 					<li onclick="changeActive(this)" class="list"><a
 						href="passage-list.html">阅读</a></li>
-					<div class="search">
+					<div class ="search">
 						<form class="navbar-form navbar-left" role="search">
 							<div class="form-group">
 								<input id="inputSearchExample3" type="search"

@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.entity.Course;
-import com.entity.Page;
 import com.searchcourse.dao.SearchCourseDao;
+import com.util.Page;
 import com.util.SetPageUtil;
 
 @Service
@@ -54,6 +54,16 @@ public class SearchCourseService extends SetPageUtil<Course>{
 	public int countCourses() {
 		List<Course> list=searchCourseDao.searchAllCourses();
 		return list.size();
+	}
+	/**
+	 * 
+	 *@desc:返回所有课程实体
+	 *@return
+	 *@return:List<Course>
+	 *@trhows
+	 */
+	public List<Course> getAllCousers() {
+		return this.searchCourseDao.searchAllCourses();
 	}
 
 }

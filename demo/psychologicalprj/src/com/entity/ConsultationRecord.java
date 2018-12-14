@@ -23,6 +23,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name="consultationrecord")
 public class ConsultationRecord {
+	@Override
+	public String toString() {
+		return "ConsultationRecord [consultationrecordId=" + consultationrecordId + ", randomNum=" + randomNum
+				+ ", consultationrecordOrderTime=" + consultationrecordOrderTime + ", consultationrecordStartTime="
+				+ consultationrecordStartTime + ", consultationrecordEndTime=" + consultationrecordEndTime + "]";
+	}
 	private int consultationrecordId;
 	private String randomNum;
 	private String consultationrecordOrderTime;

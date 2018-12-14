@@ -28,7 +28,7 @@
 
     <!-- 在此处编码你的创意 -->
     <%@include file="head.jsp" %>
-   
+  
     <div class="contains">
         <div class="panel consult-category">
             <div class="panel-body">
@@ -80,7 +80,7 @@
         <div class="panel consult-panel">
             <div class="panel-body">
             <c:if test="${empty date }">
-            <c:forEach items="${page.teacher }" var="d">
+            <c:forEach items="${page.list }" var="d">
             	 <div class="crightlist-consultant">
                     <!--头像-->
                     <div><a href="<%=path %>/consultdetail/showdetail?teacherId=${d.teacherId }"><img src="<%=path %>/images/consultant.png" style="width: 100px;margin-right:20px;float: left;"/></a></div>
@@ -187,7 +187,7 @@
                 </c:forEach>
             </c:if>
             <c:if test="${not empty date }">
-              <c:forEach var="t" items="${page.teacher }">
+              <c:forEach var="t" items="${page.list }">
                 <!--一个专家  循环展示这部分  专家-->
                 <div class="crightlist-consultant">
                     <!--头像-->
