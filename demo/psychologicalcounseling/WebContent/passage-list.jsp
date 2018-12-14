@@ -115,11 +115,11 @@
 			%>
 			<c:if test="${passageList.totalCount > passageList.pageSize }">
 				<ul id="myPager" class="pager" data-elements="prev,nav,next" data-ride="pager"
-					data-page="${passageList.PageNum }"
+					data-page="${passageList.pageNum }"
 					data-rec-total="${passageList.totalCount }"
-					data-max-nav-count="5"
+					data-max-nav-count="3"
 					data-rec-per-page="${passageList.pageSize }"
-					data-link-creator="${url}?page={page}<c:if test='${!empty(params) }'>&${params }</c:if>#page={page}"
+					data-link-creator="PassageListControllerImpl?pageNum={page}&businesstypeWorkType=5&typetableId=${typetableId}"
 				>
 				</ul>
 				<script>

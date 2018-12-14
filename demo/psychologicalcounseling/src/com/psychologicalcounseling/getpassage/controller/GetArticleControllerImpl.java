@@ -65,7 +65,7 @@ public class GetArticleControllerImpl {
 		
 		Article article = new Article();
 		article.setArticleName(articleName);
-		article.setArticleImgPath(newpath);
+		article.setArticleImgPath(articleImgPath);
 		article.setArticleIntroduction(articleIntroduction);
 		article.setArticleContent(articleContent);
 		article.setArticlePublishTime(new Date());
