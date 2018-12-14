@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -17,8 +18,12 @@ import com.alipay.api.request.AlipayTradeCancelRequest;
 import com.alipay.api.request.AlipayTradeQueryRequest;
 import com.alipay.api.response.AlipayTradeCancelResponse;
 import com.alipay.api.response.AlipayTradeQueryResponse;
+
+import com.psychologicalcounseling.entity.User;
 import com.psychologicalcounseling.login.dao.AlipayDaoImpl;
 import com.psychologicalcounseling.util.AlipayConfig;
+
+import net.sf.json.JSONObject;
 
 @Service
 public class AlipayServiceImpl {
@@ -68,12 +73,35 @@ public class AlipayServiceImpl {
 	 * 
 	 *@desc:第三方登录时插入用户。
 	 *@param alipayUserId
+	 *       false--新用户
 	 *@return:void
 	 *@trhows
 	 */
-	public void AlipayLogin(String alipayUserId) {
-		adi.insertUser(alipayUserId);
+	public void alipayLogin(String json) {
+		//创建一个user
+		User user=new User();
+		//将传过来的json字符串数据变成json对象
+		JSONObject jsonObject=JSONObject.fromObject(json);
+		System.out.println(jsonObject+"*************************");
+		if(isNewUser(jsonObject.getString("user_id"))==false) {
+			//接收用户详细信息的数据
+			user.setAlipayUserId(jsonObject.getString("user_id"));
+			user.setUserCity(jsonObject.getString("city"));
+			user.setUserIdentity(user.IDENTITY_USER);
+			user.setUserProvince(jsonObject.getString("province"));		
+			user.setUserNickName(jsonObject.getString("nick_name"));
+			user.setUserHeadPath(jsonObject.getString("avatar"));
+			if(jsonObject.getString("avatar")=="F") {
+				user.setUserSex("男");
+			}else {
+				user.setUserSex("女");
+			}
+			adi.insertUser(user);
+		}else {
+			//日志操作
+		}
 	}
+	
 	/**
 	 * 
 	 *@desc:根据alipayUserId判断是不是新用户。
@@ -82,7 +110,7 @@ public class AlipayServiceImpl {
 	 *@return:boolean
 	 *@trhows
 	 */
-	public boolean isNewUser4Alipay(String alipayUserId) {
+	public boolean isNewUser(String alipayUserId) {
 		List list=adi.isNewUser4Alipay(alipayUserId);
 		if(list.size()==0) {
 			return false;
@@ -101,5 +129,6 @@ public class AlipayServiceImpl {
 	public int findUserId(String alipayUserId) {
 		return adi.findUserId(alipayUserId);
 	}
+	
 
 }

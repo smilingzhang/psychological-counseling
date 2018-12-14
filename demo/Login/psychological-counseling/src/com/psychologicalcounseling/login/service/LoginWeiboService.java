@@ -12,6 +12,7 @@ import com.psychologicalcounseling.login.weibo4j.Users;
 import com.psychologicalcounseling.login.weibo4j.model.User;
 import com.psychologicalcounseling.login.weibo4j.model.WeiboException;
 //import com.psychologicalcounseling.user.dao.UserDao;
+import com.psychologicalcounseling.user.dao.UserDao;
 
 /**
  *@desc: 提供微博第三方登录服务
@@ -22,8 +23,8 @@ import com.psychologicalcounseling.login.weibo4j.model.WeiboException;
 public class LoginWeiboService {
 	@Resource
 	private LoginWeiboDao loginWeiboDao;
-	//@Resource
-	//private UserDao userDao;
+	@Resource
+	private UserDao userDao;
 
 	/**
 	 * 
@@ -39,14 +40,14 @@ public class LoginWeiboService {
 	 *				<li>否则，返回-1</li></ul>
 	 *@trhows
 	 */
-	public com.psychologicalcounseling.entity.User login(String accessToken,long weiboUid) {
+	public com.psychologicalcounseling.entity.User login(String accessToken,String weiboUid) {
 		int uid = 0;
 		//实例化一个项目内的User对象（com.psychologicalcounseling.entity）
 		com.psychologicalcounseling.entity.User user = new com.psychologicalcounseling.entity.User();
 		//1. 用weiboUid查询数据库，判断该用户是否已经注册过
 		if(isRegist(weiboUid)) {
 			//1-1 若注册过，查询用户的id
-			//user = userDao.getUser(getId(weiboUid));
+			user = userDao.getUser(getId(weiboUid));
 		}else {
 			//1-2 若没注册过，拉取该用户的微博个人资料，并存入用户表
 			Users users = new Users(accessToken);
@@ -112,7 +113,7 @@ public class LoginWeiboService {
 	 *@return:String
 	 *@trhows
 	 */
-	private int getId(long weiboUid) {
+	private int getId(String weiboUid) {
 		return loginWeiboDao.getId(weiboUid);
 	}
 
@@ -122,7 +123,7 @@ public class LoginWeiboService {
 	 *@return:boolean
 	 *@trhows
 	 */
-	private boolean isRegist(long weiboUid) {
+	private boolean isRegist(String weiboUid) {
 		return loginWeiboDao.isRegist(weiboUid);
 	}
 

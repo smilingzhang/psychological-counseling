@@ -36,15 +36,8 @@ public class AlipayDaoImpl extends BaseDao{
       *@return:void
       *@trhows
       */
-     public void insertUser(String alipayUserId) {
-    	 String sql="insert into user(userRegistTime,alipayUserId) values(?,?)";
-    	 System.out.println("*********");
-    	 int result=insert(sql,new Date(),alipayUserId);
-    	 if(result==0) {
-    		 System.out.println("用户插入失败");
-    	 }else {
-    		 System.out.println("用户插入成功");
-    	 }
+     public void insertUser(User user) {
+    	 save(user);
      }
      /**
       * 

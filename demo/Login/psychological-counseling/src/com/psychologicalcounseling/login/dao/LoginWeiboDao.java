@@ -27,7 +27,7 @@ public class LoginWeiboDao extends BaseDao<User> {
 	 *@return:boolean
 	 *@trhows
 	 */
-	public boolean isRegist(long weiboUid) {
+	public boolean isRegist(String weiboUid) {
 		String hql = "from User u where u.weiboUid=?";
 		List<User> list = find(hql,weiboUid);
 		if(list.size()==0) return false;
@@ -41,7 +41,7 @@ public class LoginWeiboDao extends BaseDao<User> {
 	 *@return:String
 	 *@trhows
 	 */
-	public int getId(long weiboUid) {
+	public int getId(String weiboUid) {
 		String hql = "select u.userId from User u where u.weiboUid=?";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter(0 , weiboUid);

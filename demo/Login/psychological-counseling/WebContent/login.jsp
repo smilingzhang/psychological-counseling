@@ -103,7 +103,7 @@
 	                <div class="login-other center-block">
 	                    <!--原生icon-->
 	                    <!--支付宝-->
-	                    <a href="https://openauth.alipaydev.com/oauth2/publicAppAuthorize.htm?app_id=2016091900550564&scope=auth_user,auth_base&redirect_uri=http%3A%2F%2F127.0.0.1%3A8080%2Fpsychological-counseling%2FAlipay">
+	                    <a href="https://openauth.alipaydev.com/oauth2/publicAppAuthorize.htm?app_id=2016091900550564&scope=auth_user,auth_base&redirect_uri=http://127.0.0.1:8080/psychological-counseling/loginAlipay">
 	                    	<img src="images/alipay.png" alt="支付宝登录">
 	                    </a>
 	                    <!--微博-->
