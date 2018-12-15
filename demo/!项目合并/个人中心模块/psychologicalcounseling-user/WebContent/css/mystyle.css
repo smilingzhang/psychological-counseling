@@ -1426,7 +1426,6 @@ a:focus{
 }
 .directory-contain-list .btn{
     background-color: #d75455;
-    margin-top: 10px;
 }
 .directory-contain-list .btn:hover{
     background-color: #ec6a6b;
@@ -1492,9 +1491,10 @@ a:focus{
     height: 30%;
     position: fixed;
     margin: auto;    top: 0; left: 0; bottom: 0; right: 0;   
-    background-color: rgba(255, 255, 255, 0.863);
+    background-color: rgba(255, 255, 255);
     padding: 30px;
     line-height: 2em;
+    border-radius: 18px;
 }
 .info-contain .directory-contain-list .find-back-pwd i{
     display: block;

@@ -129,7 +129,10 @@ function findBackPwd(){
 }
 //在忘记密码的流程中，给手机发送验证码。
 //注意事项：不复用之前的方法，原因是手机号码没办法直接获取，之前取手机号的方式与现在不同。
+var sendTime = 60;
 function sendCode4Pwd(){
+	$("#resendMsg").css("display","none");
+	$("#resendMsg").attr("onclick","");
     var phoneNum = $("#user-phoneNum-Pwd").attr("class");
     var controllerName = "login/getMessage";
 	var toUrl = window.location.protocol+controllerName;
@@ -148,18 +151,31 @@ function sendCode4Pwd(){
 			alert(textStatus); 
 		}
 	})
-	
+	self.setInterval(function(){
+        var currentTime = new Date().getSeconds();
+        var time = (currentTime - sendTime);
+        if(time > 60){
+            //document.getElementById('login-send-verifyCode').removeAttribute("disabled");
+        	$("#resendMsg").css("display","block");
+    		$("#resendMsg").attr("onclick","sendCode4Pwd();");
+            window.clearInterval(int);
+            sendTime = 60;
+            return;
+        }
+    },1000);
 }
 //在忘记密码,发送验证码的界面
 //功能：判断验证码的正确性
-function PwdVerifyCode(){
+function PwdVerifyCode(obj){
 	var code=$("#pwd-code").val();
 	if(code.length > 6 || code.length < 6){ 
         $("#error-msg-code").text("验证码长度不正确");
         $("#error-msg-code").attr("class","msg-err");
+        setErrorInput($(obj).parent());
     } else if(code.length==0){
     	 $("#error-msg-code").text("请输入验证码");
-    	 $("#error-msg-code").attr("class","msg-right");
+    	 $("#error-msg-code").attr("class","msg-err");
+    	 setErrorInput($(obj).parent());
     }else{
        
     }
@@ -175,12 +191,18 @@ function PwdVerifyCode(){
 			
 			if(data.result=="different"){
 				$("#error-msg-code").text("验证码不正确");
+				$("#error-msg-code").attr("class","msg-err");
+				setErrorInput($(obj).parent());
 				$("#verify-code-pwd").attr("disabled","disabled");
 			}else if(data.result=="outOfTime"){
+				$("#error-msg-code").attr("class","msg-err");
 				$("#error-msg-code").text("验证码超时");
+				setErrorInput($(obj).parent());
 				$("#verify-code-pwd").attr("disabled","disabled");
 			}else if(data.result=="same"){
+				$("#error-msg-code").attr("class","msg-right");
 				$("#error-msg-code").text("验证码正确");
+				setSuccessInput($(obj).parent());
 				$("#verify-code-pwd").removeAttr("disabled");
 			}else{
 				console.log("在修改密码界面，发送手机验证码出错");
@@ -203,14 +225,17 @@ function setNewPwd(){
     $("#find-back-pwd").css("display","none");
     $("#set-new-pwd").css("display","block");
 }
+
 //在以原密码为根据修改密码时
 //判断原始密码是否正确
-function verifyOldPwd(){
+function verifyOldPwd(obj){
+	
 	var oldPwd=$('input[name="oldPwd"]').val();
-	console.log("修改密码信息了（根据原密码）");
+	
+	//更改请求url获取方式 by dy
 	var controllerName = "user/verifyOldPwd";
 	var toUrl = window.location.protocol+controllerName;
-	//console.log(toUrl);
+	//console.log("修改密码信息了（根据原密码）");
 	
 	 $.ajax({
  		url:toUrl,
@@ -223,9 +248,11 @@ function verifyOldPwd(){
  			if(data.result=="false"){
  				$("#errorMsg-oldPwd").text("原始密码错误");
  				$("#errorMsg-oldPwd").attr("class","msg-err");
+ 				setErrorInput($(obj).parent());
  			}else{
  				$("#errorMsg-oldPwd").text("原始密码正确");
  				$("#errorMsg-oldPwd").attr("class","msg-right");
+ 				setSuccessInput($(obj).parent());
  			}
  		},
  		error:function(XMLHttpRequest, textStatus, errorThrown){
@@ -240,55 +267,63 @@ function verifyOldPwd(){
  	isCanClick4Pwd();
 }
 //判断新密码位数是否合法
-function checkNewPwd(){
+function checkNewPwd(obj){
 	var newPwd=$('input[name="newPwd"]').val();
 	if(newPwd.length>16||newPwd.length<6){
 		$("#errorMsg-newPwd").text("密码位数须在6-16位之间");
 		$("#errorMsg-newPwd").attr("class","msg-err");
+		setErrorInput($(obj).parent());
 	}else{
 		$("#errorMsg-newPwd").text("密码合法");
 		$("#errorMsg-newPwd").attr("class","msg-right");
+		setSuccessInput($(obj).parent());
 	}
 	isCanClick4Pwd();
 }
 //在“忘记密码”界面--同样不可以复用。
 //功能：判断新密码位数是否合法--
-function checkNewPwdWithPhone(){
+function checkNewPwdWithPhone(obj){
 	var newPwd=$('input[name="newPwdWithPhone"]').val();
 	if(newPwd.length>16||newPwd.length<6){
 		$("#errorMsg-newPwd-phone").text("密码位数须在6-16位之间");
 		$("#errorMsg-newPwd-phone").attr("class","msg-err");
+		setErrorInput($(obj).parent());
 	}else{
 		$("#errorMsg-newPwd-phone").text("密码合法");
 		$("#errorMsg-newPwd-phone").attr("class","msg-right");
+		setSuccessInput($(obj).parent());
 	}
 	isCanClick4PwdWithPhone();
 }
 //输入新密码界面
 //判断前后两次输入的密码是否一致
-function confirm4Pwd(){
+function confirm4Pwd(obj){
 	var newPwd=$('input[name="newPwd"]').val();
 	var confirmPwd=$('input[name="confirmPwd"]').val();
 	if(newPwd==confirmPwd){
-		$("#errorMsg-confirmPwd").text("密码正确");
+		$("#errorMsg-confirmPwd").text("密码相匹配");
 		$("#errorMsg-confirmPwd").attr("class","msg-right");
+		setSuccessInput($(obj).parent());
 	}else{
 		$("#errorMsg-confirmPwd").text("两次密码不一致，请修改");
 		$("#errorMsg-confirmPwd").attr("class","msg-err");
+		setErrorInput($(obj).parent());
 	}
 	isCanClick4Pwd();
 }
 //在“忘记密码”界面--同样不可以复用。
 //功能：判断两次新密码是否一致
-function confirm4PwdWithPhone(){
+function confirm4PwdWithPhone(obj){
 	var newPwd=$('input[name="newPwdWithPhone"]').val();
 	var confirmPwd=$('input[name="confirmPwdWithPhone"]').val();
 	if(newPwd==confirmPwd){
-		$("#errorMsg-confirmPwd-phone").text("密码正确");
+		$("#errorMsg-confirmPwd-phone").text("密码相匹配");
 		$("#errorMsg-confirmPwd-phone").attr("class","msg-right");
+		setSuccessInput($(obj).parent());
 	}else{
 		$("#errorMsg-confirmPwd-phone").text("两次密码不一致，请修改");
 		$("#errorMsg-confirmPwd-phone").attr("class","msg-err");
+		setErrorInput($(obj).parent());
 	}
 	isCanClick4PwdWithPhone();
 }
@@ -320,6 +355,8 @@ function finalButton4Pwd(obj){
 	}else{
 		var newPwd=$('input[name="newPwd"]').val();
 	}
+	
+	//更改请求url获取方式 by dy
 	var controllerName = "user/revisePwd";
 	var toUrl = window.location.protocol+controllerName;
 	$.ajax({
@@ -358,6 +395,8 @@ function savePhone(){
 	
     var phoneNum=$("#phoneNum").val();
     //ajax---更新手机号
+    
+	//更改请求url获取方式 by dy
     var controllerName = "login/addPhone";
 	var toUrl = window.location.protocol+controllerName;
     $.ajax({

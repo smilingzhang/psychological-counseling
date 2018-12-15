@@ -25,8 +25,10 @@
     <link href="${ctx }css/mystyle.css" rel="stylesheet">
     <script src="${ctx }js/user.js"></script>
     <script src="${ctx }js/change-state.js"></script>
-    <script src="${ctx }js/verifyCode.js"></script>
     <script src="${ctx }js/city.js"></script>
+    <!-- 自定义js -->
+    <script src="${ctx }js/verify.js"></script>
+    <script src="${ctx }js/verifyCode.js"></script>
   </head>
   <body>
     <!-- 在此处编码你的创意 -->
@@ -455,20 +457,20 @@
 	                                </tr>
                                     <tr><td class="tag">证件号</td><td id="userIdNumber">
                                       <c:if test="${empty(user.getUserIdNumber()) }">未实名</c:if>
-                                      <c:if test="${!empty(user.getUserIdNumber()) }">${user.getUserIdNumber() }</c:if>
+                                      <c:if test="${!empty(user.getUserIdNumber()) }">${User.userIdNumber.substring(0,6)}*********${User.userIdNumber.substring(14,18) }</c:if>
                                     </td></tr>
                                   
                                 </table>
                                 <table class="setting-table" style="display:none">
                                     <tr>
                                     	<td class="tag" class="10%">姓名</td>
-	                                    <td><input onblur="changeBtnStyle()" class="form-control" name="idName" type="text" onkeyup="isLegal()" value="${user.getUserRealName() }"/></td>
+	                                    <td><div><input class="form-control" name="idName" type="text" onkeyup="isLegal()" value="${user.getUserRealName() }"/></div></td>
 	                                    <!--★★★ 错误信息 -->
 	                                    <td><font id="errorMsg4Name">&nbsp;</font></td>
                                     </tr>
                                     <tr>
 	                                    <td class="tag">证件号</td>
-	                                    <td class="tag"><input onblur="changeBtnStyle()" class="form-control" name="idNum" type="text" onkeyup="isLegal()" value="${user.getUserIdNumber() }"/></td>
+	                                    <td class="tag"><div><input maxlength="18" class="form-control" name="idNum" type="text" onkeyup="isLegal()" value="${user.getUserIdNumber() }"/></div></td>
 	                                    <!--★★★ 错误信息 -->
 	                                    <td><font id="errorMsg4IdNum">&nbsp;</font></td>
                                     </tr>
@@ -481,20 +483,20 @@
                             <form action="" method="POST">
                                 <table class="setting-table">
                                     <tr>
-                                    	<td>原始密码</td>
-                                    	<td><input class="form-control" name="oldPwd" type="password" onblur="verifyOldPwd()"/></td>
+                                    	<td width="20%">原始密码</td>
+                                    	<td width="50%"><div><input maxlength="16" class="form-control" name="oldPwd" type="password" onkeyup="verifyOldPwd(this)"/></div></td>
 		                                    <!--★★★ 错误信息 -->
-                                   		<td><font id="errorMsg-oldPwd">&nbsp;</font></td>
+                                   		<td width="30%"><font id="errorMsg-oldPwd">&nbsp;</font></td>
                                    	</tr>
                                     <tr>
                                     	<td>新密码</td>
-                                    	<td><input onblur="changeBtnStyle()" class="form-control" type="password" name="newPwd" onkeyup="checkNewPwd()"/></td>
+                                    	<td><div><input maxlength="16" onblur="changeBtnStyle()" class="form-control" type="password" name="newPwd" onkeyup="checkNewPwd(this)"/></div></td>
                                     	<!--★★★ 错误信息 -->
                                     	<td><font id="errorMsg-newPwd">&nbsp;</font></td>
                                    	</tr>
                                     <tr>
                                     	<td>确认密码</td>
-                                    	<td><input type="password" class="form-control" name="confirmPwd"  onkeyup="confirm4Pwd()"/></td>
+                                    	<td><div><input maxlength="16" type="password" class="form-control" name="confirmPwd" onkeyup="confirm4Pwd(this)"/></div></td>
                                     	<!--★★★ 错误信息 -->
                                     	<td><font id="errorMsg-confirmPwd">&nbsp;</font></td>
                                    	</tr>
@@ -521,8 +523,10 @@
                                   	  验证码：
                                     <!--★★★ 错误信息，验证码是否正确 -->
                                     <font id="error-msg-code">&nbsp;</font><br/>
-                                  	<input class="form-control" type="text" name="verifyCode" id="pwd-code" onkeyup="PwdVerifyCode()"/>
-                                    <a class="btn btn-primary btn-sm" href="#" onclick="setNewPwd()" disabled="disabled" id="verify-code-pwd">验证</a>
+                                  	<div><input maxlength="6" class="form-control" type="text" name="verifyCode" id="pwd-code" onkeyup="PwdVerifyCode(this)" style="width:80%;float:left;margin-right:10px;"/></div>
+                                    <a class="btn btn-primary" href="#" onclick="setNewPwd()" disabled="disabled" id="verify-code-pwd">验证</a>
+                                    <!-- 重新发送短信按钮 -->
+                                    <span id="resendMsg" class="tag" style="display:none;float:left">没有收到短信？<a href="#" onclick="">重新发送一条</a></span>
                                 </div>
                             </div>
                             <!--设置新密码界面-->
@@ -533,10 +537,10 @@
                                 <div class="verify-zoom">
                                     <!--★★★ 错误信息 -->
                                  	   新密码：<font id="errorMsg-newPwd-phone">&nbsp;</font><br/>
-                                 	 <input class="form-control" type="text" name="newPwdWithPhone" id="" onkeyup="checkNewPwdWithPhone()"/>
+                                 	 <div><input maxlength="16" class="form-control" type="text" name="newPwdWithPhone" id="" onkeyup="checkNewPwdWithPhone(this)"/></div>
                                      <!--★★★ 错误信息，两次密码是否一致 -->
                                  	   确认密码：<font id="errorMsg-confirmPwd-phone">&nbsp;</font><br/>
-                                 	 <input class="form-control" type="text" name="confirmPwdWithPhone" id="" onkeyup="confirm4PwdWithPhone()"/>
+                                 	 <div><input maxlength="16" class="form-control" type="text" name="confirmPwdWithPhone" id="" onkeyup="confirm4PwdWithPhone(this)"/></div>
                                 </div>
                                 <button class="btn btn-primary btn-block" onclick="closeWindow(this);finalButton4Pwd(this)" disabled="disabled" id="RevisePwdButtonWithPhone">确认设置</button>
                             </div>
@@ -547,15 +551,15 @@
                                 <table class="setting-table">
                                 	<c:if test="${!empty(user.getUserPhone()) and fn:length(user.getUserPhone())>0}"><tr><td>原绑定手机号码</td><td id="show-old-phone">${user.getUserPhone().substring(0,3)}****${user.getUserPhone().substring(7,11)}</td></tr></c:if>
                                     <tr>
-                                    	<td>新绑定手机号码</td>
-                                    	<td><input id="phoneNum" name="phoneNum" type="text" class="form-control" placeholder="11位手机号" style="width: 150px;display: block; width: 300px;float: left;" onkeyup="loginVerifyPhone4Alert()"></td>
+                                    	<td witdh="20%">新绑定手机号码</td>
+                                    	<td width="50%"><input maxlength="11" id="phoneNum" name="phoneNum" type="text" class="form-control" placeholder="11位手机号" style="width: 150px;display: block; width: 300px;float: left;" onkeyup="loginVerifyPhone4Alert()"></td>
                                      	<!--★★★ 错误信息，新绑定手机号发是否合法 -->
-                                   		<td><font name="loginErrMsg4Phone" id="loginErrMsg4Phone" class="">&nbsp;</font></td>
+                                   		<td width="30%"><font name="loginErrMsg4Phone" id="loginErrMsg4Phone" class="">&nbsp;</font></td>
                                    	</tr>
                                     <tr>
                                     	<td>验证码</td>
                                         <td>
-                                        	<input id="verifyCode" name="verifyCode" type="text" class="form-control" placeholder="验证码" onkeyup="loginVerifyCode()" style="width: 150px;display: block;float: left;">
+                                        	<div><input malength="6" id="verifyCode" name="verifyCode" type="text" class="form-control" placeholder="验证码" onkeyup="loginVerifyCode(this)" style="width: 55%;float: left;margin-right:10px"></div>
                                             <!-- 这里的onclick解释，settime(this):倒计时功能，sendVerifyCode():验证码是否正确 -->
                                             <a class="btn btn-primarys" id="login-send-verifyCode"  onclick="settime(this);sendVerifyCode()" disabled="disabled">发送验证码</a>
 	                                   </td>
