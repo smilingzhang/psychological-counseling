@@ -1414,8 +1414,9 @@ a:focus{
 .info-contain .directory-contain-list table img{
     height: 80px;
 }
-.info-contain .directory-contain-list table span{
-    font-size: 14px;
+.info-contain .listen table td{
+    text-align: center;
+    vertical-align:middle;
 }
 .info-contain .directory-contain-list table .catagory{
     font-weight: bold;
@@ -1444,6 +1445,12 @@ a:focus{
     float: left;
     margin: 0.5%;
     margin-bottom: 4%
+}
+.info-contain #directory-contain-4 .directory-contain-list .setting-table{
+	table-layout: fixed;
+}
+.info-contain #directory-contain-4 .directory-contain-list .setting-table td{
+	border:0;
 }
 .info-contain .directory-contain-list .passage-block,
 .passage-list-contain .passage-list-body .passage-block
