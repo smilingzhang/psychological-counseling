@@ -8,8 +8,8 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.Consultation.consulterlist.dao.ConsulterDao;
-import com.entity.Page;
 import com.entity.Teacher;
+import com.util.Page;
 import com.util.SetPageUtil;
 
 @Service

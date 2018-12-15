@@ -20,18 +20,31 @@
                     <li onclick="changeActive(this)" class="list active"><a href="#">首页</a></li>
                     <li onclick="changeActive(this)" class="list"><a href="#">咨询</a></li>
                     <li onclick="changeActive(this)" class="list"><a href="#">课程</a></li>
-                    <li onclick="changeActive(this)" class="list"><a href="#">倾听</a></li>
+                    <li onclick="changeActive(this)" class="list"><a href="listenList">倾听</a></li>
                     <li onclick="changeActive(this)" class="list"><a href="#">阅读</a></li>
+                  
                     <div class="search">
-                        <form class="navbar-form navbar-left" role="search">
+                    	<c:if test="${isshow!=1 }">
+                        <form class="navbar-form navbar-left" role="search" action="<%=p %>/searchkeyword/coursekeyword" method="post">
                             <div class="form-group">
-                                    <input id="inputSearchExample3" type="search" class="form-control search-input" placeholder="搜索">
+                                    <input id="inputSearchExample3" type="search" class="form-control search-input" placeholder="搜索" name="searchContent" value="${searchContent }">
                                     <label for="inputSearchExample3" class="input-control-icon-left search-icon"><i class="icon icon-search"></i></label>
                             </div>
                             <button type="submit" class="btn btn-default">搜索</button>
                         </form>
+                        </c:if>
+                        <c:if test="${isshow==1 }">
+                        	 <form class="navbar-form navbar-left" role="search" action="<%=p %>/searchkeyword/coursekeyword" method="post">
+                            <div class="form-group">
+                                  
+                                    <label for="inputSearchExample3" class="input-control-icon-left search-icon"><i class="icon icon-search"></i></label>
+                            </div>
+                           
+                        </form>
+                        </c:if>
                     </div>
-                    <li class="list"><a class="login" href="#">登录</a></li>
+                
+                    <li class="list"><a class="login" href="login.jsp">登录</a></li>
                     <li class="list"><a class="regist" href="#">注册</a></li>
                 </ul>  
             </div>

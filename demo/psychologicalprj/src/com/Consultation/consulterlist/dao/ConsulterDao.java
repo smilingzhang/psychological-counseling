@@ -22,9 +22,6 @@ import com.util.BaseDao;
  */
 @Repository
 public class ConsulterDao extends BaseDao<Teacher> {
-	@Resource
-	private SessionFactory sessionFactory;
-
 	/**
 	 * 
 	 * @desc:检索符合条件的咨询师
