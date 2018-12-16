@@ -84,15 +84,15 @@
 	                <!--账号密码登录表单-->
 	                <form class="login-form" action="${ctx }/login/login4Pwd" method="POST" id="form-2" style="display:none">
 	                    <div class="group">
-		                    <font name="loginErrMsg4Phone" id="loginErrMsg4Phone" class=""></font>
-	                    	<div><input name="phoneNum" type="text" class="form-control" id="phoneNum" placeholder="11位手机号" onkeyup="loginVerifyPhone4Pwd();"></div><br/>
+		                    <font name="loginErrMsg4Phone4Second" id="loginErrMsg4Phone4Second" class=""></font>
+	                    	<div><input name="phoneNum" type="text" class="form-control" id="phoneNum4Pwd" placeholder="11位手机号" onkeyup="loginVerifyPhone4Pwd()"></div><br/>
 	                    </div>
 	                    <div class="group">
 		                    <!-- 错误信息 -->							
 		                    <font name="loginErrMsg4Pwd" id="loginErrMsg4Pwd" class=""></font>
 	                    	<div><input name="pwd" type="text" class="form-control" id="pwd" placeholder="密码" onkeyup="loginVerifyPwd();"></div><br/>
 	                    </div>
-	                    <button id="login-form-submit-button" class="btn btn-block" disabled="disabled" onclick="this.form.submit()">登录</button>
+	                    <button id="login-form-submit-button-Second" class="btn btn-block" disabled="disabled" onclick="this.form.submit()">登录</button>
 	                </form>
                     <!--第三方登录接口-->
 	                <div class="login-tag">
@@ -103,11 +103,12 @@
 	                <div class="login-other center-block">
 	                    <!--原生icon-->
 	                    <!--支付宝-->
-	                    <a href="https://openauth.alipaydev.com/oauth2/publicAppAuthorize.htm?app_id=2016091900550564&scope=auth_user,auth_base&redirect_uri=http://127.0.0.1:8080/psychological-counseling/loginAlipay">
+<!-- 	                    <a href="https://openauth.alipaydev.com/oauth2/publicAppAuthorize.htm?app_id=2016091900550564&scope=auth_user,auth_base&redirect_uri=http://127.0.0.1:8080/psychological-counseling/loginAlipay"> -->
+	                    <a href="${ctx }/loginAlipayRequest">
 	                    	<img src="images/alipay.png" alt="支付宝登录">
 	                    </a>
 	                    <!--微博-->
-	                    <a href="loginWeiboRequest">
+	                    <a href="${ctx }/loginWeiboRequest">
 	                    	<img src="images/weibo.png" alt="微博登录">
 	                    </a>
 	                </div>

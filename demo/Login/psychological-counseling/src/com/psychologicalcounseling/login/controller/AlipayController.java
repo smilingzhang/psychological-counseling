@@ -54,6 +54,10 @@ public class AlipayController {
 	
 @Resource
 private AlipayServiceImpl asi;
+@RequestMapping("/loginAlipayRequest")
+public void loginAlipayRequest(HttpServletRequest req,HttpServletResponse resp) throws ServletException, IOException {
+	resp.sendRedirect("https://openauth.alipaydev.com/oauth2/publicAppAuthorize.htm?app_id=2016091900550564&scope=auth_user,auth_base&redirect_uri=http://127.0.0.1:8080/psychological-counseling/loginAlipay");
+}
 //获取用户登录授权信息
 @RequestMapping("/loginAlipay")
 public void loginByAlipay(@RequestParam(value="auth_code") String auth_code,
@@ -92,8 +96,7 @@ public void loginByAlipay(@RequestParam(value="auth_code") String auth_code,
     	 System.out.println("用户详细信息调用失败");
     	 resp.sendRedirect("login.jsp");
      }
-     
-     req.getRequestDispatcher("redirect").forward(req, resp);
+     req.getRequestDispatcher("/login/redirect").forward(req, resp);
 }
 
 

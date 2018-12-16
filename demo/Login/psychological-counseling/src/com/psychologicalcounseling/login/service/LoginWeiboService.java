@@ -41,7 +41,7 @@ public class LoginWeiboService {
 	 *@trhows
 	 */
 	public com.psychologicalcounseling.entity.User login(String accessToken,String weiboUid) {
-		int uid = 0;
+		int userId = 0;
 		//实例化一个项目内的User对象（com.psychologicalcounseling.entity）
 		com.psychologicalcounseling.entity.User user = new com.psychologicalcounseling.entity.User();
 		//1. 用weiboUid查询数据库，判断该用户是否已经注册过
@@ -56,7 +56,7 @@ public class LoginWeiboService {
 			try {
 				weiboUser = users.showUserById(""+weiboUid);
 			} catch (WeiboException e) {
-				uid = -1;
+				userId = -1;
 				user = null;
 				System.out.println("拉取用户微博个人信息失败");
 			}
@@ -68,7 +68,7 @@ public class LoginWeiboService {
 			//将新建的用户插入数据库
 			loginWeiboDao.save(user);
 			//获取用户id
-			uid = getId(weiboUid);
+			userId = getId(weiboUid);
 		}
 		
 		return user;

@@ -1,7 +1,9 @@
 package com.psychologicalcounseling.login.service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -82,20 +84,30 @@ public class AlipayServiceImpl {
 		User user=new User();
 		//将传过来的json字符串数据变成json对象
 		JSONObject jsonObject=JSONObject.fromObject(json);
-		System.out.println(jsonObject+"*************************");
-		if(isNewUser(jsonObject.getString("user_id"))==false) {
+		JSONObject jsonObject1=(JSONObject) jsonObject.get("alipay_user_info_share_response");
+		System.out.println(jsonObject1.getString("user_id")+"*************************");
+		if(isNewUser(jsonObject1.getString("user_id"))==false) {
 			//接收用户详细信息的数据
-			user.setAlipayUserId(jsonObject.getString("user_id"));
-			user.setUserCity(jsonObject.getString("city"));
-			user.setUserIdentity(user.IDENTITY_USER);
-			user.setUserProvince(jsonObject.getString("province"));		
-			user.setUserNickName(jsonObject.getString("nick_name"));
-			user.setUserHeadPath(jsonObject.getString("avatar"));
-			if(jsonObject.getString("avatar")=="F") {
-				user.setUserSex("男");
-			}else {
-				user.setUserSex("女");
+			user.setAlipayUserId(jsonObject1.getString("user_id"));
+			if(jsonObject1.has("city")) {
+				user.setUserCity(jsonObject1.getString("city"));
 			}
+			user.setUserIdentity(user.IDENTITY_USER);
+			if(jsonObject1.has("province")) {
+				user.setUserProvince(jsonObject1.getString("province"));		
+			}
+			if(jsonObject1.has("nick_name")) {
+				user.setUserNickName(jsonObject1.getString("nick_name"));
+			}
+			if(jsonObject1.has("avatar")) {
+				user.setUserHeadPath(jsonObject1.getString("avatar"));
+				if(jsonObject1.getString("avatar")=="f") {
+					user.setUserSex("男");
+				}else {
+					user.setUserSex("女");
+				}
+			}
+			user.setUserRegistTime(new Date());
 			adi.insertUser(user);
 		}else {
 			//日志操作

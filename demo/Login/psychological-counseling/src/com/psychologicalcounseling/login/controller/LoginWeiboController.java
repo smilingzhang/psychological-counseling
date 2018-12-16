@@ -60,14 +60,14 @@ public class LoginWeiboController {
 			if(accessToken!=null && weiboUid!=null) {
 				User user = loginWeiboService.login(accessToken,weiboUid);
 				if(user != null) {
-					session.setAttribute("uid", user.getUserId());
+					session.setAttribute("userId", user.getUserId());
 					session.setAttribute("userNickName", user.getUserNickName());
 					session.setAttribute("description", user.getUserAutograph());
 					session.setAttribute("avatarLink", user.getUserHeadPath());
 				}
-				else session.setAttribute("uid", null);
+				else session.setAttribute("userId", null);
 			} else {
-				session.setAttribute("uid", null);
+				session.setAttribute("userId", null);
 				//登陆失败时，重新返回到的登录界面
 				resp.sendRedirect("login.jsp");
 			}
@@ -81,7 +81,7 @@ public class LoginWeiboController {
 			}
 			resp.sendRedirect("login.jsp");
 		}
-		req.getRequestDispatcher("redirect").forward(req, resp);
+		req.getRequestDispatcher("/login/redirect").forward(req, resp);
 	}
 	
 	
