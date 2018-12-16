@@ -1,5 +1,4 @@
 <!-- by邓旸 -->
-<!-- by刘田会 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -66,7 +65,7 @@
 			                <!--错误信息-->
 		                    <font name="loginErrMsg4Phone" id="loginErrMsg4Phone" class="">&nbsp;</font>
 		                    <div id="first"><input id="phoneNum" name="phoneNum" type="text" class="form-control" placeholder="11位手机号" onkeyup="loginVerifyPhone()"></div></br>
-                        </div>
+                        </div> 
                         <div class="group">
 		                    <!--错误信息-->
 		                    <font name="loginErrMsg4Code" id="loginErrMsg4Code" class="">&nbsp;</font>
@@ -80,7 +79,7 @@
                     	
 	                    <button class="btn btn-block " id="login-form-submit-button" disabled="disabled" onclick="this.form.submit()">快速登录</button>
 	                </form>
-                
+                 
 	                <!--账号密码登录表单-->
 	                <form class="login-form" action="${ctx }/login/login4Pwd" method="POST" id="form-2" style="display:none">
 	                    <div class="group">
@@ -109,7 +108,7 @@
 	                    </a>
 	                    <!--微博-->
 	                    <a href="${ctx }/loginWeiboRequest">
-	                    	<img src="images/weibo.png" alt="微博登录">
+	                    	<img src="images/weibo.png" alt="微博登录"> 
 	                    </a>
 	                </div>
             </div>

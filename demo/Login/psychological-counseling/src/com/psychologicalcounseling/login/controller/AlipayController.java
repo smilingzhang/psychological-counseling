@@ -50,7 +50,7 @@ import com.alipay.api.request.*;
  *@date:2018年12月14日上午9:55:26
  */
 @Controller
-public class AlipayController {
+public class AlipayController { 
 	
 @Resource
 private AlipayServiceImpl asi;
