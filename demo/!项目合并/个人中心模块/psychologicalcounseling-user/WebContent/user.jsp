@@ -25,8 +25,10 @@
     <link href="${ctx }css/mystyle.css" rel="stylesheet">
     <script src="${ctx }js/user.js"></script>
     <script src="${ctx }js/change-state.js"></script>
-    <script src="${ctx }js/verifyCode.js"></script>
     <script src="${ctx }js/city.js"></script>
+    <!-- 自定义js -->
+    <script src="${ctx }js/verify.js"></script>
+    <script src="${ctx }js/verifyCode.js"></script>
   </head>
   <body>
     <!-- 在此处编码你的创意 -->
@@ -121,18 +123,18 @@
 		                        <c:if test="${!empty(crList) && crList.size()>0 }">
 		                            <!--一个咨询-->
 	                            	<tr class="table-head">
-	                            		<td class="tag"  width="25%">咨询师信息</td>
-	                            		<td class="tag" width="45%">咨询信息</td>
+	                            		<td class="tag"  width="30%">咨询师信息</td>
+	                            		<td class="tag" width="40%">咨询信息</td>
 	                            		<td width="15%"></td><td width="15%"></td>
 	                            	</tr>
 		                            <c:forEach items="${crList }" var="consulter">
 			                            <tr>
-			                                <!--咨询师照片-->
 			                                <td>
+				                                <!--咨询师照片-->
 			                                	<img style="float:left;margin-right:20px;" src="${consulter.getTeacher().getUser().getUserHeadPath() }" alt="${consulter.getTeacher().getUser().getUserNickName() }">
 			                                	<div>
 				                                    <!--咨询师名字-->
-				                                    <span class=""><a href="consulter.html">${consulter.getTeacher().getUser().getUserRealName() }</a></span><br/>
+				                                    <span class=""><a href="${ctx }consultdetail/showdetail?teacherId=${consulter.getTeacher().getTeacherId()}">${consulter.getTeacher().getUser().getUserRealName() }</a></span><br/>
 				                                    <!-- 咨询师性别/年龄 -->
 				                                    <span class="tag">${consulter.getTeacher().getUser().getUserSex() }/${consulter.getTeacher().getTeacherAge() }岁</span><br/>
 				                                    <!-- 咨询师资质 -->
@@ -163,7 +165,7 @@
 				                                    function showCancelDialog(id){
 				                                        $("#user-app-dialog").css("display","block");
 				                                        $("#shade").css("display","block");
-				                                        $("#cancel-btn").attr("href","cancel?consultationId="+id);
+				                                        $("#cancel-btn").attr("href","${ctx}cancel?consultationId="+id);
 				                                    }
 				                                </script>
 				                                <%
@@ -195,10 +197,10 @@
 		                            </c:forEach>
 		                        </c:if>
 		                        <c:if test="${consultState=='0' && empty(crList) }">
-		                        	<tr><td class="tag">您暂无预约的咨询,<a href="consult-list.html">去体验第一次心理咨询</a></td></tr>
+		                        	<tr><td class="tag">您暂无预约的咨询,<a href="${ctx }consult/default?pageNum=1">去体验第一次心理咨询</a></td></tr>
 		                        </c:if>
 		                        <c:if test="${empty(consultState) && empty(crList) }">
-		                        	<tr><td class="tag">您暂无预约的咨询,<a href="consult-list.html">去体验第一次心理咨询</a></td></tr>
+		                        	<tr><td class="tag">您暂无预约的咨询,<a href="${ctx }consult/default?pageNum=1">去体验第一次心理咨询</a></td></tr>
 		                        </c:if>
 		                        <c:if test="${consultState=='1' && empty(crList) }">
 	                        		<tr><td class="tag">您暂无已完成的咨询</td></tr>
@@ -208,7 +210,7 @@
 		                        </c:if>
 	                        </table>
 	                    </div>
-	                    <!--分页器：一页最多显示10项。示例并没有超过10项，就把这段注释掉吧-->
+	                    <!--分页器-->
 	                    <div class="button-pager">
 				            <!--说明-->
 				            <!--
@@ -278,20 +280,20 @@
 	                        <!--一门课程-->
 	                        <div class="course-block">
 	                            <!--课程图片-->
-	                            <a href="course-intr.html?courseId=${course.get('courseId')} "><img src="images/course.jpg" alt="${course.get('courseName') }"></a>
+	                            <a href="${ctx }/lesson/instr?id=${course.get('courseId') } "><img src="images/course.jpg" alt="${course.get('courseName') }"></a>
 	                            <!--课程名-->
-	                            <a class="title" href="course-intr.html?courseId=${course.get('courseId')}">${course.get('courseName') }</a><br/>
+	                            <a class="title" href="${ctx }/lesson/instr?id=${course.get('courseId') }">${course.get('courseName') }</a><br/>
 	                            <!--教师名 -->
-	                            <a class="tag">${course.get('userRealName') }</a><br/>
+	                            <a href="${ctx }consultdetail/showdetail?teacherId=${consulter.getTeacher().getTeacherId()}" class="tag">${course.get('userRealName') }</a><br/>
 	                            <!--学习进度-->
 	                            <!-- <span class="progress">已学习1/12</span><br/> -->
 	                            <!--进入学习按钮-->
-	                            <a class="btn btn-primary" href="course.html?courseId=${course.get('courseId')}">进入学习</a>
+	                            <a class="btn btn-primary" href="/course-intr?courseId=${course.get('courseId')}&userId=${sessionScope.userId}">进入学习</a>
 	                        </div>                    		
 	                    	</c:forEach>
 	                    </c:if>
-	                    <c:if test="${empty(consultState) && empty(crList) }">
-                        	<span class="tag">您暂无添加任何课程,<a href="course-list.html">去看看什么课程适合您</a></span>
+	                    <c:if test="${empty(courseType) and empty(courseList) }">
+                        	<span class="tag">您暂无添加任何课程,<a href="${ctx }lesson/list">去看看什么课程适合您</a></span>
                         </c:if>
 	                    </div>
 	                    <!-- 分页器 -->
@@ -321,33 +323,42 @@
             <c:if test="${!empty(nav) and nav=='3' }">
 	            <div id="directory-contain-3" class="panel">
 	                <div class="panel-body">
-		                <div class="directory-contain-list">
+		                <div class="directory-contain-list listen">
 		                    <table>
 		                        <c:if test="${!empty(listenList) && listenList.size()>0 }">
+		                       		<!--一个咨询-->
+	                            	<tr class="table-head">
+	                            		<td class="tag">倾听者</td>
+	                            		<td class="tag">倾听时间</td>
+	                            		<td class="tag">倾听费用</td>
+	                            		<td class="tag">倾听总时长</td>
+	                            	</tr>
 		                            <!--一个倾听-->
 		                            <c:forEach items="${listenList }" var="listen">
 			                            <tr>
-			                                <!--倾听者头像-->
-			                                <td><a href="consulter.html?consulterId=${listen.get('teacherId') }"><img src="${listen.get('userHeadPath') }" alt="${listen.get('userRealName') }"></a></td>
-			                                <td>
+	                            			<!--倾听者头像-->
+			                            	<td>
+			                            		<a href="${ctx }consultdetail/showdetail?teacherId=${listen.get('teacherId') }"><img style="margin-right:30px;" src="${listen.get('userHeadPath') }" alt="${listen.get('userRealName') }"></a>
 			                                    <!--倾听者名字-->
-			                                    <span class="teacher catagory">倾听者：<a href="consulter.html?consulterId=${listen.get('teacherId') }">${listen.get('userRealName') }</a></span><br/>
+			                                    <span class="teacher"><a href="${ctx }consultdetail/showdetail?teacherId=${listen.get('teacherId') }">${listen.get('userRealName') }</a></span>
+		                                    </td>
+		                                    <td>
 			                                    <!-- 倾听时间 -->
-			                                    <span>倾听时间：${dateutil:formatDate(listen.get('listenrecordStartTime')) }&nbsp;~&nbsp;${dateutil:formatDate(listen.get('listenrecordEndTime')) }</span><br/>
-			                                    <!--倾听费用-->
-			                                    <span>倾听费用：￥${listen.get('listenrecordPrice') }</span><br/>
+			                                    ${fn:split(dateutil:formatDate(listen.get('listenrecordStartTime')),' ')[0] }<br/>${fn:split(dateutil:formatDate(listen.get('listenrecordStartTime')),' ')[1] }&nbsp;~&nbsp;${fn:split(dateutil:formatDate(listen.get('listenrecordEndTime')),' ')[1] }
+		                                    </td>
+		                                    <!--倾听费用-->
+		                                    <td>￥${listen.get('listenrecordPrice') }</td>
 			                            	<td>
 				                            	<!-- 倾听时长 -->
 				                            	<c:set var="startTime" value="${listen.get('listenrecordStartTime') }"/>
 				                            	<c:set var="endTime" value="${listen.get('listenrecordEndTime') }"/>
-				                            	
-				                            	<span class="min">总时长：${dateutil:getMinutes(dateutil:sub(listen.get('listenrecordStartTime'),listen.get('listenrecordEndTime'))) }分钟</span>
+				                            	<span class="min">${dateutil:getMinutes(dateutil:sub(listen.get('listenrecordStartTime'),listen.get('listenrecordEndTime'))) }分钟</span>
 			                            	</td>
 			                            </tr> 
 		                            </c:forEach>
 		                        </c:if>
 		                        <c:if test="${empty(listenList)}">
-		                        	<tr><td class="tag">您暂无倾听历史,<a href="listen-list.html">或许您有话想说</a></td></tr>
+		                        	<tr><td class="tag">您暂无倾听历史,<a href="${ctx }listenList">或许您有话想说</a></td></tr>
 		                        </c:if>
 	                        </table>
 		                    
@@ -393,34 +404,34 @@
                         <div id="setting-1">
                             <!--基本信息-->
                             <form action="" method="POST">
-                                <span class="board-title-h1">基本信息</span>
-                                <button class="btn btn-mini " type="button" onclick="changeBtnValue(this)" id="essentialInfo">修改</button>
-                                <table>
-                                    <tr><td>昵称</td><td id="userNickName">${user.getUserNickName() }</td></tr>
-                                    <tr><td>性别</td><td id="userSex">${user.getUserSex() }</td></tr>
-                                    <tr><td>所在地</td><td id="userProvince">${user.getUserProvince() }&nbsp;${user.getUserCity() }</td></tr>
-                                    <tr><td>签名</td><td id="userAutograph">${user.getUserAutograph() }</td></tr>
+                               	<span class="board-title-h1">基本信息</span>
+                               	<button class="btn btn-mini " type="button" onclick="changeBtnValue(this)" id="essentialInfo">修改</button>
+                                <table class="setting-table" style="table-layout:fixed">
+                                    <tr><td class="tag" width="10%">昵称</td><td id="userNickName">${user.getUserNickName() }</td></tr>
+                                    <tr><td class="tag">性别</td><td id="userSex">${user.getUserSex() }</td></tr>
+                                    <tr><td class="tag">所在地</td><td id="userProvince">${user.getUserProvince() }&nbsp;${user.getUserCity() }</td></tr>
+                                    <tr><td class="tag">签名</td><td id="userAutograph">${user.getUserAutograph() }</td></tr>
                                 </table>
                                 <!-- 隐藏的修改项 -->
                                 <!--两个隐藏的div，隐藏的信息是用户在数据库里的省和市的信息  -->
                                 <div style="display:none" id="select-province" class="${user.getUserProvince() }"></div>
                                 <div style="display:none" id="select-city" class="${user.getUserCity() }"></div>
-                                <table style="display:none">
-                                    <tr><td>昵称</td><td><input onblur="changeBtnStyle()" class="form-control" name="nicoName" type="text" value="${user.getUserNickName() }"/></td></tr>
-                                    <tr><td>性别</td>
-                                        <input type="hidden"  id="hiddenUserSex" class="${user.getUserSex() }">
-                                        <td><input onblur="changeBtnStyle()" type="radio" name="gender" id="male" value="male" />男
-                                            <input onblur="changeBtnStyle()" type="radio" name="gender" id="female" value="female"/>女
+                                <input type="hidden"  id="hiddenUserSex" class="${user.getUserSex() }">
+                                <table class="setting-table" style="table-layout:fixed;display:none">
+                                    <tr><td class="tag" width="10%">昵称</td><td><input class="form-control" name="nicoName" type="text" value="${user.getUserNickName() }"/></td></tr>
+                                    <tr><td class="tag">性别</td>
+                                        <td><input type="radio" name="gender" id="male" value="male" />男
+                                            <input type="radio" name="gender" id="female" value="female"/>女
                                         </td>
                                     </tr>
-                                    <tr><td>省份</td>
+                                    <tr><td class="tag">省份</td>
                                         <td>
                                             <select name="province" id="province">
                                                 <!--★★★注：第一个option填数据库中字段-->
                                             </select>
                                         </td>
                                     </tr>
-                                    <tr><td>城市</td>
+                                    <tr><td class="tag">城市</td>
                                         <td>
                                             <select name="city" id="city" >
                                                 <!--★★★注：第一个option填数据库中字段-->
@@ -428,41 +439,40 @@
                                             </select>
                                         </td>
                                     </tr>
-                                    <tr><td>签名</td><td><input onblur="changeBtnStyle()" class="self-intr form-control" type="text" name="userAutograph" id="" value="${user.getUserAutograph() }"/></td></tr>
+                                    <tr><td class="tag">签名</td><td><input class="self-intr form-control" type="text" name="userAutograph" id="" value="${user.getUserAutograph() }"/></td></tr>
                                 </table>
                             </form>
                             <!--实名信息-->
                             <form action="" method="POST">
-                                <span class="board-title-h1">实名信息</span>
-                                
-                                <button class="btn btn-mini " type="button" onclick="changeBtnValue(this)" id="realName">修改</button> 
                                 <!--★★★注：若数据库中该字段为空，请帮忙填上“未实名”-->
-                                <table>
-                                    <tr><td>姓名</td><td id="userRealName">
-                                      
-                                      <c:if test="${empty(user.getUserRealName()) }">未实名</c:if>
-                                      <c:if test="${!empty(user.getUserRealName()) }">${user.getUserRealName() }</c:if>
-                                     </td></tr>
-                                    <tr><td>证件号</td><td id="userIdNumber">
+                                <span class="board-title-h1">实名信息</span>
+                                <button class="btn btn-mini " type="button" onclick="changeBtnValue(this)" id="realName">修改</button> 
+                                <table class="setting-table" style="table-layout:fixed">
+                                    <tr>
+                                    	<td class="tag" class="10%">姓名</td>
+                                    	<td id="userRealName">
+	                                      <c:if test="${empty(user.getUserRealName()) }">未实名</c:if>
+	                                      <c:if test="${!empty(user.getUserRealName()) }">${user.getUserRealName() }</c:if>
+	                                    </td>
+	                                </tr>
+                                    <tr><td class="tag">证件号</td><td id="userIdNumber">
                                       <c:if test="${empty(user.getUserIdNumber()) }">未实名</c:if>
-                                      <c:if test="${!empty(user.getUserIdNumber()) }">${user.getUserIdNumber() }</c:if>
+                                      <c:if test="${!empty(user.getUserIdNumber()) }">${User.userIdNumber.substring(0,6)}*********${User.userIdNumber.substring(14,18) }</c:if>
                                     </td></tr>
                                   
                                 </table>
-                                <table style="display:none">
-                                    <tr><td>姓名</td>
-                                    <td>
-	                                    <input onblur="changeBtnStyle()" class="form-control" name="idName" type="text" onkeyup="isLegal()" value="${user.getUserRealName() }"/>
-	                                    <!--★★★ 错误信息 -->
-	                                    <div id="errorMsg4Name" style="float:left;"></div>
-                                    </td></tr>
+                                <table class="setting-table" style="display:none">
                                     <tr>
-	                                    <td>证件号</td>
-	                                    <td>
-	                                    	<input onblur="changeBtnStyle()" class="form-control" name="idNum" type="text" onkeyup="isLegal()" value="${user.getUserIdNumber() }"/>
-		                                    <!--★★★ 错误信息 -->
-		                                    <div id="errorMsg4IdNum" style="float:left;"></div>
-	                                    </td>
+                                    	<td class="tag" class="10%">姓名</td>
+	                                    <td><div><input class="form-control" name="idName" type="text" onkeyup="isLegal()" value="${user.getUserRealName() }"/></div></td>
+	                                    <!--★★★ 错误信息 -->
+	                                    <td><font id="errorMsg4Name">&nbsp;</font></td>
+                                    </tr>
+                                    <tr>
+	                                    <td class="tag">证件号</td>
+	                                    <td class="tag"><div><input maxlength="18" class="form-control" name="idNum" type="text" onkeyup="isLegal()" value="${user.getUserIdNumber() }"/></div></td>
+	                                    <!--★★★ 错误信息 -->
+	                                    <td><font id="errorMsg4IdNum">&nbsp;</font></td>
                                     </tr>
                                 </table>
                             </form>
@@ -471,16 +481,30 @@
                         <div id="setting-2" style="display:none">
                             <!--基本信息-->
                             <form action="" method="POST">
-                                <table>
-                                    <!--★★★ 错误信息 -->
-                                    <tr><td>原始密码</td><td><input onblur="changeBtnStyle()" class="form-control" name="oldPwd" type="password" onkeyup="verifyOldPwd()"/><!--★★★ 错误信息 --><div id="errorMsg-oldPwd"></div></td></tr>
-                                    <tr><td>新密码</td><td><input onblur="changeBtnStyle()" class="form-control" type="password" name="newPwd" onkeyup="checkNewPwd()"/><!--★★★ 错误信息 --><div id="errorMsg-newPwd"></td></tr>
-                                    <tr><td>确认密码</td><td><input onblur="changeBtnStyle()" type="password" class="form-control" name="confirmPwd"  onkeyup="confirm4Pwd()"/><!--★★★ 错误信息 --><div id="errorMsg-confirmPwd"></div></td></tr>
+                                <table class="setting-table">
+                                    <tr>
+                                    	<td width="20%">原始密码</td>
+                                    	<td width="50%"><div><input maxlength="16" class="form-control" name="oldPwd" type="password" onkeyup="verifyOldPwd(this)"/></div></td>
+		                                    <!--★★★ 错误信息 -->
+                                   		<td width="30%"><font id="errorMsg-oldPwd">&nbsp;</font></td>
+                                   	</tr>
+                                    <tr>
+                                    	<td>新密码</td>
+                                    	<td><div><input maxlength="16" onblur="changeBtnStyle()" class="form-control" type="password" name="newPwd" onkeyup="checkNewPwd(this)"/></div></td>
+                                    	<!--★★★ 错误信息 -->
+                                    	<td><font id="errorMsg-newPwd">&nbsp;</font></td>
+                                   	</tr>
+                                    <tr>
+                                    	<td>确认密码</td>
+                                    	<td><div><input maxlength="16" type="password" class="form-control" name="confirmPwd" onkeyup="confirm4Pwd(this)"/></div></td>
+                                    	<!--★★★ 错误信息 -->
+                                    	<td><font id="errorMsg-confirmPwd">&nbsp;</font></td>
+                                   	</tr>
                                 </table>
                                 <span>忘记密码了？<a href="#" onclick="findBackPwd();sendCode4Pwd();">找回密码</a></span><br/>
                                 <div id="user-phoneNum-Pwd" style="display:none" class="${user.getUserPhone() }"></div>
                                 <!--★★★ 修改成功信息，这里的字的颜色区别错误的信息 -->
-                                <div id="successMsg4Pwd"></div>
+                                <!-- <font id="successMsg4Pwd">&nbsp;</font><br/> -->
                                 <!-- 这里finalButton是最后一个按钮，因为是这一页的最后一个，故为final。也就是开始为灰色，后来才变红的按钮 -->
                                 <button class="btn btn-block " type="button" onclick="finalButton4Pwd(this)" disabled="disabled" id="RevisePwdButton">修改</button>
                             </form>
@@ -496,10 +520,13 @@
                                 <!-- <span class="board-title-h1">请及时查收</span><br/> -->
                                 <!--验证码-->
                                 <div class="verify-zoom">
-                                  	  验证码：<input class="form-control" type="text" name="verifyCode" id="pwd-code" onkeyup="PwdVerifyCode()"/>
+                                  	  验证码：
                                     <!--★★★ 错误信息，验证码是否正确 -->
-                                    <div id="error-msg-code"></div>
-                                    <a class="btn btn-primary btn-sm" href="#" onclick="setNewPwd()" disabled="disabled" id="verify-code-pwd">验证</a>
+                                    <font id="error-msg-code">&nbsp;</font><br/>
+                                  	<div><input maxlength="6" class="form-control" type="text" name="verifyCode" id="pwd-code" onkeyup="PwdVerifyCode(this)" style="width:80%;float:left;margin-right:10px;"/></div>
+                                    <a class="btn btn-primary" href="#" onclick="setNewPwd()" disabled="disabled" id="verify-code-pwd">验证</a>
+                                    <!-- 重新发送短信按钮 -->
+                                    <span id="resendMsg" class="tag" style="display:none;float:left">没有收到短信？<a href="#" onclick="">重新发送一条</a></span>
                                 </div>
                             </div>
                             <!--设置新密码界面-->
@@ -508,12 +535,12 @@
                                 <i class="icon icon-times" onclick="closeWindow(this)"></i>
                                 <!--新密码-->
                                 <div class="verify-zoom">
-                                 	   新密码：<input class="form-control" type="text" name="newPwdWithPhone" id="" onkeyup="checkNewPwdWithPhone()"/>
                                     <!--★★★ 错误信息 -->
-                                    <div id="errorMsg-newPwd-phone"></div>
-                                 	   确认密码：<input class="form-control" type="text" name="confirmPwdWithPhone" id="" onkeyup="confirm4PwdWithPhone()"/>
+                                 	   新密码：<font id="errorMsg-newPwd-phone">&nbsp;</font><br/>
+                                 	 <div><input maxlength="16" class="form-control" type="text" name="newPwdWithPhone" id="" onkeyup="checkNewPwdWithPhone(this)"/></div>
                                      <!--★★★ 错误信息，两次密码是否一致 -->
-                                    <div id="errorMsg-confirmPwd-phone"></div>
+                                 	   确认密码：<font id="errorMsg-confirmPwd-phone">&nbsp;</font><br/>
+                                 	 <div><input maxlength="16" class="form-control" type="text" name="confirmPwdWithPhone" id="" onkeyup="confirm4PwdWithPhone(this)"/></div>
                                 </div>
                                 <button class="btn btn-primary btn-block" onclick="closeWindow(this);finalButton4Pwd(this)" disabled="disabled" id="RevisePwdButtonWithPhone">确认设置</button>
                             </div>
@@ -521,28 +548,31 @@
                         <!--绑定手机-->
                         <div id="setting-3" style="display:none">
                             <form action="" method="POST">
-                                <table>
-                                    <tr><td>原绑定手机号码</td><td id="show-old-phone">${user.getUserPhone()}</td></tr>
-                                    <tr><td>新绑定手机号码</td><td><input id="phoneNum" name="phoneNum" type="text" class="form-control" placeholder="11位手机号" style="width: 150px;display: block; width: 300px;float: left;" onkeyup="loginVerifyPhone4Alert()">
-                                     <!--★★★ 错误信息，新绑定手机号发是否合法 -->
-                                    <font name="loginErrMsg4Phone" id="loginErrMsg4Phone" class=""></font></td></tr>
-                                    
-                                    <tr><td>验证码</td>
-                                        <td><input id="verifyCode" name="verifyCode" type="text" class="form-control" placeholder="验证码" onkeyup="loginVerifyCode()" style="width: 150px;display: block;float: left;">
+                                <table class="setting-table">
+                                	<c:if test="${!empty(user.getUserPhone()) and fn:length(user.getUserPhone())>0}"><tr><td>原绑定手机号码</td><td id="show-old-phone">${user.getUserPhone().substring(0,3)}****${user.getUserPhone().substring(7,11)}</td></tr></c:if>
+                                    <tr>
+                                    	<td witdh="20%">新绑定手机号码</td>
+                                    	<td width="50%"><input maxlength="11" id="phoneNum" name="phoneNum" type="text" class="form-control" placeholder="11位手机号" style="width: 150px;display: block; width: 300px;float: left;" onkeyup="loginVerifyPhone4Alert()"></td>
+                                     	<!--★★★ 错误信息，新绑定手机号发是否合法 -->
+                                   		<td width="30%"><font name="loginErrMsg4Phone" id="loginErrMsg4Phone" class="">&nbsp;</font></td>
+                                   	</tr>
+                                    <tr>
+                                    	<td>验证码</td>
+                                        <td>
+                                        	<div><input malength="6" id="verifyCode" name="verifyCode" type="text" class="form-control" placeholder="验证码" onkeyup="loginVerifyCode(this)" style="width: 55%;float: left;margin-right:10px"></div>
                                             <!-- 这里的onclick解释，settime(this):倒计时功能，sendVerifyCode():验证码是否正确 -->
                                             <a class="btn btn-primarys" id="login-send-verifyCode"  onclick="settime(this);sendVerifyCode()" disabled="disabled">发送验证码</a>
-                                         <!--★★★ 错误信息，验证码是否正确 -->
-                                        <font name="loginErrMsg4Code" id="loginErrMsg4Code" class=""></font>
-                                    </td></tr>
-                                    <!-- 之所以写用户协议是为了重用JS代码，因为在JS中isFirst()判断时要有checkbox的判断（注册时需要） -->
-                                    <label id="checkbox" onclick="verifyAccord()" style="display:none;">
-	                           			 <input type="checkbox" name="isAgreeProtocal"  > 同意《XXX用户注册协议》
-	                        		</label>
-	                        		<!-- 上面用户协议结束 -->
+	                                   </td>
+                                        <!--★★★ 错误信息，验证码是否正确 -->
+	                                   <td><font name="loginErrMsg4Code" id="loginErrMsg4Code" class="">&nbsp;</font></td>
+                                    </tr>
                                 </table>
+                                <!-- 之所以写用户协议是为了重用JS代码，因为在JS中isFirst()判断时要有checkbox的判断（注册时需要） -->
+                                <label id="checkbox" onclick="verifyAccord()" style="display:none;"><input type="checkbox" name="isAgreeProtocal"  > 同意《XXX用户注册协议》</label>
+                        		<!-- 上面用户协议结束 -->
                                 <button class="btn btn-block" id="login-form-submit-button" disabled="disabled" onclick="savePhone()">保存设置</button>  
                                  <!--★★★ 成功信息 -->
-                                <font name="successMsg-revise-phone" id="successMsg-revise-phone" class=""></font>                              
+                                <!-- <font name="successMsg-revise-phone" id="successMsg-revise-phone" class="">&nbsp;</font> -->                              
                             </form>
                         </div><!--END 绑定手机-->
                     </div>

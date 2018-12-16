@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.Consultation.consulterlist.service.ConsulterService;
-import com.entity.Page;
 import com.entity.Teacher;
+import com.util.Page;
 
 /**
  * 

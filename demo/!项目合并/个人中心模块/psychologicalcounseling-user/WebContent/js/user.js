@@ -8,21 +8,21 @@ function isLegal(){
 	
 	if(pass4IdNum==false){
 		$("#errorMsg4IdNum").text("身份证号码不合法");
-		$("#errorMsg4IdNum").attr("class","wrong");
+		$("#errorMsg4IdNum").attr("class","msg-err");
 	}else{
 		$("#errorMsg4IdNum").text("");
-		$("#errorMsg4IdNum").attr("class","right");
+		$("#errorMsg4IdNum").attr("class","msg-right");
 	}
 	if(pass4Name==false){
 		$("#errorMsg4Name").text("姓名不合法");
-		$("#errorMsg4Name").attr("class","wrong");
+		$("#errorMsg4Name").attr("class","msg-err");
 	}else{
 		//既然没有调用实名接口，就不要显示“姓名合法”字眼了。
 		$("#errorMsg4Name").text("");
-		$("#errorMsg4Name").attr("class","right");
+		$("#errorMsg4Name").attr("class","msg-err");
 	}
 	
-	if($("#errorMsg4IdNum").attr("class")=="right"&&$("#errorMsg4Name").attr("class")=="right"){
+	if($("#errorMsg4IdNum").attr("class")=="msg-right"&&$("#errorMsg4Name").attr("class")=="msg-right"){
 		$("#realName").removeAttr("disabled");
 	}else{
 		$("#realName").attr("disabled","disabled");
@@ -65,8 +65,10 @@ function changeBtnValue(obj){
 	        var city=$('select[name="city"]').val();
 	        var userAutograph=$('input[name="userAutograph"]').val();
 	        //ajax---修改基本信息
+	        var controllerName = "user/reviseEssentialInfo";
+	    	var toUrl = window.location.protocol+controllerName;
 	        $.ajax({
-	    		url:"http://localhost:8080/psychological-counseling/user/reviseEssentialInfo",
+	    		url:toUrl,
 	    		async:false,
 	    		type:"post",
 	    		dataType:"json",
@@ -93,9 +95,11 @@ function changeBtnValue(obj){
     	}else if($(obj).attr("id")=="realName"){	
     		var idName=$('input[name="idName"]').val();
 	        var idNum=$('input[name="idNum"]').val();
-    		console.log("进去修改实名信息了");
+    		//console.log("进去修改实名信息了");
+	        var controllerName = "user/reviseRealName";
+	    	var toUrl = window.location.protocol+controllerName;
     		 $.ajax({
- 	    		url:"http://localhost:8080/psychological-counseling/user/reviseRealName",
+ 	    		url:toUrl,
  	    		async:false,
  	    		type:"post",
  	    		dataType:"json",
@@ -118,10 +122,6 @@ function changeBtnValue(obj){
         $(obj).attr("type","button");
     } 
 }
-function changeBtnStyle(){
-    // $(".directory-contain-list form .btn").attr("type","");
-    console.log($(".directory-contain-list form .btn").attr("type"));
-}
 function findBackPwd(){
     $("#find-back-pwd").css("display","block");
     $("#shade").css("display","block");
@@ -129,11 +129,15 @@ function findBackPwd(){
 }
 //在忘记密码的流程中，给手机发送验证码。
 //注意事项：不复用之前的方法，原因是手机号码没办法直接获取，之前取手机号的方式与现在不同。
+var sendTime = 60;
 function sendCode4Pwd(){
+	$("#resendMsg").css("display","none");
+	$("#resendMsg").attr("onclick","");
     var phoneNum = $("#user-phoneNum-Pwd").attr("class");
-    
+    var controllerName = "login/getMessage";
+	var toUrl = window.location.protocol+controllerName;
     $.ajax({
-		url:"http://localhost:8080/psychological-counseling/login/getMessage",
+		url:toUrl,
 		async:true,
 		type:"post",
 		dataType:"json",
@@ -147,21 +151,38 @@ function sendCode4Pwd(){
 			alert(textStatus); 
 		}
 	})
-	
+	self.setInterval(function(){
+        var currentTime = new Date().getSeconds();
+        var time = (currentTime - sendTime);
+        if(time > 60){
+            //document.getElementById('login-send-verifyCode').removeAttribute("disabled");
+        	$("#resendMsg").css("display","block");
+    		$("#resendMsg").attr("onclick","sendCode4Pwd();");
+            window.clearInterval(int);
+            sendTime = 60;
+            return;
+        }
+    },1000);
 }
 //在忘记密码,发送验证码的界面
 //功能：判断验证码的正确性
-function PwdVerifyCode(){
+function PwdVerifyCode(obj){
 	var code=$("#pwd-code").val();
 	if(code.length > 6 || code.length < 6){ 
         $("#error-msg-code").text("验证码长度不正确");
+        $("#error-msg-code").attr("class","msg-err");
+        setErrorInput($(obj).parent());
     } else if(code.length==0){
     	 $("#error-msg-code").text("请输入验证码");
+    	 $("#error-msg-code").attr("class","msg-err");
+    	 setErrorInput($(obj).parent());
     }else{
        
     }
+	var controllerName = "login/verifyCode";
+	var toUrl = window.location.protocol+controllerName;
 	$.ajax({
-		url:"http://localhost:8080/psychological-counseling/login/verifyCode",
+		url:toUrl,
 		async:false,
 		type:"post",																																																							
 		dataType:"json",
@@ -170,12 +191,18 @@ function PwdVerifyCode(){
 			
 			if(data.result=="different"){
 				$("#error-msg-code").text("验证码不正确");
+				$("#error-msg-code").attr("class","msg-err");
+				setErrorInput($(obj).parent());
 				$("#verify-code-pwd").attr("disabled","disabled");
 			}else if(data.result=="outOfTime"){
+				$("#error-msg-code").attr("class","msg-err");
 				$("#error-msg-code").text("验证码超时");
+				setErrorInput($(obj).parent());
 				$("#verify-code-pwd").attr("disabled","disabled");
 			}else if(data.result=="same"){
+				$("#error-msg-code").attr("class","msg-right");
 				$("#error-msg-code").text("验证码正确");
+				setSuccessInput($(obj).parent());
 				$("#verify-code-pwd").removeAttr("disabled");
 			}else{
 				console.log("在修改密码界面，发送手机验证码出错");
@@ -198,14 +225,20 @@ function setNewPwd(){
     $("#find-back-pwd").css("display","none");
     $("#set-new-pwd").css("display","block");
 }
+
 //在以原密码为根据修改密码时
 //判断原始密码是否正确
-function verifyOldPwd(){
+function verifyOldPwd(obj){
+	
 	var oldPwd=$('input[name="oldPwd"]').val();
-	console.log("修改密码信息了（根据原密码）");
+	
+	//更改请求url获取方式 by dy
+	var controllerName = "user/verifyOldPwd";
+	var toUrl = window.location.protocol+controllerName;
+	//console.log("修改密码信息了（根据原密码）");
 	
 	 $.ajax({
- 		url:"http://localhost:8080/psychological-counseling/user/verifyOldPwd",
+ 		url:toUrl,
  		async:false,
  		type:"post",
  		dataType:"json",
@@ -214,78 +247,91 @@ function verifyOldPwd(){
  			console.log(data.result);
  			if(data.result=="false"){
  				$("#errorMsg-oldPwd").text("原始密码错误");
- 				$("#errorMsg-oldPwd").attr("class","wrong");
+ 				$("#errorMsg-oldPwd").attr("class","msg-err");
+ 				setErrorInput($(obj).parent());
  			}else{
  				$("#errorMsg-oldPwd").text("原始密码正确");
- 				$("#errorMsg-oldPwd").attr("class","right");
+ 				$("#errorMsg-oldPwd").attr("class","msg-right");
+ 				setSuccessInput($(obj).parent());
  			}
  		},
  		error:function(XMLHttpRequest, textStatus, errorThrown){
- 			alert(XMLHttpRequest.status); 
- 	     	alert(XMLHttpRequest.readyState); 
- 			alert(textStatus); 
+ 			console.log("status="+XMLHttpRequest.status);
+ 			console.log("readyState="+XMLHttpRequest.readyState);
+ 			console.log("textStatus="+textStatus);
+ 			//alert(XMLHttpRequest.status); 
+ 	     	//alert(XMLHttpRequest.readyState); 
+ 			//alert(textStatus); 
  		}
  	})
  	isCanClick4Pwd();
 }
 //判断新密码位数是否合法
-function checkNewPwd(){
+function checkNewPwd(obj){
 	var newPwd=$('input[name="newPwd"]').val();
 	if(newPwd.length>16||newPwd.length<6){
 		$("#errorMsg-newPwd").text("密码位数须在6-16位之间");
-		$("#errorMsg-newPwd").attr("class","wrong");
+		$("#errorMsg-newPwd").attr("class","msg-err");
+		setErrorInput($(obj).parent());
 	}else{
 		$("#errorMsg-newPwd").text("密码合法");
-		$("#errorMsg-newPwd").attr("class","right");
+		$("#errorMsg-newPwd").attr("class","msg-right");
+		setSuccessInput($(obj).parent());
 	}
 	isCanClick4Pwd();
 }
 //在“忘记密码”界面--同样不可以复用。
 //功能：判断新密码位数是否合法--
-function checkNewPwdWithPhone(){
+function checkNewPwdWithPhone(obj){
 	var newPwd=$('input[name="newPwdWithPhone"]').val();
 	if(newPwd.length>16||newPwd.length<6){
 		$("#errorMsg-newPwd-phone").text("密码位数须在6-16位之间");
-		$("#errorMsg-newPwd-phone").attr("class","wrong");
+		$("#errorMsg-newPwd-phone").attr("class","msg-err");
+		setErrorInput($(obj).parent());
 	}else{
 		$("#errorMsg-newPwd-phone").text("密码合法");
-		$("#errorMsg-newPwd-phone").attr("class","right");
+		$("#errorMsg-newPwd-phone").attr("class","msg-right");
+		setSuccessInput($(obj).parent());
 	}
 	isCanClick4PwdWithPhone();
 }
 //输入新密码界面
 //判断前后两次输入的密码是否一致
-function confirm4Pwd(){
+function confirm4Pwd(obj){
 	var newPwd=$('input[name="newPwd"]').val();
 	var confirmPwd=$('input[name="confirmPwd"]').val();
 	if(newPwd==confirmPwd){
-		$("#errorMsg-confirmPwd-phone").text("密码正确");
-		$("#errorMsg-confirmPwd-phone").attr("class","right");
+		$("#errorMsg-confirmPwd").text("密码相匹配");
+		$("#errorMsg-confirmPwd").attr("class","msg-right");
+		setSuccessInput($(obj).parent());
 	}else{
-		$("#errorMsg-confirmPwd-phone").text("两次密码不一致，请修改");
-		$("#errorMsg-confirmPwd-phone").attr("class","wrong");
+		$("#errorMsg-confirmPwd").text("两次密码不一致，请修改");
+		$("#errorMsg-confirmPwd").attr("class","msg-err");
+		setErrorInput($(obj).parent());
 	}
 	isCanClick4Pwd();
 }
 //在“忘记密码”界面--同样不可以复用。
 //功能：判断两次新密码是否一致
-function confirm4PwdWithPhone(){
+function confirm4PwdWithPhone(obj){
 	var newPwd=$('input[name="newPwdWithPhone"]').val();
 	var confirmPwd=$('input[name="confirmPwdWithPhone"]').val();
 	if(newPwd==confirmPwd){
-		$("#errorMsg-confirmPwd-phone").text("密码正确");
-		$("#errorMsg-confirmPwd-phone").attr("class","right");
+		$("#errorMsg-confirmPwd-phone").text("密码相匹配");
+		$("#errorMsg-confirmPwd-phone").attr("class","msg-right");
+		setSuccessInput($(obj).parent());
 	}else{
 		$("#errorMsg-confirmPwd-phone").text("两次密码不一致，请修改");
-		$("#errorMsg-confirmPwd-phone").attr("class","wrong");
+		$("#errorMsg-confirmPwd-phone").attr("class","msg-err");
+		setErrorInput($(obj).parent());
 	}
 	isCanClick4PwdWithPhone();
 }
 //在以原密码作为依据修改密码界面，检测“修改”按钮
 //功能：判断是否能够由disabled变红色
 function isCanClick4Pwd(){
-	console.log($("#errorMsg-newPwd").attr("class"));
-	if(($("#errorMsg-oldPwd").attr("class")=="right")&&($("#errorMsg-confirmPwd").attr("class")=="right")&&($("#errorMsg-newPwd").attr("class")=="right")){
+	//console.log($("#errorMsg-newPwd").attr("class"));
+	if(($("#errorMsg-oldPwd").attr("class")=="msg-right")&&($("#errorMsg-confirmPwd").attr("class")=="msg-right")&&($("#errorMsg-newPwd").attr("class")=="msg-right")){
 		$("#RevisePwdButton").removeAttr("disabled");
 	}else{
 		$("#RevisePwdButton").attr("disabled","disabled");
@@ -295,7 +341,7 @@ function isCanClick4Pwd(){
 //功能：判断是否能够由disabled变红色
 function isCanClick4PwdWithPhone(){
 	
-	if(($("#errorMsg-confirmPwd-phone").attr("class")=="right")&&($("#errorMsg-newPwd-phone").attr("class")=="right")){
+	if(($("#errorMsg-confirmPwd-phone").attr("class")=="msg-right")&&($("#errorMsg-newPwd-phone").attr("class")=="msg-right")){
 		$("#RevisePwdButtonWithPhone").removeAttr("disabled");
 	}else{
 		$("#RevisePwdButtonWithPhone").attr("disabled","disabled");
@@ -309,8 +355,12 @@ function finalButton4Pwd(obj){
 	}else{
 		var newPwd=$('input[name="newPwd"]').val();
 	}
+	
+	//更改请求url获取方式 by dy
+	var controllerName = "user/revisePwd";
+	var toUrl = window.location.protocol+controllerName;
 	$.ajax({
- 		url:"http://localhost:8080/psychological-counseling/user/revisePwd",
+ 		url:toUrl,
  		async:false,
  		type:"post",
  		dataType:"json",
@@ -319,9 +369,12 @@ function finalButton4Pwd(obj){
  			
  		},
  		error:function(XMLHttpRequest, textStatus, errorThrown){
- 			alert(XMLHttpRequest.status); 
- 	     	alert(XMLHttpRequest.readyState); 
- 			alert(textStatus); 
+ 			console.log("status="+XMLHttpRequest.status);
+ 			console.log("readyState="+XMLHttpRequest.readyState);
+ 			console.log("textStatus="+textStatus);
+// 			alert(XMLHttpRequest.status); 
+// 	     	alert(XMLHttpRequest.readyState); 
+// 			alert(textStatus); 
  		}
  	})
  	//下面是在点击“修改”按钮之后上面的密码信息清空，原因可能对用户交互信息更好，点击”修改“后页面上会有所反应，不会停留原来的信息。
@@ -331,7 +384,10 @@ function finalButton4Pwd(obj){
  	$("#errorMsg-confirmPwd").text("");
 	$("#errorMsg-newPwd").text("");
 	$("#errorMsg-oldPwd").text("");
- 	$("#successMsg4Pwd").text("密码修改修改成功");
+// 	$("#successMsg4Pwd").text("密码修改修改成功");
+ 	new $.zui.Messager('密码修改成功', {
+	    type: 'success' // 定义颜色主题
+	}).show();
 }
 //下面是修改绑定手机号界面，
 //功能：点击“保存设置”按钮后更改数据库信息
@@ -339,19 +395,29 @@ function savePhone(){
 	
     var phoneNum=$("#phoneNum").val();
     //ajax---更新手机号
+    
+	//更改请求url获取方式 by dy
+    var controllerName = "login/addPhone";
+	var toUrl = window.location.protocol+controllerName;
     $.ajax({
-		url:"http://localhost:8080/psychological-counseling/login/addPhone",
+		url:toUrl,
 		async:false,
 		type:"post",
 		dataType:"json",
 		data:{"phoneNum":phoneNum},
 		success:function(data){
-			$("#successMsg-revise-phone").text("手机号修改成功");
+			//$("#successMsg-revise-phone").text("手机号修改成功");
+			new $.zui.Messager('手机号修改成功', {
+			    type: 'success' // 定义颜色主题
+			}).show();
 		},
 		error:function(XMLHttpRequest, textStatus, errorThrown){
-			alert(XMLHttpRequest.status); 
-	     	alert(XMLHttpRequest.readyState); 
-			alert(textStatus); 
+			console.log("status="+XMLHttpRequest.status);
+ 			console.log("readyState="+XMLHttpRequest.readyState);
+ 			console.log("textStatus="+textStatus);
+//			alert(XMLHttpRequest.status); 
+//	     	alert(XMLHttpRequest.readyState); 
+//			alert(textStatus); 
 		}
 	})
 }
@@ -433,17 +499,10 @@ function IdentityCodeValid(code) {
 //实名信息界面
 //验证名字是否合法，二到四个汉字
 function checkRealName(val){
-	 
 	 reg = /^[\u4E00-\u9FA5]{2,4}$/;
-	 
 	 if(!reg.test(val)){
-	 
-	 return false;
-	 
+		 return false;
 	 }else{
-	 
-	  return true;
-	 
+	 	return true;
 	 }
-	 
-	}
+}

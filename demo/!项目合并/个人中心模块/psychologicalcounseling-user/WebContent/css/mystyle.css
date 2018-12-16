@@ -1414,8 +1414,9 @@ a:focus{
 .info-contain .directory-contain-list table img{
     height: 80px;
 }
-.info-contain .directory-contain-list table span{
-    font-size: 14px;
+.info-contain .listen table td{
+    text-align: center;
+    vertical-align:middle;
 }
 .info-contain .directory-contain-list table .catagory{
     font-weight: bold;
@@ -1425,7 +1426,6 @@ a:focus{
 }
 .directory-contain-list .btn{
     background-color: #d75455;
-    margin-top: 10px;
 }
 .directory-contain-list .btn:hover{
     background-color: #ec6a6b;
@@ -1444,6 +1444,12 @@ a:focus{
     float: left;
     margin: 0.5%;
     margin-bottom: 4%
+}
+.info-contain #directory-contain-4 .directory-contain-list .setting-table{
+	table-layout: fixed;
+}
+.info-contain #directory-contain-4 .directory-contain-list .setting-table td{
+	border:0;
 }
 .info-contain .directory-contain-list .passage-block,
 .passage-list-contain .passage-list-body .passage-block
@@ -1485,9 +1491,10 @@ a:focus{
     height: 30%;
     position: fixed;
     margin: auto;    top: 0; left: 0; bottom: 0; right: 0;   
-    background-color: rgba(255, 255, 255, 0.863);
+    background-color: rgba(255, 255, 255);
     padding: 30px;
     line-height: 2em;
+    border-radius: 18px;
 }
 .info-contain .directory-contain-list .find-back-pwd i{
     display: block;

@@ -27,21 +27,24 @@
     <div class="contains search-conatin">
       <div class=" panel">
         <div class="panel-body">
+          <form action="${ctx }/searchkeyword/coursekeyword" method="post">
           <!--搜索框-->
           <div class="input-group">
               <div class="input-control search-box search-box-circle has-icon-left has-icon-right search-example" id="searchboxExample">
-                <input id="inputSearchExample3" type="search" class="form-control search-input" placeholder="搜索">
+                <input id="inputSearchExample3" type="search" class="form-control search-input" placeholder="搜索" name="searchContent" value="${searchContent }">
                 <label for="inputSearchExample3" class="input-control-icon-left search-icon"><i class="icon icon-search"></i></label>
               </div>
               <span class="input-group-btn">
-                <button class="btn btn-primary" type="button">搜索</button>
+                <button class="btn btn-primary" type="submit">搜索</button>
               </span>
+       
           </div>
+          </form>
           <!--搜索结果列表-->
               <!--导航-->
               <div class="search-nav">
                 <span class="tag">分类</span>
-                <a href="#" class="active">全部</a>
+                <a href="${ctx }/searchkeyword/coursekeyword?searchContent=${searchContent }" class="active">全部</a>
                 <a href="${ctx }/search/searchcourses">课程</a>
                 <a href="${ctx }/search/searcharticles">文章</a>
                 <a href="${ctx }/search/searchconsulters">咨询师/倾听师</a>
@@ -122,34 +125,55 @@
                
                <!-- 4.按照关键字搜索全部 -->
                <c:if test="${flag==4 }">
+             <c:if test="${not empty consulterIndexSearchs }">
+               <div class="result-block consult-block">
+               		<c:forEach var="consultersIndex" items="${consulterIndexSearchs }">
+               			 <div class="consult-block-contain">
+                     	 <!--头像：圆形-->
+	                      	<img src="${ctx }/images/avatar.png"  alt="${consultersIndex.teacherName }">
+	                      	<div>
+	                        <!--咨询师/倾听师名-->
+	                        <span class="name">${consultersIndex.teacherName }</span><br/>
+	                        <!--资质-->
+	                         <c:set var="var1" value="${consultersIndex.teacherApitude }"/>
+	                        <c:forEach  var="tdv" items="${fn:split(var1,' ')}" begin="1" end="1">   
+	                       		 <span class="tag">${tdv }</span>
+	                        </c:forEach>
+	                      </div>
+                      </div>      
+               		</c:forEach>
+               	</div>
+               	</c:if>
+               	<c:if test="${not empty courseIndexSearchers }">
                	  <c:forEach var="coursesIndex" items="${courseIndexSearchers }">
-               	  	<!--  c:forEach var="tname" items="${searchedTeacherName }"-->
-                  <div class="result-block">
-                  <!--类型-->
-                  <span class="type">课程</span>
-                  <!--名称_发布人-->
-                  <a href="${ctx }/lesson/instr?id=${coursesIndex.courseId }">${coursesIndex.courseTitle }_${coursesIndex.teacherName }</a>
-                  <!--发布时间-->
-                  <!--课程没有发布时间-->
-                  <!-- <span></span> -->
-                  <!--介绍-->
-                  <p>${coursesIndex.courseSynopsis }</p>
-                  </div>
+               	  	  <!--  c:forEach var="tname" items="${searchedTeacherName }"-->
+	                  <div class="result-block">
+	                  <!--类型-->
+	                  <span class="type">课程</span>
+	                  <!--名称_发布人-->
+	                  <a href="${ctx }/lesson/instr?id=${coursesIndex.courseId }">${coursesIndex.courseTitle }_${coursesIndex.teacherName }</a>
+	                  <!--发布时间-->
+	                  <!--课程没有发布时间-->
+	                  <!-- <span></span> -->
+	                  <!--介绍-->
+	                  <p>${coursesIndex.courseSynopsis }</p>
+	                  </div>
                   </c:forEach>
-                  
+                 </c:if>
+                 <c:if test="${not empty articleIndexSearchers }"> 
                   <c:forEach var="articleIndex" items="${articleIndexSearchers }">
-                  	<div class="result-block">
-                    <!--类型-->
-                    <span class="type">文章</span>
-                    <!--名称_发布人-->
-                    <a href="PassageControllerImpl?articleId=${articleIndex.articleId }">${articleIndex.articleTitle }_${articleIndex.teacherName }</a><br/>
-                    <!--发布时间-->
-                    <span class="tag">${articleIndex.publicationTime }</span>
-                    <!--介绍-->
-                    <p>${articleIndex.articleContent }</p>
-               	    </div>
+	                  	<div class="result-block">
+	                    <!--类型-->
+	                    <span class="type">文章</span>
+	                    <!--名称_发布人-->
+	                    <a href="PassageControllerImpl?articleId=${articleIndex.articleId }">${articleIndex.articleTitle }_${articleIndex.teacherName }</a><br/>
+	                    <!--发布时间-->
+	                    <span class="tag">${articleIndex.publicationTime }</span>
+	                    <!--介绍-->
+	                    <p>${articleIndex.articleContent }</p>
+	               	    </div>
                   </c:forEach>
-                  
+                  </c:if>
                   
                </c:if>
               </div>
@@ -189,6 +213,7 @@
 	                });
 	            </script>
             </c:if>
+            
             <c:if test="${flag==2 }">
            	   <ul id="myPager" class="pager" data-elements="prev,nav,next" data-ride="pager"
 	                data-page=${pageSearchArticles.pageNum }
@@ -208,8 +233,29 @@
 	                });
 	            </script>
             </c:if>
+            
             <c:if test="${flag==3 }">
            	   <ul id="myPager" class="pager" data-elements="prev,nav,next" data-ride="pager"
+	                data-page=${pageSearchConsulters.pageNum }
+	                data-rec-total=${pageSearchConsulters.totalCount }
+	                data-max-nav-count="3"
+	                data-rec-per-page=${pageSearchConsulters.pageSize }
+	                data-link-creator="search/searchconsulters?pageNum={page}"
+		            >
+	            </ul>
+	            <script>
+	                $('#myPager').pager({
+	                    linkCreator: function(page, pager) {
+	                        var url = window.location.href;
+	                        url = url.split("?")[0];
+	                        return url+'?pageNum=' + page;
+	                    } 
+	                });
+	            </script>
+            </c:if>
+            
+            <c:if test="${flag==4 }">
+            	 <ul id="myPager" class="pager" data-elements="prev,nav,next" data-ride="pager"
 	                data-page=${pageSearchConsulters.pageNum }
 	                data-rec-total=${pageSearchConsulters.totalCount }
 	                data-max-nav-count="3"

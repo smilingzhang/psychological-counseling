@@ -12,8 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.Consultation.consulterlist.dao.ConsultCourseDao;
 import com.Consultation.consulterlist.dao.ConsulterDao;
 import com.entity.Course;
-import com.entity.Page;
 import com.entity.Teacher;
+import com.util.Page;
 import com.util.SetPageUtil;
 
 /**

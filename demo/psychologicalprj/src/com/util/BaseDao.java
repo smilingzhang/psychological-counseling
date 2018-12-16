@@ -11,7 +11,7 @@ import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.CriteriaSpecification;
 
-import com.entity.Page;
+
 
 /**
  * 
@@ -223,7 +223,7 @@ public class BaseDao<T> {
 	 * @return 数据数量
 	 * @throws Exception
 	 */
-	public Long findCount(String hql, Object[] ... params) throws Exception {
+	public Long findCount(String hql, Object ... params) throws Exception {
 		Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
 		if (params != null && params.length > 0) {
 			for (int i = 0; i < params.length; i++)
