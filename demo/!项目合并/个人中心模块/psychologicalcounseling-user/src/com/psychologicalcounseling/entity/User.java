@@ -50,6 +50,9 @@ public class User {
 	private Set<UserLabel> userLabels= new HashSet<UserLabel>();
 	private Set<ConsultationRecord> consultationRecords = new HashSet<ConsultationRecord>();
 	
+	public User() {
+		
+	}
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

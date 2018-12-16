@@ -55,23 +55,23 @@ public class UserController {
 	 *@trhows
 	 */
 	public boolean isLogin(HttpSession session) {
-		Integer id = (Integer) session.getAttribute("uid");
+		Integer id = (Integer) session.getAttribute("userId");
 		if(id!=null) return true;
 		else return false;
 	}
 
 	@RequestMapping(value="/goToUser",method=RequestMethod.GET)
 	public void goToUser(HttpSession session,HttpServletResponse resp) throws IOException {
-		session.setAttribute("uid", 1);
+		session.setAttribute("userId", 1);
 		resp.sendRedirect("user");
 	}
 	@RequestMapping(value="/user",method=RequestMethod.GET)
 	public void user(HttpSession session,HttpServletRequest req,HttpServletResponse resp,Model model) throws ServletException, IOException {
 		//1. 获取用户id
 		if(isLogin(session)) {
-			int uid = this.getParamId((Integer)session.getAttribute("uid")); 
+			int userId = this.getParamId((Integer)session.getAttribute("userId")); 
 			//2. 获取用户实例
-			User user = userService.getUser(uid);
+			User user = userService.getUser(userId);
 			session.setAttribute("avatarLink", user.getUserHeadPath());
 			session.setAttribute("userNickName", user.getUserNickName());
 			session.setAttribute("description", user.getUserAutograph());
@@ -92,9 +92,9 @@ public class UserController {
 									HttpServletRequest req,HttpServletResponse resp) throws ServletException, IOException {
 		//1. 获取用户id
 		if(isLogin(session)) {
-			int uid = this.getParamId((Integer)session.getAttribute("uid"));
+			int userId = this.getParamId((Integer)session.getAttribute("userId"));
 			//2. 获取用户实例
-			User user = userService.getUser(uid);
+			User user = userService.getUser(userId);
 			//3. 将咨询记录按照状态拆分成三张表
 			userService.splitConsultList(user);
 			//4. 获取三张表
@@ -152,26 +152,32 @@ public class UserController {
 	@RequestMapping(value="/cancel",method=RequestMethod.GET)
 	public void cancleAppointment(HttpServletRequest req,HttpServletResponse resp,
 									HttpSession session) throws ServletException, IOException {
-		//消息
-		String msg = "";
-		//获取咨询记录id
-		int cid = Integer.parseInt(req.getParameter("consultationId"));
-		//获取用户id
-		int uid = this.getParamId((Integer)session.getAttribute("uid"));
-		//修改咨询状态
-		if(userService.changeAppointmentState(cid,uid)) {
-			msg = "咨询取消成功！您支付的金额将在1~3个工作日内原路返回。";
-			session.setAttribute("cancelMsgAttr", "success");
+		if(!isLogin(session)) {
+			session.setAttribute("backToUrl", "user");
+			resp.sendRedirect("login.jsp");
 		}
-		else{
-			msg = "好像出了一点问题，取消失败了";
-			session.setAttribute("cancelMsgAttr", "danger");
+		else {
+			//消息
+			String msg = "";
+			//获取咨询记录id
+			int cid = Integer.parseInt(req.getParameter("consultationId"));
+			//获取用户id
+			int userId = this.getParamId((Integer)session.getAttribute("userId"));
+			//修改咨询状态
+			if(userService.changeAppointmentState(cid,userId)) {
+				msg = "咨询取消成功！您支付的金额将在1~3个工作日内原路返回。";
+				session.setAttribute("cancelMsgAttr", "success");
+			}
+			else{
+				msg = "好像出了一点问题，取消失败了";
+				session.setAttribute("cancelMsgAttr", "danger");
+			}
+			
+			//设置局部消息
+			session.setAttribute("cancelMsg", msg);
+			//转发请求
+			resp.sendRedirect("user");
 		}
-		
-		//设置局部消息
-		session.setAttribute("cancelMsg", msg);
-		//转发请求
-		resp.sendRedirect("user");
 	}
 	
 	/**
@@ -191,7 +197,7 @@ public class UserController {
 			return "login";
 		}
 		else {
-			int uid = this.getParamId((Integer)session.getAttribute("uid"));
+			int userId = this.getParamId((Integer)session.getAttribute("userId"));
 			//2. 获取数据 
 			//获取展现类型：0 “我的课程” 1 “我的收藏”
 			String type = req.getParameter("courseType");
@@ -200,7 +206,7 @@ public class UserController {
 			//默认展示“我的课程”
 			if(type==null) type = "0";
 			//3. 查询需要的数据（分页）
-			List<Map<String, Object>> list = userService.courseServiceWithPaging(uid, type, pageNum); 
+			List<Map<String, Object>> list = userService.courseServiceWithPaging(userId, type, pageNum); 
 			//4. 设置参数
 			model.addAttribute("courseList", list);
 			model.addAttribute("courseType",type);
@@ -210,7 +216,7 @@ public class UserController {
 		}
 	}
 	
-	@RequestMapping(value="myListen",method=RequestMethod.GET)
+	@RequestMapping(value="/myListen",method=RequestMethod.GET)
 	public String myListen(HttpSession session,HttpServletRequest req,HttpServletResponse resp,
 							Model model) throws Exception {
 		//判断是否登录：如果id为空，跳转至登录界面
@@ -222,9 +228,9 @@ public class UserController {
 			//获取页码
 			int pageNum = this.getParamPage((String)req.getParameter("page"));
 			//获取用户id
-			int uid = this.getParamId((Integer)session.getAttribute("uid"));
+			int userId = this.getParamId((Integer)session.getAttribute("userId"));
 			//2. 查询需要的数据
-			List<Map<String, Object>> list = userService.listenServiceWithPaging(uid, pageNum); 
+			List<Map<String, Object>> list = userService.listenServiceWithPaging(userId, pageNum); 
 			//3. 设置参数
 			model.addAttribute("listenList",list);
 			model.addAttribute("nav", 3);
@@ -235,7 +241,7 @@ public class UserController {
 	
 	@RequestMapping(value="/logout",method=RequestMethod.GET)
 	public String logOut(HttpSession session) {
-		session.removeAttribute("uid");
+		session.removeAttribute("userId");
 		session.removeAttribute("avatarLink");
 		session.removeAttribute("userNickName");
 		session.removeAttribute("description");
@@ -273,8 +279,8 @@ public class UserController {
      */
 	@RequestMapping("/user/getUser")
 	public String  getUser(HttpSession session ){
-		int uid=(int) session.getAttribute("uid");
-		session.setAttribute("User", userService.getUser(uid));
+		int userId=(int) session.getAttribute("userId");
+		session.setAttribute("user", userService.getUser(userId));
 		return "user";
 	}
 	/**
@@ -299,14 +305,14 @@ public class UserController {
 			@RequestParam(value="userAutograph",required=false) String userAutograph,
 			HttpSession session) {
 		int userId=0;
-		if(session.getAttribute("User")!=null) {
-		 userId=((User) session.getAttribute("User")).getUserId();
+		if(session.getAttribute("user")!=null) {
+		 userId=((User) session.getAttribute("user")).getUserId();
 		}else {
 			System.out.println("session为空");
 		}
 		userService.reviseEssentialInfo(userNickName, userSex, userProvince, userCity, userAutograph, userId);
 		//这里的userId保留，6应该是userId
-		session.setAttribute("User", userService.getUser(userId));
+		session.setAttribute("user", userService.getUser(userId));
 		return userService.getUser4Json();
 	}
 	/**
@@ -326,7 +332,7 @@ public class UserController {
 			HttpSession session) {
 		int userId=0;
 		if(session!=null) {
-		 userId=((User) session.getAttribute("User")).getUserId();
+		 userId=((User) session.getAttribute("user")).getUserId();
 		}else {
 			System.out.println("session为空");
 		}
@@ -345,9 +351,9 @@ public class UserController {
 	@RequestMapping("/user/verifyOldPwd")
 	@ResponseBody
 	public String verifyOldPwd(@RequestParam(value="oldPwd",required=false) String oldPwd,HttpSession session) {
-		int userId=(int) session.getAttribute("uid");
+		int userId=(int) session.getAttribute("userId");
 		boolean result=userService.verifyOldPwd(oldPwd,userId);
-		System.out.println(result);
+		//System.out.println(result);
 		if(result==true) {
 			return "{\"result\":\"true\"}";
 		}else {
@@ -363,12 +369,12 @@ public class UserController {
 	 *@return:String
 	 *@trhows
 	 */
-	@RequestMapping("/revisePwd")
+	@RequestMapping("/user/revisePwd")
 	@ResponseBody
 	public String revisePwd(@RequestParam(value="newPwd",required=false) String newPwd,HttpSession session) {
 		int userId=0;
 		if(session!=null) {
-		 userId=((User) session.getAttribute("User")).getUserId();
+		 userId=((User) session.getAttribute("user")).getUserId();
 		}else {
 			System.out.println("session为空");
 		}
