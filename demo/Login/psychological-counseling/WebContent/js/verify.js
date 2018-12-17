@@ -16,8 +16,9 @@ function isFirst(){
         && document.getElementById('loginErrMsg4Phone').className == 'msg-right'
         //如果是老用户快捷登录，而非注册，那么不显示协议。
         && (document.getElementById('checkbox').style.display == 'none' || $("#checkbox  input[type='checkbox']:checked").length==1) ){
-    	
-        document.getElementById('login-form-submit-button-Second').removeAttribute("disabled");
+    	console.log(document.getElementById('loginErrMsg4Code').className+"****");
+    	console.log(document.getElementById('loginErrMsg4Phone').className);
+        document.getElementById('login-form-submit-button').removeAttribute("disabled");
         }
 }
 

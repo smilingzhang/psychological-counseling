@@ -112,6 +112,18 @@ public class LoginController {
 			}
 		}
 	}
+	/**
+	 * 
+	 *@desc:账号密码的方式登录
+	 *@param session
+	 *@param phoneNum
+	 *@param req
+	 *@param resp
+	 *@throws ServletException
+	 *@throws IOException
+	 *@return:void
+	 *@trhows
+	 */
 	@RequestMapping("/login4Pwd")
 	public void login4Pwd(HttpSession session,@RequestParam(value="phoneNum",required=false) String phoneNum,
 			HttpServletRequest req,HttpServletResponse resp) throws ServletException, IOException {

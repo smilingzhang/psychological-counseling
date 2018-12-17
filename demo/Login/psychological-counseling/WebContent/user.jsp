@@ -25,6 +25,7 @@
   </head>
   <body>
     <!-- 在此处编码你的创意 -->
+    <%@include file="head.jsp" %>
     <div class="contains user-contain">
         <!--头部-->
         <div class="panel user">
