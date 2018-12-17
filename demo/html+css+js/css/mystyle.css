@@ -17,21 +17,6 @@ select{
 .btn-link:hover{
     color: #fff;
 }
-.btn{
-    border-radius: 5px;
-    border-width: 0;
-    text-shadow: none;
-}
-.btn:active,
-.btn:visited
-{
-	color:#d75455
-}
-.btn-default{
-	backgroud-color: #f2f2f2;
-	border-color: #bfbfbf;
-	color:#d75455;
-}
 a:hover{
     color: #d75455;
     text-decoration: none
@@ -1429,8 +1414,9 @@ a:focus{
 .info-contain .directory-contain-list table img{
     height: 80px;
 }
-.info-contain .directory-contain-list table span{
-    font-size: 14px;
+.info-contain .listen table td{
+    text-align: center;
+    vertical-align:middle;
 }
 .info-contain .directory-contain-list table .catagory{
     font-weight: bold;
@@ -1440,7 +1426,6 @@ a:focus{
 }
 .directory-contain-list .btn{
     background-color: #d75455;
-    margin-top: 10px;
 }
 .directory-contain-list .btn:hover{
     background-color: #ec6a6b;
@@ -1459,6 +1444,12 @@ a:focus{
     float: left;
     margin: 0.5%;
     margin-bottom: 4%
+}
+.info-contain #directory-contain-4 .directory-contain-list .setting-table{
+	table-layout: fixed;
+}
+.info-contain #directory-contain-4 .directory-contain-list .setting-table td{
+	border:0;
 }
 .info-contain .directory-contain-list .passage-block,
 .passage-list-contain .passage-list-body .passage-block
@@ -1500,9 +1491,10 @@ a:focus{
     height: 30%;
     position: fixed;
     margin: auto;    top: 0; left: 0; bottom: 0; right: 0;   
-    background-color: rgba(255, 255, 255, 0.863);
+    background-color: rgba(255, 255, 255);
     padding: 30px;
     line-height: 2em;
+    border-radius: 18px;
 }
 .info-contain .directory-contain-list .find-back-pwd i{
     display: block;
@@ -1538,6 +1530,7 @@ a:focus{
     margin-bottom: 20px;
 }
 .passage-contain .passage-panel .passage .writer-info img{
+    width: 40px;
     float: left;
     margin-right: 20px;
 }
@@ -1686,4 +1679,22 @@ a:focus{
 }
 #back-to-top-btn i{
     font-size: 20px;
+}
+.table-head td{
+	text-align: center;
+	line-height:1.5em;
+	font-size:20px;
+	color: #6e0706;
+	background-color: #faf1f1;
+}
+#index-header{
+    background-color: #fff;
+}
+#index-header .logo{
+    width: 70%;
+    height: 100px;
+}
+#index-header .logo img{
+    /* margin: 20px; */
+    width: 50%;
 }

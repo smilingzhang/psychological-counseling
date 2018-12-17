@@ -165,7 +165,7 @@
 				                                    function showCancelDialog(id){
 				                                        $("#user-app-dialog").css("display","block");
 				                                        $("#shade").css("display","block");
-				                                        $("#cancel-btn").attr("href","${ctx}cancel?consultationId="+id);
+				                                        $("#cancel-btn").attr("href","${ctx}/cancel?consultationId="+id);
 				                                    }
 				                                </script>
 				                                <%
