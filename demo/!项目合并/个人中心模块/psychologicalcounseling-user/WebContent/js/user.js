@@ -28,33 +28,11 @@ function isLegal(){
 		$("#realName").attr("disabled","disabled");
 	}
 }
-function checkNickName(obj){
-	console.log($(obj).attr("name"));
-	if($(obj).attr("name")=="nickName"){
-		console.log("******123456");
-		var text1=$("#userNickName").val();
-		console.log(hasIllegalChar(text1));
-		if(hasIllegalChar(text1)){
-			$("#error_msg_name").text("符合规范");
-		}else{
-			$("#error_msg_name").text("您的昵称不合符规范，请重新输入");
+//为了防止用户输入非法信息，比如script标签。
+function stripscript(s) {
+	return s.replace(/<[^<>]+>/g, ''); 
 
-		}
-	}
-	else if($(obj).attr("name")=="userAutograph"){
-		var text1=$("#userAutograph").val();
-		
-		if(hasIllegalChar(text1)){
-			$("#error_msg_autograph").text("符合规范");
-		}else{
-			$("#error_msg_autograph").text("您的昵称不合符规范，请重新输入");
-	
-		}
-	}
-}
-function hasIllegalChar(str) {
-    return /<[^<]+>/.test(str);
-}
+} 
 //修改在个人基本信息界面
 //功能：1.实现“修改”和“保存”界面的跳转。2.通过ajax来进行数据库更新。3.通过ajax返回的用户的姓名，省份等信息，赋值到界面上。使其在保存过后立刻就能在界面上显示新保存的信息。
 function changeBtnValue(obj){
@@ -86,11 +64,15 @@ function changeBtnValue(obj){
     	//essentialInfo--基本信息 realName--实名信息
     	console.log($(obj).attr("id"));
     	if($(obj).attr("id")=="essentialInfo"){
-	        var nicoName=$('input[name="nicoName"]').val();
+	        var nicoName1=$('input[name="nicoName"]').val();
+	   
+	        var nicoName=stripscript(nicoName1);
+	        console.log(nicoName+"456456545646546545645646546");
 	        var gender=$('input[name="gender"]:checked').val();
 	        var province=$('select[name="province"]').val();
 	        var city=$('select[name="city"]').val();
-	        var userAutograph=$('input[name="userAutograph"]').val();
+	        var userAutograph1=$('input[name="userAutograph"]').val();
+	        var userAutograph=stripscript(userAutograph1);
 	        //ajax---修改基本信息
 	        var controllerName = "user/reviseEssentialInfo";
 	    	var toUrl = window.location.protocol+controllerName;
