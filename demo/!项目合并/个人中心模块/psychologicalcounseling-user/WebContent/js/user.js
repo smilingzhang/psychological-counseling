@@ -19,7 +19,7 @@ function isLegal(){
 	}else{
 		//既然没有调用实名接口，就不要显示“姓名合法”字眼了。
 		$("#errorMsg4Name").text("");
-		$("#errorMsg4Name").attr("class","msg-err");
+		$("#errorMsg4Name").attr("class","msg-right");
 	}
 	
 	if($("#errorMsg4IdNum").attr("class")=="msg-right"&&$("#errorMsg4Name").attr("class")=="msg-right"){
