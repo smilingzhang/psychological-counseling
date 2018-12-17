@@ -165,7 +165,7 @@
 				                                    function showCancelDialog(id){
 				                                        $("#user-app-dialog").css("display","block");
 				                                        $("#shade").css("display","block");
-				                                        $("#cancel-btn").attr("href","cancel?consultationId="+id);
+				                                        $("#cancel-btn").attr("href","${ctx}cancel?consultationId="+id);
 				                                    }
 				                                </script>
 				                                <%
@@ -407,7 +407,7 @@
                                	<span class="board-title-h1">基本信息</span>
                                	<button class="btn btn-mini " type="button" onclick="changeBtnValue(this)" id="essentialInfo">修改</button>
                                 <table class="setting-table" style="table-layout:fixed">
-                                    <tr><td class="tag" width="10%">昵称</td><td id="userNickName">${user.getUserNickName() }</td></tr>
+                                    <tr><td class="tag" width="10%">昵称</td><td id="userNickName" >${user.userNickName }</td></tr>
                                     <tr><td class="tag">性别</td><td id="userSex">${user.getUserSex() }</td></tr>
                                     <tr><td class="tag">所在地</td><td id="userProvince">${user.getUserProvince() }&nbsp;${user.getUserCity() }</td></tr>
                                     <tr><td class="tag">签名</td><td id="userAutograph">${user.getUserAutograph() }</td></tr>
@@ -418,7 +418,9 @@
                                 <div style="display:none" id="select-city" class="${user.getUserCity() }"></div>
                                 <input type="hidden"  id="hiddenUserSex" class="${user.getUserSex() }">
                                 <table class="setting-table" style="table-layout:fixed;display:none">
-                                    <tr><td class="tag" width="10%">昵称</td><td><input class="form-control" name="nicoName" type="text" value="${user.getUserNickName() }"/></td></tr>
+                                    <tr><td class="tag" width="10%">昵称</td><td><input class="form-control" id="userNickName" name="nicoName"  type="text"  value="${user.getUserNickName() } "/></td ><td><font id="error_msg_name"></font></td></tr>
+									<!--     错误信息 -->
+                                    
                                     <tr><td class="tag">性别</td>
                                         <td><input type="radio" name="gender" id="male" value="male" />男
                                             <input type="radio" name="gender" id="female" value="female"/>女
@@ -439,7 +441,9 @@
                                             </select>
                                         </td>
                                     </tr>
-                                    <tr><td class="tag">签名</td><td><input class="self-intr form-control" type="text" name="userAutograph" id="" value="${user.getUserAutograph() }"/></td></tr>
+                                    <tr><td class="tag">签名</td><td><input class="self-intr form-control" type="text" name="userAutograph" maxlength="40" id="userAutograph" value="${user.getUserAutograph() }"/></td><td><font id="error_msg_autograph"></font></td></tr>
+                                    <!--     错误信息 -->
+                                    <div id="error_msg_tag"></div>
                                 </table>
                             </form>
                             <!--实名信息-->
@@ -457,7 +461,7 @@
 	                                </tr>
                                     <tr><td class="tag">证件号</td><td id="userIdNumber">
                                       <c:if test="${empty(user.getUserIdNumber()) }">未实名</c:if>
-                                      <c:if test="${!empty(user.getUserIdNumber()) }">${User.userIdNumber.substring(0,6)}*********${User.userIdNumber.substring(14,18) }</c:if>
+                                      <c:if test="${!empty(user.getUserIdNumber()) }">${user.userIdNumber.substring(0,6)}*********${user.userIdNumber.substring(14,18) }</c:if>
                                     </td></tr>
                                   
                                 </table>
@@ -483,10 +487,12 @@
                             <form action="" method="POST">
                                 <table class="setting-table">
                                     <tr>
-                                    	<td width="20%">原始密码</td>
-                                    	<td width="50%"><div><input maxlength="16" class="form-control" name="oldPwd" type="password" onkeyup="verifyOldPwd(this)"/></div></td>
-		                                    <!--★★★ 错误信息 -->
-                                   		<td width="30%"><font id="errorMsg-oldPwd">&nbsp;</font></td>
+                                        <c:if test="${!empty(user.userPassword) }">
+	                                    	<td width="20%">原始密码</td>
+	                                    	<td width="50%"><div><input maxlength="16" class="form-control" name="oldPwd" type="password" onkeyup="verifyOldPwd(this)"/></div></td>
+                                   		</c:if>
+			                                    <!--★★★ 错误信息 -->
+	                                   		<td width="30%"><font id="errorMsg-oldPwd" class="sign-display">&nbsp;</font></td>
                                    	</tr>
                                     <tr>
                                     	<td>新密码</td>
@@ -501,7 +507,9 @@
                                     	<td><font id="errorMsg-confirmPwd">&nbsp;</font></td>
                                    	</tr>
                                 </table>
-                                <span>忘记密码了？<a href="#" onclick="findBackPwd();sendCode4Pwd();">找回密码</a></span><br/>
+                                <c:if test="${!empty(user.getUserPhone()) and fn:length(user.getUserPhone())>0}">
+                                	<span>忘记密码了？<a href="#" onclick="findBackPwd();sendCode4Pwd();">找回密码</a></span><br/>
+                                </c:if>
                                 <div id="user-phoneNum-Pwd" style="display:none" class="${user.getUserPhone() }"></div>
                                 <!--★★★ 修改成功信息，这里的字的颜色区别错误的信息 -->
                                 <!-- <font id="successMsg4Pwd">&nbsp;</font><br/> -->
@@ -511,24 +519,26 @@
                             <!--黑色遮罩层-->
                             <div id="shade" style="display:none"></div>
                             <!--找回密码界面-->
-                            <div class="find-back-pwd" id="find-back-pwd" style="display:none">
-                                <!--关闭按钮-->
-                                <i class="icon icon-times" onclick="closeWindow(this)"></i>
-                                <span class="board-title-h1">我们给您的手机</span>
-                                <span class="board-title-h1 phone-num" id="send-phone-pwd">${user.getUserPhone().substring(0,3)}****${user.getUserPhone().substring(7,11)}</span><br/>
-                                <span class="board-title-h1">发送了一条验证码,请及时查收</span><br/>
-                                <!-- <span class="board-title-h1">请及时查收</span><br/> -->
-                                <!--验证码-->
-                                <div class="verify-zoom">
-                                  	  验证码：
-                                    <!--★★★ 错误信息，验证码是否正确 -->
-                                    <font id="error-msg-code">&nbsp;</font><br/>
-                                  	<div><input maxlength="6" class="form-control" type="text" name="verifyCode" id="pwd-code" onkeyup="PwdVerifyCode(this)" style="width:80%;float:left;margin-right:10px;"/></div>
-                                    <a class="btn btn-primary" href="#" onclick="setNewPwd()" disabled="disabled" id="verify-code-pwd">验证</a>
-                                    <!-- 重新发送短信按钮 -->
-                                    <span id="resendMsg" class="tag" style="display:none;float:left">没有收到短信？<a href="#" onclick="">重新发送一条</a></span>
-                                </div>
-                            </div>
+                            <c:if test="${!empty(user.getUserPhone()) and fn:length(user.getUserPhone())>0}">
+	                            <div class="find-back-pwd" id="find-back-pwd" style="display:none">
+	                                <!--关闭按钮-->
+	                                <i class="icon icon-times" onclick="closeWindow(this)"></i>
+	                                <span class="board-title-h1">我们给您的手机</span>
+	                                <span class="board-title-h1 phone-num" id="send-phone-pwd">${user.getUserPhone().substring(0,3)}****${user.getUserPhone().substring(7,11)}</span><br/>
+	                                <span class="board-title-h1">发送了一条验证码,请及时查收</span><br/>
+	                                <!-- <span class="board-title-h1">请及时查收</span><br/> -->
+	                                <!--验证码-->
+	                                <div class="verify-zoom">
+	                                  	  验证码：
+	                                    <!--★★★ 错误信息，验证码是否正确 -->
+	                                    <font id="error-msg-code">&nbsp;</font><br/>
+	                                  	<div><input maxlength="6" class="form-control" type="text" name="verifyCode" id="pwd-code" onkeyup="PwdVerifyCode(this)" style="width:80%;float:left;margin-right:10px;"/></div>
+	                                    <a class="btn btn-primary" href="#" onclick="setNewPwd()" disabled="disabled" id="verify-code-pwd">验证</a>
+	                                    <!-- 重新发送短信按钮 -->
+	                                    <span id="resendMsg" class="tag" style="display:none;float:left">没有收到短信？<a href="#" onclick="">重新发送一条</a></span>
+	                                </div>
+	                            </div>
+                            </c:if>
                             <!--设置新密码界面-->
                             <div class="find-back-pwd" id="set-new-pwd" style="display:none">
                                 <!--关闭按钮-->

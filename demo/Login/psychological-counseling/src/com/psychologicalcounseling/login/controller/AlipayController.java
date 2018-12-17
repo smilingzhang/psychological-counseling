@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
@@ -28,18 +29,10 @@ import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.domain.AlipayDataDataserviceBillDownloadurlQueryModel;
-import com.alipay.api.domain.AlipayTradeCancelModel;
 import com.alipay.api.domain.AlipayTradePrecreateModel;
-import com.alipay.api.domain.AlipayTradeQueryModel;
-import com.alipay.api.domain.AlipayTradeRefundModel;
-import com.alipay.api.domain.GoodsDetail;
 import com.alipay.api.response.AlipayDataDataserviceBillDownloadurlQueryResponse;
-import com.alipay.api.response.AlipayOpenAuthTokenAppResponse;
 import com.alipay.api.response.AlipaySystemOauthTokenResponse;
-import com.alipay.api.response.AlipayTradeCancelResponse;
 import com.alipay.api.response.AlipayTradePrecreateResponse;
-import com.alipay.api.response.AlipayTradeQueryResponse;
-import com.alipay.api.response.AlipayTradeRefundResponse;
 import com.alipay.api.response.AlipayUserInfoShareResponse;
 
 import com.google.zxing.BarcodeFormat;
@@ -47,22 +40,33 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
-import com.psychologicalcounseling.login.dao.AlipayDaoImpl;
 import com.psychologicalcounseling.login.service.AlipayServiceImpl;
 import com.psychologicalcounseling.util.AlipayConfig;
 import com.alipay.api.request.*;
+/**
+ * 
+ *@desc:
+ *@author 刘田会
+ *@date:2018年12月14日上午9:55:26
+ */
 @Controller
-public class AlipayController {
+public class AlipayController { 
 	
 @Resource
 private AlipayServiceImpl asi;
+@RequestMapping("/loginAlipayRequest")
+public void loginAlipayRequest(HttpServletRequest req,HttpServletResponse resp) throws ServletException, IOException {
+	resp.sendRedirect("https://openauth.alipaydev.com/oauth2/publicAppAuthorize.htm?app_id=2016091900550564&scope=auth_user,auth_base&redirect_uri=http://127.0.0.1:8080/psychological-counseling/loginAlipay");
+}
 //获取用户登录授权信息
-@RequestMapping("/Alipay")
-public String loginByAlipay(@RequestParam(value="auth_code") String auth_code,HttpSession session) throws UnsupportedEncodingException, AlipayApiException {
+@RequestMapping("/loginAlipay")
+public void loginByAlipay(@RequestParam(value="auth_code") String auth_code,
+		HttpSession session,HttpServletRequest req,HttpServletResponse resp) throws AlipayApiException, IOException, ServletException {
+	
      //网关（固定），format：参数返回格式（只支持json），sign_type:生成签名字符串使用的算法类型。
    	 AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl, AlipayConfig.app_id, AlipayConfig.merchant_private_key, AlipayConfig.format, AlipayConfig.charset, AlipayConfig.alipay_public_key, AlipayConfig.sign_type);
      AlipaySystemOauthTokenRequest request = new AlipaySystemOauthTokenRequest();
-     //值为authorization_code时，代表用code换取
+     //-----------------利用auth_code换区access_token-------------------
  	 request.setGrantType("authorization_code");
  	 request.setCode(auth_code);
      AlipaySystemOauthTokenResponse oauthTokenResponse = null;
@@ -75,27 +79,26 @@ public String loginByAlipay(@RequestParam(value="auth_code") String auth_code,Ht
      
      //-------------------获取用户的详细信息---------------------------
      String accessToken = oauthTokenResponse.getAccessToken();
-     String userId=oauthTokenResponse.getUserId();
      System.out.println(oauthTokenResponse.getBody());
      AlipayUserInfoShareRequest userinfoShareRequest = new AlipayUserInfoShareRequest();
      AlipayUserInfoShareResponse userinfoShareResponse = alipayClient.execute(userinfoShareRequest,accessToken);
      if(userinfoShareResponse.isSuccess()){
-    	 System.out.println(userinfoShareResponse.getNickName());
-    	 //false--代表新用户。 数据库插入操作
-    	 if(asi.isNewUser4Alipay(userinfoShareResponse.getUserId())==false) {
-    		 asi.AlipayLogin(userinfoShareResponse.getUserId());
-    		 //根据userinfoShareResponse.getUserId()找到userId
-    		 session.setAttribute("uid", asi.findUserId(userinfoShareResponse.getUserId()));
-    	 }else {
-    		 
-    	 }
-         System.out.println("调用成功");
+    	 //获取到userId
+    	 String alipayUserId=userinfoShareResponse.getUserId();
+    	 String json=userinfoShareResponse.getBody();
+    	 //进行数据库操作
+    	 asi.alipayLogin(json);
+    	 //根据alipayUserId找到对应的userId
+    	 session.setAttribute("userId", asi.findUserId(alipayUserId));
+         System.out.println("用户详细信息调用成功");
      } else {
-    	 System.out.println("调用失败");
+    	 session.setAttribute("userId", null);
+    	 System.out.println("用户详细信息调用失败");
+    	 resp.sendRedirect("login.jsp");
      }
-     
-     return "index";
+     req.getRequestDispatcher("/login/redirect").forward(req, resp);
 }
+
 
 //生成支付所需的二维码
 @RequestMapping(value = "/getQ", method = { RequestMethod.POST, RequestMethod.GET })

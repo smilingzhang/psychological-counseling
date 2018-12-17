@@ -31,7 +31,7 @@
                             <button type="submit" class="btn btn-default">搜索</button>
                         </form>
                     </div>
-                    <c:if test="${!empty(sessionScope.uid) }">
+                    <c:if test="${!empty(sessionScope.userId) }">
                     	<li class="dropdown list dropdown-hover" id="list-after-login">
 	                        <a href="#"  class="dropdown-toggle" data-toggle="dropdown"><img id="avatar" src="${sessionScope.avatarLink }" alt="头像"></a>
 	                        <ul class="dropdown-menu" role="menu">
@@ -41,7 +41,7 @@
 	                        </ul>
                     	</li>
                     </c:if>
-                    <c:if test="${empty(sessionScope.uid) }">
+                    <c:if test="${empty(sessionScope.userId) }">
 	                    <li class="list" id="list"><a class="login" href="login.jsp">登录/注册</a></li>
                     </c:if>
                 </ul>  

@@ -4,11 +4,10 @@
  * isSecond():判断表单提交按钮是否可用。second代表这是账号密码登录。
  */
 function isSecond(){
-
 	if(document.getElementById('loginErrMsg4Pwd').className=='msg-right'
-        && document.getElementById('loginErrMsg4Phone').className == 'msg-right'
+        && document.getElementById('loginErrMsg4Phone4Second').className == 'msg-right'
         ){
-        document.getElementById('login-form-submit-button').removeAttribute("disabled");
+        document.getElementById('login-form-submit-button-Second').removeAttribute("disabled");
         
 	}
 }
@@ -17,7 +16,8 @@ function isFirst(){
         && document.getElementById('loginErrMsg4Phone').className == 'msg-right'
         //如果是老用户快捷登录，而非注册，那么不显示协议。
         && (document.getElementById('checkbox').style.display == 'none' || $("#checkbox  input[type='checkbox']:checked").length==1) ){
-    	
+    	console.log(document.getElementById('loginErrMsg4Code').className+"****");
+    	console.log(document.getElementById('loginErrMsg4Phone').className);
         document.getElementById('login-form-submit-button').removeAttribute("disabled");
         }
 }
@@ -80,19 +80,18 @@ function loginVerifyPhone(){
 //第二个检测
 function loginVerifyPhone4Pwd(){
 	
-    var phoneNum = document.getElementById('phoneNum').value;
-    
+    var phoneNum = document.getElementById('phoneNum4Pwd').value;
     //手机号格式错误
     if(!(/^1[34578]\d{9}$/.test(phoneNum))){ 
-        document.getElementById('loginErrMsg4Phone').innerText = '手机格式有误';
-        document.getElementById('phoneNum').parentElement.className = 'has-error'; 
-        document.getElementById('loginErrMsg4Phone').className = 'msg-err';
-        document.getElementById('login-form-submit-button').setAttribute("disabled","disabled");
+        document.getElementById('loginErrMsg4Phone4Second').innerText = '手机格式有误';
+        document.getElementById('phoneNum4Pwd').parentElement.className = 'has-error'; 
+        document.getElementById('loginErrMsg4Phone4Second').className = 'msg-err';
+        document.getElementById('login-form-submit-button-Second').setAttribute("disabled","disabled");
     } else{
         //手机号格式正确
-        document.getElementById('phoneNum').parentElement.className = 'has-success';
-        document.getElementById('loginErrMsg4Phone').innerText = '格式正确';
-        document.getElementById('loginErrMsg4Phone').className = 'msg-right';
+        document.getElementById('phoneNum4Pwd').parentElement.className = 'has-success';
+        document.getElementById('loginErrMsg4Phone4Second').innerText = '格式正确';
+        document.getElementById('loginErrMsg4Phone4Second').className = 'msg-right';
     }
   //验证改手机号是否注册过
     $.ajax({
@@ -104,13 +103,14 @@ function loginVerifyPhone4Pwd(){
 		success:function(data){
 			if(data.result=="false"){
 				//对pwd第二个div
-		        document.getElementById('loginErrMsg4Phone').innerText = '您是新用户，请先注册';
-		        document.getElementById('phoneNum').parentElement.className = 'has-error'; 
-		        document.getElementById('loginErrMsg4Phone').className = 'msg-err';
-		        document.getElementById('login-form-submit-button').setAttribute("disabled","disabled");
+		        document.getElementById('loginErrMsg4Phone4Second').innerText = '您是新用户，请先注册';
+		        document.getElementById('phoneNum4Pwd').parentElement.className = 'has-error'; 
+		        document.getElementById('loginErrMsg4Phone4Second').className = 'msg-err';
+		        document.getElementById('login-form-submit-button-Second').setAttribute("disabled","disabled");
 			}else{
-				document.getElementById('phoneNum').parentElement.className = 'has-success';
-				document.getElementById('loginErrMsg4Phone').className = 'msg-right';
+				document.getElementById('loginErrMsg4Phone4Second').innerText = '格式正确';
+				document.getElementById('phoneNum4Pwd').parentElement.className = 'has-success';
+				document.getElementById('loginErrMsg4Phone4Second').className = 'msg-right';
 			}
 		},
 		error:function(XMLHttpRequest, textStatus, errorThrown){
@@ -261,19 +261,19 @@ function verifyAccord(){
 //验证密码
 function loginVerifyPwd(){
     var pwd = document.getElementById('pwd').value;
-    var phoneNum = document.getElementById('phoneNum').value;
+    var phoneNum = document.getElementById('phoneNum4Pwd').value;
     
     //密码长度有误
     if(pwd.length > 16){ 
         document.getElementById('loginErrMsg4Pwd').innerText = '密码长度不应超过16位';
         document.getElementById('pwd').parentElement.className = 'has-error'; 
         document.getElementById('loginErrMsg4Pwd').className = 'msg-err';
-        document.getElementById('login-form-submit-button').setAttribute("disabled","disabled");
+        document.getElementById('login-form-submit-button-Second').setAttribute("disabled","disabled");
     } else if(pwd.length==0){
         document.getElementById('loginErrMsg4Pwd').innerText = '请输入密码';
         document.getElementById('pwd').parentElement.className = 'has-error'; 
         document.getElementById('loginErrMsg4Pwd').className = 'msg-err';
-        document.getElementById('login-form-submit-button').setAttribute("disabled","disabled");
+        document.getElementById('login-form-submit-button-Second').setAttribute("disabled","disabled");
     }else{
         //密码长度正确
         document.getElementById('pwd').parentElement.className = 'has-success';
@@ -289,6 +289,7 @@ function loginVerifyPwd(){
 		dataType:"json",
 		data:{"phoneNum":phoneNum,"pwd":pwd},
 		success:function(data){
+			console.log(data.result);
 			if(data.result=="same"){
 				document.getElementById('pwd').parentElement.className = 'has-success';
 		        document.getElementById('loginErrMsg4Pwd').className = 'msg-right';
@@ -297,12 +298,12 @@ function loginVerifyPwd(){
 				document.getElementById('loginErrMsg4Pwd').innerText = '密码错误';
 		        document.getElementById('pwd').parentElement.className = 'has-error'; 
 		        document.getElementById('loginErrMsg4Pwd').className = 'msg-err';
-		        document.getElementById('login-form-submit-button').setAttribute("disabled","disabled");
+		        document.getElementById('login-form-submit-button-Second').setAttribute("disabled","disabled");
 			}else{
 				document.getElementById('loginErrMsg4Pwd').innerText = '请先输入手机号';
 				document.getElementById('pwd').parentElement.className = 'has-error'; 
 		        document.getElementById('loginErrMsg4Pwd').className = 'msg-err';
-		        document.getElementById('login-form-submit-button').setAttribute("disabled","disabled");
+		        document.getElementById('login-form-submit-button-Second').setAttribute("disabled","disabled");
 			}
 		},
 		error:function(XMLHttpRequest, textStatus, errorThrown){

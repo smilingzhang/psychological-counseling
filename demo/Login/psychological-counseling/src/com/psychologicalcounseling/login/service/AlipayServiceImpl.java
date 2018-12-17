@@ -1,9 +1,12 @@
 package com.psychologicalcounseling.login.service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
+
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +20,12 @@ import com.alipay.api.request.AlipayTradeCancelRequest;
 import com.alipay.api.request.AlipayTradeQueryRequest;
 import com.alipay.api.response.AlipayTradeCancelResponse;
 import com.alipay.api.response.AlipayTradeQueryResponse;
+
+import com.psychologicalcounseling.entity.User;
 import com.psychologicalcounseling.login.dao.AlipayDaoImpl;
 import com.psychologicalcounseling.util.AlipayConfig;
+
+import net.sf.json.JSONObject;
 
 @Service
 public class AlipayServiceImpl {
@@ -68,12 +75,45 @@ public class AlipayServiceImpl {
 	 * 
 	 *@desc:第三方登录时插入用户。
 	 *@param alipayUserId
+	 *       false--新用户
 	 *@return:void
 	 *@trhows
 	 */
-	public void AlipayLogin(String alipayUserId) {
-		adi.insertUser(alipayUserId);
+	public void alipayLogin(String json) {
+		//创建一个user
+		User user=new User();
+		//将传过来的json字符串数据变成json对象
+		JSONObject jsonObject=JSONObject.fromObject(json);
+		JSONObject jsonObject1=(JSONObject) jsonObject.get("alipay_user_info_share_response");
+		System.out.println(jsonObject1.getString("user_id")+"*************************");
+		if(isNewUser(jsonObject1.getString("user_id"))==false) {
+			//接收用户详细信息的数据
+			user.setAlipayUserId(jsonObject1.getString("user_id"));
+			if(jsonObject1.has("city")) {
+				user.setUserCity(jsonObject1.getString("city"));
+			}
+			user.setUserIdentity(user.IDENTITY_USER);
+			if(jsonObject1.has("province")) {
+				user.setUserProvince(jsonObject1.getString("province"));		
+			}
+			if(jsonObject1.has("nick_name")) {
+				user.setUserNickName(jsonObject1.getString("nick_name"));
+			}
+			if(jsonObject1.has("avatar")) {
+				user.setUserHeadPath(jsonObject1.getString("avatar"));
+				if(jsonObject1.getString("avatar")=="f") {
+					user.setUserSex("男");
+				}else {
+					user.setUserSex("女");
+				}
+			}
+			user.setUserRegistTime(new Date());
+			adi.insertUser(user);
+		}else {
+			//日志操作
+		}
 	}
+	
 	/**
 	 * 
 	 *@desc:根据alipayUserId判断是不是新用户。
@@ -82,7 +122,7 @@ public class AlipayServiceImpl {
 	 *@return:boolean
 	 *@trhows
 	 */
-	public boolean isNewUser4Alipay(String alipayUserId) {
+	public boolean isNewUser(String alipayUserId) {
 		List list=adi.isNewUser4Alipay(alipayUserId);
 		if(list.size()==0) {
 			return false;
@@ -101,5 +141,6 @@ public class AlipayServiceImpl {
 	public int findUserId(String alipayUserId) {
 		return adi.findUserId(alipayUserId);
 	}
+	
 
 }

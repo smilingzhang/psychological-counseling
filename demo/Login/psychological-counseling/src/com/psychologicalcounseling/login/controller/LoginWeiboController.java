@@ -49,6 +49,7 @@ public class LoginWeiboController {
 	public void loginWeiboAuth(@RequestParam("code")String code,HttpSession session,
 									HttpServletRequest req,HttpServletResponse resp) throws ServletException, IOException {
 		Oauth oauth = new Oauth();
+		//记录日志
 		Log.logInfo("code: " + code);
 		try{
 			AccessToken at = oauth.getAccessTokenByCode(code);
@@ -57,16 +58,17 @@ public class LoginWeiboController {
 			//调用服务进行登录，若登录成功，将用户id存入session。
 			//若登录失败，uid值为null
 			if(accessToken!=null && weiboUid!=null) {
-				User user = loginWeiboService.login(accessToken,Long.parseLong(weiboUid));
+				User user = loginWeiboService.login(accessToken,weiboUid);
 				if(user != null) {
-					session.setAttribute("uid", user.getUserId());
+					session.setAttribute("userId", user.getUserId());
 					session.setAttribute("userNickName", user.getUserNickName());
 					session.setAttribute("description", user.getUserAutograph());
 					session.setAttribute("avatarLink", user.getUserHeadPath());
 				}
-				else session.setAttribute("uid", null);
+				else session.setAttribute("userId", null);
 			} else {
-				session.setAttribute("uid", null);
+				session.setAttribute("userId", null);
+				//登陆失败时，重新返回到的登录界面
 				resp.sendRedirect("login.jsp");
 			}
 		} catch (WeiboException e) {
@@ -75,12 +77,11 @@ public class LoginWeiboController {
 			}else{
 				session.setAttribute("loginMsg", "非常抱歉，暂时无法使用微博账号登录");
 				session.setAttribute("loginMsgAttr", "warning");
-				
 				e.printStackTrace();
 			}
 			resp.sendRedirect("login.jsp");
 		}
-		req.getRequestDispatcher("redirect").forward(req, resp);
+		req.getRequestDispatcher("/login/redirect").forward(req, resp);
 	}
 	
 	

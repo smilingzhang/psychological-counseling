@@ -30,7 +30,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name="teacher")
 public class Teacher {
 	//--------增加 by邓旸
-	private int teacherAge;
+	private Integer teacherAge;
 	//--------
 	//--------增加 by张春辉
 	private String authenticationAptitudeName;
@@ -90,10 +90,11 @@ public class Teacher {
 	public void setTeacherListenTime(int teacherListenTime) {
 		this.teacherListenTime = teacherListenTime;
 	}
-	public int getTeacherAge() {
+	
+	public Integer getTeacherAge() {
 		return teacherAge;
 	}
-	public void setTeacherAge(int teacherAge) {
+	public void setTeacherAge(Integer teacherAge) {
 		this.teacherAge = teacherAge;
 	}
 	public String getAuthenticationAptitudeName() {

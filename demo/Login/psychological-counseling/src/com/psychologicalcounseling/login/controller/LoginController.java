@@ -66,22 +66,28 @@ public class LoginController {
 
 /**
  * 
- *@desc:用户注册/快速登录    如果新用户查数据库，老用户直接跳到首页
+ *@desc:用户注册/快速登录    如果新用户插数据库之后跳转到redirect页，老用户直接跳redirect页。
  *@param phoneNum  
  *@return
  *@return:String
+ * @throws IOException 
+ * @throws ServletException 
  *@trhows
  */
 	@RequestMapping("/regist")
-    public String regist(@RequestParam(value="phoneNum",required=false) String phoneNum) {
-		//如果是新用户
+    public void regist(@RequestParam(value="phoneNum",required=false) String phoneNum,HttpSession session,
+    		HttpServletRequest req,HttpServletResponse resp) throws ServletException, IOException {
+		
 		JSONObject json=new JSONObject(this.isNewphone(phoneNum));
 		System.out.println(json.getString("result"));
+		//如果是新用户的情况下，进行插入数据库操作。
 		if(json.getString("result").equals("false")) {
 			//result为影响的条数
 		   int result=rsl.regist(phoneNum);
+		   int userId=rsl.getUserId(phoneNum);
+		   session.setAttribute("userId", userId);
 		}
-		return "index";
+		req.getRequestDispatcher("/login/redirect").forward(req, resp);
 	}
 /**    ----------------------------------分界线-------------------------------------------下面是登录
  * 
@@ -105,7 +111,25 @@ public class LoginController {
 				return "{\"result\":\"different\"}";
 			}
 		}
-	
+	}
+	/**
+	 * 
+	 *@desc:账号密码的方式登录
+	 *@param session
+	 *@param phoneNum
+	 *@param req
+	 *@param resp
+	 *@throws ServletException
+	 *@throws IOException
+	 *@return:void
+	 *@trhows
+	 */
+	@RequestMapping("/login4Pwd")
+	public void login4Pwd(HttpSession session,@RequestParam(value="phoneNum",required=false) String phoneNum,
+			HttpServletRequest req,HttpServletResponse resp) throws ServletException, IOException {
+		int userId=rsl.getUserId(phoneNum);
+		session.setAttribute("userId", userId);
+		req.getRequestDispatcher("/login/redirect").forward(req, resp);
 	}
 	/**
 	 * 
@@ -122,7 +146,7 @@ public class LoginController {
 	}
 	/**
 	 * 
-	 *@desc:进行登录后的重定向检查
+	 *@desc:进行登录后的重定向检查,判断登陆完成之后，将跳到哪个页面。
 	 *@param session
 	 *@param req
 	 *@param resp
@@ -131,15 +155,14 @@ public class LoginController {
 	 *@return:void
 	 *@trhows
 	 */
-	@RequestMapping(value="/redirect",method=RequestMethod.GET)
-	public void directAfterLogin(HttpSession session,HttpServletRequest req,HttpServletResponse resp) throws ServletException, IOException {
+	@RequestMapping(value="/redirect")
+	public void directAfterLogin1(HttpSession session,HttpServletRequest req,HttpServletResponse resp) throws ServletException, IOException {
 		String backToUrl = (String)session.getAttribute("backToUrl");
 		if(backToUrl!=null) {
 			req.getRequestDispatcher(backToUrl).forward(req, resp);
 		}else{
-			req.getRequestDispatcher("index.jsp").forward(req, resp);
+			req.getRequestDispatcher("/index.jsp").forward(req, resp);
 		}
-		
 	}
 
 }
