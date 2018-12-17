@@ -38,7 +38,7 @@ public class ConsultationRecord {
 	//咨询地点
 	private String consultationrecordLoc;
 	//咨询状态：0未咨询，1已完成，2已取消
-	private int consultState;
+	private Integer consultState;
 	private Teacher teacher;
 	private User user;
 	
@@ -93,10 +93,18 @@ public class ConsultationRecord {
 	public void setConsultationrecordPrice(float consultationrecordPrice) {
 		this.consultationrecordPrice = consultationrecordPrice;
 	}
-	public int getConsultState() {
+//	public int getConsultState() {
+//		return consultState;
+//	}
+//	public void setConsultState(int consultState) {
+//		this.consultState = consultState;
+//	}
+	
+	
+	public Integer getConsultState() {
 		return consultState;
 	}
-	public void setConsultState(int consultState) {
+	public void setConsultState(Integer consultState) {
 		this.consultState = consultState;
 	}
 	public String getConsultationrecordLoc() {

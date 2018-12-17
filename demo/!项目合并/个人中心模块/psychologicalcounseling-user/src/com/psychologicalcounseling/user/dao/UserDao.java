@@ -129,9 +129,9 @@ public class UserDao extends BaseDao<User> {
 	public User selectUser(int userId) {
     	return (User) get(User.class,userId);
     }
-    public Map<String, Object> selectUser4Json() throws Exception {
+    public Map<String, Object> selectUser4Json(int userId) throws Exception {
     	String sql="select * from user where userId=?";
-    	return findOneBySql(sql,6);
+    	return findOneBySql(sql,userId);
     }
     public void updateEssentialInfo(String userNickName,String userSex,String userProvince,String userCity,String userAutograph,int userId) {
     	String sql="update user set userNickName=?,userSex=?,userProvince=?,userCity=?,userAutograph=? where userId=?";

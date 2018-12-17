@@ -269,20 +269,20 @@ public class UserController {
 	
 	
 //----------------刘田会----------------------
-	/**
-     * 
-     *@desc:根据session里的userId拿到User这个对象
-     *@param session
-     *@author 刘田会
-     *@return:String
-     *@trhows
-     */
-	@RequestMapping("/user/getUser")
-	public String  getUser(HttpSession session ){
-		int userId=(int) session.getAttribute("userId");
-		session.setAttribute("user", userService.getUser(userId));
-		return "user";
-	}
+//	/**
+//     * 
+//     *@desc:根据session里的userId拿到User这个对象
+//     *@param session
+//     *@author 刘田会
+//     *@return:String
+//     *@trhows
+//     */
+//	@RequestMapping("/user/getUser")
+//	public String  getUser(HttpSession session ){
+//		int userId=(int) session.getAttribute("userId");
+//		session.setAttribute("user", userService.getUser(userId));
+//		return "user";
+//	}
 	/**
 	 * 
 	 *@desc:修改基本信息 用于前台点击“保存”按钮进行的ajax操作
@@ -307,13 +307,14 @@ public class UserController {
 		int userId=0;
 		if(session.getAttribute("user")!=null) {
 		 userId=((User) session.getAttribute("user")).getUserId();
+		 System.out.println(userId+"*****************************************************");
 		}else {
 			System.out.println("session为空");
 		}
 		userService.reviseEssentialInfo(userNickName, userSex, userProvince, userCity, userAutograph, userId);
 		//这里的userId保留，6应该是userId
 		session.setAttribute("user", userService.getUser(userId));
-		return userService.getUser4Json();
+		return userService.getUser4Json(userId);
 	}
 	/**
 	 * 
@@ -338,7 +339,7 @@ public class UserController {
 		}
 		userService.reviseRealName(userRealName, userIdNumber, userId);
 
-		return userService.getUser4Json();
+		return userService.getUser4Json(userId);
 	}
 	/**
 	 * 

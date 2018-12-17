@@ -339,9 +339,9 @@ public class UserService {
 	}
 
 //--------------刘田会----------------
-	public  Map<String, Object> getUser4Json() {
+	public  Map<String, Object> getUser4Json(int userId) {
 		try {
-			return userDao.selectUser4Json();
+			return userDao.selectUser4Json(userId);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
