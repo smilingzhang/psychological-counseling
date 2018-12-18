@@ -61,7 +61,7 @@ public class NotifyUrlController {
 		String json = new String(request.getParameter("body").getBytes("ISO-8859-1"),"UTF-8");
 		JSONObject pa=new JSONObject(json);
         String courseId=pa.getString("courseId");
-        String userId=pa.getString("userId");
+        int userId=pa.getInt("userId");
         System.out.println(courseId+"20:4033333333333333333");
 		//获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表(以上仅供参考)//
 		//计算得出通知验证结果
@@ -80,16 +80,13 @@ public class NotifyUrlController {
 				
 				AlipayTradeQueryResponse alipayTradeQueryResponse=asi.AlipayTradeQuery(out_trade_no);
 				//进行正确性判断。
-				if(alipayTradeQueryResponse.getTotalAmount().equals(total_amount)){
+				if(alipayTradeQueryResponse.getTotalAmount().equals(total_amount)&&alipayTradeQueryResponse.getOutTradeNo().equals(out_trade_no)){
 					System.out.println("恭喜你，已经跳到了这个阶段了");
-					asi.insertCourseOrderByPrecreate(Integer.parseInt(courseId),Integer.parseInt(userId),out_trade_no, Float.parseFloat(total_amount));  					
+					asi.insertCourseOrderByPrecreate(Integer.parseInt(courseId),userId,out_trade_no, Float.parseFloat(total_amount));  					
 				}
-					
-				
 			}
 			//——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
 			request.setAttribute("result", "success");	//请不要修改或删除
-
 			//////////////////////////////////////////////////////////////////////////////////////////
 		}else{//验证失败
 			request.setAttribute("result", "fail");

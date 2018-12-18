@@ -1,8 +1,14 @@
 package com.psychologicalcounseling.login.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -24,15 +30,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.domain.AlipayDataDataserviceBillDownloadurlQueryModel;
 import com.alipay.api.domain.AlipayTradePrecreateModel;
+import com.alipay.api.domain.AlipayTradeRefundModel;
 import com.alipay.api.response.AlipayDataDataserviceBillDownloadurlQueryResponse;
 import com.alipay.api.response.AlipaySystemOauthTokenResponse;
 import com.alipay.api.response.AlipayTradePrecreateResponse;
+import com.alipay.api.response.AlipayTradeRefundResponse;
 import com.alipay.api.response.AlipayUserInfoShareResponse;
 
 import com.google.zxing.BarcodeFormat;
@@ -54,11 +63,33 @@ public class AlipayController {
 	
 @Resource
 private AlipayServiceImpl asi;
+/**
+ * 
+ *@desc:点击“支付宝”图片之后，跳到此控制器，来进行授权页面的跳转。
+ *@param req
+ *@param resp
+ *@throws ServletException
+ *@throws IOException
+ *@return:void
+ *@trhows
+ */
 @RequestMapping("/loginAlipayRequest")
 public void loginAlipayRequest(HttpServletRequest req,HttpServletResponse resp) throws ServletException, IOException {
 	resp.sendRedirect("https://openauth.alipaydev.com/oauth2/publicAppAuthorize.htm?app_id=2016091900550564&scope=auth_user,auth_base&redirect_uri=http://127.0.0.1:8080/psychological-counseling/loginAlipay");
 }
-//获取用户登录授权信息
+/**
+ * 
+ *@desc:一获取用户的授权信息
+ *@param auth_code
+ *@param session
+ *@param req
+ *@param resp
+ *@throws AlipayApiException
+ *@throws IOException
+ *@throws ServletException
+ *@return:void
+ *@trhows
+ */
 @RequestMapping("/loginAlipay")
 public void loginByAlipay(@RequestParam(value="auth_code") String auth_code,
 		HttpSession session,HttpServletRequest req,HttpServletResponse resp) throws AlipayApiException, IOException, ServletException {
@@ -100,16 +131,28 @@ public void loginByAlipay(@RequestParam(value="auth_code") String auth_code,
 }
 
 
-//生成支付所需的二维码
+/**
+ * 
+ *@desc:扫码支付
+ *@param resp
+ *@param total_amount
+ *@param subject
+ *@param courseId
+ *@param session
+ *@throws IOException
+ *@throws AlipayApiException
+ *@return:void
+ *@trhows
+ */
 @RequestMapping(value = "/getQ", method = { RequestMethod.POST, RequestMethod.GET })
-public void AlipayTradePrecreate(HttpServletResponse resp, String id,
+public void AlipayTradePrecreate(HttpServletResponse resp, 
 		@RequestParam(value="total_amount") String total_amount,
 		@RequestParam(value="subject") String subject,
 		@RequestParam(value="courseId") String courseId,
 		HttpSession session
         ) throws IOException, AlipayApiException {
 	//下面是支付功能
-  	 AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl, AlipayConfig.app_id, AlipayConfig.merchant_private_key, AlipayConfig.format, AlipayConfig.charset, AlipayConfig.alipay_public_key, AlipayConfig.sign_type);
+  	AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl, AlipayConfig.app_id, AlipayConfig.merchant_private_key, AlipayConfig.format, AlipayConfig.charset, AlipayConfig.alipay_public_key, AlipayConfig.sign_type);
     AlipayTradePrecreateRequest tradePrecreateRequest = new AlipayTradePrecreateRequest();//创建API对应的request类
     //设置异步请求参数
     tradePrecreateRequest.setNotifyUrl(AlipayConfig.notify_url);
@@ -120,7 +163,9 @@ public void AlipayTradePrecreate(HttpServletResponse resp, String id,
 	model.setTotalAmount(total_amount);
 	model.setSubject(subject);
 	JSONObject json=new JSONObject();
-	json.put("userId",session.getAttribute("userId"));
+	if(session.getAttribute("userId")!=null) {
+		json.put("userId",session.getAttribute("userId"));
+	}
 	json.put("courseId", courseId);
 	model.setBody(json.toString());
 	tradePrecreateRequest.setBizModel(model);
@@ -134,28 +179,56 @@ public void AlipayTradePrecreate(HttpServletResponse resp, String id,
     System.out.print(alipayTradePrecreateResponse.getBody());
    
     //下面是二维码的生成过程。
-    String url = alipayTradePrecreateResponse.getQrCode()+id;
-    if (url != null && !"".equals(url)) {
-        OutputStream stream = null;
-        try {
-            int width = 200;//图片的宽度
-            int height = 200;//高度
-            stream = resp.getOutputStream();
-            QRCodeWriter writer = new QRCodeWriter();
-            BitMatrix m = writer.encode(url, BarcodeFormat.QR_CODE, width, height);
-            MatrixToImageWriter.writeToStream(m, "png", stream);
-        } catch (WriterException e) {
-            e.printStackTrace();
-        } finally {
-            if (stream != null) {
-                stream.flush();
-                stream.close();
-            }
-        }
-    }
+    String url = alipayTradePrecreateResponse.getQrCode();
+    System.out.println(url+"112222222222222222222222222");
+    createQrCode(url,200,200,resp);
+    
+}
+/**
+ * 
+ *@desc:生成二维码的方法
+ *@param url
+ *@param width
+ *@param height
+ *@param resp
+ *@throws IOException
+ *@return:void
+ *@trhows
+ */
+public void createQrCode(String url,int width,int height,HttpServletResponse resp) throws IOException {
+	if (url != null && !"".equals(url)) {
+	    OutputStream stream = null;
+	    try {
+	        stream = resp.getOutputStream();
+	        QRCodeWriter writer = new QRCodeWriter();
+	        BitMatrix m = writer.encode(url, BarcodeFormat.QR_CODE, width, height);
+	        MatrixToImageWriter.writeToStream(m, "png", stream);
+	    } catch (WriterException e) {
+	        e.printStackTrace();
+	    } finally {
+	        if (stream != null) {
+	            stream.flush();
+	            stream.close();
+	        }
+	    }
+	}
 }
 
-
+//退款功能实现。
+@RequestMapping("/refund4Alipay")
+@ResponseBody
+public void refund4Alipay(@RequestParam(value="out_trade_no" ,required=false) String out_trade_no,
+		@RequestParam(value="refund_amount" ,required=false) String refund_amount) throws AlipayApiException {
+	AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl, AlipayConfig.app_id, AlipayConfig.merchant_private_key, AlipayConfig.format, AlipayConfig.charset, AlipayConfig.alipay_public_key, AlipayConfig.sign_type);
+	AlipayTradeRefundRequest request = new AlipayTradeRefundRequest();//创建API对应的request类
+	AlipayTradeRefundModel model=new AlipayTradeRefundModel();
+	model.setOutTradeNo(out_trade_no);
+	model.setRefundAmount(refund_amount);
+	request.setBizModel(model);
+	AlipayTradeRefundResponse response = alipayClient.execute(request);//通过alipayClient调用API，获得对应的response类
+	System.out.print(response.getBody());
+	
+}
 
 //生成账单
 @RequestMapping("AlipayTradeDataserviceBillDownloadurl")
@@ -171,14 +244,51 @@ public void AlipayTradeDataserviceBillDownloadurl() throws AlipayApiException {
 	model.setBillType("trade");
 	request.setBizModel(model);
 	AlipayDataDataserviceBillDownloadurlQueryResponse response = alipayClient.execute(request);
+	String billUrl=response.getBillDownloadUrl();
 	if(response.isSuccess()){
-	System.out.println("调用成功");
-	} else {
-	System.out.println("调用失败");
+		System.out.println("调用成功");
+	}else{
+		System.out.println("调用失败");
 	}
 	
 }
 
-
-
+//下载账单到本地
+public void downloadBill(String billUrl) {
+	String filePath = "E:\\psychological-counseling\\demo\\Login";
+	URL url = null;
+	HttpURLConnection httpUrlConnection = null;
+	InputStream fis = null;
+	FileOutputStream fos = null;
+	try {
+	    url = new URL(billUrl);
+	    httpUrlConnection = (HttpURLConnection) url.openConnection();
+	    httpUrlConnection.setConnectTimeout(5 * 1000);
+	    httpUrlConnection.setDoInput(true);
+	    httpUrlConnection.setDoOutput(true);
+	    httpUrlConnection.setUseCaches(false);
+	    httpUrlConnection.setRequestMethod("GET");
+	    httpUrlConnection.setRequestProperty("CHARSET", "UTF-8");
+	    httpUrlConnection.connect();
+	    fis = httpUrlConnection.getInputStream();
+	    byte[] temp = new byte[1024];
+	    int b;
+	    fos = new FileOutputStream(new File(filePath));
+	    while ((b = fis.read(temp)) != -1) {
+	        fos.write(temp, 0, b);
+	        fos.flush();
+	    }
+	} catch (MalformedURLException e) {
+	    e.printStackTrace();
+	} catch (IOException e) {
+	    e.printStackTrace();
+	} finally {
+	    try {
+	        if(fis!=null) fis.close();
+	        if(fos!=null) fos.close();
+	        if(httpUrlConnection!=null) httpUrlConnection.disconnect();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+}
 }
