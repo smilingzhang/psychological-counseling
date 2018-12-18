@@ -9,7 +9,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -231,15 +233,18 @@ public void refund4Alipay(@RequestParam(value="out_trade_no" ,required=false) St
 }
 
 //生成账单
-@RequestMapping("AlipayTradeDataserviceBillDownloadurl")
 public void AlipayTradeDataserviceBillDownloadurl() throws AlipayApiException {
 	AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl, AlipayConfig.app_id, AlipayConfig.merchant_private_key, AlipayConfig.format, AlipayConfig.charset, AlipayConfig.alipay_public_key, AlipayConfig.sign_type);
 	
 	AlipayDataDataserviceBillDownloadurlQueryRequest request = 	new AlipayDataDataserviceBillDownloadurlQueryRequest();
 	/****************************传参方法一*********************/
 	AlipayDataDataserviceBillDownloadurlQueryModel model = new AlipayDataDataserviceBillDownloadurlQueryModel();
+	//生成前一天的账单。
+	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+	Calendar calendar=Calendar.getInstance();
+	calendar.add(Calendar.DATE, -1);
 	//账单时间：日账单格式为yyyy-MM-dd，月账单格式为yyyy-MM。
-	model.setBillDate("2017-06");
+	model.setBillDate(sdf.format(calendar.getTime()));
 	//账单类型，trade指商户基于支付宝交易收单的业务账单；signcustomer是指基于商户支付宝余额收入及支出等资金变动的帐务账单；
 	model.setBillType("trade");
 	request.setBizModel(model);
@@ -291,4 +296,5 @@ public void downloadBill(String billUrl) {
 	        e.printStackTrace();
 	    }
     }
-}}
+}
+}

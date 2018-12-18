@@ -29,7 +29,7 @@ public class StartWebListener implements ServletContextListener {
      * @see ServletContextListener#contextInitialized(ServletContextEvent)
      */
     public void contextInitialized(ServletContextEvent sce)  { 
-         // TODO Auto-generated method stub
+    	new TimerManager();
     }
 	
 }
