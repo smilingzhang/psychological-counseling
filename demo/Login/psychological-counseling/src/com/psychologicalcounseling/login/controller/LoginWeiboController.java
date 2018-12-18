@@ -83,6 +83,4 @@ public class LoginWeiboController {
 		}
 		req.getRequestDispatcher("/login/redirect").forward(req, resp);
 	}
-	
-	
 }

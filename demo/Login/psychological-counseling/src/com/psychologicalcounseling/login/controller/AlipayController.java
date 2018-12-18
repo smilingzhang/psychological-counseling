@@ -290,5 +290,5 @@ public void downloadBill(String billUrl) {
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }
-}
-}
+    }
+}}
