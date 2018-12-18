@@ -42,27 +42,32 @@ public class PaymentRequestController extends PaymentRequestUtil{
 	public String getData(HttpServletRequest request,
 			@RequestParam("teacherPrice") String payMoney,@RequestParam("teacherId")String teacherId,
 			@RequestParam("bank") String bank,@RequestParam("date")String date,@RequestParam("content")String content,
-			@RequestParam("consultOrderId")String consultOrderId,HttpServletResponse response) throws IOException {
+			@RequestParam("consultOrderId")String consultOrderId,HttpServletResponse response,@RequestParam("type") String consultType) throws IOException {
 		response.setContentType("text/html;charset=utf-8");
 		//调用发送给易宝支付公司数据的方法
 		sendData(consultOrderId, payMoney, request, bank);
-		
-		//验证当前咨询师的此段时间是否已经被预约
-		String[] aString=content.split("-");
-		int tId=Integer.parseInt(teacherId);
-		boolean isConsult=this.ConsultOrderService.findIsConsult(tId, date, aString[0], aString[1]);
-
-		if(isConsult) {
+		if(consultType.equals("listenning")) {
 			int id=Integer.parseInt(consultOrderId);
-			this.ConsultOrderService.modifyConsultState(id);
+			this.ConsultOrderService.modifyListenState(id);
 			return "sendpay";
 		}
-		//不能预约的话让用户重新选择预约时间，同时将用户的这次记录在咨询记录表里删除	
-		this.ConsultOrderService.delConsultOrderMessage(Integer.parseInt(consultOrderId));
-		response.getWriter().write("<script>alert('哎呀，慢了一步,您选择的该咨询师的此段时间被别人抢先预约走了呢，请您重新选择时间或挑选其它咨询师哦!'); window.location='consult/default?pageNum=1' ;window.close();</script>");    
-		response.getWriter().flush();
-		return "checkout";
+		else {
+			//验证当前咨询师的此段时间是否已经被预约
+			String[] aString=content.split("-");
+			int tId=Integer.parseInt(teacherId);
+			boolean isConsult=this.ConsultOrderService.findIsConsult(tId, date, aString[0], aString[1]);
 
+			if(isConsult) {
+				int id=Integer.parseInt(consultOrderId);
+				this.ConsultOrderService.modifyConsultState(id);
+				return "sendpay";
+			}
+			//不能预约的话让用户重新选择预约时间，同时将用户的这次记录在咨询记录表里删除	
+			this.ConsultOrderService.delConsultOrderMessage(Integer.parseInt(consultOrderId));
+			response.getWriter().write("<script>alert('哎呀，慢了一步,您选择的该咨询师的此段时间被别人抢先预约走了呢，请您重新选择时间或挑选其它咨询师哦!'); window.location='consult/default?pageNum=1' ;window.close();</script>");    
+			response.getWriter().flush();
+			return "checkout";
+		}
 	}
 	
 }

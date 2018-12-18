@@ -62,7 +62,7 @@ public class LoginController extends HttpServlet {
 			System.out.println("登录后将canListen改为1");
 		}
 
-		return "redirect:head.jsp";
+		return "index";
 	}
 
 }

@@ -18,9 +18,9 @@
                 <ul class="nav-list">
                     <li><img src="<%=p %>/images/logo.png"></li>
                     <li onclick="changeActive(this)" class="list active"><a href="#">首页</a></li>
-                    <li onclick="changeActive(this)" class="list"><a href="#">咨询</a></li>
+                    <li onclick="changeActive(this)" class="list"><a href="<%=p %>/index.jsp">咨询</a></li>
                     <li onclick="changeActive(this)" class="list"><a href="#">课程</a></li>
-                    <li onclick="changeActive(this)" class="list"><a href="listenList">倾听</a></li>
+                    <li onclick="changeActive(this)" class="list"><a href="<%=p %>/listenList">倾听</a></li>
                     <li onclick="changeActive(this)" class="list"><a href="#">阅读</a></li>
                   
                     <div class="search">
@@ -45,6 +45,7 @@
                     </div>
                 
                     <li class="list"><a class="login" href="login.jsp">登录</a></li>
+                     <li class="list"><a class="login" href="http://10.7.84.56:8080/psychologicalcounseling/goToUser">中心</a></li>
                     <li class="list"><a class="regist" href="#">注册</a></li>
                 </ul>  
             </div>

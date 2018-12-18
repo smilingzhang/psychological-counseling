@@ -20,6 +20,7 @@
   </head>
   <body>
     <!-- 在此处编码你的创意 -->
+     <%@include file="head.jsp" %>
     <div class="contains checkout-contain">
         <div class="checkout-panel panel">
             <div class="panel-body">
@@ -30,6 +31,7 @@
                 	<input type="hidden" name="date" value="${date }"/>
                 	<input type="hidden" name="consultOrderId" value="${consultOrderId }">
                 	<input type="hidden" name="content" value="${content }"/>
+                	<input type="hidden" name="type" value="${type }">
                     <span class="tag">订单号：${reOrderId }</span><br/>
                     <span class="board-title-h1"> 金额&nbsp;￥${teacherPrice }</span><br/>
                     <div>
