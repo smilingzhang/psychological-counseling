@@ -28,7 +28,7 @@ public class NotifyUrlController {
 	private AlipayServiceImpl asi;
 	@RequestMapping("/notify_url")
 	public String aa(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException, AlipayApiException {
-		System.out.println("***********************************************************");
+		System.out.println("--------------- notify_url -----------------");
 		//获取支付宝POST过来反馈信息
 		Map<String,String> params = new HashMap<String,String>();
 		Map requestParams = request.getParameterMap();

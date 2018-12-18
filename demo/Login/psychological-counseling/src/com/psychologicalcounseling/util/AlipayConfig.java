@@ -42,7 +42,7 @@ public class AlipayConfig {
 	public static final  String gatewayUrl = "https://openapi.alipaydev.com/gateway.do";
 
    // 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-	public static String notify_url = "http://www.hobson.site:8080/psychological-counseling/notify_url";
+	public static String notify_url = "http://22n9x96359.51mypc.cn:19886/psychological-counseling/notify_url";
 
 	// 签名方式
 	public static String sign_type = "RSA2";

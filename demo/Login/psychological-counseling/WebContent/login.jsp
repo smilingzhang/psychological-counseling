@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="ctx" value="${pageContext.request.contextPath }"></c:set>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-cn">
@@ -42,6 +43,17 @@
 	  		- phoneLoginErrMsg4Pwd		：关于密码的错误
   	 --%>
     <!-- 在此处编码你的创意 -->
+    <%@include file="head.jsp" %>
+    <c:if test="${!empty(loginMsg) and fn:length(loginMsg)!=0}">
+    	<script>
+    		(function($){
+    			new $.zui.Messager('${sessionScope.loginMsg}', {
+    			    type: '${sessionScope.loginMsgAttr}' // 定义颜色主题
+    			}).show();
+    		}(jQuery))
+    	</script>
+    	<c:set var="loginMsg" value="" scope="session"/>
+    </c:if>
     <div class="login-contains">
         <div class="head">
             <!-- <img src="images/logo.png"/> -->

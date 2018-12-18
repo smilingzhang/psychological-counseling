@@ -418,7 +418,7 @@
                                 <div style="display:none" id="select-city" class="${user.getUserCity() }"></div>
                                 <input type="hidden"  id="hiddenUserSex" class="${user.getUserSex() }">
                                 <table class="setting-table" style="table-layout:fixed;display:none">
-                                    <tr><td class="tag" width="10%">昵称</td><td><input class="form-control" id="userNickName" name="nicoName"  type="text"  value="${user.getUserNickName() } "/></td ><td><font id="error_msg_name"></font></td></tr>
+                                    <tr><td class="tag" width="10%">昵称</td><td><input class="form-control" id="userNickName" name="nicoName" maxlength="8" type="text"  value="${user.getUserNickName() } "/></td ><td><font id="error_msg_name"></font></td></tr>
 									<!--     错误信息 -->
                                     
                                     <tr><td class="tag">性别</td>
