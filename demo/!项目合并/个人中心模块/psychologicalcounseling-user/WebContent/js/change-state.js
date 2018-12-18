@@ -13,7 +13,7 @@ function changeNav(obj,prefix){
         $("#"+prefix+(index+1)).css("display","none");
     })
     obj.className="active";
-    $("#"+prefix+(list.index($(obj))+1)).css("display","display");
+    $("#"+prefix+(list.index($(obj))+1)).css("display","block");
 }
 function changeActive(obj){
     var list = $(obj).parent().children();

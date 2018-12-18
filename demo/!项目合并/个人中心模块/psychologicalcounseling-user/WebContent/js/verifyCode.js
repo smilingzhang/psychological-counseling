@@ -60,10 +60,8 @@ function loginVerifyCode(){
         document.getElementById('loginErrMsg4Code').className = 'msg-right';
         document.getElementById('loginErrMsg4Code').innerText = '长度正确';
     }
-    var controllerName = "login/verifyCode";
-	var toUrl = window.location.protocol+controllerName;
     $.ajax({
-		url:toUrl,
+		url:"http://localhost:8080/psychological-counseling/login/verifyCode",
 		async:false,
 		type:"post",																																																							
 		dataType:"json",
@@ -89,12 +87,9 @@ function loginVerifyCode(){
 			}
 		},
 		error:function(XMLHttpRequest, textStatus, errorThrown){
-			console.log("status="+XMLHttpRequest.status);
- 			console.log("readyState="+XMLHttpRequest.readyState);
- 			console.log("textStatus="+textStatus);
-//			alert(XMLHttpRequest.status); 
-//	     	alert(XMLHttpRequest.readyState); 
-//			alert(textStatus); 
+			alert(XMLHttpRequest.status); 
+	     	alert(XMLHttpRequest.readyState); 
+			alert(textStatus); 
 			
 		}
 	})
@@ -127,10 +122,8 @@ function settime(val) {
 function sendVerifyCode(){
     var phoneNum = document.getElementById('phoneNum').value;
     alert(phoneNum);
-    var controllerName = "login/getMessage";
-	var toUrl = window.location.protocol+controllerName;
     $.ajax({
-		url:toUrl,
+		url:"http://localhost:8080/psychological-counseling/login/getMessage",
 		async:true,
 		type:"post",
 		dataType:"json",
@@ -139,12 +132,9 @@ function sendVerifyCode(){
 			
 		},
 		error:function(XMLHttpRequest, textStatus, errorThrown){
-			console.log("status="+XMLHttpRequest.status);
- 			console.log("readyState="+XMLHttpRequest.readyState);
- 			console.log("textStatus="+textStatus);
-//			alert(XMLHttpRequest.status); 
-//	     	alert(XMLHttpRequest.readyState); 
-//			alert(textStatus); 
+			alert(XMLHttpRequest.status); 
+	     	alert(XMLHttpRequest.readyState); 
+			alert(textStatus); 
 		}
 	})
 	
