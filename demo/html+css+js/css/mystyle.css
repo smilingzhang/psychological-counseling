@@ -1553,7 +1553,8 @@ a:focus{
     margin-right: 0;
 }
 .search-conatin .panel{
-    padding: 30px
+    padding: 30px;
+    width: 100%;
 }
 .search-conatin .panel .panel-body{
     width: 88%
@@ -1690,9 +1691,19 @@ a:focus{
 #index-header{
     background-color: #fff;
 }
-#index-header .logo{
+#index-header .tool{
+    height: 25px;
+    background-color:rgb(248, 245, 245);
+}
+#index-header .nav-list .logo{
     width: 70%;
-    height: 100px;
+    height: 130px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    /* float: left; */
+}
+#index-header .search{
+    /* width: 20%; */
 }
 #index-header .logo img{
     /* margin: 20px; */
