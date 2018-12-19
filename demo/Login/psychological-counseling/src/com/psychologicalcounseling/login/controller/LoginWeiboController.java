@@ -61,8 +61,6 @@ public class LoginWeiboController {
 				User user = loginWeiboService.login(accessToken,weiboUid);
 				if(user != null) {
 					session.setAttribute("userId", user.getUserId());
-					session.setAttribute("userNickName", user.getUserNickName());
-					session.setAttribute("description", user.getUserAutograph());
 					session.setAttribute("avatarLink", user.getUserHeadPath());
 				}
 				else session.setAttribute("userId", null);

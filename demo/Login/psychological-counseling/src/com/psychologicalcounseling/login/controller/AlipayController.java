@@ -123,6 +123,7 @@ public void loginByAlipay(@RequestParam(value="auth_code") String auth_code,
     	 asi.alipayLogin(json);
     	 //根据alipayUserId找到对应的userId
     	 session.setAttribute("userId", asi.findUserId(alipayUserId));
+    	 session.setAttribute("userHeadPath", userinfoShareResponse.getAvatar());
          System.out.println("用户详细信息调用成功");
      } else {
     	 session.setAttribute("userId", null);
@@ -229,13 +230,11 @@ public void refund4Alipay(@RequestParam(value="out_trade_no" ,required=false) St
 	request.setBizModel(model);
 	AlipayTradeRefundResponse response = alipayClient.execute(request);//通过alipayClient调用API，获得对应的response类
 	System.out.print(response.getBody());
-	
 }
 
 //生成账单
 public void AlipayTradeDataserviceBillDownloadurl() throws AlipayApiException {
 	AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl, AlipayConfig.app_id, AlipayConfig.merchant_private_key, AlipayConfig.format, AlipayConfig.charset, AlipayConfig.alipay_public_key, AlipayConfig.sign_type);
-	
 	AlipayDataDataserviceBillDownloadurlQueryRequest request = 	new AlipayDataDataserviceBillDownloadurlQueryRequest();
 	/****************************传参方法一*********************/
 	AlipayDataDataserviceBillDownloadurlQueryModel model = new AlipayDataDataserviceBillDownloadurlQueryModel();
@@ -260,7 +259,7 @@ public void AlipayTradeDataserviceBillDownloadurl() throws AlipayApiException {
 
 //下载账单到本地
 public void downloadBill(String billUrl) {
-	String filePath = "E:\\psychological-counseling\\demo\\Login";
+	String filePath = "E:\\psychological-counseling\\demo\\Login\\支付宝账单下载";
 	URL url = null;
 	HttpURLConnection httpUrlConnection = null;
 	InputStream fis = null;
