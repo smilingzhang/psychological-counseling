@@ -77,7 +77,6 @@ public class LoginController {
 	@RequestMapping("/regist")
     public void regist(@RequestParam(value="phoneNum",required=false) String phoneNum,HttpSession session,
     		HttpServletRequest req,HttpServletResponse resp) throws ServletException, IOException {
-		
 		JSONObject json=new JSONObject(this.isNewphone(phoneNum));
 		System.out.println(json.getString("result"));
 		//如果是新用户的情况下，进行插入数据库操作。
@@ -85,6 +84,8 @@ public class LoginController {
 			//result为影响的条数
 		   int result=rsl.regist(phoneNum);
 		   int userId=rsl.getUserId(phoneNum);
+		   String userHeadPath=rsl.getUserHeadPath(phoneNum);
+		   session.setAttribute("userHeadPath", userHeadPath);
 		   session.setAttribute("userId", userId);
 		}
 		req.getRequestDispatcher("/login/redirect").forward(req, resp);
@@ -127,6 +128,8 @@ public class LoginController {
 	@RequestMapping("/login4Pwd")
 	public void login4Pwd(HttpSession session,@RequestParam(value="phoneNum",required=false) String phoneNum,
 			HttpServletRequest req,HttpServletResponse resp) throws ServletException, IOException {
+		String userHeadPath=rsl.getUserHeadPath(phoneNum);
+	   	session.setAttribute("userHeadPath", userHeadPath);
 		int userId=rsl.getUserId(phoneNum);
 		session.setAttribute("userId", userId);
 		req.getRequestDispatcher("/login/redirect").forward(req, resp);
@@ -157,6 +160,7 @@ public class LoginController {
 	 */
 	@RequestMapping(value="/redirect")
 	public void directAfterLogin1(HttpSession session,HttpServletRequest req,HttpServletResponse resp) throws ServletException, IOException {
+		
 		String backToUrl = (String)session.getAttribute("backToUrl");
 		if(backToUrl!=null) {
 			req.getRequestDispatcher(backToUrl).forward(req, resp);

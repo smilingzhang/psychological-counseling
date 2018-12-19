@@ -70,7 +70,7 @@ public class RecordStateController {
 		
 		session.setAttribute("consultationRecords", consultationRecords);
 		
-		return "redirect:head.jsp";
+		return "index";
 		
 	}
 	
@@ -125,7 +125,7 @@ public class RecordStateController {
 		session.setAttribute("listenRecords", listenRecords);
 		
 		
-		return "redirect:head.jsp";
+		return "index";
 		
 	}
 }

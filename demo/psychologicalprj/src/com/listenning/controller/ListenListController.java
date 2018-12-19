@@ -1,5 +1,8 @@
 package com.listenning.controller;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -15,6 +18,8 @@ import com.entity.Teacher;
 import com.listenning.service.CourseServiceImpl;
 import com.listenning.service.TeacherServiceImpl;
 import com.util.Page;
+
+import sun.java2d.pipe.SpanShapeRenderer.Simple;
 
 @Controller
 public class ListenListController {
@@ -100,12 +105,16 @@ public class ListenListController {
 
 	@RequestMapping("/consultAppointment")
 	public String consultAppointmentController1(@RequestParam("id") int id, Model model) {
+		DateFormat bf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date1 = new Date();
+	    String format = bf.format(date1);
 		Teacher t = teacherServiceImpl.findTeacherById(id);
 		String[] aString = t.getAuthenticationAptitudeName().split(" ");
 		String[] goodats = t.getGoodats().split(" ");
 		model.addAttribute("authenticationAptitudeName", Arrays.asList(aString));
 		model.addAttribute("goodats", Arrays.asList(goodats));
 		model.addAttribute("teacher", t);
+		model.addAttribute("format", format);
 		return "appointment-listening";
 	}
 

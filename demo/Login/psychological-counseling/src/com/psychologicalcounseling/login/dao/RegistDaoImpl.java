@@ -22,5 +22,10 @@ public class RegistDaoImpl extends BaseDao{
 		List list=find(hql,phone);
 		return ((User) list.get(0)).getUserId();
 	}
+	public String selectUserHeadPath(String phone) {
+		String hql=" from User where userPhone=?";
+		List list=find(hql,phone);
+		return ((User) list.get(0)).getUserHeadPath();
+	}
 
 }

@@ -32,9 +32,9 @@ public class RoomController {
 		if(identity == 3) 
 			teacherServiceImpl.changeTeacherCanListen(t, 0);
 		//根据type 确定跳转的页面
-		String type = (String) session.getAttribute("type");
-		System.out.println("type:" + type);
-		if ("consult".equals(type))
+		String roomType = (String) session.getAttribute("roomType");
+		System.out.println("roomType:" + roomType);
+		if ("consult".equals(roomType))
 			return "videoRoom";
 		return "audioRoom";
 	}

@@ -31,6 +31,9 @@
     	
     </style>
   </head>
+  <body>
+  	<%@include file="head.jsp" %>
+  </body>
     <div class="contains media">
         <div class="video">
         	<iframe id="left" src="audio.jsp" class="video-consulter" frameborder="no"></iframe>

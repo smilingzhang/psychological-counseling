@@ -51,7 +51,7 @@ public class OrderTimeCheckController {
 		PrintWriter pw = res.getWriter();
 		User user = (User) session.getAttribute("user");
 		if(user == null) {
-			pw.print("请登录");
+			pw.print("please login");
 			return ;
 		}
 		int identity = user.getUserIdentity();
@@ -81,7 +81,7 @@ public class OrderTimeCheckController {
 				// 放入 consultationrecordId
 				int consultationrecordId = cr.getConsultationrecordId();
 				session.setAttribute("consultationrecordId", consultationrecordId);
-				session.setAttribute("type", "consult");
+				session.setAttribute("roomType", "consult");
 
 				
 				User other = userServiceImpl.getOtherUser(user, cr);
@@ -103,7 +103,7 @@ public class OrderTimeCheckController {
 				// 放入 listenRecordId
 				int listenRecordId = lr.getListenrecordId();
 				session.setAttribute("listenRecordId", listenRecordId);
-				session.setAttribute("type", "listen");
+				session.setAttribute("roomType", "listen");
 
 				User other = userServiceImpl.getOtherUser(user, lr);
 				session.setAttribute("other", other);
