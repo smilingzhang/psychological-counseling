@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>文章列表</title>
+    <!--自定义-->
+    <link href="css/mystyle.css" rel="stylesheet">
+    <script src="js/change-state.js"></script>
+    <!-- zui -->
+    <link href="css/zui-theme.css" rel="stylesheet">
+    <link href="css/zui.css" rel="stylesheet">
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/zui.js"></script> 
+    <script src="js/zui.lite.js"></script>
+  </head>
+  <body>
+    <!-- 在此处编码你的创意 -->
+    <div class="contains passage-list-contain">
+        <!--轮播-->
+        <div id="myNiceCarousel" class="carousel slide" data-ride="carousel">
+            <!-- 圆点指示器 -->
+            <ol class="carousel-indicators">
+                <li data-target="#myNiceCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myNiceCarousel" data-slide-to="1"></li>
+                <li data-target="#myNiceCarousel" data-slide-to="2"></li>
+            </ol>
+            
+            <!-- 轮播项目 -->
+            <div class="carousel-inner">
+                <div class="item active">
+                <img alt="First slide" src="http://zui.sexy/docs/img/slide1.jpg">
+                <div class="carousel-caption">
+                    <h3>我是第一张幻灯片</h3>
+                    <p>:)</p>
+                </div>
+                </div>
+                <div class="item">
+                <img alt="Second slide" src="http://zui.sexy/docs/img/slide2.jpg">
+                <div class="carousel-caption">
+                    <h3>我是第二张幻灯片</h3>
+                    <p>0.0</p>
+                </div>
+                </div>
+                <div class="item">
+                <img alt="Third slide" src="http://zui.sexy/docs/img/slide3.jpg">
+                <div class="carousel-caption">
+                    <h3>我是第三张幻灯片</h3>
+                    <p>最后一张咯~</p>
+                </div>
+                </div>
+            </div>
+            
+            <!-- 项目切换按钮 -->
+            <a class="left carousel-control" href="#myNiceCarousel" data-slide="prev">
+                <span class="icon icon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#myNiceCarousel" data-slide="next">
+                <span class="icon icon-chevron-right"></span>
+            </a>
+        </div>
+        <!--导航条-->
+        <div class="nav-bar panel">
+            <!-- 一般导航项目 -->
+            <div class="panel-body">
+                <ul class="nav navbar-nav .dir-nav">
+                    <li onclick="changeActive(this)" id="1" class="active"><a href="#">最新热文</a></li>
+                    <li onclick="changeActive(this)" id="2"><a href="#">心理科普</a></li>
+                    <li onclick="changeActive(this)" id="3"><a href="#">婚恋情感</a></li>
+                    <li onclick="changeActive(this)" id="4"><a href="#">家庭关系</a></li>
+                    <li onclick="changeActive(this)" id="4"><a href="#">人际交往</a></li>
+                </ul>
+            </div>
+        </div><!--END 导航栏-->
+        <!--文章列表-->
+        <!--列表展示数据由jsp动态生成-->
+        <div class="passage-list-body panel">
+            <div class="panel-body">
+                <!--一篇文章-->
+                <div class="passage-block">
+                    <!--文章图片-->
+                    <img src="images/passage.jpeg" alt="！！这里写文章的名字！！">
+                    <!--文章名-->
+                    <a class="title" href="passage.html">结婚前，听听咨询师给你的3个建议&nbsp;|&nbsp;心事博物馆</a><br/>
+                    <!--文章作者-->
+                    <a class="writer" href="consulter.html">黄小希</a><br/>
+                    <!--文章介绍-->
+                    <p>你和你的家人相处融洽，除了血亲之外，还有几十年的相处默契，她作为一个新加入的人，要让她用自己的节奏慢慢熟悉这个新的家庭。</p>
+                </div>
+                <!--以下都是重复的-->
+                <!--一篇文章-->
+                <div class="passage-block">
+                    <!--文章图片-->
+                    <img src="images/passage.jpeg" alt="！！这里写文章的名字！！">
+                    <!--文章名-->
+                    <a class="title" href="passage.html">结婚前，听听咨询师给你的3个建议&nbsp;|&nbsp;心事博物馆</a><br/>
+                    <!--文章作者-->
+                    <a class="writer" href="consulter.html">黄小希</a><br/>
+                    <!--文章介绍-->
+                    <p>你和你的家人相处融洽，除了血亲之外，还有几十年的相处默契，她作为一个新加入的人，要让她用自己的节奏慢慢熟悉这个新的家庭。</p>
+                </div>
+                <!--一篇文章-->
+                <div class="passage-block">
+                    <!--文章图片-->
+                    <img src="images/passage.jpeg" alt="！！这里写文章的名字！！">
+                    <!--文章名-->
+                    <a class="title" href="passage.html">结婚前，听听咨询师给你的3个建议&nbsp;|&nbsp;心事博物馆</a><br/>
+                    <!--文章作者-->
+                    <a class="writer" href="consulter.html">黄小希</a><br/>
+                    <!--文章介绍-->
+                    <p>你和你的家人相处融洽，除了血亲之外，还有几十年的相处默契，她作为一个新加入的人，要让她用自己的节奏慢慢熟悉这个新的家庭。</p>
+                </div>
+                <!--一篇文章-->
+                <div class="passage-block">
+                    <!--文章图片-->
+                    <img src="images/passage.jpeg" alt="！！这里写文章的名字！！">
+                    <!--文章名-->
+                    <a class="title" href="passage.html">结婚前，听听咨询师给你的3个建议&nbsp;|&nbsp;心事博物馆</a><br/>
+                    <!--文章作者-->
+                    <a class="writer" href="consulter.html">黄小希</a><br/>
+                    <!--文章介绍-->
+                    <p>你和你的家人相处融洽，除了血亲之外，还有几十年的相处默契，她作为一个新加入的人，要让她用自己的节奏慢慢熟悉这个新的家庭。</p>
+                </div>
+                <!--一篇文章-->
+                <div class="passage-block">
+                    <!--文章图片-->
+                    <img src="images/passage.jpeg" alt="！！这里写文章的名字！！">
+                    <!--文章名-->
+                    <a class="title" href="passage.html">结婚前，听听咨询师给你的3个建议&nbsp;|&nbsp;心事博物馆</a><br/>
+                    <!--文章作者-->
+                    <a class="writer" href="consulter.html">黄小希</a><br/>
+                    <!--文章介绍-->
+                    <p>你和你的家人相处融洽，除了血亲之外，还有几十年的相处默契，她作为一个新加入的人，要让她用自己的节奏慢慢熟悉这个新的家庭。</p>
+                </div>
+                <!--一篇文章-->
+                <div class="passage-block">
+                    <!--文章图片-->
+                    <img src="images/passage.jpeg" alt="！！这里写文章的名字！！">
+                    <!--文章名-->
+                    <a class="title" href="passage.html">结婚前，听听咨询师给你的3个建议&nbsp;|&nbsp;心事博物馆</a><br/>
+                    <!--文章作者-->
+                    <a class="writer" href="consulter.html">黄小希</a><br/>
+                    <!--文章介绍-->
+                    <p>你和你的家人相处融洽，除了血亲之外，还有几十年的相处默契，她作为一个新加入的人，要让她用自己的节奏慢慢熟悉这个新的家庭。</p>
+                </div>
+                <!--一篇文章-->
+                <div class="passage-block">
+                    <!--文章图片-->
+                    <img src="images/passage.jpeg" alt="！！这里写文章的名字！！">
+                    <!--文章名-->
+                    <a class="title" href="passage.html">结婚前，听听咨询师给你的3个建议&nbsp;|&nbsp;心事博物馆</a><br/>
+                    <!--文章作者-->
+                    <a class="writer" href="consulter.html">黄小希</a><br/>
+                    <!--文章介绍-->
+                    <p>你和你的家人相处融洽，除了血亲之外，还有几十年的相处默契，她作为一个新加入的人，要让她用自己的节奏慢慢熟悉这个新的家庭。</p>
+                </div>
+                <!--分页器：一页最多显示10篇文章。示例并没有超过10篇，就把这段注释掉吧-->
+                <!-- <div class="directory-contain-pager">
+                    <ul class="pager">
+                        <li class="previous"><a href="your/nice/url">«</a></li>
+                        <li><a href="your/nice/url">1</a></li>
+                        <li class="active"><a href="your/nice/url">2</a></li>
+                        <li><a href="your/nice/url">3</a></li>
+                        <li><a href="your/nice/url">4</a></li>
+                        <li><a href="your/nice/url">5</a></li>
+                        <li class="next"><a href="your/nice/url">»</a></li>
+                    </ul>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <!-- ZUI Javascript组件 -->
+    <script src="js/zui.min.js"></script>
+  </body>
+</html>
