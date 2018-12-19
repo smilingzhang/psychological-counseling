@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
 import com.entity.ConsultationRecord;
+import com.entity.ListenRecord;
 import com.util.BaseDao;
 
 /**
@@ -32,6 +33,7 @@ public class ConsultOrderDao extends BaseDao<ConsultationRecord>{
 	public int insertConsultOrder(ConsultationRecord consultOrder) {
 		return (int) save(consultOrder);
 	}
+
 	
 	/**
 	 * 

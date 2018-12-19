@@ -28,7 +28,7 @@ public class ListenRecord {
 	private String listenrecordStartTime;
 	private String listenrecordEndTime;
 	private float listenrecordPrice;
-	private int listenrecordState;
+	private String listenrecordState;
 	private String listenrecordResourcePath;
 	private Teacher teacher;
 	private User user;
@@ -66,10 +66,10 @@ public class ListenRecord {
 	public void setListenrecordPrice(float listenrecordPrice) {
 		this.listenrecordPrice = listenrecordPrice;
 	}
-	public int getListenrecordState() {
+	public String getListenrecordState() {
 		return listenrecordState;
 	}
-	public void setListenrecordState(int listenrecordState) {
+	public void setListenrecordState(String listenrecordState) {
 		this.listenrecordState = listenrecordState;
 	}
 	public String getListenrecordResourcePath() {

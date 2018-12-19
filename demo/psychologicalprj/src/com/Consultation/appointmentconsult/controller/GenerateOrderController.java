@@ -25,14 +25,22 @@ public class GenerateOrderController extends GenerateRandomUtil{
 	@Resource
 	private ConsultOrderService consultOrderService;
 	@RequestMapping("/insertorder")
-	public String generateOrder(@RequestParam("teacherId")String teacherId,@RequestParam("date")String date,
-			@RequestParam("content")String content,@RequestParam("teacherPrice")String teacherPrice,
-			@RequestParam("type")String consultType,HttpServletRequest request,HttpServletResponse response) throws IOException {
+	public String generateOrder(@RequestParam(value="teacherId",required=false)String teacherId,@RequestParam(value="date",required=false)String date,
+			@RequestParam(value="content",required=false)String content,@RequestParam(value="teacherPrice",required=false)String teacherPrice,
+			@RequestParam(value="type",required=false)String consultType,HttpServletRequest request,HttpServletResponse response) throws IOException {
 		response.setContentType("text/html;charset=utf-8");
+		int consultOrderId=0;
 		/**
 		 * 要获取session里存的用户 和 咨询师
 		 */
-		int consultOrderId=this.consultOrderService.generateConsultOrder(1, Integer.parseInt(teacherId), date, teacherPrice, content, consultType);
+		
+		if(consultType.equals("listenning")) {
+			consultOrderId=this.consultOrderService.generateListenOrder(1, Integer.parseInt(teacherId), teacherPrice, date);
+		}
+		else {
+			
+			consultOrderId=this.consultOrderService.generateConsultOrder(1, Integer.parseInt(teacherId), date, teacherPrice, content, consultType);
+		}
 		String result=generateRandom();
 		this.consultOrderService.modifyRandomNum(result,consultOrderId);
 		String reOrderId=result+consultOrderId;

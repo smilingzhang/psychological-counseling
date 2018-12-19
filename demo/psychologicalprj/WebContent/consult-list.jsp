@@ -28,7 +28,7 @@
 
     <!-- 在此处编码你的创意 -->
     <%@include file="head.jsp" %>
-  
+    <%@include file="tip.jsp" %>
     <div class="contains">
         <div class="panel consult-category">
             <div class="panel-body">
