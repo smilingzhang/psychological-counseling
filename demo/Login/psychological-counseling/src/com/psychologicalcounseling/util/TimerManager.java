@@ -37,6 +37,7 @@ public class TimerManager {
 
        }
 	   };
+	   System.out.println("下载账单********");
      timer.schedule(task, 1000,1000*60*60*24);
 }
 

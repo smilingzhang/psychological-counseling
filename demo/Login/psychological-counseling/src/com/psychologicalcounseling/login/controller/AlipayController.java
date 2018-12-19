@@ -250,9 +250,10 @@ public void AlipayTradeDataserviceBillDownloadurl() throws AlipayApiException {
 	AlipayDataDataserviceBillDownloadurlQueryResponse response = alipayClient.execute(request);
 	String billUrl=response.getBillDownloadUrl();
 	if(response.isSuccess()){
-		System.out.println("调用成功");
+		this.downloadBill(billUrl);
+		System.out.println("账单信息调用成功");
 	}else{
-		System.out.println("调用失败");
+		System.out.println("账单信息调用失败");
 	}
 	
 }
