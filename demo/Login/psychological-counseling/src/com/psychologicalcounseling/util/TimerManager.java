@@ -38,7 +38,7 @@ public class TimerManager {
        }
 	   };
 	   System.out.println("下载账单********");
-     timer.schedule(task, 1000,1000*60*60*24);
+     timer.schedule(task, date,1000*60*60*24);
 }
 
    //增加或减少天数

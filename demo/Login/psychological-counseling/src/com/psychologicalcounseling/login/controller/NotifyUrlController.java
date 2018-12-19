@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
@@ -27,7 +28,7 @@ public class NotifyUrlController {
 	@Resource
 	private AlipayServiceImpl asi;
 	@RequestMapping("/notify_url")
-	public String aa(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException, AlipayApiException {
+	public String aa(HttpServletRequest request,HttpServletResponse response,HttpSession session) throws UnsupportedEncodingException, AlipayApiException {
 		System.out.println("--------------- notify_url -----------------");
 		//获取支付宝POST过来反馈信息
 		Map<String,String> params = new HashMap<String,String>();
@@ -81,7 +82,7 @@ public class NotifyUrlController {
 				AlipayTradeQueryResponse alipayTradeQueryResponse=asi.AlipayTradeQuery(out_trade_no);
 				//进行正确性判断。
 				if(alipayTradeQueryResponse.getTotalAmount().equals(total_amount)&&alipayTradeQueryResponse.getOutTradeNo().equals(out_trade_no)){
-					System.out.println("恭喜你，已经跳到了这个阶段了");
+					session.setAttribute("moneySuccessMessage", "支付成功");
 					asi.insertCourseOrderByPrecreate(Integer.parseInt(courseId),userId,out_trade_no, Float.parseFloat(total_amount));  					
 				}
 			}

@@ -225,8 +225,8 @@ public void refund4Alipay(@RequestParam(value="out_trade_no" ,required=false) St
 	AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl, AlipayConfig.app_id, AlipayConfig.merchant_private_key, AlipayConfig.format, AlipayConfig.charset, AlipayConfig.alipay_public_key, AlipayConfig.sign_type);
 	AlipayTradeRefundRequest request = new AlipayTradeRefundRequest();//创建API对应的request类
 	AlipayTradeRefundModel model=new AlipayTradeRefundModel();
-	model.setOutTradeNo(out_trade_no);
-	model.setRefundAmount(refund_amount);
+	model.setOutTradeNo("96eb2fdeb9e345d5ae310c0b08ce8f1d");
+	model.setRefundAmount("123");
 	request.setBizModel(model);
 	AlipayTradeRefundResponse response = alipayClient.execute(request);//通过alipayClient调用API，获得对应的response类
 	System.out.print(response.getBody());
@@ -242,6 +242,7 @@ public void AlipayTradeDataserviceBillDownloadurl() throws AlipayApiException {
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 	Calendar calendar=Calendar.getInstance();
 	calendar.add(Calendar.DATE, -1);
+	
 	//账单时间：日账单格式为yyyy-MM-dd，月账单格式为yyyy-MM。
 	model.setBillDate(sdf.format(calendar.getTime()));
 	//账单类型，trade指商户基于支付宝交易收单的业务账单；signcustomer是指基于商户支付宝余额收入及支出等资金变动的帐务账单；
@@ -260,7 +261,7 @@ public void AlipayTradeDataserviceBillDownloadurl() throws AlipayApiException {
 
 //下载账单到本地
 public void downloadBill(String billUrl) {
-	String filePath = "E:\\psychological-counseling\\demo\\Login\\支付宝账单下载";
+	String filePath = "E:/AlipayBill.csv.zip";
 	URL url = null;
 	HttpURLConnection httpUrlConnection = null;
 	InputStream fis = null;
