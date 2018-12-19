@@ -97,6 +97,9 @@ public class ConsultOrderService {
 	public void modifyRandomNum(String randomNum,int orderId) {
 		this.consultOrderDao.updateConsultOrder(randomNum,orderId);
 	}
+	public void modifyListenRandomNum(String randomNum,int orderId) {
+		this.consultOrderDao.updateListenOrderRandom(randomNum, orderId);
+	}
 	@Transactional(readOnly=true)
 	public boolean findIsConsult(int teacherId,String orderTime,String startTime,String endTime) {
 		return this.consultOrderDao.selectIsConsult(teacherId, orderTime, startTime, endTime);
@@ -104,9 +107,15 @@ public class ConsultOrderService {
 	public void modifyConsultState(int consultOrderId) {
 		this.consultOrderDao.updateConsultState(consultOrderId);
 	}
+	public void modifyConsulterTime(String date,int teacherId,int number) {
+		this.consultOrderTeacherDao.updateConsulterTime(date,teacherId, number);
+	}
 	
 	public void modifyListenState(int listenOrderId) {
 		this.listenOrderDao.updateListenState(listenOrderId);
+	}
+	public void modifyCanListen(int teacherId) {
+		this.listenOrderDao.updateConsulterCanListen(teacherId);
 	}
 	public void delConsultOrderMessage(int consultOrderId) {
 		this.consultOrderDao.deleteConsultOrderMessage(consultOrderId);

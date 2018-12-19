@@ -51,7 +51,7 @@ public class OrderTimeCheckController {
 		PrintWriter pw = res.getWriter();
 		User user = (User) session.getAttribute("user");
 		if(user == null) {
-			pw.print("please login");
+			pw.print("请登录");
 			return ;
 		}
 		int identity = user.getUserIdentity();
@@ -60,9 +60,11 @@ public class OrderTimeCheckController {
 		System.out.println("OrderTimeCheck...");
 		
 		
-		List<ConsultationRecord> consultationRecords = consultationRecordServiceImpl.listUnusedConsultationRecordsById(id, identity);
+		List<ConsultationRecord> consultationRecords = consultationRecordServiceImpl
+				.listUnusedConsultationRecordsById(id, identity);
 		
-		List<ListenRecord> listenRecords = listenRecordServiceImpl.listUnusedListenRecordsById(id, identity);
+		List<ListenRecord> listenRecords = listenRecordServiceImpl
+				.listUnusedListenRecordsById(id, identity);
 		
 		System.out.println("found listenRecords : " + listenRecords);
 		System.out.println("found consultationRecords : " + consultationRecords);
@@ -82,6 +84,7 @@ public class OrderTimeCheckController {
 				int consultationrecordId = cr.getConsultationrecordId();
 				session.setAttribute("consultationrecordId", consultationrecordId);
 				session.setAttribute("roomType", "consult");
+				System.out.println("放入roomType: consult");
 
 				
 				User other = userServiceImpl.getOtherUser(user, cr);
@@ -100,7 +103,7 @@ public class OrderTimeCheckController {
 				System.out.println("放入audioChatAddress.." + audioChatAddress);
 				session.setAttribute("audioChatAddress", audioChatAddress);
 
-				// 放入 listenRecordId
+				// 放入 listenRecordId  
 				int listenRecordId = lr.getListenrecordId();
 				session.setAttribute("listenRecordId", listenRecordId);
 				session.setAttribute("roomType", "listen");

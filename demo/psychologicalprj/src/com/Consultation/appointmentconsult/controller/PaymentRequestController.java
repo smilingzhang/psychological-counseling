@@ -49,6 +49,7 @@ public class PaymentRequestController extends PaymentRequestUtil{
 		if(consultType.equals("listenning")) {
 			int id=Integer.parseInt(consultOrderId);
 			this.ConsultOrderService.modifyListenState(id);
+			this.ConsultOrderService.modifyCanListen(Integer.parseInt(teacherId));
 			return "sendpay";
 		}
 		else {
@@ -56,10 +57,11 @@ public class PaymentRequestController extends PaymentRequestUtil{
 			String[] aString=content.split("-");
 			int tId=Integer.parseInt(teacherId);
 			boolean isConsult=this.ConsultOrderService.findIsConsult(tId, date, aString[0], aString[1]);
-
+			String[] bString=aString[0].split(":");
 			if(isConsult) {
 				int id=Integer.parseInt(consultOrderId);
 				this.ConsultOrderService.modifyConsultState(id);
+				this.ConsultOrderService.modifyConsulterTime(date,Integer.parseInt(teacherId), Integer.parseInt(bString[0]));
 				return "sendpay";
 			}
 			//不能预约的话让用户重新选择预约时间，同时将用户的这次记录在咨询记录表里删除	

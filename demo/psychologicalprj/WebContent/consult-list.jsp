@@ -106,6 +106,7 @@
                         <!--time-cell-able:可预约 time-cell-disable:不可预约-->
                         <div class="timetable">
                            	 <c:forEach items="${d.teacherTimes }" var="timelist" >
+                           	 <c:if test="${timelist.date==format }">
                         	<c:if test="${timelist.time8==1 }">
                             <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=8:00-9:00">8:00</a></span>
                        		 </c:if>
@@ -180,6 +181,7 @@
                         	<c:if test="${timelist.time19==0 }">
                             <span class="time-cell-disable">19:00</span>
                         	</c:if>
+                        	</c:if>
                          </c:forEach>
                         </div>
                     </div>
@@ -214,7 +216,7 @@
                         <!--time-cell-able:可预约 time-cell-disable:不可预约-->
                         <div class="timetable">
                         <c:forEach items="${t.teacherTimes }" var="timelist" >
-                       
+                       	<c:if test="${timelist.date==date }">
                         	<c:if test="${timelist.time8==1 }">
                             <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=8:00-9:00">8:00</a></span>
                        		 </c:if>
@@ -290,6 +292,7 @@
                         	<c:if test="${timelist.time19==0 }">
                             <span class="time-cell-disable">19:00</span>
                         	</c:if>
+                        	</c:if>
                          </c:forEach>
                         </div>
                     </div>
@@ -329,16 +332,16 @@
         <!--分页-->
         <c:if test="${empty date }">
         <div class="button-pager">
-        <form action="<%=path %>consult/default?pageNum=${pager.page }" method="post">
+    
              <ul id="myPager" class="pager" data-elements="prev,nav,next" data-ride="pager"
                 data-page=${page.pageNum }
                 data-rec-total=${page.totalCount }
                 data-max-nav-count="3"
                 data-rec-per-page=${page.pageSize }
-                data-link-creator="consult/default?pageNum={page}"
+                data-link-creator="<%=path %>/consult/default?pageNum={page}"
             >
             </ul>
-         </form>
+      
             <script>
                 $('#myPager').pager({
                     linkCreator: function(page, pager) {
@@ -358,7 +361,7 @@
                 data-rec-total=${page.totalCount }
                 data-max-nav-count="3"
                 data-rec-per-page=${page.pageSize }
-                data-link-creator="consult/default?pageNum={page}&fenlei=${fenlei }&shijian=${date }"
+                data-link-creator="<%=path %>/consult/default?pageNum={page}&fenlei=${fenlei }&shijian=${date }"
             >
             </ul>
             <script>

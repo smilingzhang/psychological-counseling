@@ -26,6 +26,7 @@ public class SendController extends HttpServlet {
 
 	@RequestMapping("/SendServlet")
 	public void deal(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		System.out.println("SendServlet...");
 		ServletContext application = request.getServletContext();
 		
 		User user = (User) session.getAttribute("user");
@@ -36,13 +37,14 @@ public class SendController extends HttpServlet {
 		String videoChatAddress = (String) session.getAttribute("videoChatAddress");
 		String audioChatAddress = (String) session.getAttribute("audioChatAddress");
 		String message = request.getParameter("message");
+		System.out.println("message:" + message);
 		Map<String, List<String[]>> videoAddress2messages = (Map<String, List<String[]>>) application.getAttribute("videoAddress2messages");
 		
 		Map<String, List<String[]>> audioAddress2messages = (Map<String, List<String[]>>) application.getAttribute("audioAddress2messages");
 		// Map<String:videoChatAddress, List<String[]> 本次会话的所有消息>
 		// String[] 0:from 1:to 2:message
-		String type = (String) session.getAttribute("type");
-		if(type.equals("consult")) {
+		String roomType = (String) session.getAttribute("roomType");
+		if(roomType.equals("consult")) {
 			videoAddress2messages = sendServiceImpl.videoSend(videoAddress2messages,
 					videoChatAddress, myName, otherName, message);
 			application.setAttribute("videoAddress2messages", videoAddress2messages);

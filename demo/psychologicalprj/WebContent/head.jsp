@@ -43,10 +43,19 @@
                         </form>
                         </c:if>
                     </div>
-                
-                    <li class="list"><a class="login" href="login.jsp">登录</a></li>
-                     <li class="list"><a class="login" href="http://10.7.84.56:8080/psychologicalcounseling/goToUser">中心</a></li>
-                    <li class="list"><a class="regist" href="#">注册</a></li>
+                 <c:if test="${!empty(sessionScope.userId) }">
+                    	<li class="dropdown list dropdown-hover" id="list-after-login">
+	                        <a href="#"  class="dropdown-toggle" data-toggle="dropdown"><img id="avatar" src="<%=p %>/images/consultant2.png" alt="头像"></a>
+	                        <ul class="dropdown-menu" role="menu">
+	                            <li class="dropdown-list"><a href="user">个人中心</a></li>
+	                            <!-- <li class="dropdown-list"><a href="#">我的消息&nbsp;<span class="label label-badge label-success">4</span></a></li> -->
+	                            <li class="dropdown-list"><a href="<%=p %>/logout">退出登录</a></li>
+	                        </ul>
+                    	</li>
+                    </c:if>
+                    <c:if test="${empty(sessionScope.userId) }">
+	                    <li class="list" id="list"><a class="login" href="<%=p %>/login.jsp">登录/注册</a></li>
+                    </c:if>
                 </ul>  
             </div>
         </nav>

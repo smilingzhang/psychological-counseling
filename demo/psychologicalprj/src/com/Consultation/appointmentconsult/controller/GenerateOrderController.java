@@ -30,19 +30,25 @@ public class GenerateOrderController extends GenerateRandomUtil{
 			@RequestParam(value="type",required=false)String consultType,HttpServletRequest request,HttpServletResponse response) throws IOException {
 		response.setContentType("text/html;charset=utf-8");
 		int consultOrderId=0;
-		/**
-		 * 要获取session里存的用户 和 咨询师
-		 */
-		
-		if(consultType.equals("listenning")) {
-			consultOrderId=this.consultOrderService.generateListenOrder(1, Integer.parseInt(teacherId), teacherPrice, date);
+		if(request.getSession().getAttribute("userId")==null) {
+			response.getWriter().write("<script>alert('请您先完成登录！'); window.location='login.jsp' ;window.close();</script>");    
+			response.getWriter().flush();
+			return "phone";
 		}
-		else {
-			
-			consultOrderId=this.consultOrderService.generateConsultOrder(1, Integer.parseInt(teacherId), date, teacherPrice, content, consultType);
+		int userId=(int) request.getSession().getAttribute("userId");
+		if(consultType.equals("listenning")) {
+			consultOrderId=this.consultOrderService.generateListenOrder(userId, Integer.parseInt(teacherId), teacherPrice, date);
+		}
+		else {		
+			consultOrderId=this.consultOrderService.generateConsultOrder(userId, Integer.parseInt(teacherId), date, teacherPrice, content, consultType);
 		}
 		String result=generateRandom();
-		this.consultOrderService.modifyRandomNum(result,consultOrderId);
+		if(consultType.equals("listenning")) {
+			this.consultOrderService.modifyListenRandomNum(result, consultOrderId);
+		}
+		else {
+			this.consultOrderService.modifyRandomNum(result,consultOrderId);
+		}
 		String reOrderId=result+consultOrderId;
 		boolean isHasPhone=this.consultOrderService.findIsHasPhone(1);
 		request.getSession().setAttribute("reOrderId", reOrderId);

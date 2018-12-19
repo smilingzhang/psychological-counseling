@@ -1,5 +1,8 @@
 package com.Consultation.consulterlist.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -61,9 +64,13 @@ public class ConsulterListController {
 	public String showPopularConsult(@RequestParam("pageNum") Integer num, HttpServletRequest request) {
 		@SuppressWarnings("unchecked")
 		Page<Teacher> page = this.consulterService.showDefault(num, 6);
+		DateFormat bf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date1 = new Date();
+	    String format = bf.format(date1);
 		request.setAttribute("page", page);
 		List<Teacher> listTeachers = this.consulterService.showPopularConsulter();
 		request.setAttribute("listTeachers", listTeachers);
+		request.setAttribute("format", format);
 		return "consult-list";
 	}
 
