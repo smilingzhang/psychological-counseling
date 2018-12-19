@@ -389,7 +389,7 @@ public class UserController {
 	public String handleFormUpload(@RequestParam("upfile") MultipartFile file,
 			HttpServletRequest request) {
 		System.out.println(request.getContextPath());
-		String rootPath=request.getContextPath()+"images/";                   //路径在这里设置就可以。
+		String rootPath=request.getContextPath()+"/images/";                   //路径在这里设置就可以。
 		try {
 			file.transferTo(new File(rootPath,file.getOriginalFilename()));  
 		} catch (IOException e) {
