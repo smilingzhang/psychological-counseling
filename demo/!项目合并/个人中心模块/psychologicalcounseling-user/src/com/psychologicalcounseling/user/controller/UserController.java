@@ -3,6 +3,7 @@
  */
 package com.psychologicalcounseling.user.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.portlet.bind.annotation.ResourceMapping;
 
 import com.psychologicalcounseling.entity.ConsultationRecord;
@@ -382,5 +384,18 @@ public class UserController {
 		userService.revisePwd(newPwd, userId);
 		return "{\"result\":\"false\"}";
 		
+	}
+	@RequestMapping("/userHeadUpload")
+	public String handleFormUpload(@RequestParam("upfile") MultipartFile file,
+			HttpServletRequest request) {
+		System.out.println(request.getContextPath());
+		String rootPath=request.getContextPath()+"images/";                   //路径在这里设置就可以。
+		try {
+			file.transferTo(new File(rootPath,file.getOriginalFilename()));  
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
