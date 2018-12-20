@@ -11,10 +11,11 @@ select{
     -webkit-border-radius:5px;  
     border-radius:2px; 
 }
-.btn{
-    border-radius: 5px;
-    border-width: 0;
-    text-shadow: none;
+.btn-link{
+    color: #fff;
+}
+.btn-link:hover{
+    color: #fff;
 }
 a:hover{
     color: #d75455;
@@ -36,6 +37,13 @@ a:focus{
     z-index: 0;
     display: block;
 
+}
+#header .nav-list img{
+    display: block;
+    line-height: 50px;
+    height: 35px;
+    margin-top: 7px;
+    margin-bottom: auto;
 }
 .navbar .nav-list li{
     list-style: none;
@@ -118,6 +126,15 @@ a:focus{
 .navbar .nav-toggle{
     display: none;
 }
+#header{
+    -moz-box-shadow: 5px 5px 10px #c4b5b598;
+    box-shadow: 5px 5px 10px #c4b5b598;
+}
+#header #avatar{
+	border:0px solid;
+	border-radius: 100%;
+}
+
 @media screen and (max-width: 600px) {
     .navbar .nav-toggle{
         display: none;
@@ -156,15 +173,17 @@ a:focus{
      }
 }
 .login-contains{
-    width: 60%;
-    margin: auto;  position: absolute;  top: 0; left: 0; bottom: 0; right: 0;
+    width: 30%;
+    height:90%;
+    margin-top: 5%;
+    /* margin: auto;  position: absolute;  top: 0; left: 0; bottom: 0; right: 0; */
 }
 .loginpanel{
     clear: both;
-    width: 40%;
+    width: 100%;
     height: 50%;
     padding: 10px;
-    margin: auto;  position: absolute;  top: 0; left: 0; bottom: 0; right: 0;
+    margin-top: 10%;
 }
 .loginpanel .panel-body{
     margin: 10px;
@@ -177,6 +196,9 @@ a:focus{
     margin-top: 20px;
     margin-bottom: 20px;
     text-shadow: none;
+}
+.login-contains .loginpanel .login-nav ul{
+	width: 75%;
 }
 .login-form #login-send-verifyCode{
     float: right;
@@ -208,30 +230,22 @@ a:focus{
     margin: 20px;
 }
 .login-contains .loginpanel .login-other{
-    /* margin: auto;  position: absolute;  top: 0; left: 0; bottom: 0; right: 0; */
-    height: 80px;
-    padding-left:20%;
-    padding-right: 20%;
-}
-.login-contains .loginpanel .login-other .img{
-    /* display: block; */
     width: 50%;
-    float: left;
-    padding-right: 20px;
 }
 .login-contains .loginpanel .login-other img{
+    width: 33%;
+    margin: 10px;
     border-radius: 10px;
-    width: 100%;
 }
 .login-contains .loginpanel .login-other img:hover{
     /* box-sshadow: ; */
-    box-shadow: #db96969c  0 0 15px 0px;
+    box-shadow: #db96969c  0 0 5px 0px;
 }
 .head{
     display: block;
-    padding: 10px;
-    width: 40%;
-    margin-top: 10%;
+    /* padding: 10px; */
+    width: 100%;
+    /* margin-top: 10%; */
 }
 .head img{
     float: left;
@@ -288,7 +302,6 @@ a:focus{
     width: 580px;
 }
 .contains .panel{
-	width:100%;
     float: left;
     margin-left: 10px;
 }
@@ -443,18 +456,54 @@ a:focus{
     margin: auto 0;
     /* background-color: #000000; */
 }
-.footer{
-    /* width: 1920px; */
-    height: 360px;
-    background-image: none;
+#footer{
+    clear: both;
+    width: 100%;
+    background-image: url('../images/footer-bg.gif');
+    background-repeat: repeat;
     background-color: #33221f;
+    margin-top: 80px;
 }
-.footer .container{
-    width: 750px;
+#footer-social-account i{
+    font-size: 40px;
+    text-indent: 0.3em
+}
+#footer-social-account .icon-qq{
+    color: teal;
+}
+#footer-social-account .icon-wechat{
+    color: #4f8a4e;
+}
+#footer #code #code-title h4{
+    background-color: rgb(165, 152, 152);
+    border-radius: 10px 10px 0 0;
+    line-height: 3em;
+    margin-top: 0;
+    text-indent: 1em;
+}
+#footer #code #code-img{
+    padding: 10px;
+    width: 100%;
+}
+#footer #code{
+    display: block;
+    position: absolute;
+    z-index: 10000;
+    width: 15%;
+    border-radius: 10px;
+    margin: 10px;
+}
+#footer #code .code{
+    width: 90%;
+}
+.footer-contain{
+    width: 100%;
+    padding-left: 10%;
+    padding-right: 10%;
     margin: auto;  position: relative;  top: 0; left: 0; bottom: 0; right: 0;
 }
 .footer a{
-    color: #ffffff;
+    color: #f0d2d2;
 }
 .footer a:hover{
     color: #d75455;
@@ -468,6 +517,9 @@ a:focus{
     float: left;
     line-height: 1.5em;
 }
+#footer-contact i{
+    color: #db5757;
+}
 #footer-link,
 #footer-contact
 {
@@ -479,7 +531,7 @@ a:focus{
 }
 .footer-title-h1{
     font-size: 20px;
-    color: #ffffff;
+    color: #f0d2d2;
     line-height: 1.5em;
 }
 .up-part{
@@ -490,8 +542,8 @@ a:focus{
 #footer-contact .phone,
 #footer-contact .add
 {
- color: #ffffff;
- line-height: 2em;
+    color: #f0d2d2;
+    line-height: 2em;
 }
 #footer-social-account img{
     margin-right: 10px;
@@ -500,14 +552,10 @@ a:focus{
     width: 750px;
     margin: auto;  position: relative;  top: 0; left: 0; bottom: 0; right: 0;
 }
-.button-part span{
-    color: #883231;
-    font-weight: bold;
-}
 .button-part .footer-icp{
+    color: #883231;
     display: block;
     text-align: center;
-    width: 750px;
 }
 #footer-contact .icon{
     width: 1em;
@@ -771,6 +819,7 @@ a:focus{
     position: relative;
     top: 0;right: 0;
     background-color:#fffefe;
+    
 }
 .media .board-text{
     width: 28%;
@@ -1278,18 +1327,20 @@ a:focus{
 }
 .user-contain .user{
     width: 100%;
+    height: 20%;
+    padding-left: 10%;
+    padding-right: 10%;
 }
 .user-contain .user .panel-body{
     margin: 0;
 }
 .user-contain .user .panel-body img{
-    width: 10%;
+    width: 15%;
     float: left;
+    margin-right: 30px;
 }
 .user-contain .user .panel-body .intr{
-    width: 85%;
     margin-left: 30px;
-    float: right;
 }
 .user-contain .user .panel-body .intr .user-name{
     font-size: 16px;
@@ -1298,12 +1349,19 @@ a:focus{
 .user-contain .user .panel-body .intr .btn{
     border: 0;
 }
+.user-contain .info-contain .min{
+	color: #d75455;
+}
+.user-contain .nav-bar .navbar-nav{
+	height:100%;
+}
 .user-contain .nav-bar,
 .passage-list-contain .nav-bar
 {
     width: 100%;
     border-radius: 27px;
     position: relative;
+    padding:0;
 }
 .user-contain .nav-bar .active,
 .passage-list-contain .nav-bar .active
@@ -1330,123 +1388,130 @@ a:focus{
     padding: 0;
     width: 100%;
 }
-.info-conatin .dir-nav{
+.info-contain .dir-nav{
     margin: 20px;
     width: 100%;
 }
-.info-conatin .dir-nav li{
+.info-contain .dir-nav li{
     margin-right: 10px;
 }
-.info-conatin .dir-nav li a{
+.info-contain .dir-nav li a{
     font-size: 14px;
     line-height: 1em
 }
-.info-conatin .dir-nav li a:focus{
+.info-contain .dir-nav li a:focus{
     background-color: #d75455;
 }
-.info-conatin .panel{
+.info-contain .panel{
     width: 100%;
     padding-left: 6%;
     padding-right: 6%;
 }
-.info-conatin .directory-contain-list{
+.info-contain .directory-contain-list{
     width: 100%;
     padding-top: 10px
 }
-.info-conatin .directory-contain-list table{
+.info-contain .directory-contain-list table{
     width: 100%;
 }
-.info-conatin .directory-contain-list table img{
+.info-contain .directory-contain-list table img{
     height: 80px;
 }
-.info-conatin .directory-contain-list table span{
-    font-size: 14px;
+.info-contain .listen table td{
+    text-align: center;
+    vertical-align:middle;
 }
-.info-conatin .directory-contain-list table .catagory{
+.info-contain .directory-contain-list table .catagory{
     font-weight: bold;
 }
-.info-conatin .directory-contain-list table .tag{
+.info-contain .directory-contain-list table .tag{
     font-size: 12px;
 }
 .directory-contain-list .btn{
     background-color: #d75455;
-    margin-top: 10px;
 }
 .directory-contain-list .btn:hover{
     background-color: #ec6a6b;
 }
-.info-conatin .directory-contain-list table td{
+.info-contain .directory-contain-list table td{
     border: 1px solid #979292;
     border-width: 0 0 1px 0;
     padding: 10px;
 }
-.info-conatin #directory-contain-2 .directory-contain-list .title{
+.info-contain #directory-contain-2 .directory-contain-list .title{
     font-size: 14px;
     font-weight: bold
 }
-.info-conatin #directory-contain-2 .directory-contain-list .course-block{
+.info-contain #directory-contain-2 .directory-contain-list .course-block{
     width: 24%;
     float: left;
     margin: 0.5%;
     margin-bottom: 4%
 }
-.info-conatin .directory-contain-list .passage-block,
+.info-contain #directory-contain-4 .directory-contain-list .setting-table{
+	table-layout: fixed;
+}
+.info-contain #directory-contain-4 .directory-contain-list .setting-table td{
+	border:0;
+}
+.info-contain .directory-contain-list .passage-block,
 .passage-list-contain .passage-list-body .passage-block
 {
     width: 74%;
     clear: both;
     margin-bottom: 24px;
 }
-.info-conatin .directory-contain-list .passage-block img,
+.info-contain .directory-contain-list .passage-block img,
 .passage-list-contain .passage-list-body .passage-block img
 {
     width: 32%;
     float: left;
     margin-right: 30px;
 }
-.info-conatin .directory-contain-list .passage-block .title,
+.info-contain .directory-contain-list .passage-block .title,
 .passage-list-contain .passage-list-body .passage-block .title
 {
     font-size: 16px;
     font-weight: bold;
 }
-.info-conatin .directory-contain-list .passage-block .writer,
+.info-contain .directory-contain-list .passage-block .writer,
 .passage-list-contain .passage-list-body .passage-block .writer
 {
     line-height: 3em
 }
-.info-conatin .directory-contain-list .self-intr{
+.info-contain .directory-contain-list .self-intr{
     width: 100%
 }
-.info-conatin .directory-contain-list form table{
+.info-contain .directory-contain-list form table{
     margin-bottom: 30px;
 }
-.info-conatin .directory-contain-list form table .btn-block{
+.info-contain .directory-contain-list form table .btn-block{
     float: left;
 }
-.info-conatin .directory-contain-list .find-back-pwd{
+.info-contain .directory-contain-list .find-back-pwd{
     z-index: 100;
     width: 30%;
     height: 30%;
     position: fixed;
     margin: auto;    top: 0; left: 0; bottom: 0; right: 0;   
-    background-color: rgba(255, 255, 255, 0.863);
+    background-color: rgba(255, 255, 255);
     padding: 30px;
     line-height: 2em;
+    border-radius: 18px;
 }
-.info-conatin .directory-contain-list .find-back-pwd i{
+.info-contain .directory-contain-list .find-back-pwd i{
     display: block;
     color: #d7545469;
     float: right;
     font-size: 20px;
     margin: 0px;
 }
-.info-conatin .directory-contain-list .find-back-pwd i:hover,
+.info-contain .directory-contain-list .find-back-pwd i:hover,
 .phone-num
 {
     color: #d75455
 }
-.info-conatin .directory-contain-list .find-back-pwd .verify-zoom{
+.info-contain .directory-contain-list .find-back-pwd .verify-zoom{
     margin: 20px;
 }
 .passage-contain .passage-panel,
@@ -1532,7 +1597,6 @@ a:focus{
     padding: 10px;
     float: left;
     margin-right: 10px;
-    margin-bottom:20px;
     line-height: 1em;
 }
 .search-conatin .panel .result .result-block.consult-block .consult-block-contain .name{
@@ -1541,7 +1605,6 @@ a:focus{
 .search-conatin .panel .result .result-block.consult-block .consult-block-contain img{
     float: left;
     padding-right: 10px;
-   
 }
 .checkout-contain{
     width: 50%
@@ -1614,8 +1677,17 @@ a:focus{
 .modal-footer{
     margin-top: 20px;
 }
-.modal-header{
-	height:300px;
-	width:650px;
-	background:white;
+#back-to-top-btn{
+    position: fixed;
+    z-index: 1010;
+}
+#back-to-top-btn i{
+    font-size: 20px;
+}
+.table-head td{
+	text-align: center;
+	line-height:1.5em;
+	font-size:20px;
+	color: #6e0706;
+	background-color: #faf1f1;
 }

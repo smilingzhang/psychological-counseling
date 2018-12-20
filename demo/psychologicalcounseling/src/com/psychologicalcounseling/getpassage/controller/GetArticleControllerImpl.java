@@ -4,19 +4,26 @@ import java.io.IOException;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 import javax.annotation.Resource;
-
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.ServletConfigAware;
 
 import com.google.gson.Gson;
+import com.jspsmart.upload.SmartUpload;
+import com.jspsmart.upload.SmartUploadException;
 import com.psychologicalcounseling.entity.Article;
 import com.psychologicalcounseling.entity.BusinessType;
 import com.psychologicalcounseling.entity.Evaluate;
@@ -28,12 +35,12 @@ import com.psychologicalcounseling.getpassage.service.GetArticleServiceImpl;
 
 
 @Controller
-public class GetArticleControllerImpl {
+public class GetArticleControllerImpl{
 	
 	@Resource
 	private GetArticleServiceImpl getArticleServiceImpl;
-	
-	@RequestMapping("/GetArticleControllerImpl")
+
+	@RequestMapping(value="/GetArticleControllerImpl",method=RequestMethod.POST)
 	public String getArticle(HttpServletRequest request,HttpServletResponse response){
 		String articleName = request.getParameter("articleName");     //获取文章名字
 		System.out.println(articleName);
@@ -42,7 +49,7 @@ public class GetArticleControllerImpl {
 		System.out.println(userName);
 		User user = this.getArticleServiceImpl.findUserByUserName(userName);
 		Teacher teacher = this.getArticleServiceImpl.findTeacherByUserId(user.getUserId());  //获取作者
-		
+			
 		String articleImgPath = request.getParameter("ImgUpload");    //获取文章图片的地址
 		System.out.println(articleImgPath);
 		
@@ -65,7 +72,7 @@ public class GetArticleControllerImpl {
 		
 		Article article = new Article();
 		article.setArticleName(articleName);
-		article.setArticleImgPath(articleImgPath);
+		article.setArticleImgPath("teacher.png");
 		article.setArticleIntroduction(articleIntroduction);
 		article.setArticleContent(articleContent);
 		article.setArticlePublishTime(new Date());
@@ -89,6 +96,8 @@ public class GetArticleControllerImpl {
 		request.setAttribute("alert", "文章发表成功");
 		
 		return "demo";
+
+
 	}
 	
 	

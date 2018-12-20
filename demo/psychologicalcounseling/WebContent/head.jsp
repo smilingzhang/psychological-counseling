@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <% String p = request.getContextPath(); %>
- <!-- 在此处编码你的创意 -->
-    <header>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="ctx" value="${pageContext.request.contextPath }"></c:set>
+<header id="header">
         <nav class="navbar contianer">
             <div class="container">
                 <input type="checkbox" id="nav-toggle" class="nav-toggle"/>
@@ -16,39 +16,35 @@
                 </span>
                 </label>
                 <ul class="nav-list">
-                    <li><img src="<%=p %>/images/logo.png"></li>
-                    <li onclick="changeActive(this)" class="list active"><a href="#">首页</a></li>
-                    <li onclick="changeActive(this)" class="list"><a href="<%=p %>/index.jsp">咨询</a></li>
-                    <li onclick="changeActive(this)" class="list"><a href="#">课程</a></li>
-                    <li onclick="changeActive(this)" class="list"><a href="<%=p %>/listenList">倾听</a></li>
-                    <li onclick="changeActive(this)" class="list"><a href="PassageListControllerImpl?businesstypeWorkType=5">阅读</a></li>
-                  
+                    <li><img src="images/logo.png"></li>
+                    <li onclick="changeActive(this)" class="list active"><a href="index.html">首页</a></li>
+                    <li onclick="changeActive(this)" class="list"><a href="consult-list.html">咨询</a></li>
+                    <li onclick="changeActive(this)" class="list"><a href="listen-list.html">倾听</a></li>
+                    <li onclick="changeActive(this)" class="list"><a href="course-list.html">课程</a></li>
+                    <li onclick="changeActive(this)" class="list"><a href="${ctx }/PassageListControllerImpl?businesstypeWorkType=5">阅读</a></li>
                     <div class="search">
-                    	<c:if test="${isshow!=1 }">
-                        <form class="navbar-form navbar-left" role="search" action="<%=p %>/searchkeyword/coursekeyword" method="post">
+                        <form class="navbar-form navbar-left" role="search">
                             <div class="form-group">
-                                    <input id="inputSearchExample3" type="search" class="form-control search-input" placeholder="搜索" name="searchContent" value="${searchContent }">
+                                    <input id="inputSearchExample3" type="search" class="form-control search-input" placeholder="搜索">
                                     <label for="inputSearchExample3" class="input-control-icon-left search-icon"><i class="icon icon-search"></i></label>
                             </div>
                             <button type="submit" class="btn btn-default">搜索</button>
                         </form>
-                        </c:if>
-                        <c:if test="${isshow==1 }">
-                        	 <form class="navbar-form navbar-left" role="search" action="<%=p %>/searchkeyword/coursekeyword" method="post">
-                            <div class="form-group">
-                                  
-                                    <label for="inputSearchExample3" class="input-control-icon-left search-icon"><i class="icon icon-search"></i></label>
-                            </div>
-                           
-                        </form>
-                        </c:if>
                     </div>
-                
-                    <li class="list"><a class="login" href="login.jsp">登录</a></li>
-                    <li class="list"><a class="regist" href="#">注册</a></li>
+                    <c:if test="${!empty(sessionScope.userId) }">
+                    	<li class="dropdown list dropdown-hover" id="list-after-login">
+	                        <a href="#"  class="dropdown-toggle" data-toggle="dropdown"><img id="avatar" src="${ctx }/images/${sessionScope.user.userHeadPath }" alt="头像"></a>
+	                        <ul class="dropdown-menu" role="menu">
+	                            <li class="dropdown-list"><a href="user">个人中心</a></li>
+	                            <!-- <li class="dropdown-list"><a href="#">我的消息&nbsp;<span class="label label-badge label-success">4</span></a></li> -->
+	                            <li class="dropdown-list"><a href="logout">退出登录</a></li>
+	                        </ul>
+                    	</li>
+                    </c:if>
+                    <c:if test="${empty(sessionScope.userId) }">
+	                    <li class="list" id="list"><a class="login" href="login.jsp">登录/注册</a></li>
+                    </c:if>
                 </ul>  
             </div>
         </nav>
     </header>
-    
-  

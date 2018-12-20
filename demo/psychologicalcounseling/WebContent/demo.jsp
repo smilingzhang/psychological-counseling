@@ -20,7 +20,7 @@
 </head>
 <body>
 <div>
-	<form action="GetArticleControllerImpl" method ="post">
+	<form action="GetArticleControllerImpl" method ="post" enctype="multipart/form-data">
 		题目：<input type="text" name="articleName"><br>
 		文章类型：<select name="articletype">
 					<c:forEach items="${list}" var="l">
