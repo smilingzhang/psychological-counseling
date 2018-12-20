@@ -24,16 +24,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name="user")
 public class User {
-	//---------------增加 By 邓旸
 	public static final int IDENTITY_USER = 1;
 	public static final int IDENTITY_CONSULTER = 2;
-	private String weiboUid;
-	//------修改 by刘田会
-	private String userProvince;
-	//------增加 by刘田会
-	private String alipayUserId;//varchar255
-	//------
-	private int userId;
+	private Integer userId;
 	private String userHeadPath;
 	private String userNickName;
 	private String userSex;
@@ -43,30 +36,36 @@ public class User {
 	private String userPhone;
 	private String userPassword;
 	private Date userRegistTime;
-	private int userIdentity;
+	private Integer userIdentity;
+	private String userProvince;
 	private String userCity;
 	private String userEmail;
-	
+	private String alipayUserId;
+	private String weiboUid;
 	private Set<UserLabel> userLabels= new HashSet<UserLabel>();
 	private Set<ConsultationRecord> consultationRecords = new HashSet<ConsultationRecord>();
 	
-	public User() {
-		
-	}
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	public int getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
+	
 	public String getUserHeadPath() {
 		return userHeadPath;
 	}
 	public void setUserHeadPath(String userHeadPath) {
 		this.userHeadPath = userHeadPath;
+	}
+	public Integer getUserIdentity() {
+		return userIdentity;
+	}
+	public void setUserIdentity(Integer userIdentity) {
+		this.userIdentity = userIdentity;
 	}
 	public String getUserNickName() {
 		return userNickName;
@@ -116,11 +115,11 @@ public class User {
 	public void setUserRegistTime(Date userRegistTime) {
 		this.userRegistTime = userRegistTime;
 	}
-	public int getUserIdentity() {
-		return userIdentity;
+	public String getUserProvince() {
+		return userProvince;
 	}
-	public void setUserIdentity(int userIdentity) {
-		this.userIdentity = userIdentity;
+	public void setUserProvince(String userProvince) {
+		this.userProvince = userProvince;
 	}
 	public String getUserCity() {
 		return userCity;
@@ -134,17 +133,12 @@ public class User {
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
+	
 	public String getWeiboUid() {
 		return weiboUid;
 	}
 	public void setWeiboUid(String weiboUid) {
 		this.weiboUid = weiboUid;
-	}
-	public String getUserProvince() {
-		return userProvince;
-	}
-	public void setUserProvince(String userProvince) {
-		this.userProvince = userProvince;
 	}
 	public String getAlipayUserId() {
 		return alipayUserId;
@@ -166,7 +160,4 @@ public class User {
 	public void setConsultationRecords(Set<ConsultationRecord> consultationRecords) {
 		this.consultationRecords = consultationRecords;
 	}
-	
-	
-	
 }

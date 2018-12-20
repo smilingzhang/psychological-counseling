@@ -9,11 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>head</title>
     <!-- zui -->
-    <link href="css/zui-theme.css" rel="stylesheet">
-    <link href="css/zui.css" rel="stylesheet">
-    <link href="css/mystyle.css" rel="stylesheet">
-    <script src="js/zui.js"></script> 
-    <script src="js/zui.lite.js"></script> 
+    <link href="${ctx }css/zui-theme.css" rel="stylesheet">
+    <link href="${ctx }css/zui.css" rel="stylesheet">
+    <link href="${ctx }css/mystyle.css" rel="stylesheet">
+    <script src="${ctx }js/zui.js"></script> 
+    <script src="${ctx }js/zui.lite.js"></script> 
   </head>
   <body>
     <!-- 在此处编码你的创意 -->

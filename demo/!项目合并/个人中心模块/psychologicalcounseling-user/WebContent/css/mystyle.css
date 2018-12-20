@@ -173,7 +173,7 @@ a:focus{
      }
 }
 .login-contains{
-    width: 25%;
+    width: 30%;
     height:90%;
     margin-top: 5%;
     /* margin: auto;  position: absolute;  top: 0; left: 0; bottom: 0; right: 0; */
@@ -196,6 +196,9 @@ a:focus{
     margin-top: 20px;
     margin-bottom: 20px;
     text-shadow: none;
+}
+.login-contains .loginpanel .login-nav ul{
+	width: 75%;
 }
 .login-form #login-send-verifyCode{
     float: right;

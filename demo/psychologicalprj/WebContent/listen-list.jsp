@@ -17,11 +17,10 @@
 <script src="js/zui.js"></script>
 <script src="js/zui.lite.js"></script>
 </head>
-<body>
-						
-	page : ${page }		
+<body>	
 						
 	<!-- 在此处编码你的创意 -->
+	<%@include file="head.jsp" %>
 	<div class="panel contains">
 		<div class="panel-body appointment-body">
 			<div class="listen-category">

@@ -60,9 +60,11 @@ public class OrderTimeCheckController {
 		System.out.println("OrderTimeCheck...");
 		
 		
-		List<ConsultationRecord> consultationRecords = consultationRecordServiceImpl.listUnusedConsultationRecordsById(id, identity);
+		List<ConsultationRecord> consultationRecords = consultationRecordServiceImpl
+				.listUnusedConsultationRecordsById(id, identity);
 		
-		List<ListenRecord> listenRecords = listenRecordServiceImpl.listUnusedListenRecordsById(id, identity);
+		List<ListenRecord> listenRecords = listenRecordServiceImpl
+				.listUnusedListenRecordsById(id, identity);
 		
 		System.out.println("found listenRecords : " + listenRecords);
 		System.out.println("found consultationRecords : " + consultationRecords);
@@ -81,7 +83,8 @@ public class OrderTimeCheckController {
 				// 放入 consultationrecordId
 				int consultationrecordId = cr.getConsultationrecordId();
 				session.setAttribute("consultationrecordId", consultationrecordId);
-				session.setAttribute("type", "consult");
+				session.setAttribute("roomType", "consult");
+				System.out.println("放入roomType: consult");
 
 				
 				User other = userServiceImpl.getOtherUser(user, cr);
@@ -100,10 +103,10 @@ public class OrderTimeCheckController {
 				System.out.println("放入audioChatAddress.." + audioChatAddress);
 				session.setAttribute("audioChatAddress", audioChatAddress);
 
-				// 放入 listenRecordId
+				// 放入 listenRecordId  
 				int listenRecordId = lr.getListenrecordId();
 				session.setAttribute("listenRecordId", listenRecordId);
-				session.setAttribute("type", "listen");
+				session.setAttribute("roomType", "listen");
 
 				User other = userServiceImpl.getOtherUser(user, lr);
 				session.setAttribute("other", other);
