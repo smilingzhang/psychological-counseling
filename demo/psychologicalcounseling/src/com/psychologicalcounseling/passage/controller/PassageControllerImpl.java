@@ -32,7 +32,7 @@ public class PassageControllerImpl {
 	private PassageServiceImpl passageServiceImpl;
 	
 	@RequestMapping("/PassageControllerImpl")
-	public String show(HttpServletRequest request) {
+	public String show(HttpSession session, HttpServletRequest request) {
 		String evaluateComment = request.getParameter("evaluateContent");     //获取评论内容
 	//	System.out.println("evaluateComment"+evaluateComment);
 		
@@ -43,10 +43,6 @@ public class PassageControllerImpl {
 //		System.out.println(article.getArticleContent());
 		List<Article> list = new ArrayList<Article>();
 		list.add(article);
-		
-		/**
-		 * 这里还差一个将文章正文转换的内容
-		 */
 		
 		int articleLookNumber = article.getArticleLookNumber()+1;             //更新文章的浏览数量
 //		System.out.println("articleLookNumber--------"+articleLookNumber);
@@ -87,10 +83,9 @@ public class PassageControllerImpl {
 			evaluate.setEvaluateComment(evaluateComment);
 			evaluate.setEvaluateTime(new Date());
 
-			
-//			String Id2 = request.getParameter("userId");
-//			int userId = Integer.parseInt(Id2);
-			User user = this.passageServiceImpl.findUserByUserId(2);
+			String Id2 = (String) session.getAttribute("userId");
+			int userId = Integer.parseInt(Id2);
+			User user = this.passageServiceImpl.findUserByUserId(userId);
 			evaluate.setUser(user);
 			this.passageServiceImpl.insertEvaluate(evaluate);     //将用户的评论插入数据库
 			
@@ -116,14 +111,14 @@ public class PassageControllerImpl {
 	
 	@RequestMapping(value="/insertEvaluate",method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> insertEvaluate(@RequestParam(value="articleId") String articleId,@RequestParam(value="evaluateContent") String evaluateContent,HttpServletRequest request) {
+	public Map<String, Object> insertEvaluate(HttpSession session,@RequestParam(value="articleId") String articleId,@RequestParam(value="evaluateContent") String evaluateContent,HttpServletRequest request) {
 		System.out.println(articleId);
 		System.out.println(evaluateContent);
 		int articleid = Integer.parseInt(articleId);
-//		String id = request.getParameter("userId");
-//		int userId = Integer.parseInt(id);
+		String id = (String) session.getAttribute("userId");
+		int userId = Integer.parseInt(id);
 //		User user = new User();
-		User user = this.passageServiceImpl.findUserByUserId(2);
+		User user = this.passageServiceImpl.findUserByUserId(userId);
 		Evaluate evaluate = new Evaluate();
 		evaluate.setEvaluateWorkId(articleid);
 		evaluate.setEvaluateWorkType(5);
@@ -193,11 +188,23 @@ public class PassageControllerImpl {
 		int id = Integer.parseInt(articleId);
 		HttpSession session = request.getSession();
 		List<User> users = new ArrayList();
+		int userId;
+	    Object obj =session.getAttribute("userId");
+	    if(obj == null) {
+	    	return "请注册和登录后评论！";
+	    }
+	    else {
+	    	userId = (int)obj;
+	    }
+	    
+	//	int userId = Integer.parseInt(id1);
+		User u = this.passageServiceImpl.findUserByUserId(userId);
 		User user = new User();
-		user.setUserId(7);
-		user.setUserRealName("孙明伟");
-		user.setUserNickName("克罗夫");
-		user.setUserHeadPath("consultant.png");
+		user.setUserId(u.getUserId());
+		user.setUserRealName(u.getUserRealName());
+		user.setUserNickName(u.getUserNickName());
+		user.setUserHeadPath(u.getUserHeadPath());
+		
 		session.setAttribute("user", user);
 		String a = request.getParameter("evaluateContent");
 	    Date time = new Date();

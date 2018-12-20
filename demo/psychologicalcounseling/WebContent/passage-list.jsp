@@ -1,6 +1,7 @@
 <%@ page language = "java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<c:set var="ctx" value="${pageContext.request.contextPath }"></c:set>
 <!DOCTYPE html>
 <html lang="zh-cn">
   <head>
@@ -9,14 +10,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>文章列表</title>
     <!-- zui -->
-    <link href="css/zui-theme.css" rel="stylesheet">
-    <link href="css/zui.css" rel="stylesheet">
-    <script src="js/jquery-3.3.1.js"></script>
-    <script src="js/zui.js"></script> 
-    <script src="js/zui.lite.js"></script>
+    <link href="${ctx }/css/zui-theme.css" rel="stylesheet">
+    <link href="${ctx }/css/zui.css" rel="stylesheet">
+    <script src="${ctx }/js/jquery-3.3.1.js"></script>
+    <script src="${ctx }/js/zui.js"></script> 
+    <script src="${ctx }/js/zui.lite.js"></script>
     <!--自定义-->
-    <link href="css/mystyle.css" rel="stylesheet">
-    <script src="js/change-state.js"></script>
+    <link href="${ctx }/css/mystyle.css" rel="stylesheet">
+    <script src="${ctx }/js/change-state.js"></script>
   </head>
   <body>
   	<!-- head -->
@@ -72,7 +73,7 @@
             <div class="panel-body" style="text-align: center;">
                 <ul class="nav navbar-nav .dir-nav">
                 <c:forEach items="${ typeTablelist}" var="t">
-                    <li onclick="changeActive(this)" id="1" class="active"><a href="PassageListControllerImpl?typetableId=${t.typetableId }&&businesstypeWorkType=5">${t.typetableName }</a></li>
+                    <li onclick="changeActive(this)" id="${t.typetableId }"  class="active"><a href="${ctx }/PassageListControllerImpl?typetableId=${t.typetableId }&&businesstypeWorkType=5">${t.typetableName }</a></li>
      			</c:forEach>
         <!--        <li onclick="changeActive(this)" id="2"><a href="PassageListControllerImpl?typetableId=2">心理科普</a></li>
                     <li onclick="changeActive(this)" id="3"><a href="PassageListControllerImpl?typetableId=3">婚恋情感</a></li>
@@ -90,11 +91,11 @@
 	            <c:forEach items="${passageList.list }" var="p">
 	                <div class="passage-block">
 	                    <!--文章图片-->
-	                    <img src="images/${p.articleImgPath }" alt="！！这里写文章的名字！！">
+	                    <img src="${ctx }/images/${p.articleImgPath }" alt="！！这里写文章的名字！！">
 	                    <!--文章名-->
-	                    <a class="title" href="PassageControllerImpl?articleId=${p.articleId }">${p.articleName }&nbsp;|&nbsp;心事博物馆</a><br/>
+	                    <a class="title" href="${ctx }/PassageControllerImpl?articleId=${p.articleId }">${p.articleName }&nbsp;|&nbsp;心事博物馆</a><br/>
 	                    <!--文章作者-->
-	                    <a class="writer" href="TeacherControllerImpl?teacherId=${p.teacher.user.userId }">${p.teacher.user.userRealName }</a><br/>
+	                    <a class="writer" href="${ctx }/cousultdetail/showdetail?teacherId=${lesson.teacher.teacherId}">${p.teacher.user.userRealName }</a><br/>
 	                    <!--文章介绍-->
 	                    <p>${p.articleIntroduction }</p>
 	                </div><br><br>
@@ -119,7 +120,7 @@
 					data-rec-total="${passageList.totalCount }"
 					data-max-nav-count="3"
 					data-rec-per-page="${passageList.pageSize }"
-					data-link-creator="PassageListControllerImpl?pageNum={page}&businesstypeWorkType=5&typetableId=${typetableId}"
+					data-link-creator="${ctx }/PassageListControllerImpl?pageNum={page}&businesstypeWorkType=5&typetableId=${typetableId}"
 				>
 				</ul>
 				<script>
@@ -134,8 +135,8 @@
 			</c:if>  
    	</div>
     <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
-    <script src="js/jquery-1.11.0.min.js"></script>
+    <script src="${ctx }/js/jquery-1.11.0.min.js"></script>
     <!-- ZUI Javascript组件 -->
-    <script src="js/zui.min.js"></script>
+    <script src="${ctx }/js/zui.min.js"></script>
   </body>
 </html>

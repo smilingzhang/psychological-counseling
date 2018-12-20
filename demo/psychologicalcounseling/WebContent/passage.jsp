@@ -104,7 +104,9 @@
       <!--输入框-->
         <!--使用的是wang富文本编辑器-->
         <!--文档请见：https://www.kancloud.cn/wangfupeng/wangeditor3/455793-->
+    
         <div class="comment-input" id="comment-input">
+ 
             <button class="btn btn-link" type="button" onclick="closeCommentWindow()">取消</button>
             <button class="btn" id="submit" onclick="closeCommentWindow()">发送</button>
             <div id="editor">
@@ -123,7 +125,7 @@
                 editor.create()
            		$("#submit").click(function(){
            			var id = ${article[0].articleId}
-           			alert(id);
+           		
            			var htmls = "";
            	    	var html = "";
            	    	var content=editor.txt.html();
@@ -141,8 +143,12 @@
            		xmlhttp.onreadystatechange=function(){
         		    if (xmlhttp.readyState==4 && xmlhttp.status==200){
         		    	 var res=xmlhttp.responseText;
+        		    	 if(res == "请注册和登录后评论！"){
+        		    		 alert(res);
+        		    		 window.location = "login.jsp";
+        		    	 }
         		    	 var endlesson = JSON.parse(res);
-        			     console.log(endlesson);
+        			 
         			        var key;
         			        var value;
         			        var keys;
@@ -181,7 +187,10 @@
         	   }  
            		})
                 </script>
+        
         </div>
+     
+    
       <!--黑色遮罩-->
       <div id="shade" style="display:none"></div>
         <!--评论-->
@@ -190,6 +199,7 @@
             <span class="board-title-h1">评论</span>
             <button type="button" class="btn btn-link to-comment" onclick="openCommentWindow()"><i class="icon icon-pencil"></i>参与讨论</button>
             <!--一条评论-->
+           
          <div class="pagescomment" id="pageses"> 
         <c:forEach items="${page.list }" var="p">    
             <div class="comment">
@@ -220,6 +230,7 @@
 
         </div>
     </div>
+    
     <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
     <script src="js/jquery-1.11.0.min.js"></script>
     <!-- ZUI Javascript组件 -->
@@ -246,7 +257,7 @@
 		    if (xmlhttp.readyState==4 && xmlhttp.status==200){
 		    	 var res=xmlhttp.responseText;
 		    	 var endlesson = JSON.parse(res);
-			     console.log(endlesson);
+			    
 			        var key;
 			        var value;
 			        var keys;
@@ -306,7 +317,7 @@
    		    if (xmlhttp.readyState==4 && xmlhttp.status==200){
    		    	 var res=xmlhttp.responseText;
    		    	 var endlesson = JSON.parse(res);
-   			     console.log(endlesson);
+   			   
    			        var key;
    			        var value;
    			        var keys;

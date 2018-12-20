@@ -1,17 +1,3 @@
-var bodyHeight;
-window.onload = function(){
-    
-}
-$(document).ready(function(){
-    console.log(bodyHeight);
-    if(bodyHeight==null){
-        bodyHeight = $(document.body).height();
-    }
-
-    console.log(bodyHeight);
-    var height =  bodyHeight-160;
-    $("#lesson-part").css("height",height);
-})
 function openCommentWindow(){
     $("#comment-input").css("display","block");
     $("#shade").css("display","block");
@@ -27,7 +13,7 @@ function changeNav(obj,prefix){
         $("#"+prefix+(index+1)).css("display","none");
     })
     obj.className="active";
-    $("#"+prefix+(list.index($(obj))+1)).css("display","display");
+    $("#"+prefix+(list.index($(obj))+1)).css("display","block");
 }
 function changeActive(obj){
     var list = $(obj).parent().children();
