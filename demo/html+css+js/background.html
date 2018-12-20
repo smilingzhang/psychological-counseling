@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>后台</title>
+    <!-- zui -->
+    <link href="css/zui-theme.css" rel="stylesheet">
+    <link href="css/zui.css" rel="stylesheet">
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/zui.js"></script> 
+    <script src="js/zui.lite.js"></script>
+    <!--自定义-->
+    <script src="js/background.js"></script>
+    <link href="css/mystyle.css" rel="stylesheet">
+    <link href="css/background.css" rel="stylesheet">
+    <!--富文本编辑器-->
+    <script type="text/javascript" charset="utf-8" src="utf8-jsp/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="utf8-jsp/ueditor.all.min.js"> </script>
+    <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+    <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+    <script type="text/javascript" charset="utf-8" src="utf8-jsp/lang/zh-cn/zh-cn.js"></script>
+  </head>
+  <body>
+    <!-- 在此处编码你的创意 -->
+    <div id="background-contain">
+        <!--导航-->
+        <div class="bg-nav" id="bg-nav">
+            <!--logo-->
+            <div class="logo"><img src="images/logo-head-white.png" alt=""></div>
+            <ul class="nav nav-tabs nav-stacked">
+                <li onclick="changeNav(this,'page-')" class="active"><a href="#">首页</a></li>
+                <li onclick="changeNav(this,'page-')" id="nav-passage"><a href="#">文章管理</a></li>
+                <li onclick="changeNav(this,'page-')"><a href="#">课程管理</a></li>
+                <li onclick="changeNav(this,'page-')"><a href="#">订单管理</a></li>
+            </ul>
+        </div>
+        <div class="bg-contain" id="bg-contain">
+            <!--导航栏-->
+            <div class="head-nav">
+                <a class="tag" href="#">退出登录</a>
+                <a class="tag" href="#">个人中心</a>
+                <a class="tag" href="#">网站首页</a>
+            </div>
+            <!--首页-->
+            <div id="page-1"></div>
+            <!--文章管理-->
+            <div id="page-2" class="page">
+                <!--头部-->
+                <div>
+                    <!--发表文章按钮-->
+                    <button class="btn btn-lg" type="button" onclick="goToSendPassage()">发表新文章&nbsp;&nbsp;<i class="icon icon-pencil"></i></button>
+                    <!--搜索-->
+                    <div class="input-control search-box search-box-circle has-icon-left has-icon-right" id="searchboxExample">
+                        <input id="inputSearchExample1" type="search" class="form-control search-input" placeholder="按名检索">
+                        <label for="inputSearchExample1" class="input-control-icon-left search-icon"><i class="icon icon-search"></i></label>
+                        <a href="#" class="input-control-icon-right search-clear-btn"><i class="icon icon-remove"></i></a>
+                    </div>
+                </div>
+                <hr>
+                <!--内容-->
+                <div class="list panel">
+                    <div class="panel-body">
+                        <header>
+                            <h3><i class="icon-list-ul"></i> 文章 <small>共 123 篇</small></h3>
+                        </header>
+                        <div class="items items-hover" id="item">
+                            <div class="item">
+                                <div class="item-heading">
+                                    <div class="pull-right"><a href="###"><i class="icon-pencil"></i> 编辑</a> &nbsp;<a href="#"><i class="icon-remove"></i> 删除</a></div>
+                                    <h4>
+                                        <!--文章分类-->
+                                        <span class="label label-danger">情感</span>
+                                        <!--文章标题：点击跳转到文章阅读页面-->
+                                        <a href="###">HTML5 发展历史</a>
+                                    </h4>
+                                </div>
+                                <!--文章简介-->
+                                <div class="item-content">
+                                    <div class="text">HTML 5草案的前身名为Web Applications 1.0，是在2004年由WHATWG提出。2008年1月22日，第一份正式草案发布。WHATWG表示该规范是目前仍在进行的工作，仍须多年的努力。[8]目前Mozilla Firefox、Google Chrome、Opera、Safari（版本4以上）、Internet Explorer（版本9以上）已支持HTML5技术。</div>
+                                </div>
+                                <div class="item-footer">
+                                    <i class="icon icon-eye-open"></i> 243 &nbsp; <i class="icon icon-comments"></i>12 &nbsp; <span class="text-muted">2013-11-11 16:14:37</span>
+                                </div>
+                            </div>
+                            <!--以下重复-->
+                            <div class="item">
+                                <div class="item-heading">
+                                    <div class="pull-right"><a href="###"><i class="icon-pencil"></i> 编辑</a> &nbsp;<a href="#"><i class="icon-remove"></i> 删除</a></div>
+                                    <h4>
+                                        <!--文章分类-->
+                                        <span class="label label-danger">情感</span>
+                                        <!--文章名字：点击跳转到文章阅读页面-->
+                                        <a href="###">HTML5 发展历史</a>
+                                    </h4>
+                                </div>
+                                <div class="item-content">
+                                    <div class="text">HTML 5草案的前身名为Web Applications 1.0，是在2004年由WHATWG提出。2008年1月22日，第一份正式草案发布。WHATWG表示该规范是目前仍在进行的工作，仍须多年的努力。[8]目前Mozilla Firefox、Google Chrome、Opera、Safari（版本4以上）、Internet Explorer（版本9以上）已支持HTML5技术。</div>
+                                </div>
+                                <div class="item-footer">
+                                    <i class="icon icon-eye-open"></i> 243 &nbsp; <i class="icon icon-comments"></i>12 &nbsp; <span class="text-muted">2013-11-11 16:14:37</span>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="item-heading">
+                                    <div class="pull-right"><a href="###"><i class="icon-pencil"></i> 编辑</a> &nbsp;<a href="#"><i class="icon-remove"></i> 删除</a></div>
+                                    <h4>
+                                        <!--文章分类-->
+                                        <span class="label label-danger">情感</span>
+                                        <!--文章名字：点击跳转到文章阅读页面-->
+                                        <a href="###">HTML5 发展历史</a>
+                                    </h4>
+                                </div>
+                                <div class="item-content">
+                                    <div class="text">HTML 5草案的前身名为Web Applications 1.0，是在2004年由WHATWG提出。2008年1月22日，第一份正式草案发布。WHATWG表示该规范是目前仍在进行的工作，仍须多年的努力。[8]目前Mozilla Firefox、Google Chrome、Opera、Safari（版本4以上）、Internet Explorer（版本9以上）已支持HTML5技术。</div>
+                                </div>
+                                <div class="item-footer">
+                                    <i class="icon icon-eye-open"></i> 243 &nbsp; <i class="icon icon-comments"></i>12 &nbsp; <span class="text-muted">2013-11-11 16:14:37</span>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="item-heading">
+                                    <div class="pull-right"><a href="###"><i class="icon-pencil"></i> 编辑</a> &nbsp;<a href="#"><i class="icon-remove"></i> 删除</a></div>
+                                    <h4>
+                                        <!--文章分类-->
+                                        <span class="label label-danger">情感</span>
+                                        <!--文章名字：点击跳转到文章阅读页面-->
+                                        <a href="###">HTML5 发展历史</a>
+                                    </h4>
+                                </div>
+                                <div class="item-content">
+                                    <div class="text">HTML 5草案的前身名为Web Applications 1.0，是在2004年由WHATWG提出。2008年1月22日，第一份正式草案发布。WHATWG表示该规范是目前仍在进行的工作，仍须多年的努力。[8]目前Mozilla Firefox、Google Chrome、Opera、Safari（版本4以上）、Internet Explorer（版本9以上）已支持HTML5技术。</div>
+                                </div>
+                                <div class="item-footer">
+                                    <i class="icon icon-eye-open"></i> 243 &nbsp; <i class="icon icon-comments"></i>12 &nbsp; <span class="text-muted">2013-11-11 16:14:37</span>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="item-heading">
+                                    <div class="pull-right"><a href="###"><i class="icon-pencil"></i> 编辑</a> &nbsp;<a href="#"><i class="icon-remove"></i> 删除</a></div>
+                                    <h4>
+                                        <!--文章分类-->
+                                        <span class="label label-danger">情感</span>
+                                        <!--文章名字：点击跳转到文章阅读页面-->
+                                        <a href="###">HTML5 发展历史</a>
+                                    </h4>
+                                </div>
+                                <div class="item-content">
+                                    <div class="text">HTML 5草案的前身名为Web Applications 1.0，是在2004年由WHATWG提出。2008年1月22日，第一份正式草案发布。WHATWG表示该规范是目前仍在进行的工作，仍须多年的努力。[8]目前Mozilla Firefox、Google Chrome、Opera、Safari（版本4以上）、Internet Explorer（版本9以上）已支持HTML5技术。</div>
+                                </div>
+                                <div class="item-footer">
+                                    <i class="icon icon-eye-open"></i> 243 &nbsp; <i class="icon icon-comments"></i>12 &nbsp; <span class="text-muted">2013-11-11 16:14:37</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--分页器：一页显示6~8篇为宜-->
+                <div class="button-pager">
+                    <ul id="myPager" class="pager" data-elements="prev,nav,next" data-ride="pager"
+                        data-page="1"
+                        data-rec-total="50"
+                        data-max-nav-count="5"
+                        data-rec-per-page="20"
+                        data-link-creator="${url}?page={page}<c:if test='${!empty(params) }'>&${params }</c:if>#page={page}"
+                    >
+                    </ul>
+                    <script>
+                        $('#myPager').pager({
+                            linkCreator: function(page, pager) {
+                                var url = window.location.href;
+                                url = url.split("#")[0];
+                                return url+'#page='+ page +'?page=' + page;
+                            } 
+                        });
+                    </script>
+                </div>
+            </div>
+            <!--文章发表界面-->
+            <div id="new-passage" style="display:none" class="page">
+                <div class="panel">
+                    <div class="panel-body">
+                        <header>
+                            <h3><i class="icon-list-ul"></i> 发布文章 <a href="#" class="tag" onclick="returnToPassage()"><i class="icon icon-share-alt"></i>返回</a></h3>
+                        </header>
+                        <form action="" method="post">
+                            <div class="passage-block">
+                                <!--文章类型-->
+                                <select name="" id="passage-type">
+                                    <option value="心理科普">心理科普</option>
+                                    <option value="婚恋情感">婚恋情感</option>
+                                    <option value="家庭关系">家庭关系</option>
+                                    <option value="人际交往">人际交往</option>
+                                </select>
+                                <!--文章题目-->
+                                <input type="text" name="" id="passage-title" placeholder="取一个响亮的标题吧" class="form-control">
+                            </div>
+                            <!--文章简介-->
+                            <div class="passage-block"><input maxlength="40" type="text" name="" id="" placeholder="文章简介" class="form-control"></div>
+                            <!--标题图上传-->
+                            <div class="passage-block" id="ImgUpload-block">
+                                <span>上传标题图片<span class="tag">(可选)</span><span class="msg-warning">&nbsp;*若未上传，将使用默认图片</span></span><input class="tag" type="file" name="ImgUpload"/>
+                            </div>
+                            <!--编辑框：富文本编辑器-->
+                            <script class="ueditor" id="editor4Psg" type="text/plain" name="articleContent" height=""></script>
+                            <hr>
+                            <!--预览-->
+                            <a class="btn btn-primary" href="#">预览</a>
+                            <!--发送-->
+                            <button class="btn btn-primary">发布</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--课程管理-->
+            <div id="page-3" style="display:none" class="page"> 
+                 <!--头部-->
+                <div>
+                    <!--新建课程按钮-->
+                    <button class="btn btn-lg" type="button" onclick="newCourse()">新建课程&nbsp;&nbsp;<i class="icon icon-film"></i></button>
+                    <!--搜索-->
+                    <div class="input-control search-box search-box-circle has-icon-left has-icon-right" id="searchboxExample">
+                        <input id="inputSearchExample1" type="search" class="form-control search-input" placeholder="按名检索">
+                        <label for="inputSearchExample1" class="input-control-icon-left search-icon"><i class="icon icon-search"></i></label>
+                        <a href="#" class="input-control-icon-right search-clear-btn"><i class="icon icon-remove"></i></a>
+                    </div>
+                </div>
+                <hr>
+                <!--内容-->
+                <div class="list panel">
+                    <div class="panel-body">
+                        <header>
+                            <h3><i class="icon-list-ul"></i> 课程 <small>共 10 门</small></h3>
+                        </header>
+                        <div class="items items-hover" id="item">
+                            <!--免费的-->
+                            <div class="item">
+                                <div class="item-heading">
+                                    <div class="pull-right"><a href="###" onclick="editCourse()"><i class="icon-pencil"></i> 编辑</a> &nbsp;<a href="#"><i class="icon-remove"></i> 删除</a></div>
+                                    <h4>
+                                        <!--课程分类-->
+                                        <span class="label label-danger">个人成长</span>
+                                        <!--课程标题：点击跳转到课程介绍页-->
+                                        <a href="###">HTML5 发展历史</a>
+                                        <span class="tag">&nbsp;&nbsp;免费</span>
+                                    </h4>
+                                </div>
+                                <!--课程简介-->
+                                <div class="item-content">
+                                    <div class="text">HTML 5草案的前身名为Web Applications 1.0，是在2004年由WHATWG提出。2008年1月22日，第一份正式草案发布。WHATWG表示该规范是目前仍在进行的工作，仍须多年的努力。[8]目前Mozilla Firefox、Google Chrome、Opera、Safari（版本4以上）、Internet Explorer（版本9以上）已支持HTML5技术。</div>
+                                    <!--banner图-->
+                                    <img class="bannerImg-course" src="images/course.jpg" alt="">
+                                </div>
+                                <div class="item-footer">
+                                    <i class="icon icon-eye-open"></i> 243 &nbsp; <i class="icon icon-comments"></i>12 &nbsp; <span class="stress">4个章节&nbsp;共20课时</span>
+                                </div>
+                            </div>
+                            <!--付费的-->
+                            <div class="item">
+                                <div class="item-heading">
+                                    <div class="pull-right"><a href="###" onclick="editCourse()"><i class="icon-pencil"></i> 编辑</a> &nbsp;<a href="#"><i class="icon-remove"></i> 删除</a></div>
+                                    <h4>
+                                        <!--课程分类-->
+                                        <span class="label label-danger">个人成长</span>
+                                        <!--课程标题：点击跳转到课程介绍页-->
+                                        <a href="###">HTML5 发展历史</a>
+                                        <span class="tag stress">&nbsp;&nbsp;￥36</span>
+                                    </h4>
+                                </div>
+                                <!--课程简介-->
+                                <div class="item-content">
+                                    <div class="text">HTML 5草案的前身名为Web Applications 1.0，是在2004年由WHATWG提出。2008年1月22日，第一份正式草案发布。WHATWG表示该规范是目前仍在进行的工作，仍须多年的努力。[8]目前Mozilla Firefox、Google Chrome、Opera、Safari（版本4以上）、Internet Explorer（版本9以上）已支持HTML5技术。</div>
+                                    <!--banner图-->
+                                    <img class="bannerImg-course" src="images/course.jpg" alt="">
+                                </div>
+                                <div class="item-footer">
+                                    <i class="icon icon-eye-open"></i> 243 &nbsp; <i class="icon icon-comments"></i>12 &nbsp; <span class="stress">4个章节&nbsp;共20课时</span>
+                                </div>
+                            </div>
+                            <!--不符合规定的-->
+                            <div class="item">
+                                <div class="item-heading">
+                                    <div class="pull-right"><a href="###"><i class="icon-pencil"></i> 编辑</a> &nbsp;<a href="#"><i class="icon-remove"></i> 删除</a></div>
+                                    <h4>
+                                        <!--课程分类-->
+                                        <span class="label label-danger">个人成长</span>
+                                        <!--课程标题：点击跳转到课程介绍页-->
+                                        <a>HTML5 发展历史</a><span class="msg-err">&nbsp;&nbsp;<i class="icon icon-frown"></i>&nbsp;不符合发布要求&nbsp;原因：尚未上传课程视频</span>
+                                    </h4>
+                                </div>
+                                <!--课程简介-->
+                                <div class="item-content">
+                                    <div class="text">HTML 5草案的前身名为Web Applications 1.0，是在2004年由WHATWG提出。2008年1月22日，第一份正式草案发布。WHATWG表示该规范是目前仍在进行的工作，仍须多年的努力。[8]目前Mozilla Firefox、Google Chrome、Opera、Safari（版本4以上）、Internet Explorer（版本9以上）已支持HTML5技术。</div>
+                                    <!--banner图-->
+                                    <img class="bannerImg-course" src="images/course.jpg" alt="">
+                                </div>
+                                <div class="item-footer">
+                                    <i class="icon icon-eye-open"></i> 0 &nbsp; <i class="icon icon-comments"></i>0 &nbsp; <span class="stress">0个章节&nbsp;共0课时</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--分页器-->
+                <div class="button-pager">
+                    <ul id="myPager" class="pager" data-elements="prev,nav,next" data-ride="pager"
+                        data-page="1"
+                        data-rec-total="50"
+                        data-max-nav-count="5"
+                        data-rec-per-page="20"
+                        data-link-creator="${url}?page={page}<c:if test='${!empty(params) }'>&${params }</c:if>#page={page}"
+                    >
+                    </ul>
+                    <script>
+                        $('#myPager').pager({
+                            linkCreator: function(page, pager) {
+                                var url = window.location.href;
+                                url = url.split("#")[0];
+                                return url+'#page='+ page +'?page=' + page;
+                            } 
+                        });
+                    </script>
+                </div>
+            </div>
+            <!--新建课程-->
+            <div id="new-course" class="page" style="display:none">
+                <div class="panel">
+                    <div class="panel-body">
+                        <form action="" method="post">
+                            <div id="newCourse-info">
+                                <header>
+                                    <h3><i class="icon-list-ul"></i> 新建课程 <a href="#" class="tag" onclick="backToCourse()"><i class="icon icon-share-alt"></i>返回</a></h3>
+                                </header>
+                                <div class="course-block">
+                                    <!--课程分类-->
+                                    <select name="" id="passage-type">
+                                        <option selected>分类</option>
+                                        <option value="个人成长">个人成长</option>
+                                        <option value="两性关系">两性关系</option>
+                                        <option value="家庭亲子">家庭亲子</option>
+                                        <option value="心理健康">心理健康</option>
+                                    </select>
+                                    <!--课程标题-->
+                                    <input type="text" name="" id="passage-title" placeholder="课程标题" class="form-control">
+                                </div>
+                                <!--课程类型-->
+                                <div class="course-block">
+                                    课程类型&nbsp;
+                                    <input type="radio" name="type" id="" checked>免费&nbsp;&nbsp;
+                                    <input type="radio" name="type" id="pay" >收费&nbsp;&nbsp;
+                                    价格：<input type="number" name="" id="price" disabled="disabled">
+                                </div>
+                                <!--banner图上传-->
+                                <div class="course-block" id="ImgUpload-block">
+                                    <span>上传标题图片</span><input class="tag" type="file" name="ImgUpload"/>
+                                </div>
+                                <!--课程简介-->
+                                <div class="course-block"><input maxlength="40" type="text" name="" id="" placeholder="文章简介" class="form-control"></div>
+                                <!--课程详细介绍：富文本编辑器-->
+                                <div class="course-block"> 课程详细介绍<span class="msg-warning">&nbsp;&nbsp;*详细地描述一下课程的内容、开课的目的，帮助大家进一步了解课程的概况</span></div>
+                                <script class="ueditor" id="editor4Course" type="text/plain" name="articleContent" height=""></script>
+                                <hr>
+                                <!--前往创建章节-->
+                                <button class="btn btn-primary" type="button" onclick="">确认创建</button><span class="msg-warning">&nbsp;&nbsp;*少于一个课时的课程不会被发布</span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--课程编辑页-->
+            <div id="edit-course" class="page" style="display:none">
+                <div class="panel">
+                    <div class="panel-body">
+                        <!--导航栏-->
+                        <ul class="nav nav-tabs">
+                            <li class="active" onclick="changeNav(this,'edit-course-')"><a href="#">课程基本信息</a></li>
+                            <li onclick="changeNav(this,'edit-course-')"><a href="#">更新课程内容</a></li>
+                        </ul>
+                        <!--基本信息修改：应将数据库的数据自动填充进来-->
+                        <div class="edit-course-info" id="edit-course-1">
+                            <div id="newCourse-info">
+                                <div class="course-block">
+                                    <form action="" method="post">
+                                    <!--课程分类-->
+                                        <select name="" id="passage-type">
+                                            <option selected>分类</option>
+                                            <option value="个人成长">个人成长</option>
+                                            <option value="两性关系">两性关系</option>
+                                            <option value="家庭亲子">家庭亲子</option>
+                                            <option value="心理健康">心理健康</option>
+                                        </select>
+                                        <!--课程标题-->
+                                        <input type="text" name="" id="passage-title" placeholder="课程标题" class="form-control">
+                                    </div>
+                                    <!--课程类型-->
+                                    <div class="course-block">
+                                        课程类型&nbsp;
+                                        <input type="radio" name="type" id="" checked>免费&nbsp;&nbsp;
+                                        <input type="radio" name="type" id="pay" >收费&nbsp;&nbsp;
+                                        价格：<input type="number" name="" id="price" disabled="disabled">
+                                    </div>
+                                    <!--banner图上传-->
+                                    <div class="course-block" id="ImgUpload-block">
+                                        <span>上传标题图片</span><input class="tag" type="file" name="ImgUpload"/>
+                                    </div>
+                                    <!--课程简介-->
+                                    <div class="course-block"><input maxlength="40" type="text" name="" id="" placeholder="文章简介" class="form-control"></div>
+                                    <!--课程详细介绍：富文本编辑器-->
+                                    <div class="course-block"> 课程详细介绍</div>
+                                    <script class="ueditor" id="editor4EditCourse" type="text/plain" name="articleContent" height=""></script>
+                                    <hr>
+                                    <!--删掉type=button-->
+                                    <button class="btn btn-primary" type="button">保存</button>
+                                </form>
+                            </div>
+                        </div>
+                        <!--更新课程视频-->
+                        <div class="edit-course-vedio" id="edit-course-2" style="display:none">
+                            <button class="btn btn-link" type="button" data-toggle="modal" data-target="#newChapDialog"><i class="icon icon-plus"></i> 新建一个章节</button>
+                            <hr>
+                            <!--如果当前没有任何章节-->
+                            <!-- <span class="tag">您尚未创建任何章节</span> -->
+                            <!-- 对话框HTML -->
+                            <div class="modal" id="newChapDialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span></button>
+                                            <h4 class="modal-title">增加章节</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="course-block"> 章节序号<input class="form-control" type="number" name="" id="" value="1"></div>
+                                                <div class="course-block">章节名称<input class="form-control" type="text" name="" id=""></div>
+                                            </div>
+                                            <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--订单管理-->
+            <div id="page-4" style="display:none" class="page">
+                 <!--头部-->
+                 <div>
+                    <!--发表文章按钮-->
+                    <button class="btn btn-lg" type="button" onclick="goToSendPassage()">发表新文章&nbsp;&nbsp;<i class="icon icon-pencil"></i></button>
+                    <!--搜索-->
+                    <div class="input-control search-box search-box-circle has-icon-left has-icon-right" id="searchboxExample">
+                        <input id="inputSearchExample1" type="search" class="form-control search-input" placeholder="按名检索">
+                        <label for="inputSearchExample1" class="input-control-icon-left search-icon"><i class="icon icon-search"></i></label>
+                        <a href="#" class="input-control-icon-right search-clear-btn"><i class="icon icon-remove"></i></a>
+                    </div>
+                </div>
+                <hr>
+                <!--内容-->
+            </div>
+            
+        </div>
+    </div>
+    <script type="text/javascript">
+        var toolbarsArr = [
+                     'bold', //加粗
+                      'indent', //首行缩进
+                    'snapscreen', //截图
+                    'italic', //斜体
+                    'underline', //下划线
+                    'strikethrough', //删除线
+                    'subscript', //下标
+                    'fontborder', //字符边框
+                    'superscript', //上标
+                    'formatmatch', //格式刷
+                    'blockquote', //引用
+                    'pasteplain', //纯文本粘贴模式
+                    'selectall', //全选
+                     'horizontal', //分隔线
+                    'removeformat', //清除格式
+                    'time', //时间
+                    'date', //日期
+                    'insertrow', //前插入行
+                    'insertcol', //前插入列
+                    'mergeright', //右合并单元格
+                    'mergedown', //下合并单元格
+                    'deleterow', //删除行
+                    'deletecol', //删除列
+                     'splittocells', //完全拆分单元格
+                    'deletecaption', //删除表格标题
+                    'inserttitle', //插入标题
+                    'mergecells', //合并多个单元格
+                    'deletetable', //删除表格
+                    'cleardoc', //清空文档
+                    'insertparagraphbeforetable', //"表格前插入行"
+                    'fontfamily', //字体
+                    'fontsize', //字号
+                    'paragraph', //段落格式
+                    'simpleupload', //单图上传
+                     'edittable', //表格属性
+                    'edittd', //单元格属性
+                    'link', //超链接
+                    'spechars', //特殊字符
+                    'searchreplace', //查询替换
+                    'justifyleft', //居左对齐
+                    'justifyright', //居右对齐
+                    'justifycenter', //居中对齐
+                    'justifyjustify', //两端对齐
+                    'forecolor', //字体颜色
+                    'backcolor', //背景色
+                    'insertorderedlist', //有序列表
+                    'insertunorderedlist', //无序列表
+                    'fullscreen', //全屏
+                    'rowspacingtop', //段前距
+                    'rowspacingbottom', //段后距
+                    'pagebreak', //分页
+                    'imagenone', //默认
+                    'imageleft', //左浮动
+                    'imageright', //右浮动
+                    'attachment', //附件
+                     'lineheight', //行间距
+                      'imagecenter', //居中
+                      'touppercase', //字母大写
+                    'tolowercase', //字母小写
+                    'background', //背景
+                     'inserttable', //插入表格
+                      'charts', // 图表2
+                ];
+        //实例化编辑器
+        //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+        var ue4Psg = UE.getEditor('editor4Psg',{
+            toolbars:[toolbarsArr],
+            initialFrameWidth: null , autoHeightEnabled: false
+        });
+        var ue4Course = UE.getEditor('editor4Course',{
+            toolbars:[toolbarsArr],
+            initialFrameWidth: null , autoHeightEnabled: false
+        });
+        var ue4EditCourse = UE.getEditor('editor4EditCourse',{
+            toolbars:[toolbarsArr],
+            initialFrameWidth: null , autoHeightEnabled: false
+        });
+    </script>
+    <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <!-- ZUI Javascript组件 -->
+    <script src="js/zui.min.js"></script>
+  </body>
+</html>

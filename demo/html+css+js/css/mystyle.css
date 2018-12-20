@@ -9,10 +9,13 @@ select{
     border:1px solid #d75455;  
     -moz-border-radius:2px;  
     -webkit-border-radius:5px;  
-    border-radius:2px; 
+    border-radius:4px; 
+}
+.stress{
+    color: #d75455;
 }
 .btn-link{
-    color: #fff;
+    color: #6e0706;
 }
 .btn-link:hover{
     color: #fff;
@@ -173,7 +176,7 @@ a:focus{
      }
 }
 .login-contains{
-    width: 25%;
+    width: 30%;
     height:90%;
     margin-top: 5%;
     /* margin: auto;  position: absolute;  top: 0; left: 0; bottom: 0; right: 0; */
@@ -196,6 +199,9 @@ a:focus{
     margin-top: 20px;
     margin-bottom: 20px;
     text-shadow: none;
+}
+.login-contains .loginpanel .login-nav ul{
+	width: 75%;
 }
 .login-form #login-send-verifyCode{
     float: right;
@@ -1015,7 +1021,7 @@ a:focus{
     margin-top: 20px;
 }
 .panel-body{
-    padding: 25px;
+    /* padding: 25px; */
 }
 .comment-header img{
     width: 50px;
@@ -1452,27 +1458,31 @@ a:focus{
 	border:0;
 }
 .info-contain .directory-contain-list .passage-block,
-.passage-list-contain .passage-list-body .passage-block
+.passage-list-contain .passage-list-body .passage-block,
+.index-contain .passage-list-body .passage-block
 {
     width: 74%;
     clear: both;
     margin-bottom: 24px;
 }
 .info-contain .directory-contain-list .passage-block img,
-.passage-list-contain .passage-list-body .passage-block img
+.passage-list-contain .passage-list-body .passage-block img,
+.index-contain .passage-list-body .passage-block img
 {
     width: 32%;
     float: left;
     margin-right: 30px;
 }
 .info-contain .directory-contain-list .passage-block .title,
-.passage-list-contain .passage-list-body .passage-block .title
+.passage-list-contain .passage-list-body .passage-block .title,
+.index-contain .passage-list-body .passage-block .title
 {
     font-size: 16px;
     font-weight: bold;
 }
 .info-contain .directory-contain-list .passage-block .writer,
-.passage-list-contain .passage-list-body .passage-block .writer
+.passage-list-contain .passage-list-body .passage-block .writer,
+.index-contain .passage-list-body .passage-block .writer
 {
     line-height: 3em
 }
@@ -1530,7 +1540,6 @@ a:focus{
     margin-bottom: 20px;
 }
 .passage-contain .passage-panel .passage .writer-info img{
-    width: 40px;
     float: left;
     margin-right: 20px;
 }
@@ -1553,8 +1562,7 @@ a:focus{
     margin-right: 0;
 }
 .search-conatin .panel{
-    padding: 30px;
-    width: 100%;
+    padding: 30px
 }
 .search-conatin .panel .panel-body{
     width: 88%
@@ -1690,22 +1698,209 @@ a:focus{
 }
 #index-header{
     background-color: #fff;
-}
-#index-header .tool{
-    height: 25px;
-    background-color:rgb(248, 245, 245);
+    margin: 0;
 }
 #index-header .nav-list .logo{
-    width: 70%;
-    height: 130px;
+    width: 40%;
     padding-top: 10px;
     padding-bottom: 10px;
     /* float: left; */
 }
-#index-header .search{
-    /* width: 20%; */
+#index-header .index-contain{
+    margin: 0;
+}
+.index-contain{
+    margin-top: 0
 }
 #index-header .logo img{
     /* margin: 20px; */
-    width: 50%;
+    width: 75%;
+}
+.index-contain .row1{
+    margin-top: 20px;
+    height: 370px;
+}
+.index-contain .intro{
+    float: left;
+    width: 33%;
+    height: 100%;
+}
+.index-contain .intro .title{
+    font-weight: bold;
+    font-size: 16px;
+}
+.index-contain .intro p{
+    margin-top: 10px;
+    font-size: 14px;
+    text-indent: 2em;
+}
+.index-contain .intro .intro-p{
+    /* width: 60%;
+    float: left; */
+    margin-right: 20px;
+}
+.index-contain .intro img{
+    margin-top: 10px;
+    width: 60%;
+}
+.index-contain .row1 .news{
+    width: 38%;
+    height: 100%;
+}
+.index-contain .row1 .news .news-contain{
+    margin-top: 10px;
+}
+
+.index-contain .row1 .news .news-contain li{
+    line-height: 1.6em;
+}
+.index-contain .nav a{
+    font-size: 14px;
+}
+.index-contain .row1 .service{
+    width: 25%;
+    height: 100%;
+}
+.index-contain .row1 .service img{
+    width: 30%;
+}
+.index-contain .row1 .service .service-contain{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.index-contain .row1 .service .service-block{
+    display: block;
+    width: 100%;
+    padding: 10px 20px 10px 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    clear: both;
+    border: 1px solid #979292;
+    border-radius: 27px;
+}
+.index-contain .row1 .service .service-block img{
+    /* float: left; */
+    width: 30%;
+    margin-right: 20px;
+}
+.index-contain .row1 .service .service-block .name{
+    text-align: center;
+    vertical-align: middle
+}
+.index-contain .row2{
+    clear: both;
+    height: 320px;
+}
+.index-contain .row2 .consultation{
+    width: 72%;
+    height: 100%;
+}
+.index-contain .row2 .consultation .title{
+    margin-bottom: 10px;
+}
+.index-contain .row2 .consultation .title .more,
+.index-contain .row2 .index-listening .more
+{
+    float: right;
+}
+.index-contain .row2 .consultation .consultor{
+    float: left;
+    width: 45%;
+    height: 45%;
+    margin: 10px;
+    border: 1px solid #979292;
+    padding: 20px 10px 20px 10px;
+}
+.index-contain .row2 .consultation .consultor img{
+    float: left;
+    margin-right: 10px;
+}
+.index-contain .row2 .consultation .consultor .tag .stress{
+    color: #d75455;
+}
+.index-contain .row2 .consultation #cnosultor3{
+    clear: left;
+}
+.index-contain .row2 .index-listening{
+    width: 25%;
+    height: 100%;
+    margin-right: 5px;
+}
+.index-contain .row2 .index-listening .index-listener{
+    width: 100%;
+    background-image: none;
+    margin: 20px 0 40px 0;
+    clear: both;
+    height: 50%;
+    /* padding-top: 10px;
+    padding-bottom: 10px; */
+}
+.index-contain .row2 .index-listening .index-listener .head{
+    float: left;
+    height: 100%;
+    width: 34%;
+    margin-right: 10px;
+
+}
+.index-contain .row2 .index-listening .index-listener .head img{
+    display: block;
+    /* width: 30%; */
+    clear: both;
+    border-radius: 100%;
+    border: 1px solid #9792923f;
+}
+.index-contain .row2 .index-listening .index-listener .head .label{
+    margin-top: 5px;
+}
+.index-contain .row2 .index-listening .index-listener .index-listener-intr{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.section2{
+    background-image: url('../images/index-dark.gif');
+    background-repeat: repeat;
+    padding: 40px;
+    height: 680px;
+    margin-bottom: 50px;
+}
+.section2 .index-contain .board-title-h1{
+    line-height: 2.5em
+}
+.section2 .index-contain .course-contain{
+    width: 100%;
+    height: 500px;
+}
+
+.section2 .index-contain .course-contain .recommend-course{
+    margin-top: 20px;
+    height: 55%;
+}
+.section2 .index-contain .course-contain .recommend-course .card{
+    float: left;
+    width: 48%;
+    height: 100%;
+    margin-right: 10px;
+}
+.section2 .index-contain .course-contain .recommend-course-small{
+    width: 100%;
+    /* clear: left; */
+    margin-top: 20px;
+}
+.section2 .index-contain .course-contain .recommend-course-small .course{
+    width: 23%;
+    height: 30%;;
+    float: left;
+    margin-right: 18px;
+}
+.section2 .index-contain .row4{
+    clear: both;
+    width: 100%;
+    margin-top: 80px;
+    margin-left: 0
+}
+.section2 .index-contain .row4 .title{
+    margin-bottom: 20px;
+}
+.section2 .index-contain .row4 .more{
+    float: right;
 }
