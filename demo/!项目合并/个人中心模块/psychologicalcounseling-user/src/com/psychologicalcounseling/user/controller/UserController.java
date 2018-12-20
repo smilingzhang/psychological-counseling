@@ -5,6 +5,8 @@ package com.psychologicalcounseling.user.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -270,7 +272,7 @@ public class UserController {
 	}
 	
 	
-//----------------刘田会----------------------
+//-----------------------刘田会----------------------
 //	/**
 //     * 
 //     *@desc:根据session里的userId拿到User这个对象
@@ -385,17 +387,42 @@ public class UserController {
 		return "{\"result\":\"false\"}";
 		
 	}
+	/**
+	 * 
+	 *@desc:用来实现文件上传
+	 *@param file
+	 *@param request
+	 *@return
+	 *@return:String
+	 *@trhows
+	 *time:2018/12/20 8:28
+	 */ 
 	@RequestMapping("/userHeadUpload")
-	public String handleFormUpload(@RequestParam("upfile") MultipartFile file,
-			HttpServletRequest request) {
-		System.out.println(request.getContextPath());
-		String rootPath=request.getContextPath()+"/images/";                   //路径在这里设置就可以。
+	@ResponseBody
+	public String handleFormUpload(@RequestParam(value="file" ,required=false) MultipartFile file,
+			HttpServletRequest request,HttpSession session) {
+		if(file==null) {
+			System.out.println("图片失败");
+			return "{\"result\":\"false\"}";
+		}
+		String rootPath=request.getServletContext().getRealPath("/")+"images/";
+		System.out.println(rootPath+"**************");
+		System.out.println(file.getOriginalFilename());
+		//为路径设置名字。
+		Calendar calendar=Calendar.getInstance();
+		SimpleDateFormat sdf=new SimpleDateFormat();
+		String headName=sdf.format(calendar.getTime());
+		
+		//路径在这里设置就可以。
 		try {
-			file.transferTo(new File(rootPath,file.getOriginalFilename()));  
+			file.transferTo(new File(rootPath,headName));  
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("图片失败");
+			return "{\"result\":\"false\"}";
 		}
-		return null;
+		userService.reviseHeadPath(headName, (int)session.getAttribute("userId"));
+		return "{\"result\":\"success\"}";
 	}
 }

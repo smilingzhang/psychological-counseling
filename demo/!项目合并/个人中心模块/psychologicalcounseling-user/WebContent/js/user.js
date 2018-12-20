@@ -1,3 +1,4 @@
+//----------------------刘田会--------------------------
 //用于实名验证界面的“保存”按钮上。
 //功能：判断按钮由disabled变亮的条件。
 function isLegal(){
@@ -131,11 +132,7 @@ function changeBtnValue(obj){
         $(obj).attr("type","button");
     } 
 }
-function findBackPwd(){
-    $("#find-back-pwd").css("display","block");
-    $("#shade").css("display","block");
-    
-}
+
 //在忘记密码的流程中，给手机发送验证码。
 //注意事项：不复用之前的方法，原因是手机号码没办法直接获取，之前取手机号的方式与现在不同。
 var sendTime = 60;
@@ -226,14 +223,7 @@ function PwdVerifyCode(obj){
 		}
 	})
 }
-function closeWindow(obj){
-    $(obj).parent().css("display","none");
-    $("#shade").css("display","none");
-}
-function setNewPwd(){
-    $("#find-back-pwd").css("display","none");
-    $("#set-new-pwd").css("display","block");
-}
+
 
 //在以原密码为根据修改密码时
 //判断原始密码是否正确
@@ -514,4 +504,18 @@ function checkRealName(val){
 	 }else{
 	 	return true;
 	 }
+}
+//----------------邓旸------------------
+function findBackPwd(){
+    $("#find-back-pwd").css("display","block");
+    $("#shade").css("display","block");
+    
+}
+function closeWindow(obj){
+    $(obj).parent().css("display","none");
+    $("#shade").css("display","none");
+}
+function setNewPwd(){
+    $("#find-back-pwd").css("display","none");
+    $("#set-new-pwd").css("display","block");
 }
