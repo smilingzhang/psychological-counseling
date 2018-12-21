@@ -11,6 +11,9 @@ select{
     -webkit-border-radius:5px;  
     border-radius:4px; 
 }
+.btn{
+    text-shadow: 0 0px 0 ;
+}
 .stress{
     color: #d75455;
 }
@@ -177,7 +180,7 @@ a:focus{
 }
 .login-contains{
     width: 30%;
-    height:90%;
+    height:100%;
     margin-top: 5%;
     /* margin: auto;  position: absolute;  top: 0; left: 0; bottom: 0; right: 0; */
 }
@@ -200,11 +203,23 @@ a:focus{
     margin-bottom: 20px;
     text-shadow: none;
 }
+.login-contains .loginpanel li{
+    width: 50%;
+    text-align: center;
+}
+.login-contains .loginpanel li a{
+    /* font-size: 14px; */
+}
 .login-contains .loginpanel .login-nav ul{
-	width: 75%;
+	width: 100%;
+}
+.login-form #verifyCode{
+    width: 70%;
+    float: left;
+    margin-right: 1%;
 }
 .login-form #login-send-verifyCode{
-    float: right;
+    width: 29%;
     text-shadow: none;
 }
 .login-form .group{

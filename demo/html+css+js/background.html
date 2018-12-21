@@ -11,6 +11,9 @@
     <script src="js/jquery-3.3.1.js"></script>
     <script src="js/zui.js"></script> 
     <script src="js/zui.lite.js"></script>
+    <!--文件上传-->
+    <link href="lib/uploader/zui.uploader.css" rel="stylesheet">
+    <script src="lib/uploader/zui.uploader.min.js"></script>
     <!--自定义-->
     <script src="js/background.js"></script>
     <link href="css/mystyle.css" rel="stylesheet">
@@ -375,7 +378,8 @@
                         <!--导航栏-->
                         <ul class="nav nav-tabs">
                             <li class="active" onclick="changeNav(this,'edit-course-')"><a href="#">课程基本信息</a></li>
-                            <li onclick="changeNav(this,'edit-course-')"><a href="#">更新课程内容</a></li>
+                            <li onclick="changeNav(this,'edit-course-')"><a href="#">文件上传</a></li>
+                            <li onclick="changeNav(this,'edit-course-')"><a href="#">课时管理</a></li>
                         </ul>
                         <!--基本信息修改：应将数据库的数据自动填充进来-->
                         <div class="edit-course-info" id="edit-course-1">
@@ -384,7 +388,7 @@
                                     <form action="" method="post">
                                     <!--课程分类-->
                                         <select name="" id="passage-type">
-                                            <option selected>分类</option>
+                                            <option selected>课程分类</option>
                                             <option value="个人成长">个人成长</option>
                                             <option value="两性关系">两性关系</option>
                                             <option value="家庭亲子">家庭亲子</option>
@@ -402,10 +406,10 @@
                                     </div>
                                     <!--banner图上传-->
                                     <div class="course-block" id="ImgUpload-block">
-                                        <span>上传标题图片</span><input class="tag" type="file" name="ImgUpload"/>
+                                        <span>上传封面图片</span><input class="tag" type="file" name="ImgUpload"/>
                                     </div>
                                     <!--课程简介-->
-                                    <div class="course-block"><input maxlength="40" type="text" name="" id="" placeholder="文章简介" class="form-control"></div>
+                                    <div class="course-block"><input maxlength="40" type="text" name="" id="" placeholder="课程简介" class="form-control"></div>
                                     <!--课程详细介绍：富文本编辑器-->
                                     <div class="course-block"> 课程详细介绍</div>
                                     <script class="ueditor" id="editor4EditCourse" type="text/plain" name="articleContent" height=""></script>
@@ -415,10 +419,23 @@
                                 </form>
                             </div>
                         </div>
-                        <!--更新课程视频-->
+                        <!--文件上传-->
                         <div class="edit-course-vedio" id="edit-course-2" style="display:none">
+                            <div id="uploaderExample" class="uploader">
+                                <div class="file-list" data-drag-placeholder="请拖拽文件到此处"></div>
+                                <button type="button" class="btn btn-primary uploader-btn-browse"><i class="icon icon-cloud-upload"></i> 选择文件</button>
+                            </div>
+                            <script>
+                                $('#uploaderExample').uploader({
+                                    autoUpload: true,            // 当选择文件后立即自动进行上传操作
+                                    url: 'your/file/upload/url'  // 文件上传提交地址
+                                });
+                            </script>
+                        </div><!--END 文件上传-->
+                        <!--课时管理-->
+                        <div class="edit-course-construction" id="edit-course-3" style="display:none">
                             <button class="btn btn-link" type="button" data-toggle="modal" data-target="#newChapDialog"><i class="icon icon-plus"></i> 新建一个章节</button>
-                            <hr>
+                            <hr>   
                             <!--如果当前没有任何章节-->
                             <!-- <span class="tag">您尚未创建任何章节</span> -->
                             <!-- 对话框HTML -->
@@ -439,6 +456,7 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>

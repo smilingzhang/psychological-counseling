@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="css/zui.css" rel="stylesheet">
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/zui.lite.js"></script>
+    <script src="js/zui.js"></script> 
+    <link href="lib/uploader/zui.uploader.css" rel="stylesheet">
+    <script src="lib/uploader/zui.uploader.min.js"></script>
+</head>
+<body>
+    <div id="uploaderExample" class="uploader">
+        <div class="file-list" data-drag-placeholder="请拖拽文件到此处"></div>
+        <button type="button" class="btn btn-primary uploader-btn-browse"><i class="icon icon-cloud-upload"></i> 选择文件</button>
+    </div>
+    <script>
+        $('#uploaderExample').uploader({
+            autoUpload: true,            // 当选择文件后立即自动进行上传操作
+            url: 'http://localhost:8080/document'  // 文件上传提交地址
+        });
+    </script>
+
+    <button type="button" onclick="newChap()">创建章节</button>
+    <div id="chapList"></div>
+
+    <script>
+        var index = 1;
+        function newChap(){
+            $("#chapList").append($("<div>章节"+index+"</div>"));
+            index++;
+        }
+    </script>
+    <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <!-- ZUI Javascript组件 -->
+    <script src="js/zui.min.js"></script>
+</body>
+</html>
