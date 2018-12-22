@@ -9,29 +9,53 @@
     <script src="js/jquery-3.3.1.js"></script>
     <script src="js/zui.lite.js"></script>
     <script src="js/zui.js"></script> 
-    <link href="lib/uploader/zui.uploader.css" rel="stylesheet">
-    <script src="lib/uploader/zui.uploader.min.js"></script>
 </head>
 <body>
-    <div id="uploaderExample" class="uploader">
-        <div class="file-list" data-drag-placeholder="请拖拽文件到此处"></div>
-        <button type="button" class="btn btn-primary uploader-btn-browse"><i class="icon icon-cloud-upload"></i> 选择文件</button>
+    <div style="width: 30%; margin: 50px">
+        <button type="button" onclick="newChap()">创建章节</button>
+        <!--key的格式：
+            id-父id-名字
+        -->
+        <form action="" method="post">
+            <div id="chapList"></div>
+        </form>
     </div>
-    <script>
-        $('#uploaderExample').uploader({
-            autoUpload: true,            // 当选择文件后立即自动进行上传操作
-            url: 'http://localhost:8080/document'  // 文件上传提交地址
-        });
-    </script>
-
-    <button type="button" onclick="newChap()">创建章节</button>
-    <div id="chapList"></div>
 
     <script>
         var index = 1;
         function newChap(){
-            $("#chapList").append($("<div>章节"+index+"</div>"));
-            index++;
+            var name = prompt("请输入章节名");
+            if(name!=null){
+                $("#chapList").append($(
+                    "<div>"
+                        + "<span>"+name+ "</span>"
+                            + "<span style='display:none'>"
+                                + "<input type='checkbox' name='course' value='"+index+"$0$"+name+"'>"
+                            + "</span>"
+                        
+                        + "&nbsp;<a href='#' onclick='addSection(this)'>添加子课时</a>"
+                    + "</div>"
+                ));
+                index++;
+
+            }
+        }
+        function addSection(obj){
+            var name = prompt("请输入课时名");
+            if(name!=null){
+                var parentName = $(obj).siblings(":eq(1)").children().attr("value");
+                $(obj).parent().append($(
+                    "<div>"
+                        + "<span>&gl;"+name+"</span>"
+                        + "<input type='file' name='vedio'>"
+                        + "<span style='display:none'>"
+                            + "<input type='checkbox' name='course' value='"+parentName+"$"+index+"$"+name+"'"
+                        + "</span>"
+                    + "</div>"
+                ));
+                index++;
+
+            }
         }
     </script>
     <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
