@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="css/zui-theme.css" rel="stylesheet">
+    <link href="css/zui.css" rel="stylesheet">
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/zui.js"></script> 
+    <script src="js/zui.lite.js"></script>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>订单类型</th>
+            <th>预约时间</th>
+            <th>价格</th>
+            <th>客户信息</th>
+        </tr>
+        <tr>
+            <td>视频咨询</td>
+            <td>2018-12-12 11:21</td>
+            <td>200￥</td>
+            <td>
+                <a href="#" onclick="showClient(this)">展开</a>
+            </td>
+        </tr>
+        <tr style="display:none"><td><div>【客户信息】<br>姓名</div></td></tr>
+    </table>
+    <script>
+        function showClient(obj){
+            $(obj).parent().parent().next().css("display","block");
+            $(obj).attr("onclick","hideClient(this)");
+        }
+        function hideClient(obj){
+            $(obj).parent().parent().next().css("display","none");
+            $(obj).attr("onclick","showClient(this)");
+        }
+    </script>
+</body>
+</html>

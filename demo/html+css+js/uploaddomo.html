@@ -14,7 +14,7 @@
     <div style="width: 30%; margin: 50px">
         <button type="button" onclick="newChap()">创建章节</button>
         <!--key的格式：
-            id-父id-名字
+            父id$id$名字
         -->
         <form action="" method="post">
             <div id="chapList"></div>
@@ -43,7 +43,7 @@
         function addSection(obj){
             var name = prompt("请输入课时名");
             if(name!=null){
-                var parentName = $(obj).siblings(":eq(1)").children().attr("value");
+                var parentName = $(obj).siblings(":eq(1)").children().attr("value").split("$")[0];
                 $(obj).parent().append($(
                     "<div>"
                         + "<span>&gl;"+name+"</span>"

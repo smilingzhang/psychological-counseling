@@ -42,7 +42,8 @@ html{
     padding-right: 10px;
 }
 .bg-contain .page,
-.bg-contain #new-passage
+.bg-contain #new-passage,
+.bg-contain #edit-passage
 {
     width: 100%;
     padding: 20px 10% 40px 10%;
@@ -60,7 +61,8 @@ html{
     color: #d75455;
 }
 .bg-contain #new-passage #passage-type,
-.bg-contain #passage-type
+.bg-contain #passage-type,
+.bg-contain #edit-passage #passage-type
 {
     float: left;
     width: 20%;
@@ -68,17 +70,20 @@ html{
     height: 32px;
 }
 .bg-contain #new-passage #passage-title,
+.bg-contain #edit-passage #passage-title,
 .bg-contain  #passage-title
 {
     width: 79%;
     /* display: inline; */
 }
 .bg-contain #new-passage .passage-block,
+.bg-contain #edit-passage .passage-block,
 .bg-contain .course-block
 {
     margin-bottom: 10px;
 }
 .bg-contain #new-passage #ImgUpload-block,
+.bg-contain #edit-passage #ImgUpload-block,
 .bg-contain #ImgUpload-block
 {
     width: 100%;
@@ -87,6 +92,7 @@ html{
     padding: 5px 10px 5px 10px;
 }
 .bg-contain #new-passage #ImgUpload-block:hover,
+.bg-contain #edit-passage #ImgUpload-block:hover,
 .bg-contain #ImgUpload-block:hover
 {
     background-color:#f7e7e3;
@@ -104,6 +110,79 @@ html{
     float: right;
     width: 20%;
 }
-.bg-contain #edit-course .nav{
+.bg-contain #edit-course .nav,
+.bg-contain #page-4 .nav
+{
     margin: 20px 0 20px 0;
+}
+.bg-contain #edit-course-2 #chapList{
+    width: 100%;
+    padding: 20px;
+}
+.bg-contain #edit-course-2 #chapList .parent,
+.bg-contain #edit-course-2 #chapList .child
+{
+    line-height: 2em;
+    border: 1.5px solid #f7e7e3;
+    padding: 10px 20px 10px 20px;
+    margin-bottom: 5px;
+}
+.bg-contain #edit-course-2 #chapList .parent{
+    width: 100%;
+}
+.bg-contain #edit-course-2 #chapList .child{
+    width: 97%;
+    margin-left: 3%;
+}
+.bg-contain #edit-course-2 #chapList .child:hover{
+    background-color:#f7e7e3;
+}
+.bg-contain #page-4 .nav-tabs{
+    margin-bottom: 20px;
+}
+.bg-contain #page-4 #order-1,
+.bg-contain #page-4 #order-2{
+    padding: 0 10px 0 10px;
+}
+.bg-contain #page-4 #order-1 .nav-pills a,
+.bg-contain #page-4 #order-2 .nav-pills a{
+    font-size: 12px;
+    line-height: 1em;
+    margin-right: 5px;
+}
+.bg-contain #page-5 .panel{
+    padding: 20px;
+}
+.bg-contain #page-5 #time-table{
+    width: 80%;
+    margin-bottom: 30px
+}
+.bg-contain #page-5 #time-table .time-table-block{
+    height: 3em;
+    width: 12em;
+    border: 1px solid #d75455;
+    border-radius: 10px;
+    float: left;
+    margin: 0.5em;
+    text-align: center;
+}
+.bg-contain #page-5 #time-table .unchecked{
+    background-color: none;
+}
+.bg-contain #page-5 #time-table .checked{
+    background-color: #f7e7e3;
+}
+.bg-contain #page-5 #time-table .time-table-block span{
+    vertical-align:  middle;
+    line-height: 3em;
+}
+.bg-contain #page-5 #time-table .time-table-block:hover{
+    background-color: #f7e7e3;
+}
+.bg-contain #page-5 #time-table .save-btn{
+    width: 50%;
+}
+.bg-contain #page-5 .form-date{
+    width: 20%;
+    margin: 0;
 }
