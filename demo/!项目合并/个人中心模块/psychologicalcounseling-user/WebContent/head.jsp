@@ -16,7 +16,10 @@
                 </span>
                 </label>
                 <ul class="nav-list">
-                    <li><img src="images/logo.png"></li>
+                    <li class="logo">
+                    <!--logo-->
+                        <img src="images/logo-head-white.png" alt="明心心理">
+                    </li>
                     <li onclick="changeActive(this)" class="list active"><a href="index.html">首页</a></li>
                     <li onclick="changeActive(this)" class="list"><a href="consult-list.html">咨询</a></li>
                     <li onclick="changeActive(this)" class="list"><a href="listen-list.html">倾听</a></li>
