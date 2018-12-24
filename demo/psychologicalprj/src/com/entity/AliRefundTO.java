@@ -1,9 +1,10 @@
 package com.entity;
+
 /**
  * 
- *@desc:封装一个退款需要的数据的类，包括流水单号、退款金额等
- *@author chunhui
- *@date:Dec 7, 20183:55:25 PM
+ * @desc:封装一个退款需要的数据的类，包括流水单号、退款金额等
+ * @author chunhui
+ * @date:Dec 7, 20183:55:25 PM
  */
 public class AliRefundTO {
 	private String orderId;
@@ -28,6 +29,5 @@ public class AliRefundTO {
 	public void setRefundMoney(float refundMoney) {
 		this.refundMoney = refundMoney;
 	}
-	
 
 }

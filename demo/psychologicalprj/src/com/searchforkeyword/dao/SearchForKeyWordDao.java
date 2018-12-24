@@ -23,6 +23,7 @@ public class SearchForKeyWordDao extends BaseDao<Course>{
 	 *@trhows
 	 */
 	public List<String> selectSearchTeachersName(List<CourseIndexSearcher> list){
+		System.out.println("搜索到课程的数量"+list.size());
 		List<String> listName=new ArrayList<>();
 		Session session=sessionFactory.getCurrentSession();
 		for(int i=0;i<list.size();i++) {	
@@ -42,11 +43,14 @@ public class SearchForKeyWordDao extends BaseDao<Course>{
 	 *@trhows
 	 */
 	public List<String> selectSearchTeachersNameByArticle(List<ArticleIndexSearch> list){
+		System.out.println("搜索到的文章的数量为"+list.size());
 		List<String> listNames=new ArrayList<>();
 		Session session =sessionFactory.getCurrentSession();
 		for(int i=0;i<list.size();i++) {
 			Query query =session.createSQLQuery("select userRealName from user where userId in(select teacherId from article where articleId=?)");
+			System.out.println("文章的id为"+list.get(i).getArticleId());
 			query.setParameter(0, list.get(i).getArticleId());
+			System.out.println(query.uniqueResult());
 			String teacherNames=query.uniqueResult().toString();
 			listNames.add(teacherNames);	
 		}

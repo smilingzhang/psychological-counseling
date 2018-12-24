@@ -7,8 +7,8 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.Consultation.consulterlist.dao.ConsulterDao;
 import com.entity.Teacher;
+import com.searchconsulter.dao.SearchConsulterDao;
 import com.util.Page;
 import com.util.SetPageUtil;
 
@@ -16,7 +16,7 @@ import com.util.SetPageUtil;
 public class SearchConsulterService extends SetPageUtil<Teacher>{
 
 	@Resource
-	private ConsulterDao consulterDao;
+	private SearchConsulterDao searchConsulterDao;
 	public Page<Teacher> showAllConsulters(String pageNum,int pageSize){
 		int num=0;
 		if(pageNum==null||pageNum.equals("")) {
@@ -25,7 +25,7 @@ public class SearchConsulterService extends SetPageUtil<Teacher>{
 		else {
 			num=Integer.parseInt(pageNum);
 		}
-		List<Teacher> list=consulterDao.selectDefault();
+		List<Teacher> list=searchConsulterDao.getAllConsulterAndListener();
 		List<Teacher> searchConsulters = new ArrayList<>();
 		for (int i = (num - 1) * pageSize; i < pageSize * num && i < list.size(); i++) {
 			searchConsulters.add(list.get(i));
@@ -34,7 +34,7 @@ public class SearchConsulterService extends SetPageUtil<Teacher>{
 		return pageCourses;
 	}
 	public int countConsulters() {
-		return this.consulterDao.selectDefault().size();
+		return this.searchConsulterDao.getAllConsulterAndListener().size();
 	}
 
 }

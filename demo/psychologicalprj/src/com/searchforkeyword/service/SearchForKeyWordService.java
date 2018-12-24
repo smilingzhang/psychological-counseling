@@ -18,6 +18,7 @@ import com.entity.CourseIndexSearcher;
 import com.entity.SearchPage;
 import com.entity.Teacher;
 import com.searcharticle.dao.SearchArticleDao;
+import com.searchconsulter.dao.SearchConsulterDao;
 import com.searchcourse.dao.SearchCourseDao;
 import com.searchforkeyword.dao.SearchForKeyWordDao;
 import com.util.Page;
@@ -33,7 +34,7 @@ public class SearchForKeyWordService extends TestLucene{
 	@Resource
 	private SearchArticleDao searchArticleDao;
 	@Resource
-	private ConsulterDao consulterDao;
+	private SearchConsulterDao searchConsulterDao;
 	public List<CourseIndexSearcher> getSearchTeacherName(String searchContent) throws IOException, ParseException, org.apache.lucene.queryParser.ParseException{
 		if(searchContent==null||searchContent.equals("")) {
 			String aString=new String("心理");
@@ -41,7 +42,7 @@ public class SearchForKeyWordService extends TestLucene{
 		}
 		List<Course> searchCourse=this.searchCourseDao.searchAllCourses();
 		List<Article> searchArticle=this.searchArticleDao.searchAllArticles();
-		List<Teacher> searchTeacher=this.consulterDao.selectDefault();
+		List<Teacher> searchTeacher=this.searchConsulterDao.getAllConsulters();
 		createIndex(searchCourse,searchArticle,searchTeacher);
 		List<CourseIndexSearcher> courseIndexSearchers=seacher(searchContent);
 		List<String> searchedTeacherName= this.searchForKeyWordDao.selectSearchTeachersName(courseIndexSearchers);
@@ -125,31 +126,4 @@ public class SearchForKeyWordService extends TestLucene{
 		return page;	
 	}
 }
-/*	SearchPage searchPages=new SearchPage();
-if(listConsult.size()!=0) {
-	searchPages.setConsulterIndexSearchs(listConsult);	
-}
-if(listCourse.size()!=0) {
-	searchPages.setCourseIndexSearchers(listCourse);
-}
-if(listArticle.size()!=0) {
-	searchPages.setArticleIndexSearchs(listArticle);
-}
-int totalCount=listCourse.size()+listArticle.size()+listConsult.size();
 
-List<SearchPage> searchs = new ArrayList<>();
-int countCourse=listCourse.size();
-int countArticle=listArticle.size();
-int countConsulter=listConsult.size();
-for (int i = (num - 1) * pageSize; i < pageSize * num && i < totalCount; i++) {
-	
-	
-}
-Page<SearchPage> page = new Page<SearchPage>(num, pageSize);
-page.setList(searchs);
-page.setPageNum(num);
-page.setPrePageNum(num - 1);
-page.setNextPageNum(num + 1);
-page.setTotalCount(totalCount);
-page.setTotalCount(totalCount);
-*/

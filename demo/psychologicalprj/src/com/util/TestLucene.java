@@ -152,8 +152,9 @@ public class TestLucene extends  FileManager{
 	    	List<CourseIndexSearcher> listCour=new ArrayList<CourseIndexSearcher>();
 	    	int i=0;
 	    	for(i=0;i<docs.length;i++) {
-	    		int docId=docs[i].doc;
-	    		
+	    		int docId=docs[i].doc;		
+	    		System.out.println("课程索引为");
+	    		System.out.println(docId);
 	    		Document document = searcher.doc(docId);
 	    		CourseIndexSearcher c=new CourseIndexSearcher();
 	    		c.setCourseId(String.valueOf(docs[i].doc+1));
@@ -166,7 +167,8 @@ public class TestLucene extends  FileManager{
 	    		
 	    		lastId1=docs[i-1].doc;
 	    	}
-	    
+	    	System.out.println("最后一个编号为");
+	    	System.out.println(lastId1);
 	    	return listCour;
 	    	
 	      }
@@ -200,10 +202,12 @@ public class TestLucene extends  FileManager{
 	    	List<ArticleIndexSearch> listArti=new ArrayList<ArticleIndexSearch>();
 	    	for(int i=0;i<docs.length;i++) {
 	    		int docId=docs[i].doc;
-	    		
+	    		System.out.println(docId);
+	    		System.out.println("索引值为");
+	    		System.out.println(docs[i].doc-lastId1);
 	    		Document document = searcher.doc(docId);
 	    		ArticleIndexSearch a=new ArticleIndexSearch();
-	    		a.setArticleId(String.valueOf(docs[i].doc-lastId1));
+	    		a.setArticleId(String.valueOf(docs[i].doc-26));
 	    		a.setArticleTitle(document.get(ARTICLE_TITLE));
 	    		a.setArticleIntroduction(document.get(ARTICLE_INTRODUCTION));
 	    		a.setArticleContent(document.get(ARTICLE_CONTENT));
@@ -243,7 +247,6 @@ public class TestLucene extends  FileManager{
 	    	List<ConsulterIndexSearch> listCons=new ArrayList<ConsulterIndexSearch>();
 	    	for(int i=0;i<docs.length;i++) {
 	    		int docId=docs[i].doc;
-	    		
 	    		Document document = searcher.doc(docId);
 	    		ConsulterIndexSearch a=new ConsulterIndexSearch();
 	    		a.setTeacherId(String.valueOf(docs[i].doc));

@@ -10,14 +10,15 @@ import com.psychologicalcounseling.login.dao.RegistDaoImpl;
 
 public class RegistServiceImpl {
 
-    @Resource
-    private RegistDaoImpl rdl;
-    public int regist(String phone) {
-    	return rdl.insertUser(phone);
-    }
-    public int getUserId(String phone ) {
-    	return rdl.selectUserId(phone);
-    }
-	
+	@Resource
+	private RegistDaoImpl rdl;
+
+	public int regist(String phone) {
+		return rdl.insertUser(phone);
+	}
+
+	public int getUserId(String phone) {
+		return rdl.selectUserId(phone);
+	}
 
 }

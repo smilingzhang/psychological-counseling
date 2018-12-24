@@ -13,9 +13,9 @@ import com.listenning.dao.TeacherDaoImpl;
 
 /**
  * 
- *@desc:一句话被描述
- *@author baozhangjun
- *@date:2018年12月11日下午4:17:36
+ * @desc:一句话被描述
+ * @author baozhangjun
+ * @date:2018年12月11日下午4:17:36
  */
 @Service
 @Transactional
@@ -26,21 +26,21 @@ public class TeacherServiceImpl {
 
 	/**
 	 * 
-	 *@desc:通过传过来的参数来选择筛选的方法,当前可以倾听的倾听师
-	 *@param pageNo
-	 *@param pageSize
-	 *@param gender
-	 *@param age
-	 *@return
-	 *@return:List<Teacher>
-	 *@trhows
+	 * @desc:通过传过来的参数来选择筛选的方法,当前可以倾听的倾听师
+	 * @param pageNo
+	 * @param pageSize
+	 * @param gender
+	 * @param age
+	 * @return
+	 * @return:List<Teacher>
+	 * @trhows
 	 */
 	public List<Teacher> listListeners(int pageNo, int pageSize, String gender, String age) {
 		List<Teacher> teachers;
 		if (gender.equals("default") && age.equals("default")) {
 			teachers = teacherDaoImpl.findCanListenersByPage(pageNo, pageSize);
 		} else if (gender.equals("default") && !age.equals("default")) {
-			teachers = teacherDaoImpl.findCanListenersByAgeAndPage(pageNo, pageSize, age); 
+			teachers = teacherDaoImpl.findCanListenersByAgeAndPage(pageNo, pageSize, age);
 		} else if (!gender.equals("default") && age.equals("default")) {
 			teachers = teacherDaoImpl.findCanListenersBySexAndPage(pageNo, pageSize, gender);
 		} else {
@@ -48,7 +48,7 @@ public class TeacherServiceImpl {
 		}
 		return teachers;
 	}
-	
+
 	public long countListeners(String gender, String age) throws Exception {
 		long cnt;
 		if (gender.equals("default") && age.equals("default")) {
@@ -74,7 +74,7 @@ public class TeacherServiceImpl {
 
 	/**
 	 * @Desc: listenTime (min) @date 2018年12月10日:上午10:43:31 @author
-	 * baozhangjun @throws
+	 *        baozhangjun @throws
 	 */
 	public void changeTeacherListenTime(Teacher t, int listenTime) {
 		t.setTeacherListenTime(t.getTeacherListenTime() + listenTime);

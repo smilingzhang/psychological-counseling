@@ -1,6 +1,8 @@
 package com.entity;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -28,7 +30,7 @@ public class CourseCatalog {
 	private String coursecatalogName;
 	private String coursecatalogResourcePath;
 	private CourseCatalog parentCourseCatalog;
-	private Set<CourseCatalog> courseCatalogs = new HashSet<CourseCatalog>();
+	private List<CourseCatalog> courseCatalogs = new ArrayList<CourseCatalog>();
 	
 	
 	@Id
@@ -60,13 +62,8 @@ public class CourseCatalog {
 	
 
 	
-	@OneToMany(mappedBy="parentCourseCatalog",targetEntity=CourseCatalog.class,cascade=CascadeType.ALL)
-	public Set<CourseCatalog> getCourseCatalogs() {
-		return courseCatalogs;
-	}
-	public void setCourseCatalogs(Set<CourseCatalog> courseCatalogs) {
-		this.courseCatalogs = courseCatalogs;
-	}
+	
+	
 	@ManyToOne
 	@JoinColumn(name="coursecatalogParentId")
 	public CourseCatalog getParentCourseCatalog() {
@@ -74,6 +71,14 @@ public class CourseCatalog {
 	}
 	public void setParentCourseCatalog(CourseCatalog parentCourseCatalog) {
 		this.parentCourseCatalog = parentCourseCatalog;
+	}
+	
+	@OneToMany(mappedBy="parentCourseCatalog",targetEntity=CourseCatalog.class,cascade=CascadeType.ALL)
+	public List<CourseCatalog> getCourseCatalogs() {
+		return courseCatalogs;
+	}
+	public void setCourseCatalogs(List<CourseCatalog> courseCatalogs) {
+		this.courseCatalogs = courseCatalogs;
 	}
 	
 	
