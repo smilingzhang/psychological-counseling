@@ -3,7 +3,11 @@
  */
 package com.psychologicalcounseling.user.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.portlet.bind.annotation.ResourceMapping;
 
 import com.psychologicalcounseling.entity.ConsultationRecord;
@@ -72,7 +77,7 @@ public class UserController {
 			int userId = this.getParamId((Integer)session.getAttribute("userId")); 
 			//2. 获取用户实例
 			User user = userService.getUser(userId);
-			session.setAttribute("avatarLink", user.getUserHeadPath());
+			session.setAttribute("userHeadPath", user.getUserHeadPath());
 			session.setAttribute("userNickName", user.getUserNickName());
 			session.setAttribute("description", user.getUserAutograph());
 			session.setAttribute("user", user);
@@ -101,15 +106,20 @@ public class UserController {
 			//获取咨询状态
 			String consultState = req.getParameter("consultState");
 			//默认为“未咨询”
-			if(consultState==null) consultState = ""+ConsultationRecord.TODO;
+			if(consultState==null) consultState = ConsultationRecord.TODO;
 			//获取页码
 			int pageNum = this.getParamPage((String)req.getParameter("page"));
-			if(ConsultationRecord.TODO.equals(consultState))
+			switch(consultState) {
+			case ConsultationRecord.TODO:
 				model.addAttribute("crList", userService.getToDoListWithPaging(pageNum));
-			else if(ConsultationRecord.FINISHED.equals(consultState))
+				break;
+			case ConsultationRecord.FINISHED:
 				model.addAttribute("crList", userService.getFinishedListWithPaging(pageNum));
-			else if(ConsultationRecord.FINISHED.equals(consultState))
+				break;
+			case ConsultationRecord.CANCELED:
 				model.addAttribute("crList", userService.getCanceledListWithPaging(pageNum));
+				break;
+			}
 			model.addAttribute("consultState",consultState);
 			model.addAttribute("nav",1);
 			//设置页码
@@ -263,7 +273,7 @@ public class UserController {
 	}
 	
 	
-//----------------刘田会----------------------
+//-----------------------刘田会----------------------
 //	/**
 //     * 
 //     *@desc:根据session里的userId拿到User这个对象
@@ -307,7 +317,7 @@ public class UserController {
 			System.out.println("session为空");
 		}
 		userService.reviseEssentialInfo(userNickName, userSex, userProvince, userCity, userAutograph, userId);
-		//这里的userId保留，6应该是userId
+		
 		session.setAttribute("user", userService.getUser(userId));
 		return userService.getUser4Json(userId);
 	}
@@ -377,5 +387,58 @@ public class UserController {
 		userService.revisePwd(newPwd, userId);
 		return "{\"result\":\"false\"}";
 		
+	}
+	/**
+	 * 
+	 *@desc:用来实现文件上传
+	 *@param file
+	 *@param request
+	 *@return
+	 *@return:String
+	 *@trhows
+	 *time:2018/12/20 8:28
+	 */ 
+	@RequestMapping("/userHeadUpload")
+	@ResponseBody
+	public Map handleFormUpload(@RequestParam(value="file" ,required=false) MultipartFile file,
+			@RequestParam(value="ext" ,required=false) String ext,HttpServletRequest request,HttpSession session) {
+		Map map=new HashMap();
+		if(file==null) {
+			System.out.println("图片失败");
+			map.put("result", "false");
+			return map;
+		}
+		System.out.println(request.getServletContext().getRealPath("/"));
+		System.out.println(request.getServletContext());
+		String rootPath=request.getServletContext().getRealPath("/")+"images/";
+		//为路径设置名字。
+		Calendar calendar=Calendar.getInstance();
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddHHmmssSSS");
+		String headName=sdf.format(calendar.getTime())+ext;
+		
+		//路径在这里设置就可以。
+		try {
+			file.transferTo(new File(rootPath,headName));  
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			map.put("result", "false");
+			return map;
+		}
+		//(int)session.getAttribute("userId")
+		//存储到数据库的相对路径。
+		String relativePath="/images/"+headName;
+		//更新session中的头像路径。
+		session.setAttribute("userHeadPath", relativePath);
+		//更新数据库中的头像路径。
+		userService.reviseHeadPath(relativePath, 1);
+		//更新session中的user
+		int userId=(int)session.getAttribute("userId");
+		session.setAttribute("user", userService.getUser(userId));
+		System.out.println(userService.getUser(userId).getUserHeadPath()+"*************************************");
+		map.put("result", "success");
+		map.put("userHeadPath", relativePath);
+		
+		return map;
 	}
 }

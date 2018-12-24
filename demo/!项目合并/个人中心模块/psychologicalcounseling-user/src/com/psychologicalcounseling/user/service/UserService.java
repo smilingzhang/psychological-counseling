@@ -339,6 +339,14 @@ public class UserService {
 	}
 
 //--------------刘田会----------------
+	/**
+	 * 
+	 *@desc:得到user
+	 *@param userId
+	 *@return
+	 *@return:Map<String,Object>
+	 *@trhows
+	 */
 	public  Map<String, Object> getUser4Json(int userId) {
 		try {
 			return userDao.selectUser4Json(userId);
@@ -349,6 +357,18 @@ public class UserService {
 			return null;
 		}
 	}
+	/**
+	 * 
+	 *@desc:修改基本信息
+	 *@param userNickName
+	 *@param userSex
+	 *@param userProvince
+	 *@param userCity
+	 *@param userAutograph
+	 *@param userId
+	 *@return:void
+	 *@trhows
+	 */
 	public void reviseEssentialInfo(String userNickName,String userSex,String userProvince,String userCity,String userAutograph,int userId) {
 		System.out.println(userSex);
 		if(userSex.equals("male")) {
@@ -360,9 +380,27 @@ public class UserService {
 		userDao.updateEssentialInfo(userNickName, userSex, userProvince, userCity, userAutograph,userId);
 		
 	}
+	/**
+	 * 
+	 *@desc:修改真实姓名
+	 *@param userRealName
+	 *@param userIdNumber
+	 *@param userId
+	 *@return:void
+	 *@trhows
+	 */
 	public void reviseRealName(String userRealName,String userIdNumber,int userId ) {
 		userDao.updateRealName(userRealName, userIdNumber,userId);
 	}
+	/**
+	 * 
+	 *@desc:修改旧密码
+	 *@param oldPwd
+	 *@param userId
+	 *@return
+	 *@return:boolean
+	 *@trhows
+	 */
     public boolean verifyOldPwd(String oldPwd,int userId) {
     	
     	//这个用的找到当前用户，从而找到密码
@@ -373,8 +411,28 @@ public class UserService {
     		return false;
     	}
     }
+    /**
+     * 
+     *@desc:更新密码
+     *@param newPwd
+     *@param userId
+     *@return:void
+     *@trhows
+     */
     public void revisePwd(String newPwd,int userId) {
     	userDao.updatePwd(newPwd, userId);
     	
+    }
+    /**
+     * 
+     *@desc:更新用户的头像。
+     *@param userHeadPath
+     *@param userId
+     *@return:void
+     *@trhows
+     */
+    public void reviseHeadPath(String userHeadPath,int userId) {
+    	
+    	userDao.updateHeadPath(userHeadPath,userId);
     }
 }
