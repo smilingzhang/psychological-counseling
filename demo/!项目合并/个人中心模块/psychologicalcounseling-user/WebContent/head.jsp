@@ -22,6 +22,7 @@
                     <li onclick="changeActive(this)" class="list"><a href="listen-list.html">倾听</a></li>
                     <li onclick="changeActive(this)" class="list"><a href="course-list.html">课程</a></li>
                     <li onclick="changeActive(this)" class="list"><a href="passage-list.html">阅读</a></li>
+                    <li>
                     <div class="search">
                         <form class="navbar-form navbar-left" role="search">
                             <div class="form-group">
@@ -31,6 +32,7 @@
                             <button type="submit" class="btn btn-default">搜索</button>
                         </form>
                     </div>
+                    </li>
                     <c:if test="${!empty(sessionScope.userId) }">
                     	<li class="dropdown list dropdown-hover" id="list-after-login">
 	                        <a href="#"  class="dropdown-toggle" data-toggle="dropdown"><img id="avatar" src="${sessionScope.avatarLink }" alt="头像"></a>

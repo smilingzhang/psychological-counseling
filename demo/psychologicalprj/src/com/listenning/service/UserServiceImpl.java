@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.Consultation.appointmentconsult.dao.ConsultOrderUserDao;
 import com.entity.ConsultationRecord;
 import com.entity.ListenRecord;
 import com.entity.User;
@@ -14,6 +15,8 @@ public class UserServiceImpl {
 
 	@Resource
 	private UserDaoImpl userDaoImpl;
+	@Resource
+	private ConsultOrderUserDao consultOrderUserDao;
 
 	public User getUserByUserNickName(String userNickName) {
 		return userDaoImpl.findUserByUserNickName(userNickName);
@@ -37,5 +40,8 @@ public class UserServiceImpl {
 		} else {
 			return r.getUser();
 		}
+	}
+	public User getUserById(int userId) {
+		return this.consultOrderUserDao.selectUserById(userId);
 	}
 }

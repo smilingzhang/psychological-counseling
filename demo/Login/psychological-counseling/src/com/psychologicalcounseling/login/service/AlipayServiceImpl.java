@@ -101,7 +101,9 @@ public class AlipayServiceImpl {
 			}
 			if(jsonObject1.has("avatar")) {
 				user.setUserHeadPath(jsonObject1.getString("avatar"));
-				if(jsonObject1.getString("avatar")=="f") {
+			}
+			if(jsonObject1.has("gender")) {
+				if(jsonObject1.getString("gender")=="f") {
 					user.setUserSex("男");
 				}else {
 					user.setUserSex("女");

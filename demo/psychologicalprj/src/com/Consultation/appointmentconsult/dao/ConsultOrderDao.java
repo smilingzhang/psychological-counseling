@@ -2,11 +2,8 @@ package com.Consultation.appointmentconsult.dao;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
 import com.entity.ConsultationRecord;
@@ -32,6 +29,7 @@ public class ConsultOrderDao extends BaseDao<ConsultationRecord>{
 	public int insertConsultOrder(ConsultationRecord consultOrder) {
 		return (int) save(consultOrder);
 	}
+
 	
 	/**
 	 * 
@@ -45,6 +43,13 @@ public class ConsultOrderDao extends BaseDao<ConsultationRecord>{
 	public void updateConsultOrder(String randomNum,int orderId) {
 		Session session=sessionFactory.getCurrentSession();
 		Query query=session.createSQLQuery("update consultationRecord set randomNum=?  where consultationrecordId=?");
+		query.setParameter(0, randomNum);
+		query.setParameter(1, orderId);
+		query.executeUpdate();
+	}
+	public void updateListenOrderRandom(String randomNum,int orderId) {
+		Session session=sessionFactory.getCurrentSession();
+		Query query=session.createSQLQuery("update listenrecord set randomNum=? where listenrecordId=?");
 		query.setParameter(0, randomNum);
 		query.setParameter(1, orderId);
 		query.executeUpdate();
@@ -96,7 +101,7 @@ public class ConsultOrderDao extends BaseDao<ConsultationRecord>{
 	 *@return:boolean
 	 *@trhows
 	 */
-	public boolean selectIsHasPhoneNum(int userId) {
+	public boolean selectIsHasPhoneNum(Integer userId) {
 		Session session=sessionFactory.getCurrentSession();
 		Query query=session.createQuery("select u.userPhone from User u where u.userId=?");
 		query.setParameter(0, userId);
@@ -114,7 +119,7 @@ public class ConsultOrderDao extends BaseDao<ConsultationRecord>{
 	 *@return:void
 	 *@trhows
 	 */
-	public void updateUserPhoneById(int userId,String userPhone) {
+	public void updateUserPhoneById(Integer userId,String userPhone) {
 		Session session=sessionFactory.getCurrentSession();
 		Query query=session.createSQLQuery("update user set userPhone=? where userId=?");
 		query.setParameter(0, userPhone);

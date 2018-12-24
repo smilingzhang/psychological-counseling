@@ -50,4 +50,15 @@ public class ListenRecordServiceImpl {
 		return listenRecordDaoImpl.get(ListenRecord.class, id);
 	}
 
+	public void changeListenRecordStartTimeById(int id, String startTime) {
+		listenRecordDaoImpl.updateListenRecordStartTimeById(id, startTime);
+	}
+	
+	public void changeListenRecordEndTimeById(int id, String endTime) {
+		listenRecordDaoImpl.updateListenRecordEndTimeById(id, endTime);
+	}
+	
+	public void changeListenRecordPriceById(int id, int price) {
+		listenRecordDaoImpl.updateListenRecordPriceById(id, price);
+	}
 }

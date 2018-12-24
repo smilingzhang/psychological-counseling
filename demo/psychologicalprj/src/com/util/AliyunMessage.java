@@ -2,9 +2,11 @@ package com.util;
 
 
 
+import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.UUID;
 
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
@@ -61,7 +63,7 @@ public class AliyunMessage {
         //必填:短信模板-可在短信控制台中找到
         request.setTemplateCode("SMS_151575472");
         //可选:模板中的变量替换JSON串,如模板内容为"亲爱的${name},您的验证码为${code}"时,此处的值为
-        HashMap map=new HashMap<>();
+        HashMap map=new HashMap();
         map.put("code", code);
         String json=new Gson().toJson(map);
         request.setTemplateParam(json);
@@ -79,7 +81,7 @@ public class AliyunMessage {
     }
 
 
-    public static QuerySendDetailsResponse querySendDetails(String bizId) throws ClientException {
+    public static QuerySendDetailsResponse querySendDetails(String bizId,String phoneNumber) throws ClientException {
 
         //可自助调整超时时间
         System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
@@ -93,7 +95,7 @@ public class AliyunMessage {
         //组装请求对象
         QuerySendDetailsRequest request = new QuerySendDetailsRequest();
         //必填-号码
-        request.setPhoneNumber("15227103563");
+        request.setPhoneNumber(phoneNumber);
         //可选-流水号
         request.setBizId(bizId);
         //必填-发送日期 支持30天内记录查询，格式yyyyMMdd
@@ -111,7 +113,6 @@ public class AliyunMessage {
     }
 
     public static void getResult(String phoneNumber,String code) throws ClientException, InterruptedException {
-
         //发短信
         SendSmsResponse response = sendSms(phoneNumber,code);
         System.out.println("短信接口返回的数据----------------");
@@ -124,7 +125,7 @@ public class AliyunMessage {
 
         //查明细
         if(response.getCode() != null && response.getCode().equals("OK")) {
-            QuerySendDetailsResponse querySendDetailsResponse = querySendDetails(response.getBizId());
+            QuerySendDetailsResponse querySendDetailsResponse = querySendDetails(response.getBizId(),phoneNumber);
             System.out.println("短信明细查询接口返回数据----------------");
             System.out.println("Code=" + querySendDetailsResponse.getCode());
             System.out.println("Message=" + querySendDetailsResponse.getMessage());

@@ -18,6 +18,7 @@
   </head>
   <body>
     <!-- 在此处编码你的创意 -->
+     <%@include file="head.jsp" %>
     <div class="panel contains">
         <div class="panel-body business-panel">
             <!--业务流程图-->
@@ -43,7 +44,7 @@
             </div>
             <!--小贴士-->
             <form action="<%=path %>/insertorder" method="POST">
-             <input type="hidden" value="${teacherId }" name="teacherId"/>
+            	<input type="hidden" value="${teacherId }" name="teacherId"/>
                 <input type="hidden" value="${teacherPrice }" name="teacherPrice">
                 <input type="hidden" value="${date }" name="date"/>
                 <input type="hidden" value="${content }" name="content"/>
@@ -79,6 +80,9 @@
                     && ($("#pro1").is(":checked") && $("#pro2").is(":checked"))){
                       $("#confirmed-btn").removeAttr("disabled");
                     }
+                else{
+                	$("#confirmed-btn").attr("disabled","disabled");
+                }
               })
             </script>
         </div>

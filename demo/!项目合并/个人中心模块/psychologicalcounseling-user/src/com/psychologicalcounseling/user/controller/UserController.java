@@ -104,17 +104,12 @@ public class UserController {
 			if(consultState==null) consultState = ""+ConsultationRecord.TODO;
 			//获取页码
 			int pageNum = this.getParamPage((String)req.getParameter("page"));
-			switch(Integer.parseInt(consultState)) {
-			case ConsultationRecord.TODO:
+			if(ConsultationRecord.TODO.equals(consultState))
 				model.addAttribute("crList", userService.getToDoListWithPaging(pageNum));
-				break;
-			case ConsultationRecord.FINISHED:
+			else if(ConsultationRecord.FINISHED.equals(consultState))
 				model.addAttribute("crList", userService.getFinishedListWithPaging(pageNum));
-				break;
-			case ConsultationRecord.CANCELED:
+			else if(ConsultationRecord.FINISHED.equals(consultState))
 				model.addAttribute("crList", userService.getCanceledListWithPaging(pageNum));
-				break;
-			}
 			model.addAttribute("consultState",consultState);
 			model.addAttribute("nav",1);
 			//设置页码

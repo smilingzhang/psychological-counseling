@@ -21,7 +21,6 @@ function isFirst(){
         document.getElementById('login-form-submit-button').removeAttribute("disabled");
         }
 }
-
 //验证手机号格式
 /**
  * 
@@ -29,7 +28,6 @@ function isFirst(){
  *                     -true  老用户
  */
 function loginVerifyPhone(){
-	
     var phoneNum = document.getElementById('phoneNum').value;
     
     //手机号格式错误
