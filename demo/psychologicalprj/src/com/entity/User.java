@@ -24,7 +24,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name="user")
 public class User {
-	private int userId;
+	public static final int IDENTITY_USER = 1;
+	public static final int IDENTITY_CONSULTER = 2;
+	private String userProvince;
+	private String alipayUserId;
+	private String weiboUid;
+	private Integer userId;
 	private String userHeadPath;
 	private String userNickName;
 	private String userSex;
@@ -34,7 +39,7 @@ public class User {
 	private String userPhone;
 	private String userPassword;
 	private Date userRegistTime;
-	private int userIdentity;
+	private Integer userIdentity;
 	private String userCity;
 	private String userEmail;
 	private Set<UserLabel> userLabels= new HashSet<UserLabel>();
@@ -43,7 +48,7 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	public int getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
 	public void setUserId(int userId) {
@@ -103,7 +108,7 @@ public class User {
 	public void setUserRegistTime(Date userRegistTime) {
 		this.userRegistTime = userRegistTime;
 	}
-	public int getUserIdentity() {
+	public Integer getUserIdentity() {
 		return userIdentity;
 	}
 	public void setUserIdentity(int userIdentity) {
@@ -135,7 +140,39 @@ public class User {
 	public void setConsultationRecords(Set<ConsultationRecord> consultationRecords) {
 		this.consultationRecords = consultationRecords;
 	}
+	public String getUserProvince() {
+		return userProvince;
+	}
+	public void setUserProvince(String userProvince) {
+		this.userProvince = userProvince;
+	}
+	public String getAlipayUserId() {
+		return alipayUserId;
+	}
+	public void setAlipayUserId(String alipayUserId) {
+		this.alipayUserId = alipayUserId;
+	}
+	public String getWeiboUid() {
+		return weiboUid;
+	}
+	public void setWeiboUid(String weiboUid) {
+		this.weiboUid = weiboUid;
+	}
+	public static int getIdentityUser() {
+		return IDENTITY_USER;
+	}
+	public static int getIdentityConsulter() {
+		return IDENTITY_CONSULTER;
+	}
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+	public void setUserIdentity(Integer userIdentity) {
+		this.userIdentity = userIdentity;
+	}
 	
-	
+	public String toString() {
+		return "uaserName is"+userRealName;
+	}
 	
 }

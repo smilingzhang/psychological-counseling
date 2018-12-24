@@ -106,79 +106,81 @@
                         <!--time-cell-able:可预约 time-cell-disable:不可预约-->
                         <div class="timetable">
                            	 <c:forEach items="${d.teacherTimes }" var="timelist" >
+                           	 <c:if test="${timelist.date==format }">
                         	<c:if test="${timelist.time8==1 }">
-                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=8:00-9:00">8:00</a></span>
+                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=8:00-9:00" data-toggle="tooltip" data-placement="bottom" title="可预约时间:8:00-9:00">8:00</a></span>
                        		 </c:if>
                         	<c:if test="${timelist.time8==0 }">
                             <span class="time-cell-disable">8:00</span>
                         	</c:if>
                         	 
                         	 <c:if test="${timelist.time9==1 }">
-                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=9:00-10:00">9:00</a></span>
+                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=9:00-10:00" data-toggle="tooltip" data-placement="bottom" title="可预约时间:8:00-9:00">9:00</a></span>
                        		 </c:if>
                         	<c:if test="${timelist.time9==0 }">
                             <span class="time-cell-disable">9:00</span>
                         	 </c:if>
      	  	
                         	 <c:if test="${timelist.time10==1 }">
-                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=10:00-11:00">10:00</a></span>
+                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=10:00-11:00" data-toggle="tooltip" data-placement="bottom" title="可预约时间:8:00-9:00">10:00</a></span>
                        		 </c:if>
                         	<c:if test="${timelist.time10==0 }">
                             <span class="time-cell-disable">10:00</span>
                         	 </c:if>
                         	 <c:if test="${timelist.time11==1 }">
-                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=11:00-12:00">11:00</a></span>
+                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=11:00-12:00" data-toggle="tooltip" data-placement="bottom" title="可预约时间:8:00-9:00">11:00</a></span>
                        		 </c:if>
                         	<c:if test="${timelist.time11==0 }">
                             <span class="time-cell-disable">11:00</span>
                         	</c:if>
                         	<c:if test="${timelist.time12==1 }">
-                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=12:00-13:00">12:00</a></span>
+                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=12:00-13:00" data-toggle="tooltip" data-placement="bottom" title="可预约时间:8:00-9:00">12:00</a></span>
                        		 </c:if>
                         	<c:if test="${timelist.time12==0 }">
                             <span class="time-cell-disable">12:00</span>
                         	</c:if>
                         	<c:if test="${timelist.time13==1 }">
-                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=13:00-14:00">13:00</a></span>
+                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=13:00-14:00" data-toggle="tooltip" data-placement="bottom" title="可预约时间:8:00-9:00">13:00</a></span>
                        		 </c:if>
                         	<c:if test="${timelist.time13==0 }">
                             <span class="time-cell-disable">13:00</span>
                         	</c:if>
                         	<c:if test="${timelist.time14==1 }">
-                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=14:00-15:00">14:00</a></span>
+                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=14:00-15:00" data-toggle="tooltip" data-placement="bottom" title="可预约时间:8:00-9:00">14:00</a></span>
                        		 </c:if>
                         	<c:if test="${timelist.time14==0 }">
                             <span class="time-cell-disable">14:00</span>
                         	</c:if>
                         	<c:if test="${timelist.time15==1 }">
-                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=15:00-16:00">15:00</a></span>
+                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=15:00-16:00" data-toggle="tooltip" data-placement="bottom" title="可预约时间:8:00-9:00">15:00</a></span>
                        		 </c:if>
                         	<c:if test="${timelist.time15==0 }">
                             <span class="time-cell-disable">15:00</span>
                         	</c:if>
                         	<c:if test="${timelist.time16==1 }">
-                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=16:00-17:00">16:00</a></span>
+                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=16:00-17:00" data-toggle="tooltip" data-placement="bottom" title="可预约时间:8:00-9:00">16:00</a></span>
                        		 </c:if>
                         	<c:if test="${timelist.time16==0 }">
                             <span class="time-cell-disable">16:00</span>
                         	</c:if>
                         	<c:if test="${timelist.time17==1 }">
-                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=17:00-18:00">17:00</a></span>
+                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=17:00-18:00" data-toggle="tooltip" data-placement="bottom" title="可预约时间:8:00-9:00">17:00</a></span>
                        		 </c:if>
                         	<c:if test="${timelist.time17==0 }">
                             <span class="time-cell-disable">17:00</span>
                         	</c:if>
                         	<c:if test="${timelist.time18==1 }">
-                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=18:00-19:00">18:00</a></span>
+                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=18:00-19:00" data-toggle="tooltip" data-placement="bottom" title="可预约时间:8:00-9:00">18:00</a></span>
                        		 </c:if>
                         	<c:if test="${timelist.time18==0 }">
                             <span class="time-cell-disable">18:00</span>
                         	</c:if>
                         	<c:if test="${timelist.time19==1 }">
-                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=19:00-20:00">19:00</a></span>
+                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${d.user.userRealName }&price=${d.teacherPrice }&date=${date }&autograph=${d.user.userAutograph }&id=${d.teacherId }&content=19:00-20:00" data-toggle="tooltip" data-placement="bottom" title="可预约时间:8:00-9:00">19:00</a></span>
                        		 </c:if>
                         	<c:if test="${timelist.time19==0 }">
                             <span class="time-cell-disable">19:00</span>
+                        	</c:if>
                         	</c:if>
                          </c:forEach>
                         </div>
@@ -214,84 +216,88 @@
                         <!--time-cell-able:可预约 time-cell-disable:不可预约-->
                         <div class="timetable">
                         <c:forEach items="${t.teacherTimes }" var="timelist" >
-                       
+                       	<c:if test="${timelist.date==date }">
                         	<c:if test="${timelist.time8==1 }">
-                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=8:00-9:00">8:00</a></span>
+                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=8:00-9:00" data-toggle="tooltip" data-placement="bottom" title="可预约时间:8:00-9:00">8:00</a></span>
                        		 </c:if>
                         	<c:if test="${timelist.time8==0 }">
                             <span class="time-cell-disable">8:00</span>
                         	</c:if>
                         	
                         	 	<c:if test="${timelist.time9==1 }">
-                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=9:00-10:00">9:00</a></span>
+                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=9:00-10:00" data-toggle="tooltip" data-placement="bottom" title="可预约时间:8:00-9:00">9:00</a></span>
                        		 </c:if>
                         	<c:if test="${timelist.time9==0 }">
                             <span class="time-cell-disable">9:00</span>
                         	 </c:if>
                         	 
                         	 	<c:if test="${timelist.time10==1 }">
-                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=10:00-11:00">10:00</a></span>
+                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=10:00-11:00" data-toggle="tooltip" data-placement="bottom" title="可预约时间:8:00-9:00">10:00</a></span>
                        		 </c:if>
                         	<c:if test="${timelist.time10==0 }">
                             <span class="time-cell-disable">10:00</span>
                         	 </c:if>
                         	 
                         	 <c:if test="${timelist.time11==1 }">
-                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=11:00-12:00">11:00</a></span>
+                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=11:00-12:00" data-toggle="tooltip" data-placement="bottom" title="可预约时间:8:00-9:00">11:00</a></span>
                        		 </c:if>
                         	<c:if test="${timelist.time11==0 }">
                             <span class="time-cell-disable">11:00</span>
                         	</c:if>
                         	<c:if test="${timelist.time12==1 }">
-                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=12:00-13:00">12:00</a></span>
+                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=12:00-13:00" data-toggle="tooltip" data-placement="bottom" title="可预约时间:8:00-9:00">12:00</a></span>
                        		 </c:if>
                         	<c:if test="${timelist.time12==0 }">
                             <span class="time-cell-disable">12:00</span>
                         	</c:if>
                         	<c:if test="${timelist.time13==1 }">
-                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=13:00-14:00">13:00</a></span>
+                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=13:00-14:00" data-toggle="tooltip" data-placement="bottom" title="可预约时间:8:00-9:00">13:00</a></span>
                        		 </c:if>
                         	<c:if test="${timelist.time13==0 }">
                             <span class="time-cell-disable">13:00</span>
                         	</c:if>
                         	<c:if test="${timelist.time14==1 }">
-                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=14:00-15:00">14:00</a></span>
+                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=14:00-15:00" data-toggle="tooltip" data-placement="bottom" title="可预约时间:8:00-9:00">14:00</a></span>
                        		 </c:if>
                         	<c:if test="${timelist.time14==0 }">
                             <span class="time-cell-disable">14:00</span>
                         	</c:if>
                         	<c:if test="${timelist.time15==1 }">
-                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=15:00-16:00">15:00</a></span>
+                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=15:00-16:00" data-toggle="tooltip" data-placement="bottom" title="可预约时间:8:00-9:00">15:00</a></span>
                        		 </c:if>
                         	<c:if test="${timelist.time15==0 }">
                             <span class="time-cell-disable">15:00</span>
                         	</c:if>
                         	<c:if test="${timelist.time16==1 }">
-                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=16:00-17:00">16:00</a></span>
+                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=16:00-17:00" data-toggle="tooltip" data-placement="bottom" title="可预约时间:8:00-9:00">16:00</a></span>
                        		 </c:if>
                         	<c:if test="${timelist.time16==0 }">
                             <span class="time-cell-disable">16:00</span>
                         	</c:if>
                         	<c:if test="${timelist.time17==1 }">
-                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=17:00-18:00">17:00</a></span>
+                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=17:00-18:00" data-toggle="tooltip" data-placement="bottom" title="可预约时间:8:00-9:00">17:00</a></span>
                        		 </c:if>
                         	<c:if test="${timelist.time17==0 }">
                             <span class="time-cell-disable">17:00</span>
                         	</c:if>
                         	<c:if test="${timelist.time18==1 }">
-                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=18:00-19:00">18:00</a></span>
+                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=18:00-19:00" data-toggle="tooltip" data-placement="bottom" title="可预约时间:8:00-9:00">18:00</a></span>
                        		 </c:if>
                         	<c:if test="${timelist.time18==0 }">
                             <span class="time-cell-disable">18:00</span>
                         	</c:if>
                         	<c:if test="${timelist.time19==1 }">
-                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=19:00-20:00">19:00</a></span>
+                            <span class="time-cell-able"><a href="<%=path %>/appointment/showtime?teacherName=${t.user.userRealName }&price=${t.teacherPrice }&date=${date }&autograph=${t.user.userAutograph }&id=${t.teacherId }&content=19:00-20:00" data-toggle="tooltip" data-placement="bottom" title="可预约时间:8:00-9:00">19:00</a></span>
                        		 </c:if>
                         	<c:if test="${timelist.time19==0 }">
                             <span class="time-cell-disable">19:00</span>
                         	</c:if>
+                        	</c:if>
                          </c:forEach>
                         </div>
+                        <script>
+                        	$('[date-toggle="tooltip"]').tooltip();
+                        </script>
                     </div>
                 </div>
 			</c:forEach>
@@ -329,16 +335,16 @@
         <!--分页-->
         <c:if test="${empty date }">
         <div class="button-pager">
-        <form action="<%=path %>consult/default?pageNum=${pager.page }" method="post">
+    
              <ul id="myPager" class="pager" data-elements="prev,nav,next" data-ride="pager"
                 data-page=${page.pageNum }
                 data-rec-total=${page.totalCount }
                 data-max-nav-count="3"
                 data-rec-per-page=${page.pageSize }
-                data-link-creator="consult/default?pageNum={page}"
+                data-link-creator="<%=path %>/consult/default?pageNum={page}"
             >
             </ul>
-         </form>
+      
             <script>
                 $('#myPager').pager({
                     linkCreator: function(page, pager) {
@@ -358,7 +364,7 @@
                 data-rec-total=${page.totalCount }
                 data-max-nav-count="3"
                 data-rec-per-page=${page.pageSize }
-                data-link-creator="consult/default?pageNum={page}&fenlei=${fenlei }&shijian=${date }"
+                data-link-creator="<%=path %>/consult/default?pageNum={page}&fenlei=${fenlei }&shijian=${date }"
             >
             </ul>
             <script>

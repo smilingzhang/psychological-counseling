@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     <% String p = request.getContextPath(); %>
  <!-- 在此处编码你的创意 -->
     <header>
@@ -19,9 +20,9 @@
                     <li><img src="<%=p %>/images/logo.png"></li>
                     <li onclick="changeActive(this)" class="list active"><a href="#">首页</a></li>
                     <li onclick="changeActive(this)" class="list"><a href="<%=p %>/index.jsp">咨询</a></li>
-                    <li onclick="changeActive(this)" class="list"><a href="#">课程</a></li>
+                    <li onclick="changeActive(this)" class="list"><a href="<%=p %>/lesson/list">课程</a></li>
                     <li onclick="changeActive(this)" class="list"><a href="<%=p %>/listenList">倾听</a></li>
-                    <li onclick="changeActive(this)" class="list"><a href="#">阅读</a></li>
+                    <li onclick="changeActive(this)" class="list"><a href="<%=p %>/PassageListControllerImpl?businesstypeWorkType=5">阅读</a></li>
                   
                     <div class="search">
                     	<c:if test="${isshow!=1 }">
@@ -43,10 +44,19 @@
                         </form>
                         </c:if>
                     </div>
-                
-                    <li class="list"><a class="login" href="login.jsp">登录</a></li>
-                     <li class="list"><a class="login" href="http://10.7.84.56:8080/psychologicalcounseling/goToUser">中心</a></li>
-                    <li class="list"><a class="regist" href="#">注册</a></li>
+                	 <c:if test="${not empty(sessionScope.userId) }">
+                    	<li class="dropdown list dropdown-hover" id="list-after-login">
+	                        <a href="#"  class="dropdown-toggle" data-toggle="dropdown"><img id="avatar" src="<%=p %>/images/consultant2.png" alt="头像"></a>
+	                        <ul class="dropdown-menu" role="menu">
+	                            <li class="dropdown-list"><a href="user">个人中心</a></li>
+	                            <!-- <li class="dropdown-list"><a href="#">我的消息&nbsp;<span class="label label-badge label-success">4</span></a></li> -->
+	                            <li class="dropdown-list"><a href="<%=p %>/logout">退出登录</a></li>
+	                        </ul>
+                    	</li>
+                    </c:if>
+                    <c:if test="${empty(sessionScope.userId) }">
+	                    <li class="list" id="list"><a class="login" href="<%=p %>/login.jsp">登录/注册</a></li>
+                    </c:if>
                 </ul>  
             </div>
         </nav>

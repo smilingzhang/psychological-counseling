@@ -106,10 +106,10 @@ public class UserController {
 			//获取咨询状态
 			String consultState = req.getParameter("consultState");
 			//默认为“未咨询”
-			if(consultState==null) consultState = ""+ConsultationRecord.TODO;
+			if(consultState==null) consultState = ConsultationRecord.TODO;
 			//获取页码
 			int pageNum = this.getParamPage((String)req.getParameter("page"));
-			switch(Integer.parseInt(consultState)) {
+			switch(consultState) {
 			case ConsultationRecord.TODO:
 				model.addAttribute("crList", userService.getToDoListWithPaging(pageNum));
 				break;
@@ -408,6 +408,11 @@ public class UserController {
 			map.put("result", "false");
 			return map;
 		}
+<<<<<<< HEAD
+=======
+		System.out.println(request.getServletContext().getRealPath("/"));
+		System.out.println(request.getServletContext());
+>>>>>>> 6a93e7a4b97d324d2ca24db37be20a302ce5b6d6
 		String rootPath=request.getServletContext().getRealPath("/")+"images/";
 		//为路径设置名字。
 		Calendar calendar=Calendar.getInstance();
@@ -433,8 +438,15 @@ public class UserController {
 		//更新session中的user
 		int userId=(int)session.getAttribute("userId");
 		session.setAttribute("user", userService.getUser(userId));
+<<<<<<< HEAD
 		map.put("result", "success");
 		map.put("userHeadPath", relativePath);
+=======
+		System.out.println(userService.getUser(userId).getUserHeadPath()+"*************************************");
+		map.put("result", "success");
+		map.put("userHeadPath", relativePath);
+		
+>>>>>>> 6a93e7a4b97d324d2ca24db37be20a302ce5b6d6
 		return map;
 	}
 }

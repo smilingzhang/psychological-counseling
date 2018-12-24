@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="css/zui.css" rel="stylesheet">
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/zui.lite.js"></script>
+    <script src="js/zui.js"></script> 
+</head>
+<body>
+    <div style="width: 30%; margin: 50px">
+        <button type="button" onclick="newChap()">创建章节</button>
+        <!--key的格式：
+            父id$id$名字
+        -->
+        <form action="" method="post">
+            <div id="chapList"></div>
+        </form>
+    </div>
+
+    <script>
+        var index = 1;
+        function newChap(){
+            var name = prompt("请输入章节名");
+            if(name!=null){
+                $("#chapList").append($(
+                    "<div>"
+                        + "<span>"+name+ "</span>"
+                            + "<span style='display:none'>"
+                                + "<input type='checkbox' name='course' value='"+index+"$0$"+name+"'>"
+                            + "</span>"
+                        
+                        + "&nbsp;<a href='#' onclick='addSection(this)'>添加子课时</a>"
+                    + "</div>"
+                ));
+                index++;
+
+            }
+        }
+        function addSection(obj){
+            var name = prompt("请输入课时名");
+            if(name!=null){
+                var parentName = $(obj).siblings(":eq(1)").children().attr("value").split("$")[0];
+                $(obj).parent().append($(
+                    "<div>"
+                        + "<span>&gl;"+name+"</span>"
+                        + "<input type='file' name='vedio'>"
+                        + "<span style='display:none'>"
+                            + "<input type='checkbox' name='course' value='"+parentName+"$"+index+"$"+name+"'"
+                        + "</span>"
+                    + "</div>"
+                ));
+                index++;
+
+            }
+        }
+    </script>
+    <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <!-- ZUI Javascript组件 -->
+    <script src="js/zui.min.js"></script>
+</body>
+</html>

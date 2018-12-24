@@ -1,13 +1,14 @@
 package com.Consultation.consulterlist.dao;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
 import com.entity.Teacher;
@@ -40,18 +41,20 @@ public class ConsulterDao extends BaseDao<Teacher> {
 	public List<Teacher> selectByScreen(int pageNum, int pageSize, int type, String date) {
 		List<Teacher> teachers = new ArrayList<>();
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session
-				.createQuery("select bt.businesstypeWorkId from BusinessType bt where bt.typeTable.typetableId=?");
+		Query query = session.createQuery(
+				"select bt.businesstypeWorkId from BusinessType bt where bt.typeTable.typetableId=? and bt.businesstypeWorkType=?");
 		query.setParameter(0, type);
+		query.setParameter(1, 1);
 		List<Integer> list = query.list();
 		for (int i = 0; i < list.size(); i++) {
-			Query query2 = session.createQuery("from Teacher t where t.teacherId=?");
+			Query query2 = session.createQuery("from Teacher t where t.teacherId=? and t.user.userIdentity=?");
 			query2.setParameter(0, list.get(i));
+			query2.setParameter(1, 2);
 			List<Teacher> list2 = query2.list();
 			for (int j = 0; j < list2.size(); j++) {
 				List<TeacherTime> teacherTimes = list2.get(j).getTeacherTimes();
 				for (int m = 0; m < teacherTimes.size(); m++) {
-					String a = teacherTimes.get(m).getDate().toString().substring(0, 10);
+					String a = teacherTimes.get(m).getDate();
 					if (date.equals(a)) {
 						teachers.add(list2.get(j));
 					}
@@ -77,13 +80,22 @@ public class ConsulterDao extends BaseDao<Teacher> {
 
 	/**
 	 * 
-	 * @desc:检索所有的咨询师
+	 * @desc:默认展示当天可以咨询的咨询师
 	 * @return
 	 * @return:List<Teacher>
 	 * @trhows
 	 */
 	public List<Teacher> selectDefault() {
-		return findAll(Teacher.class);
+		DateFormat bf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date1 = new Date();
+		String format = bf.format(date1);
+		Session session = sessionFactory.getCurrentSession();
+		SQLQuery query = session.createSQLQuery(
+				"select teacher.* from teacher,user where teacherId in(select teacherId from teachertime where date=?) and teacherId=userId and userIdentity=?");
+		query.setParameter(0, format);
+		query.setParameter(1, 2);
+		query.addEntity(Teacher.class);
+		return query.list();
 	}
 
 	/**

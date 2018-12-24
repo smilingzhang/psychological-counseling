@@ -12,11 +12,11 @@ import javax.persistence.Table;
 
 /**
  * 
- *@desc:课程学习记录�?
- *		字段：流水号，用户ID，课程ID，是否看完：1.�?2.否，�?始看的时间，看到的位�?
- *		映射关系：单向多对一  用户表和课程�?
- *@author 段智�?
- *@date:2018�?11�?20日下�?4:32:00
+ *@desc:课程学习记录表
+ *		字段：流水号，用户ID，课程ID，是否看完：1.是2.否，开始看的时间，看到的位置
+ *		映射关系：单向多对一  用户表和课程表
+ *@author 段智兴
+ *@date:2018年11月20日下午4:32:00
  */
 @Entity
 @Table(name="courserecord")
@@ -24,9 +24,10 @@ public class CourseRecord {
 	private int courserecordId;
 	private int courserecordIsFinish;
 	private Date courserecordStartTime;
-	private String courserecordStopPosition;
+	private int courserecordStopPosition;
 	private User user;
 	private Course course;
+	private int coursecatalogId;
 	
 	
 	@Id
@@ -50,10 +51,10 @@ public class CourseRecord {
 	public void setCourserecordStartTime(Date courserecordStartTime) {
 		this.courserecordStartTime = courserecordStartTime;
 	}
-	public String getCourserecordStopPosition() {
+	public int getCourserecordStopPosition() {
 		return courserecordStopPosition;
 	}
-	public void setCourserecordStopPosition(String courserecordStopPosition) {
+	public void setCourserecordStopPosition(int courserecordStopPosition) {
 		this.courserecordStopPosition = courserecordStopPosition;
 	}
 	@ManyToOne
@@ -71,6 +72,12 @@ public class CourseRecord {
 	}
 	public void setCourse(Course course) {
 		this.course = course;
+	}
+	public int getCoursecatalogId() {
+		return coursecatalogId;
+	}
+	public void setCoursecatalogId(int coursecatalogId) {
+		this.coursecatalogId = coursecatalogId;
 	}
 	
 	

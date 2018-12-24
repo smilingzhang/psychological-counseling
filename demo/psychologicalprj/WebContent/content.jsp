@@ -14,7 +14,7 @@
 
 	<a href="#mao" id="jump"></a>
 	<!-- 如果是咨询 -->
-	<c:if test="${type eq 'consult' }">
+	<c:if test="${roomType eq 'consult' }">
 		consult
 		<!-- 获取本次videoChatAddress 所对应的 -->
 		<c:forEach items="${applicationScope.videoAddress2messages[sessionScope.videoChatAddress] }" var="message">
@@ -31,7 +31,7 @@
 	</c:if>
 	
 	<!-- 如果是倾听 -->
-	<c:if test="${type eq 'listen' }">
+	<c:if test="${roomType eq 'listen' }">
 		listen
 		<!-- 获取本次videoChatAddress 所对应的 -->
 		<c:forEach items="${applicationScope.audioAddress2messages[sessionScope.audioChatAddress] }" var="message">

@@ -1,7 +1,5 @@
 package com.entity;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +20,7 @@ import javax.persistence.Table;
 public class TeacherTime {
 	private int teachertimeId;
 	private Teacher teacher;
-	private Date date;
+	private String date;
 	private int time8;
 	private int time9;
 	private int time10;
@@ -45,10 +43,10 @@ public class TeacherTime {
 		this.teachertimeId = teachertimeId;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	public int getTime8() {

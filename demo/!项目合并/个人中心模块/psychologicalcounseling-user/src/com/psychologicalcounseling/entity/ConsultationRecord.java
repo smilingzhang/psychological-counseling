@@ -22,9 +22,9 @@ import javax.persistence.Table;
 @Table(name="consultationrecord")
 public class ConsultationRecord {
 	//增加------------------
-	public static final int TODO = 0;
-	public static final int FINISHED = 1;
-	public static final int CANCELED = 2;
+	public static final String TODO = "未咨询";
+	public static final String FINISHED = "已完成";
+	public static final String CANCELED = "已取消";
 
 	private int consultationrecordId;
 	private String consultationrecordOrderTime;
@@ -38,7 +38,7 @@ public class ConsultationRecord {
 	//咨询地点
 	private String consultationrecordLoc;
 	//咨询状态：0未咨询，1已完成，2已取消
-	private Integer consultState;
+	private String consultState;
 	private Teacher teacher;
 	private User user;
 	
@@ -101,10 +101,10 @@ public class ConsultationRecord {
 //	}
 	
 	
-	public Integer getConsultState() {
+	public String getConsultState() {
 		return consultState;
 	}
-	public void setConsultState(Integer consultState) {
+	public void setConsultState(String consultState) {
 		this.consultState = consultState;
 	}
 	public String getConsultationrecordLoc() {

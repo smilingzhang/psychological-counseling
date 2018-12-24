@@ -60,7 +60,7 @@ public class SearchCourseController {
 	@RequestMapping("/searchconsulters")
 	public String searchConsulter(@RequestParam(value="pageNum",required=false)String pageNum,HttpServletRequest request) {
 	
-		Page<Teacher>pageSearchConsulters=this.searchConsulterService.showAllConsulters(pageNum, 10);
+		Page<Teacher>pageSearchConsulters=this.searchConsulterService.showAllConsulters(pageNum, 12);
 		List<Teacher> listSearchConsulters=pageSearchConsulters.getList();
 		int consultersCount=this.searchConsulterService.countConsulters();
 		request.setAttribute("listSearchConsulters", listSearchConsulters);
