@@ -393,6 +393,7 @@
                     <div class="dir-nav">
                         <ul class="nav nav-pills">
                             <li onclick="changeNav(this,'setting-')" class="active"><a href="#">个人信息</a></li>
+                            <li onclick="changeNav(this,'setting-')" class=""><a href="#">修改头像</a></li>
                             <li onclick="changeNav(this,'setting-')" class=""><a href="#">修改密码</a></li>
                             <li onclick="changeNav(this,'setting-')" class=""><a href="#">绑定手机</a></li>
                         </ul>
@@ -481,8 +482,16 @@
                                 </table>
                             </form>
                         </div><!--END 个人信息-->
-                        <!--修改密码-->
+                        <!-- 修改头像 -->
                         <div id="setting-2" style="display:none">
+                        	<form action="" method="post" enctype="multipart/form-data">
+						      <input type="file" name="upfile" id="choose-file"/><br>
+						      <font id="error-msg-uploadfile"></font>
+						      <button type="button" onclick="uploadHeadPath()">上传</button>
+							</form>
+                        </div>
+                        <!--修改密码-->
+                        <div id="setting-3" style="display:none">
                             <!--基本信息-->
                             <form action="" method="POST">
                                 <table class="setting-table">
@@ -556,7 +565,7 @@
                             </div>
                         </div><!--END 修改密码-->
                         <!--绑定手机-->
-                        <div id="setting-3" style="display:none">
+                        <div id="setting-4" style="display:none">
                             <form action="" method="POST">
                                 <table class="setting-table">
                                 	<c:if test="${!empty(user.getUserPhone()) and fn:length(user.getUserPhone())>0}"><tr><td>原绑定手机号码</td><td id="show-old-phone">${user.getUserPhone().substring(0,3)}****${user.getUserPhone().substring(7,11)}</td></tr></c:if>
