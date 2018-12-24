@@ -27,18 +27,7 @@ public class SendServiceImpl {
 		}
 		messages.add(m);
 		return videoAddress2messages;
-		/*
-		 * Map<String, List<String[]>> videoAddress2messages = (Map<String,
-		 * List<String[]>>) application.getAttribute("videoAddress2messages");
-		 * if(videoAddress2messages == null) videoAddress2messages = new HashMap<String,
-		 * List<String[]>>(); String videoChatAddress = (String)
-		 * session.getAttribute("videoChatAddress");
-		 * 
-		 * String[] m = {myName, otherName, message}; List<String[]> messages =
-		 * videoAddress2messages.get(videoChatAddress); if(messages == null) { messages
-		 * = new ArrayList<String[]>(); videoAddress2messages.put(videoChatAddress,
-		 * messages); } messages.add(m);
-		 */
+
 	}
 
 	public Map<String, List<String[]>> audioSend(Map<String, List<String[]>> audioAddress2messages,

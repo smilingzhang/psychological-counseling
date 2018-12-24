@@ -6,11 +6,12 @@ import org.springframework.stereotype.Repository;
 
 import com.entity.Course;
 import com.util.BaseDao;
+
 /**
  * 
- *@desc:查询咨询师的8个精品课程
- *@author chunhui
- *@date:Dec 10, 201810:33:50 AM
+ * @desc:查询咨询师的8个精品课程
+ * @author chunhui
+ * @date:Dec 10, 201810:33:50 AM
  */
 @Repository
 public class ConsultCourseDao extends BaseDao<Course> {

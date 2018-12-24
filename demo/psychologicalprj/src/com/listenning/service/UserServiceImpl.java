@@ -41,6 +41,7 @@ public class UserServiceImpl {
 			return r.getUser();
 		}
 	}
+
 	public User getUserById(int userId) {
 		return this.consultOrderUserDao.selectUserById(userId);
 	}

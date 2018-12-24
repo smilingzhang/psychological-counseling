@@ -198,11 +198,11 @@ a:focus{
     text-shadow: none;
 }
 .login-contains .loginpanel .login-nav ul{
-	width: 75%;
+	width: 100%;
 }
 .login-form #login-send-verifyCode{
-    float: right;
     text-shadow: none;
+    width:29%;
 }
 .login-form .group{
     margin-bottom: 10px;
@@ -1519,6 +1519,7 @@ a:focus{
 {
     padding-left: 6%;
     padding-right: 6%;
+    width:100%;
 }
 .passage-contain .passage-panel .bread-crumb-navigation{
     display: block;
@@ -1535,6 +1536,7 @@ a:focus{
 .passage-contain .passage-panel .passage .writer-info img{
     float: left;
     margin-right: 20px;
+    width:40px;
 }
 .passage-contain .passage-panel .passage-body{
     text-indent: 2em;
@@ -1695,4 +1697,57 @@ a:focus{
 	height:300px;
 	width:650px;
 	background:white;
+}
+.remind{
+	display: none;
+	overflow: hidden;
+}
+.vip_limit_content{
+	margin-top: 15%;
+}
+.vip_limit_content h3{
+	font-size:25px;
+	line-height: 36px;
+	color:black;
+	text-align: center;
+	margin-bottom: 50px;
+}
+.buy_vip,.buy_course{
+	width:200px;
+	height:40px;
+	margin-left:40%;
+	margin-bottom:30px;
+	position:relative;
+	background: #e7c781;
+	padding:0 30px;
+	border-radius:30px;
+	font-size: 18px;
+	line-height: 38px;
+	color:#623a0c;
+	text-align: center;
+	
+}
+.elsechoose h6{
+	width:500px;
+	height: 40px;
+	float: left;
+	margin-left: 25%;
+	margin-top:50px;
+	font-size: 20px;
+	color:black;
+}
+.elsechoose h6 a {
+	color:#d75455;
+}
+.login-form #verifyCode{
+	width:70%;
+	float:left;
+	margin-right:1%;
+}
+.login-contains .loginpanel li{
+	width:50%;
+	text-align:center;
+}
+.btn{
+	text-shadow:0 0px 0 #fff;
 }

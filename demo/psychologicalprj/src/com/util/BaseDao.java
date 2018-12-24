@@ -207,7 +207,6 @@ public class BaseDao<T> {
 	 */
 	@SuppressWarnings("unchecked")
 	protected int insert(String sql, Object... params) {
-		System.out.println(sessionFactory.getCurrentSession());
 		Query query = sessionFactory.getCurrentSession().createSQLQuery(sql);
 
 		for (int i = 0, len = params.length; i < len; i++) {
@@ -275,7 +274,7 @@ public class BaseDao<T> {
 		 * @return 执行sql语句所影响的行数
 		 * @throws Exception
 		 */
-		public int excuteBySql(String sql, Object[] ... params) throws Exception {
+		public int excuteBySql(String sql, Object ... params) throws Exception {
 			SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sql);
 			if (params != null && params.length > 0) {
 				for (int i = 0; i < params.length; i++)

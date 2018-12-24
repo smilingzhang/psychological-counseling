@@ -9,14 +9,13 @@ import com.util.BaseDao;
 
 @Repository
 
-public class VerifyPwdDaoImpl extends BaseDao{
+public class VerifyPwdDaoImpl extends BaseDao {
 
 	public String findPwdByPhone(String phone) {
-		String hql="from User where userPhone=?";
-		List<User> list=find(hql, phone);
-		System.out.println(list);
+		String hql = "from User where userPhone=?";
+		List<User> list = find(hql, phone);
 		return list.get(0).getUserPassword();
-		
+
 	}
 
 }

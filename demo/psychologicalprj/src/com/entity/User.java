@@ -171,6 +171,8 @@ public class User {
 		this.userIdentity = userIdentity;
 	}
 	
-	
+	public String toString() {
+		return "uaserName is"+userRealName;
+	}
 	
 }

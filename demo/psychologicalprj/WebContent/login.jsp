@@ -81,7 +81,7 @@
                         <div class="group">
 		                    <!--错误信息-->
 		                    <font name="loginErrMsg4Code" id="loginErrMsg4Code" class="">&nbsp;</font>
-		                    <div><input id="verifyCode" name="verifyCode" type="text" class="form-control" placeholder="验证码" onkeyup="loginVerifyCode(this)" style="width: 63%;display: block;float: left;"></div>
+		                    <div><input id="verifyCode" name="verifyCode" type="text" class="form-control" placeholder="验证码" onkeyup="loginVerifyCode(this)" ></div>
 		                    <a class="btn btn-primarys" id="login-send-verifyCode"  onclick="settime(this);sendVerifyCode()" disabled="disabled">获取验证码</a></br>                   
 	                    </div>
 	                    <!-- 用户协议 -->

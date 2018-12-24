@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,7 @@ public class ListenRecordServiceImpl {
 
 	@Resource
 	private ListenRecordDaoImpl listenRecordDaoImpl;
+	private Logger logger = Logger.getLogger(ListenRecordServiceImpl.class);
 
 	public List<ListenRecord> listAllUnusedListenRecords() {
 		return listenRecordDaoImpl.findAllUnusedListenRecords();
@@ -24,10 +26,10 @@ public class ListenRecordServiceImpl {
 	public List<ListenRecord> listUnusedListenRecordsById(int id, int identity) {
 		List<ListenRecord> listenRecords;
 		if (identity == 1) {
-			System.out.println("I am a common user...");
+			logger.info("I am a common user...");
 			listenRecords = listenRecordDaoImpl.findUnusedListenRecordsByUserId(id);
 		} else {
-			System.out.println("I am a common teacher...");
+			logger.info("I am a common teacher...");
 			listenRecords = listenRecordDaoImpl.findUnusedListenRecordsByTeacherId(id);
 		}
 		return listenRecords;
@@ -53,11 +55,11 @@ public class ListenRecordServiceImpl {
 	public void changeListenRecordStartTimeById(int id, String startTime) {
 		listenRecordDaoImpl.updateListenRecordStartTimeById(id, startTime);
 	}
-	
+
 	public void changeListenRecordEndTimeById(int id, String endTime) {
 		listenRecordDaoImpl.updateListenRecordEndTimeById(id, endTime);
 	}
-	
+
 	public void changeListenRecordPriceById(int id, int price) {
 		listenRecordDaoImpl.updateListenRecordPriceById(id, price);
 	}
