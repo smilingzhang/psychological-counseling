@@ -68,10 +68,7 @@
 	                        <li onclick="changeNav(this,'form-')"><a href="#">账号密码登录</a></li>
                     </ul>
                 </div>
-                
-              
 	                <!--手机号登录表单-->
-	        
 	                <form class="login-form" action="${ctx }/login/regist" method="POST" id="form-1">
 	                	<div class="group">
 			                <!--错误信息-->
@@ -81,7 +78,7 @@
                         <div class="group">
 		                    <!--错误信息-->
 		                    <font name="loginErrMsg4Code" id="loginErrMsg4Code" class="">&nbsp;</font>
-		                    <div><input id="verifyCode" name="verifyCode" type="text" class="form-control" placeholder="验证码" onkeyup="loginVerifyCode()" style="width: 150px;display: block;float: left;"></div>
+		                    <div><input id="verifyCode" name="verifyCode" type="text" class="form-control" placeholder="验证码" onkeyup="loginVerifyCode()" style="width: 63%;display: block;float: left;"></div>
 		                    <a class="btn btn-primarys" id="login-send-verifyCode"  onclick="settime(this);sendVerifyCode()" disabled="disabled">获取验证码</a></br>                   
 	                    </div>
 	                    <!-- 用户协议 -->

@@ -60,8 +60,20 @@ function uploadHeadPath(){
 				}
 			})
     }
+    //
+	var cropperHeader = new Croppic('yourId');
+	var cropperOptions = {
+			uploadUrl:'path_to_your_image_proccessing_file.php'
+		}		
+		
+	var cropperHeader = new Croppic('yourId', cropperOptions);
 }
-
+// {
+// 				"status":"success",
+// 				"url":"path/img.jpg",
+// 				"width":originalImgWidth,
+// 				"height":originalImgHeight
+// 			}
 </script>
 </head>
 <body>
@@ -70,6 +82,8 @@ function uploadHeadPath(){
 	      <font id="error-msg-uploadfile"></font>
 	      <button  type="button" onclick="uploadHeadPath()">上传</button>
       </form>
-      <img alt="nm" src="${ctx }/images/mm3.jpg">
+      <div id="yourId" style="width:200px;height:200px;position:absolute;"></div>
+      
+      
 </body>
 </html>

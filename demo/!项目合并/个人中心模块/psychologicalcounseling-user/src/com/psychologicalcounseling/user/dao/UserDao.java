@@ -211,6 +211,24 @@ public class UserDao extends BaseDao<User> {
 
     	}
     }
+    /**
+     * 
+     *@desc:更新头像
+     *@param userHeadPath
+     *@param userId
+     *@return:void
+     *@trhows
+     */
+    public void updateHeadPath(String userHeadPath,int userId) {
+    	String sql="update user set userHeadPath=?where userId=?";
+    	int result=insert(sql,userHeadPath,userId);
+    	if(result==1) {
+    		System.out.println("更新用户头像成功");
+    	}else {
+    		System.out.println("更新用户头像失败");
+
+    	}
+    }
     
 	
 }

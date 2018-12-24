@@ -1,4 +1,4 @@
-package com.psychologicalcounseling.util;
+package com.psychologicalcounseling.downloadBill4Alipay;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
@@ -14,7 +14,7 @@ public class TimerManager {
 
     Calendar calendar = Calendar.getInstance();
      
-     calendar.set(Calendar.HOUR_OF_DAY,6);
+     calendar.set(Calendar.HOUR_OF_DAY,5);
      calendar.set(Calendar.MINUTE, 0);
      calendar.set(Calendar.SECOND, 0);
 
@@ -34,7 +34,6 @@ public class TimerManager {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
        }
 	   };
 	   System.out.println("下载账单********");

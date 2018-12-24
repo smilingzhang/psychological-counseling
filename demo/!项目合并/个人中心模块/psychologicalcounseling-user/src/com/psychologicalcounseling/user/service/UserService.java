@@ -432,8 +432,7 @@ public class UserService {
      *@trhows
      */
     public void reviseHeadPath(String userHeadPath,int userId) {
-    	User user=new User();
-    	user.setUserHeadPath(userHeadPath);
-    	userDao.update(user);
+    	
+    	userDao.updateHeadPath(userHeadPath,userId);
     }
 }

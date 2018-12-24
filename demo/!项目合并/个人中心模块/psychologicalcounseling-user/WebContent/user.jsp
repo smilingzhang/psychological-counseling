@@ -4,31 +4,32 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://janborn.wang/dateutil" prefix="dateutil"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<c:set var="ctx" value="${pageContext.request.contextPath }"></c:set>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-cn">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>${userNickName }_个人中心</title>
+    <title>${user.userNickName }_个人中心</title>
     <!-- zui -->
-    <link href="${ctx }css/zui-theme.css" rel="stylesheet">
-    <link href="${ctx }css/zui.css" rel="stylesheet">
-    <script src="${ctx }js/jquery-3.3.1.js"></script>
-    <script src="${ctx }js/zui.js"></script> 
-    <script src="${ctx }js/zui.lite.js"></script>
+    <link href="${ctx }/css/zui-theme.css" rel="stylesheet">
+    <link href="${ctx }/css/zui.css" rel="stylesheet">
+    <script src="${ctx }/js/jquery-3.3.1.js"></script>
+    <script src="${ctx }/js/zui.js"></script> 
+    <script src="${ctx }/js/zui.lite.js"></script>
     <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
-    <script src="${ctx }js/jquery-1.11.0.min.js"></script>
+    <script src="${ctx }/js/jquery-1.11.0.min.js"></script>
     <!-- ZUI Javascript组件 -->
-    <script src="${ctx }js/zui.min.js"></script>
+    <script src="${ctx }/js/zui.min.js"></script>
     <!--自定义-->
-    <link href="${ctx }css/mystyle.css" rel="stylesheet">
-    <script src="${ctx }js/user.js"></script>
-    <script src="${ctx }js/change-state.js"></script>
-    <script src="${ctx }js/city.js"></script>
+    <link href="${ctx }/css/mystyle.css" rel="stylesheet">
+    <script src="${ctx }/js/user.js"></script>
+    <script src="${ctx }/js/change-state.js"></script>
+    <script src="${ctx }/js/city.js"></script>
     <!-- 自定义js -->
-    <script src="${ctx }js/verify.js"></script>
-    <script src="${ctx }js/verifyCode.js"></script>
+    <script src="${ctx }/js/verify.js"></script>
+    <script src="${ctx }/js/verifyCode.js"></script>
   </head>
   <body>
     <!-- 在此处编码你的创意 -->
@@ -42,6 +43,9 @@
     			    type: '${sessionScope.cancelMsgAttr}' // 定义颜色主题
     			}).show();
     		}(jQuery))
+    		
+    		
+
     	</script>
     	<c:set var="cancelMsg" value="" scope="session"/>
     </c:if>
@@ -66,19 +70,20 @@
             $("#shade").css("display","none");
         }
     </script>
+    <div type="hidden" class="${ctx }" id="get-ctx"> </div>
     <div class="contains user-contain">
         <!--头部-->
         <div class="panel user">
             <div class="panel-body">
                 <!--头像 方形-->
-                <img src="${sessionScope.avatarLink }" alt="${sessionScope.userNickName }_头像"/>
+                <img src="${ctx }${user.userHeadPath }" alt="${user.userNickName }_头像"  id="img-user-center" style="max-width:100px;max-height:100px;"/>
                 <div class="intr">
                     <!--用户昵称-->
-                    <span class="user-name">${sessionScope.userNickName }</span><br/>
+                    <span class="user-name">${user.userNickName }</span><br/>
                     <!--个性签名-->
                     <span class="tag">
-                    	<c:if test="${!empty(sessionScope.description) }">${sessionScope.description }</c:if>
-                    	<c:if test="${empty(sessionScope.description) }">未填写</c:if>
+                    	<c:if test="${!empty(user.userAutograph) }">${user.userAutograph }</c:if>
+                    	<c:if test="${empty(user.userAutograph) }">未填写</c:if>
                    	</span>
                     <br/><br/>
                     <!--日记-->
@@ -393,6 +398,7 @@
                     <div class="dir-nav">
                         <ul class="nav nav-pills">
                             <li onclick="changeNav(this,'setting-')" class="active"><a href="#">个人信息</a></li>
+                            <li onclick="changeNav(this,'setting-')" class=""><a href="#">修改头像</a></li>
                             <li onclick="changeNav(this,'setting-')" class=""><a href="#">修改密码</a></li>
                             <li onclick="changeNav(this,'setting-')" class=""><a href="#">绑定手机</a></li>
                         </ul>
@@ -481,8 +487,25 @@
                                 </table>
                             </form>
                         </div><!--END 个人信息-->
+                        <!-- 修改头像 -->
+                        <div id="setting-2" style="display:none;">
+                        	<form action="" method="post" enctype="multipart/form-data" style="width: 300px; float: left;">
+							<!--   修饰上传文件按钮 -->
+						      <button type="button" class="btn btn-primary" id="button-file" >选择文件</button>
+						      <input type="file" name="upfile" id="choose-file"  style="display:none;"/><br><br>
+						      <button type="button" onclick="uploadHeadPath()" class="btn btn-primary" style="background-color:#db5757;">上传</button>
+						      <font id="error-msg-uploadfile"></font>
+							</form>
+							<div style="float: left">
+	                        	<h3 style="margin-top:0px;">预览图片:</h3>
+	                        </div>
+							<div  style="float: left">
+	                        	<img src="${ctx }${user.userHeadPath }" alt="${user.userNickName }_头像"  id="img-user-center-second" style="max-width:100px;max-height:100px;"/>
+                        	</div>
+                        </div>
+                        
                         <!--修改密码-->
-                        <div id="setting-2" style="display:none">
+                        <div id="setting-3" style="display:none">
                             <!--基本信息-->
                             <form action="" method="POST">
                                 <table class="setting-table">
@@ -556,7 +579,7 @@
                             </div>
                         </div><!--END 修改密码-->
                         <!--绑定手机-->
-                        <div id="setting-3" style="display:none">
+                        <div id="setting-4" style="display:none">
                             <form action="" method="POST">
                                 <table class="setting-table">
                                 	<c:if test="${!empty(user.getUserPhone()) and fn:length(user.getUserPhone())>0}"><tr><td>原绑定手机号码</td><td id="show-old-phone">${user.getUserPhone().substring(0,3)}****${user.getUserPhone().substring(7,11)}</td></tr></c:if>
@@ -590,6 +613,14 @@
             </div><!--END 个人设置-->
         </div>
     </div>
+    <script type="text/javascript">
+  //对选择文件框进行的样式操作。
+    document.getElementById("button-file").addEventListener('click',function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        $("#choose-file").click();
+    });
+    </script>
     <%@include file="back-to-top.jsp" %>
     <%@include file="footer.jsp" %>
   </body>

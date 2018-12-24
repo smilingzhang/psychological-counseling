@@ -173,11 +173,19 @@ a:focus{
      }
 }
 .login-contains{
-    width: 25%;
-    height:90%;
+    width: 30%;
+    height:100%;
     margin-top: 5%;
     /* margin: auto;  position: absolute;  top: 0; left: 0; bottom: 0; right: 0; */
 }
+.login-contains .loginpanel li{
+width: 50%;
+text-align: center;
+}
+.login-contains .loginpanel .login-nav ul{
+width: 100%;
+}
+
 .loginpanel{
     clear: both;
     width: 100%;
@@ -198,8 +206,14 @@ a:focus{
     text-shadow: none;
 }
 .login-form #login-send-verifyCode{
-    float: right;
+	width:29%;
+
     text-shadow: none;
+}
+.login-form #verifyCode{
+	width:70%;
+	float:left;
+	margin-right:1%;
 }
 .login-form .group{
     margin-bottom: 10px;
@@ -230,7 +244,7 @@ a:focus{
     width: 50%;
 }
 .login-contains .loginpanel .login-other img{
-    width: 33%;
+    width: 29%;
     margin: 10px;
     border-radius: 10px;
 }

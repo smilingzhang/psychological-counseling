@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -76,7 +77,7 @@ public class UserController {
 			int userId = this.getParamId((Integer)session.getAttribute("userId")); 
 			//2. 获取用户实例
 			User user = userService.getUser(userId);
-			session.setAttribute("avatarLink", user.getUserHeadPath());
+			session.setAttribute("userHeadPath", user.getUserHeadPath());
 			session.setAttribute("userNickName", user.getUserNickName());
 			session.setAttribute("description", user.getUserAutograph());
 			session.setAttribute("user", user);
@@ -316,7 +317,7 @@ public class UserController {
 			System.out.println("session为空");
 		}
 		userService.reviseEssentialInfo(userNickName, userSex, userProvince, userCity, userAutograph, userId);
-		//这里的userId保留，6应该是userId
+		
 		session.setAttribute("user", userService.getUser(userId));
 		return userService.getUser4Json(userId);
 	}
@@ -399,19 +400,19 @@ public class UserController {
 	 */ 
 	@RequestMapping("/userHeadUpload")
 	@ResponseBody
-	public String handleFormUpload(@RequestParam(value="file" ,required=false) MultipartFile file,
-			HttpServletRequest request,HttpSession session) {
+	public Map handleFormUpload(@RequestParam(value="file" ,required=false) MultipartFile file,
+			@RequestParam(value="ext" ,required=false) String ext,HttpServletRequest request,HttpSession session) {
+		Map map=new HashMap();
 		if(file==null) {
 			System.out.println("图片失败");
-			return "{\"result\":\"false\"}";
+			map.put("result", "false");
+			return map;
 		}
 		String rootPath=request.getServletContext().getRealPath("/")+"images/";
-		System.out.println(rootPath+"**************");
-		System.out.println(file.getOriginalFilename());
 		//为路径设置名字。
 		Calendar calendar=Calendar.getInstance();
-		SimpleDateFormat sdf=new SimpleDateFormat();
-		String headName=sdf.format(calendar.getTime());
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddHHmmssSSS");
+		String headName=sdf.format(calendar.getTime())+ext;
 		
 		//路径在这里设置就可以。
 		try {
@@ -419,10 +420,21 @@ public class UserController {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("图片失败");
-			return "{\"result\":\"false\"}";
+			map.put("result", "false");
+			return map;
 		}
-		userService.reviseHeadPath(headName, (int)session.getAttribute("userId"));
-		return "{\"result\":\"success\"}";
+		//(int)session.getAttribute("userId")
+		//存储到数据库的相对路径。
+		String relativePath="/images/"+headName;
+		//更新session中的头像路径。
+		session.setAttribute("userHeadPath", relativePath);
+		//更新数据库中的头像路径。
+		userService.reviseHeadPath(relativePath, 1);
+		//更新session中的user
+		int userId=(int)session.getAttribute("userId");
+		session.setAttribute("user", userService.getUser(userId));
+		map.put("result", "success");
+		map.put("userHeadPath", relativePath);
+		return map;
 	}
 }
