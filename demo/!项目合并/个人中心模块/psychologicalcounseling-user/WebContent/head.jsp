@@ -16,13 +16,15 @@
                 </span>
                 </label>
                 <ul class="nav-list">
-                    <li><img src="images/logo.png"></li>
+                    <li class="logo">
+                    <!--logo-->
+                        <img src="images/logo-head-white.png" alt="明心心理">
+                    </li>
                     <li onclick="changeActive(this)" class="list active"><a href="index.html">首页</a></li>
                     <li onclick="changeActive(this)" class="list"><a href="consult-list.html">咨询</a></li>
                     <li onclick="changeActive(this)" class="list"><a href="listen-list.html">倾听</a></li>
                     <li onclick="changeActive(this)" class="list"><a href="course-list.html">课程</a></li>
                     <li onclick="changeActive(this)" class="list"><a href="passage-list.html">阅读</a></li>
-                    <li>
                     <div class="search">
                         <form class="navbar-form navbar-left" role="search">
                             <div class="form-group">
@@ -32,10 +34,9 @@
                             <button type="submit" class="btn btn-default">搜索</button>
                         </form>
                     </div>
-                    </li>
                     <c:if test="${!empty(sessionScope.userId) }">
                     	<li class="dropdown list dropdown-hover" id="list-after-login">
-	                        <a href="#"  class="dropdown-toggle" data-toggle="dropdown"><img id="avatar" src="${sessionScope.avatarLink }" alt="头像"></a>
+	                        <a href="#"  class="dropdown-toggle" data-toggle="dropdown"><img id="avatar" src="${ctx }${sessionScope.userHeadPath }" alt="头像"  width="40px" ></a>
 	                        <ul class="dropdown-menu" role="menu">
 	                            <li class="dropdown-list"><a href="user">个人中心</a></li>
 	                            <!-- <li class="dropdown-list"><a href="#">我的消息&nbsp;<span class="label label-badge label-success">4</span></a></li> -->
@@ -46,7 +47,7 @@
                     <c:if test="${empty(sessionScope.userId) }">
 	                    <li class="list" id="list"><a class="login" href="login.jsp">登录/注册</a></li>
                     </c:if>
-                </ul>  
+                </ul>
             </div>
         </nav>
     </header>

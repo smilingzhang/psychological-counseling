@@ -24,9 +24,9 @@ import javax.persistence.Table;
 
 public class ListenRecord {
 	private int listenrecordId;
-	private Date listenrecordOrderTime;
-	private Date listenrecordStartTime;
-	private Date listenrecordEndTime;
+	private String listenrecordOrderTime;
+	private String listenrecordStartTime;
+	private String listenrecordEndTime;
 	private float listenrecordPrice;
 	private int listenrecordState;
 	private String listenrecordResourcePath;
@@ -42,22 +42,22 @@ public class ListenRecord {
 	public void setListenrecordId(int listenrecordId) {
 		this.listenrecordId = listenrecordId;
 	}
-	public Date getListenrecordOrderTime() {
+	public String getListenrecordOrderTime() {
 		return listenrecordOrderTime;
 	}
-	public void setListenrecordOrderTime(Date listenrecordOrderTime) {
+	public void setListenrecordOrderTime(String listenrecordOrderTime) {
 		this.listenrecordOrderTime = listenrecordOrderTime;
 	}
-	public Date getListenrecordStartTime() {
+	public String getListenrecordStartTime() {
 		return listenrecordStartTime;
 	}
-	public void setListenrecordStartTime(Date listenrecordStartTime) {
+	public void setListenrecordStartTime(String listenrecordStartTime) {
 		this.listenrecordStartTime = listenrecordStartTime;
 	}
-	public Date getListenrecordEndTime() {
+	public String getListenrecordEndTime() {
 		return listenrecordEndTime;
 	}
-	public void setListenrecordEndTime(Date listenrecordEndTime) {
+	public void setListenrecordEndTime(String listenrecordEndTime) {
 		this.listenrecordEndTime = listenrecordEndTime;
 	}
 	public float getListenrecordPrice() {

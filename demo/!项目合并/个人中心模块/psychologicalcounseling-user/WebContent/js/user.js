@@ -1,3 +1,4 @@
+//----------------------刘田会--------------------------
 //用于实名验证界面的“保存”按钮上。
 //功能：判断按钮由disabled变亮的条件。
 function isLegal(){
@@ -88,7 +89,7 @@ function changeBtnValue(obj){
 	    			$("#select-city").text(data.userCity);
 	    			$("#send-phone-pwd").text(data.userPhone.substring(0,3)+"****"+data.userPhone.substring(7,11));
 	    			$("#show-old-phone").text(data.userPhone.substring(0,3)+"****"+data.userPhone.substring(7,11));
-	    			$("#user-name").text(data.userNickName);
+	    			$(".user-name").text(data.userNickName);
 	    			$("#user-autograph").text(data.userAutograph);
 	    			$("#userNickName").text(data.userNickName);
 	    			$("#userSex").text(data.userSex);
@@ -131,11 +132,7 @@ function changeBtnValue(obj){
         $(obj).attr("type","button");
     } 
 }
-function findBackPwd(){
-    $("#find-back-pwd").css("display","block");
-    $("#shade").css("display","block");
-    
-}
+
 //在忘记密码的流程中，给手机发送验证码。
 //注意事项：不复用之前的方法，原因是手机号码没办法直接获取，之前取手机号的方式与现在不同。
 var sendTime = 60;
@@ -226,14 +223,7 @@ function PwdVerifyCode(obj){
 		}
 	})
 }
-function closeWindow(obj){
-    $(obj).parent().css("display","none");
-    $("#shade").css("display","none");
-}
-function setNewPwd(){
-    $("#find-back-pwd").css("display","none");
-    $("#set-new-pwd").css("display","block");
-}
+
 
 //在以原密码为根据修改密码时
 //判断原始密码是否正确
@@ -514,4 +504,77 @@ function checkRealName(val){
 	 }else{
 	 	return true;
 	 }
+}
+//上传用户图像。
+function uploadHeadPath(){
+	var animateimg = $("#choose-file").val(); //获取上传的图片名 带//
+    var imgarr=animateimg.split('\\'); //分割
+    var myimg=imgarr[imgarr.length-1]; //去掉 // 获取图片名
+    var extension = myimg.lastIndexOf('.'); //获取 . 出现的位置 
+    var ext = myimg.substring(extension, myimg.length).toUpperCase();
+	var file = $('#choose-file').get(0).files[0]; //获取上传的文件
+	
+	if(file==null){
+    	$("#error-msg-uploadfile").text("请先选择图片文件");
+    	return false;
+	}
+	
+    var fileSize = file.size;           //获取上传的文件大小
+    var maxSize = 1048576*3;              //最大3MB
+    
+	if(ext !='.PNG' && ext !='.GIF' && ext !='.JPG' && ext !='.JPEG' && ext !='.BMP'){
+        $("#error-msg-uploadfile").text("文件类型错误，请上传图片类型");
+        return false;
+    }else if(parseInt(fileSize) >= parseInt(maxSize)){
+    	$("#error-msg-uploadfile").text("上传文件不能超过3MB");        
+    	return false;
+    }else{
+	    	var controllerName = "userHeadUpload";
+	    	var toUrl = window.location.protocol+controllerName;
+	    	var formdata=new FormData();
+            formdata.append("file",$("#choose-file").get(0).files[0]);
+            formdata.append("ext",ext);
+            //获取全局变量的路径
+            var ctx=$("#get-ctx").attr("class");
+            console.log(ctx);
+			$.ajax({
+				url:toUrl,
+				type:"post",
+				dataType:"json",
+				processData: false,  
+	            contentType: false ,
+	            async:false,
+				data:formdata,
+				success:function(data){
+					if(data.result=="false"){
+				        $("#error-msg-uploadfile").text("头像上传失败，请重新上传");
+					}else if(data.result=="success"){
+						console.log(data.userHeadPath);
+						$("#avatar").attr("src",ctx+data.userHeadPath);
+						$("#img-user-center").attr("src",ctx+data.userHeadPath);
+						$("#img-user-center-second").attr("src",ctx+data.userHeadPath);
+						$("#error-msg-uploadfile").text("头像上传成功");
+					}
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+					alert(XMLHttpRequest.status); 
+			     	alert(XMLHttpRequest.readyState); 
+					alert(textStatus); 
+				}
+			})
+    }
+}
+//----------------邓旸------------------
+function findBackPwd(){
+    $("#find-back-pwd").css("display","block");
+    $("#shade").css("display","block");
+    
+}
+function closeWindow(obj){
+    $(obj).parent().css("display","none");
+    $("#shade").css("display","none");
+}
+function setNewPwd(){
+    $("#find-back-pwd").css("display","none");
+    $("#set-new-pwd").css("display","block");
 }

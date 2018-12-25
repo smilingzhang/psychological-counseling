@@ -4,31 +4,32 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://janborn.wang/dateutil" prefix="dateutil"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<c:set var="ctx" value="${pageContext.request.contextPath }"></c:set>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-cn">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>${userNickName }_个人中心</title>
+    <title>${user.userNickName }_个人中心</title>
     <!-- zui -->
-    <link href="${ctx }css/zui-theme.css" rel="stylesheet">
-    <link href="${ctx }css/zui.css" rel="stylesheet">
-    <script src="${ctx }js/jquery-3.3.1.js"></script>
-    <script src="${ctx }js/zui.js"></script> 
-    <script src="${ctx }js/zui.lite.js"></script>
+    <link href="${ctx }/css/zui-theme.css" rel="stylesheet">
+    <link href="${ctx }/css/zui.css" rel="stylesheet">
+    <script src="${ctx }/js/jquery-3.3.1.js"></script>
+    <script src="${ctx }/js/zui.js"></script> 
+    <script src="${ctx }/js/zui.lite.js"></script>
     <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
-    <script src="${ctx }js/jquery-1.11.0.min.js"></script>
+    <script src="${ctx }/js/jquery-1.11.0.min.js"></script>
     <!-- ZUI Javascript组件 -->
-    <script src="${ctx }js/zui.min.js"></script>
+    <script src="${ctx }/js/zui.min.js"></script>
     <!--自定义-->
-    <link href="${ctx }css/mystyle.css" rel="stylesheet">
-    <script src="${ctx }js/user.js"></script>
-    <script src="${ctx }js/change-state.js"></script>
-    <script src="${ctx }js/city.js"></script>
+    <link href="${ctx }/css/mystyle.css" rel="stylesheet">
+    <script src="${ctx }/js/user.js"></script>
+    <script src="${ctx }/js/change-state.js"></script>
+    <script src="${ctx }/js/city.js"></script>
     <!-- 自定义js -->
-    <script src="${ctx }js/verify.js"></script>
-    <script src="${ctx }js/verifyCode.js"></script>
+    <script src="${ctx }/js/verify.js"></script>
+    <script src="${ctx }/js/verifyCode.js"></script>
   </head>
   <body>
     <!-- 在此处编码你的创意 -->
@@ -42,6 +43,9 @@
     			    type: '${sessionScope.cancelMsgAttr}' // 定义颜色主题
     			}).show();
     		}(jQuery))
+    		
+    		
+
     	</script>
     	<c:set var="cancelMsg" value="" scope="session"/>
     </c:if>
@@ -66,19 +70,20 @@
             $("#shade").css("display","none");
         }
     </script>
+    <div type="hidden" class="${ctx }" id="get-ctx"> </div>
     <div class="contains user-contain">
         <!--头部-->
         <div class="panel user">
             <div class="panel-body">
                 <!--头像 方形-->
-                <img src="${sessionScope.avatarLink }" alt="${sessionScope.userNickName }_头像"/>
+                <img src="${ctx }${user.userHeadPath }" alt="${user.userNickName }_头像"  id="img-user-center" style="max-width:100px;max-height:100px;"/>
                 <div class="intr">
                     <!--用户昵称-->
-                    <span class="user-name">${sessionScope.userNickName }</span><br/>
+                    <span class="user-name">${user.userNickName }</span><br/>
                     <!--个性签名-->
                     <span class="tag">
-                    	<c:if test="${!empty(sessionScope.description) }">${sessionScope.description }</c:if>
-                    	<c:if test="${empty(sessionScope.description) }">未填写</c:if>
+                    	<c:if test="${!empty(user.userAutograph) }">${user.userAutograph }</c:if>
+                    	<c:if test="${empty(user.userAutograph) }">未填写</c:if>
                    	</span>
                     <br/><br/>
                     <!--日记-->
@@ -111,9 +116,9 @@
 	                    <!--导航-->
 	                    <div class="dir-nav">
 	                        <ul class="nav nav-pills">
-	                            <li <c:if test='${empty(consultState) || consultState=="0" }'> class="active"</c:if>><a href="consultationRecord?consultState=0">未开始</a></li>
-	                            <li <c:if test='${!empty(consultState) and consultState=="1" }'> class="active"</c:if>><a href="consultationRecord?consultState=1">已完成</a></li>
-	                            <li <c:if test='${!empty(consultState) and consultState=="2" }'> class="active"</c:if>><a href="consultationRecord?consultState=2">已取消</a></li>
+	                            <li <c:if test='${empty(consultState) || consultState=="未咨询" }'> class="active"</c:if>><a href="consultationRecord?consultState=0">未开始</a></li>
+	                            <li <c:if test='${!empty(consultState) and consultState=="已咨询" }'> class="active"</c:if>><a href="consultationRecord?consultState=1">已完成</a></li>
+	                            <li <c:if test='${!empty(consultState) and consultState=="已取消" }'> class="active"</c:if>><a href="consultationRecord?consultState=2">已取消</a></li>
 	                        </ul>
 	                    </div>
 	                    <!--咨询列表-->
@@ -145,7 +150,7 @@
 			                                    <!--咨询费用-->
 			                                    <span>咨询费用：￥${consulter.getConsultationrecordPrice() }</span><br/>
 			                                    <!--咨询时间：精确到几点机几分-->
-			                                    <span>预约时间：${dateutil:formatDate(consulter.getConsultationrecordStartTime()) }</span><br/>
+			                                    <span>预约时间：${consulter.getConsultationrecordOrderTime() } ${consulter.getConsultationrecordStartTime() }</span><br/>
 			                                    <!--咨询方式-->
 			                                    <c:if test="${consulter.getConsultationrecordMethod()==1 }">
 				                                    <span>咨询方式：面对面咨询</span><br/>
@@ -177,18 +182,18 @@
 				                                </c:if>
 				                                <!-- 非面对面咨询且没到规定时间 -->
 				                                <c:if test="${consulter.getConsultationrecordMethod()!=1 
-				                                				&& dateutil:compare(requestScope.targetDate,consulter.getConsultationrecordStartTime())==2 }">
+				                                				&& dateutil:compare(requestScope.targetDate,consulter.getConsultationrecordOrderTime()+' '+consulter.getConsultationrecordStartTime())==2 }">
 					                                <td><span class="disabled">进入咨询室</span></td>
 				                                </c:if>
 				                                <!-- 若是线上咨询，且离预约时间仅剩十分钟 -->
 				                                <c:if test="${consulter.getConsultationrecordMethod()!=1
-				                                				&& dateutil:compare(requestScope.targetDate,consulter.getConsultationrecordStartTime())==1
-				                                				&& dateutil:compare(dateutil:getDate(),consulter.getConsultationrecordEndTime())==2 }">
+				                                				&& dateutil:compare(requestScope.targetDate,consulter.getConsultationrecordOrderTime()+' '+consulter.getConsultationrecordStartTime())==1
+				                                				&& dateutil:compare(dateutil:getDate(),consulter.getConsultationrecordOrderTime()+' '+consulter.getConsultationrecordEndTime())==2 }">
 					                                <td width="15%"><span><a class="enter-room" href="room.html">进入咨询室</a></span></td>
 				                                </c:if>
 				                                <!-- 若是线上咨询，且已经结束 -->
 				                                <c:if test="${consulter.getConsultationrecordMethod()!=1
-				                                				&& dateutil:compare(dateutil:getDate(),consulter.getConsultationrecordEndTime())==1 }">
+				                                				&& dateutil:compare(dateutil:getDate(),consulter.getConsultationrecordOrderTime()+' '+consulter.getConsultationrecordEndTime())==1 }">
 					                                <td><span class="disabled">进入咨询室</span></td>
 				                                </c:if>
 			                                </c:if>
@@ -335,6 +340,8 @@
 	                            	</tr>
 		                            <!--一个倾听-->
 		                            <c:forEach items="${listenList }" var="listen">
+		                            <c:set var="startTime" value="${listen.get('listenrecordOrderTime')} ${listen.get('listenrecordStartTime') }" scope="request"></c:set>
+		                            <c:set var="endTime" value="${listen.get('listenrecordOrderTime')} ${listen.get('listenrecordEndTime') }" scope="request"></c:set>
 			                            <tr>
 	                            			<!--倾听者头像-->
 			                            	<td>
@@ -344,7 +351,7 @@
 		                                    </td>
 		                                    <td>
 			                                    <!-- 倾听时间 -->
-			                                    ${fn:split(dateutil:formatDate(listen.get('listenrecordStartTime')),' ')[0] }<br/>${fn:split(dateutil:formatDate(listen.get('listenrecordStartTime')),' ')[1] }&nbsp;~&nbsp;${fn:split(dateutil:formatDate(listen.get('listenrecordEndTime')),' ')[1] }
+			                                    ${listen.get('listenrecordOrderTime') }<br/>${listen.get('listenrecordStartTime') }&nbsp;~&nbsp;${listen.get('listenrecordEndTime') }
 		                                    </td>
 		                                    <!--倾听费用-->
 		                                    <td>￥${listen.get('listenrecordPrice') }</td>
@@ -352,7 +359,7 @@
 				                            	<!-- 倾听时长 -->
 				                            	<c:set var="startTime" value="${listen.get('listenrecordStartTime') }"/>
 				                            	<c:set var="endTime" value="${listen.get('listenrecordEndTime') }"/>
-				                            	<span class="min">${dateutil:getMinutes(dateutil:sub(listen.get('listenrecordStartTime'),listen.get('listenrecordEndTime'))) }分钟</span>
+				                            	<span class="min">${dateutil:getMinutes(dateutil:sub(requestScope.startTime,requestScope.endTime)) }分钟</span>
 			                            	</td>
 			                            </tr> 
 		                            </c:forEach>
@@ -483,13 +490,22 @@
                             </form>
                         </div><!--END 个人信息-->
                         <!-- 修改头像 -->
-                        <div id="setting-2" style="display:none">
-                        	<form action="" method="post" enctype="multipart/form-data">
-						      <input type="file" name="upfile" id="choose-file"/><br>
+                        <div id="setting-2" style="display:none;">
+                        	<form action="" method="post" enctype="multipart/form-data" style="width: 300px; float: left;">
+							<!--   修饰上传文件按钮 -->
+						      <button type="button" class="btn btn-primary" id="button-file" >选择文件</button>
+						      <input type="file" name="upfile" id="choose-file"  style="display:none;"/><br><br>
+						      <button type="button" onclick="uploadHeadPath()" class="btn btn-primary" style="background-color:#db5757;">上传</button>
 						      <font id="error-msg-uploadfile"></font>
-						      <button type="button" onclick="uploadHeadPath()">上传</button>
 							</form>
+							<div style="float: left">
+	                        	<h3 style="margin-top:0px;">预览图片:</h3>
+	                        </div>
+							<div  style="float: left">
+	                        	<img src="${ctx }${user.userHeadPath }" alt="${user.userNickName }_头像"  id="img-user-center-second" style="max-width:100px;max-height:100px;"/>
+                        	</div>
                         </div>
+                        
                         <!--修改密码-->
                         <div id="setting-3" style="display:none">
                             <!--基本信息-->
@@ -599,6 +615,14 @@
             </div><!--END 个人设置-->
         </div>
     </div>
+    <script type="text/javascript">
+  //对选择文件框进行的样式操作。
+    document.getElementById("button-file").addEventListener('click',function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        $("#choose-file").click();
+    });
+    </script>
     <%@include file="back-to-top.jsp" %>
     <%@include file="footer.jsp" %>
   </body>

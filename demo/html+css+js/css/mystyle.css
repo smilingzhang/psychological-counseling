@@ -1,3 +1,52 @@
+/* 合并修改：添加 */
+.modal-header{
+	height:300px;
+	width:650px;
+	background:white;
+}
+/* 合并修改：添加 大概是视频播放模块的 */
+.remind{
+	display: none;
+	overflow: hidden;
+}
+.vip_limit_content{
+	margin-top: 15%;
+}
+.vip_limit_content h3{
+	font-size:25px;
+	line-height: 36px;
+	color:black;
+	text-align: center;
+	margin-bottom: 50px;
+}
+.buy_vip,.buy_course{
+	width:200px;
+	height:40px;
+	margin-left:40%;
+	margin-bottom:30px;
+	position:relative;
+	background: #e7c781;
+	padding:0 30px;
+	border-radius:30px;
+	font-size: 18px;
+	line-height: 38px;
+	color:#623a0c;
+	text-align: center;
+	
+}
+.elsechoose h6{
+	width:500px;
+	height: 40px;
+	float: left;
+	margin-left: 25%;
+	margin-top:50px;
+	font-size: 20px;
+	color:black;
+}
+.elsechoose h6 a {
+	color:#d75455;
+}
+
 .label{
     background-color: #d75455;
 }
@@ -1541,6 +1590,7 @@ a:focus{
 {
     padding-left: 6%;
     padding-right: 6%;
+    width:100%;/* 合并修改：文章模块 */    
 }
 .passage-contain .passage-panel .bread-crumb-navigation{
     display: block;
@@ -1557,6 +1607,7 @@ a:focus{
 .passage-contain .passage-panel .passage .writer-info img{
     float: left;
     margin-right: 20px;
+    width:40px;/* 合并修改：文章模块 */
 }
 .passage-contain .passage-panel .passage-body{
     text-indent: 2em;
@@ -1617,7 +1668,8 @@ a:focus{
     padding: 10px;
     float: left;
     margin-right: 10px;
-    line-height: 1em;
+    line-height: 1em;    
+    margin-bottom:20px;/* 合并添加 */
 }
 .search-conatin .panel .result .result-block.consult-block .consult-block-contain .name{
     line-height: 1.5em;
@@ -1627,29 +1679,149 @@ a:focus{
     padding-right: 10px;
 }
 .checkout-contain{
-    width: 50%
+    width: 50%;
+    height: 50%;
 }
 .checkout-contain .checkout-panel{
     width: 100%;
     clear: both;
-    padding-left: 18%;
-    padding-right: 18%;
+    padding: 30px 40px 30px 40px
 }
 .checkout-contain .checkout-panel .board-title-h1{
-    font-size: 30px;
+    font-size: 20px;
     line-height: 2em;
     color: #d75455;
 }
-.checkout-contain .checkout-panel .panel-body div{
-    /* margin-top: 14px; */
-    margin-bottom: 14px
+.checkout-contain .checkout-panel #step{
+    width: 100%;
+    height: 4em;
+    background-color: #f7e7e3;
+    box-sizing: content-box;
+    border: 1px solid #e7e4e4;
 }
-.checkout-contain .checkout-panel .panel-body div span{
-    line-height: 2em
+.checkout-contain .checkout-panel #step .step,
+.checkout-contain .checkout-panel #step .icon-arrow,
+.checkout-contain .checkout-panel #step .normal
+{
+    text-align: center;
+    vertical-align: middle;
+    line-height: 4em;
+    float: left;
+    color: #979292;
+    /* font-weight: bold; */
 }
-.checkout-contain .checkout-panel .panel-body div input{
-    /* line-height: 3em */
-    margin: 5px
+.checkout-contain .checkout-panel #step .step{
+    width: 30%;
+}
+.checkout-contain .checkout-panel #step .icon-arrow{
+    width: 5%;
+}
+.checkout-contain .checkout-panel #step .active{
+    color: #db5757;
+    box-sizing: border-box;
+    border-bottom: 2px solid #883231;
+    font-weight: bold;
+}
+.checkout-contain .checkout-panel #step-1 .step-1-content{
+    height: 100%;
+}
+.checkout-contain .checkout-panel #order{
+    font-size: 14px;
+    line-height: 2em;
+    width: 50%;
+    height: 100%;
+    margin-right: 10%;
+    float: left;
+}
+.checkout-contain .checkout-panel #order .order-content{
+    /* padding: 20px; */
+    height: 100%;
+}
+.checkout-contain .checkout-panel #order .line,
+.checkout-contain .checkout-panel #step-3 .final-order .line
+{
+    clear: both;
+}
+.checkout-contain .checkout-panel #order .name,
+.checkout-contain .checkout-panel #step-3 .final-order .name
+{
+    float: left;
+}
+.checkout-contain .checkout-panel #order .content,
+.checkout-contain .checkout-panel #step-3 .final-order .content
+{
+    float: right;
+}
+.checkout-contain .checkout-panel #select-method{
+    width: 40%;
+    float: right;
+}
+.checkout-contain .checkout-panel #select-method .pay-method ::before{
+    font-size: 22px;
+}
+.checkout-contain .checkout-panel #select-method .pay-method img{
+    margin: 0;
+    vertical-align: middle
+}
+.checkout-contain .checkout-panel #select-method .pay-method .logo{
+    display: inline-block;
+    width: 50%;
+    height: 50px;
+    border: 1px solid #e7e4e4;
+    border-radius: 15px;
+    margin: 20px;
+    padding: 10px 20px 10px 20px;
+}
+.checkout-contain .checkout-panel #select-method .checked .logo{
+    background-color: #ff8383;
+}
+.checkout-contain .checkout-panel #select-method .checked :before{
+    color: #d75455;
+    font-size: 22px;
+}
+.checkout-contain .checkout-panel #select-method .unchecke :before{
+    color: #979292;
+    font-size: 22px;
+}
+.checkout-contain .checkout-panel #select-method .pay-method .logo:hover{
+    opacity: 0.8;
+}
+.checkout-contain .checkout-panel #step-2 #pay-board-2{
+    padding: 10px 30px 10px 30px
+}
+.checkout-contain .checkout-panel #step-2 #pay-board-1 .info{
+    width: 40%;
+    margin-bottom: 20px;
+}
+.checkout-contain .checkout-panel #step-2 #pay-board-1 #code{
+    width: 40%;
+    height: 80%;
+    padding: 20px 40px 20px 40px;
+    background-color: #fff;
+    box-shadow: 1px 1px 5px #97929275;
+    border-radius: 5px;
+}
+.checkout-contain .checkout-panel #step-2 #pay-board-1 #code img{
+    width: 100%;
+    margin-bottom: 20px;
+}
+.checkout-contain .checkout-panel #step-2 #pay-board-1 #code div{
+    text-align: center;
+    vertical-align: middle;
+}
+.checkout-contain .checkout-panel #step-2 #pay-board-1 #code #code-accomplished span,
+.checkout-contain .checkout-panel #step-2 #pay-board-1 #code #code-accomplished span ::before
+{
+    text-align: center;
+    color: #4f8a4e;
+    font-size: 20px;
+}
+.checkout-contain .checkout-panel #step-3 .final-order{
+    width: 60%;
+    padding: 20px 40px 20px 40px;
+    background-color: #fff;
+    box-shadow: 1px 1px 5px #97929275;
+    border-radius: 5px;
 }
 
 .weiboContain{
@@ -1711,23 +1883,23 @@ a:focus{
 	color: #6e0706;
 	background-color: #faf1f1;
 }
-#index-header{
+#header{
     background-color: #fff;
     margin: 0;
 }
-#index-header .nav-list .logo{
+#header .nav-list .logo{
     width: 40%;
     padding-top: 10px;
     padding-bottom: 10px;
     /* float: left; */
 }
-#index-header .index-contain{
+#header .index-contain{
     margin: 0;
 }
 .index-contain{
     margin-top: 0
 }
-#index-header .logo img{
+#header .logo img{
     /* margin: 20px; */
     width: 75%;
 }
@@ -1919,3 +2091,5 @@ a:focus{
 .section2 .index-contain .row4 .more{
     float: right;
 }
+
+/* 支付-新版 */
