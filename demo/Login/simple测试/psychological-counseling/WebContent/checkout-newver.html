@@ -66,13 +66,13 @@
                             <div id="order">
                                 <span class="board-title-h1">订单信息</span> 
                                 <div class="order-content">
-                                    <div class="line"><span class="name">订单号：</span><span class="content">902389023898990380</span></div>
+                                    <div class="line"><span class="name">订单号：</span><span class="content">${consultOrderId }</span></div>
                                     <!--
                                         业务类型：
                                         咨询-在线视频 / 咨询-在线语音 / 咨询-线下面对面 / 倾听                                        
                                         付费课程
                                     -->
-                                    <div class="line"><span class="name">业务类型：</span><span class="content">咨询-在线视频</span></div>
+                                    <div class="line"><span class="name">业务类型：</span><span class="content">${type }</span></div>
                                     <!--倾听师/咨询师 ★课程没有这一行👇-->
                                     <div class="line"><span class="name">咨询师：</span><span class="content">梁田</span></div>
                                     <!--倾听和课程没有这一行👇-->
@@ -129,6 +129,14 @@
                         <div id="pay-board-2" style="display:none">
                             <div style="float:right" onclick="backToStep1(this)"><a href="#"><i class="icon icon-arrow-left"></i>&nbsp;上一步</a></div>
                             <form action="PaymentRequestServlet" method="post">
+	                            <input type="hidden" name="teacherPrice" value="${teacherPrice }"/>
+			                	<input type="hidden" name="teacherId" value="${teacherId }"/>
+			                	<input type="hidden" name="date" value="${date }"/>
+			                	<input type="hidden" name="consultOrderId" value="${consultOrderId }">
+			                	<input type="hidden" name="content" value="${content }"/>
+			                	<input type="hidden" name="type" value="${type }">
+		                    <span class="tag">订单号：${reOrderId }</span><br/>
+		                    <span class="board-title-h1"> 金额&nbsp;￥${teacherPrice }</span><br/>
                                 <span>订单号：213247225348975</span><br/>
                                 <span class="board-title-h1"> 金额&nbsp;￥200</span><br/>
                                 <div style="margin-bottom:20px">
@@ -169,6 +177,24 @@
                             </div>
                         </div>  
                         <input type="hidden" value="">
+                        <script type="text/javascript">
+	                        $("input").click( function(){
+	                      	  if(($("#bank").is(":checked")
+	                                    || $("#bank2").is(":checked")
+	                                    || $("#bank3").is(":checked")
+	                                    || $("#bank4").is(":checked")
+	                                    || $("#bank5").is(":checked")
+	                                    || $("#bank6").is(":checked")
+	                                    || $("#bank7").is(":checked")
+	                                    || $("#bank8").is(":checked")
+	                                    )){
+	                                       $("#confirmed-btn").removeAttr("disabled");
+	                                     }
+	                          else{
+	                          	$("#confirmed-btn").attr("disabled","disabled");
+	                          }
+	                        })
+                        </script>
                     </div>
                 </div>
             </div>
