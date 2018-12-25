@@ -1,5 +1,29 @@
 window.onload = function(){
     $(".checkout-panel:first").css("height",window.innerHeight*0.7);
+    
+    //用于监控扫码支付是否成功的轮询。
+    $.ajax({
+		url:"/polling4Alipay",
+		async:false,
+		type:"post",
+		dataType:"json",
+		data:{"out_trade_number":""},
+		success:function(data){
+			//付款成功
+			if(data.result=="TRADE_SUCCESS"){
+				$("#code-accomplished").css("dispaly","inline");
+				serTimeout(function(){goToStep3()},1500)
+			}else{
+				$("#code-accomplished").css("dispaly","inline");
+			}
+		},
+		error:function(XMLHttpRequest, textStatus, errorThrown){
+			console.log("进入ajax了");
+			alert(XMLHttpRequest.status); 
+	     	alert(XMLHttpRequest.readyState); 
+			alert(textStatus); 
+		}
+	})
 }
 function clickPayMethod(obj){
     var onClass;
@@ -52,6 +76,7 @@ function backToStep1(obj){
     $("#step-2").css("display","none");
     $("#step-1").css("display","block");
 }
+//跳到第三步
 function goToStep3(){
     $("#step").children().each(function(index,element){
         if(!$(element).hasClass("active")){

@@ -39,10 +39,13 @@ import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.domain.AlipayDataDataserviceBillDownloadurlQueryModel;
 import com.alipay.api.domain.AlipayTradePrecreateModel;
+import com.alipay.api.domain.AlipayTradeQueryModel;
 import com.alipay.api.domain.AlipayTradeRefundModel;
+import com.alipay.api.domain.TradeFundBill;
 import com.alipay.api.response.AlipayDataDataserviceBillDownloadurlQueryResponse;
 import com.alipay.api.response.AlipaySystemOauthTokenResponse;
 import com.alipay.api.response.AlipayTradePrecreateResponse;
+import com.alipay.api.response.AlipayTradeQueryResponse;
 import com.alipay.api.response.AlipayTradeRefundResponse;
 import com.alipay.api.response.AlipayUserInfoShareResponse;
 
@@ -152,6 +155,7 @@ public void AlipayTradePrecreate(HttpServletResponse resp,
 		@RequestParam(value="total_amount") String total_amount,
 		@RequestParam(value="subject") String subject,
 		@RequestParam(value="courseId") String courseId,
+		@RequestParam(value="out_trade_number") String out_trade_number,
 		HttpSession session
         ) throws IOException, AlipayApiException {
 	//下面是支付功能
@@ -162,7 +166,7 @@ public void AlipayTradePrecreate(HttpServletResponse resp,
     //设置 产品参数
     AlipayTradePrecreateModel model = new AlipayTradePrecreateModel();
 	//out_trade_no（订单号）必须是唯一的，测试一次必须修改新的订单号
-	model.setOutTradeNo(UUID.randomUUID().toString().replaceAll("-", ""));
+	model.setOutTradeNo(out_trade_number);
 	model.setTotalAmount(total_amount);
 	model.setSubject(subject);
 	JSONObject json=new JSONObject();
@@ -297,5 +301,37 @@ public void downloadBill(String billUrl) {
 	        e.printStackTrace();
 	    }
     }
+}
+//查询账单
+public String queryBill(String outTradeNo) throws AlipayApiException {
+	AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl, AlipayConfig.app_id, AlipayConfig.merchant_private_key, AlipayConfig.format, AlipayConfig.charset, AlipayConfig.alipay_public_key, AlipayConfig.sign_type);
+	AlipayTradeQueryRequest request = new AlipayTradeQueryRequest();
+	AlipayTradeQueryModel model=new AlipayTradeQueryModel();
+	model.setOutTradeNo(outTradeNo);
+	request.setBizModel(model);
+	AlipayTradeQueryResponse response = alipayClient.execute(request);
+	
+	
+	if(response.isSuccess()){
+		System.out.println("调用成功");
+		return response.getTradeStatus();
+	} else {
+		System.out.println("调用失败");
+		return null;
+	}
+}
+//轮询查询
+@RequestMapping("/polling4Alipay")
+@ResponseBody
+public String polling4Alipay(@RequestParam(value="out_trade_number",required=false) String outTradeNumber) throws AlipayApiException {
+	Calendar calendar=Calendar.getInstance();
+	Long startTime=calendar.getTimeInMillis();
+	//死循环模式，如果死循环时间超过5分钟，那么停止循环。
+	while(true&&(startTime-calendar.getTimeInMillis()<1000*60*5)) {
+		if(queryBill(outTradeNumber)=="TRADE_SUCCESS") {
+			return "{\"result\":\"TRADE_SUCCESS\"}";
+		}
+	}
+	return "{\"result\":\"TRADE_FAILURE\"}";
 }
 }

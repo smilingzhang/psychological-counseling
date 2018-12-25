@@ -111,12 +111,16 @@
                                 <!--二维码放置处-->
                                 <div id="code">
                                     <div id="code-showcode">
-                                        <img src="images/code-example.png" alt="">
+										<!--   支付宝的二维码 -->
+                                        <img src="${path}/psychological-counseling/getQ?total_amount=123&subject=iphone6s 32G&courseId=123&out_trade_number=123465" alt="">
                                         <div>请打开手机支付宝<br>扫一扫继续付款</div>
                                     </div>
                                     <!--成功提示-->
                                     <div id="code-accomplished" style="display:none">
-                                        <div><span><i class="icon icon-check-circle"></i>&nbsp;支付成功</span></div>
+                                        <div><span><i class="icon icon-check-circle" ></i>&nbsp;支付成功</span></div>
+                                    </div>
+                                    <div id="code-fail" style="display:none">
+                                        <div><span><i class="icon icon-check-circle" ></i>&nbsp;支付超时或支付失败，请重新支付</span></div>
                                     </div>
                                 </div>
                             </form>
@@ -141,7 +145,7 @@
                                 <button class="btn btn-block " type="button" onclick="goToStep3()">确认支付</button>
                             </form>
                         </div>
-                        <button class="btn btn-block " onclick="goToStep3()">下一步</button>                   
+<!--                         <button class="btn btn-block " onclick="goToStep3()">下一步</button>                    -->
                     </div>
                     <div id="step-3" style="display:none">
                         <div class="alert alert-success with-icon">
@@ -164,7 +168,7 @@
                                 <a href="#">立即跳转</a>
                             </div>
                         </div>  
-                        
+                        <input type="hidden" value="">
                     </div>
                 </div>
             </div>
