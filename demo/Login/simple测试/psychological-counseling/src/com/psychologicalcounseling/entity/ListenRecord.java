@@ -11,12 +11,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 /**
  * 
- *@desc:倾听记录表
- *		字段：流水号，用户ID，预约时间，开始时间，结束时间，价格 ，
- *			订单状态：已完成/已支付/已取消，倾听师ID，资源路径
+ *@desc:倾听记录�?
+ *		字段：流水号，用户ID，预约时间，�?始时间，结束时间，价�? �?
+ *			订单状�?�：已完�?/已支�?/已取消，倾听师ID，资源路�?
  *		映射关系：单向多对一  咨询师表，用户表
- *@author 段智兴
- *@date:2018年11月20日下午4:25:53
+ *@author 段智�?
+ *@date:2018�?11�?20日下�?4:25:53
  */
 
 @Entity
@@ -24,16 +24,16 @@ import javax.persistence.Table;
 
 public class ListenRecord {
 	private int listenrecordId;
-	private Date listenrecordOrderTime;
-	private Date listenrecordStartTime;
-	private Date listenrecordEndTime;
+	private String listenrecordOrderTime;
+	private String listenrecordStartTime;
+	private String listenrecordEndTime;
 	private float listenrecordPrice;
-	private int listenrecordState;
+	private String listenrecordState;
 	private String listenrecordResourcePath;
 	private Teacher teacher;
 	private User user;
-	
-	
+	private String randomNum;
+	private String listenState;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getListenrecordId() {
@@ -42,22 +42,22 @@ public class ListenRecord {
 	public void setListenrecordId(int listenrecordId) {
 		this.listenrecordId = listenrecordId;
 	}
-	public Date getListenrecordOrderTime() {
+	public String getListenrecordOrderTime() {
 		return listenrecordOrderTime;
 	}
-	public void setListenrecordOrderTime(Date listenrecordOrderTime) {
+	public void setListenrecordOrderTime(String listenrecordOrderTime) {
 		this.listenrecordOrderTime = listenrecordOrderTime;
 	}
-	public Date getListenrecordStartTime() {
+	public String getListenrecordStartTime() {
 		return listenrecordStartTime;
 	}
-	public void setListenrecordStartTime(Date listenrecordStartTime) {
+	public void setListenrecordStartTime(String listenrecordStartTime) {
 		this.listenrecordStartTime = listenrecordStartTime;
 	}
-	public Date getListenrecordEndTime() {
+	public String getListenrecordEndTime() {
 		return listenrecordEndTime;
 	}
-	public void setListenrecordEndTime(Date listenrecordEndTime) {
+	public void setListenrecordEndTime(String listenrecordEndTime) {
 		this.listenrecordEndTime = listenrecordEndTime;
 	}
 	public float getListenrecordPrice() {
@@ -66,10 +66,10 @@ public class ListenRecord {
 	public void setListenrecordPrice(float listenrecordPrice) {
 		this.listenrecordPrice = listenrecordPrice;
 	}
-	public int getListenrecordState() {
+	public String getListenrecordState() {
 		return listenrecordState;
 	}
-	public void setListenrecordState(int listenrecordState) {
+	public void setListenrecordState(String listenrecordState) {
 		this.listenrecordState = listenrecordState;
 	}
 	public String getListenrecordResourcePath() {
@@ -91,9 +91,28 @@ public class ListenRecord {
 	public User getUser() {
 		return user;
 	}
+	@Override
+	public String toString() {
+		return "ListenRecord [listenrecordId=" + listenrecordId + ", listenrecordOrderTime=" + listenrecordOrderTime
+				+ ", listenrecordStartTime=" + listenrecordStartTime + ", listenrecordEndTime=" + listenrecordEndTime
+				+ ", listenrecordPrice=" + listenrecordPrice + "]";
+	}
 	public void setUser(User user) {
 		this.user = user;
 	}
+	public String getRandomNum() {
+		return randomNum;
+	}
+	public void setRandomNum(String randomNum) {
+		this.randomNum = randomNum;
+	}
+	public String getListenState() {
+		return listenState;
+	}
+	public void setListenState(String listenState) {
+		this.listenState = listenState;
+	}
+	
 	
 	
 	

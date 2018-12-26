@@ -1,20 +1,25 @@
 window.onload = function(){
     $(".checkout-panel:first").css("height",window.innerHeight*0.7);
-    
+    var out_trade_number=$("#hidden-randomOrderId").val();
     //用于监控扫码支付是否成功的轮询。
     $.ajax({
-		url:"/polling4Alipay",
-		async:false,
+		url:"http://localhost:8080/psychological-counseling/polling4Alipay",
+		async:true,
 		type:"post",
 		dataType:"json",
-		data:{"out_trade_number":""},
+		data:{"out_trade_number":out_trade_number},
 		success:function(data){
+			console.log("进入ajax了");
 			//付款成功
 			if(data.result=="TRADE_SUCCESS"){
-				$("#code-accomplished").css("dispaly","inline");
-				serTimeout(function(){goToStep3()},1500)
+				$("#code-accomplished").attr("style",{"display":"block"});
+				
+				setTimeout(function(){goToStep3()},2000)
+			}else if(data.result=="WAIT_BUYER_PAY"){
+				
 			}else{
-				$("#code-accomplished").css("dispaly","inline");
+				console.log("失败了");
+				$("#code-fail").attr("style",{"display":"block"});
 			}
 		},
 		error:function(XMLHttpRequest, textStatus, errorThrown){

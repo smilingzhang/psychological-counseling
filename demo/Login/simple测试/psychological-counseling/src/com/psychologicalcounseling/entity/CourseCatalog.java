@@ -1,6 +1,8 @@
 package com.psychologicalcounseling.entity;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -14,11 +16,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 /**
  * 
- *@desc:课程目录表
- *		字段：目录id，课程ID，父id，目录名，资源路径
- *		映射关系：双向一对多  自连接
- *@author 段智兴
- *@date:2018年11月20日下午4:29:22
+ *@desc:课程目录�?
+ *		字段：目录id，课程ID，父id，目录名，资源路�?
+ *		映射关系：双向一对多  自连�?
+ *@author 段智�?
+ *@date:2018�?11�?20日下�?4:29:22
  */
 @Entity
 @Table(name="coursecatalog")
@@ -28,7 +30,7 @@ public class CourseCatalog {
 	private String coursecatalogName;
 	private String coursecatalogResourcePath;
 	private CourseCatalog parentCourseCatalog;
-	private Set<CourseCatalog> courseCatalogs = new HashSet<CourseCatalog>();
+	private List<CourseCatalog> courseCatalogs = new ArrayList<CourseCatalog>();
 	
 	
 	@Id
@@ -60,13 +62,8 @@ public class CourseCatalog {
 	
 
 	
-	@OneToMany(mappedBy="parentCourseCatalog",targetEntity=CourseCatalog.class,cascade=CascadeType.ALL)
-	public Set<CourseCatalog> getCourseCatalogs() {
-		return courseCatalogs;
-	}
-	public void setCourseCatalogs(Set<CourseCatalog> courseCatalogs) {
-		this.courseCatalogs = courseCatalogs;
-	}
+	
+	
 	@ManyToOne
 	@JoinColumn(name="coursecatalogParentId")
 	public CourseCatalog getParentCourseCatalog() {
@@ -74,6 +71,14 @@ public class CourseCatalog {
 	}
 	public void setParentCourseCatalog(CourseCatalog parentCourseCatalog) {
 		this.parentCourseCatalog = parentCourseCatalog;
+	}
+	
+	@OneToMany(mappedBy="parentCourseCatalog",targetEntity=CourseCatalog.class,cascade=CascadeType.ALL)
+	public List<CourseCatalog> getCourseCatalogs() {
+		return courseCatalogs;
+	}
+	public void setCourseCatalogs(List<CourseCatalog> courseCatalogs) {
+		this.courseCatalogs = courseCatalogs;
 	}
 	
 	

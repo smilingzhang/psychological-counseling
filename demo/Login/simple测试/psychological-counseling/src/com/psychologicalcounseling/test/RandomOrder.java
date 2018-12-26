@@ -1,4 +1,4 @@
-package com.courseing.course.buy_course.controller;
+package com.psychologicalcounseling.test;
 
 import java.io.IOException;
 
@@ -9,14 +9,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.util.GenerateRandomUtil;
 @Controller
 /**
  *@desc:通过继承随机数生成接口生成10位随机数订单并写入session
  *@author XX
  *@date:2018年12月7日下午4:28:01
  */
-public class RandomOrder extends GenerateRandomUtil {
+public class RandomOrder extends com.psychologicalcounseling.util.GenerateRandomUtil {
 	@RequestMapping("/random_order")
 	public String RandomOrder(HttpServletRequest request,HttpServletResponse response) throws IOException {
 		response.setContentType("text/html;charset=utf-8");
@@ -34,6 +33,7 @@ public class RandomOrder extends GenerateRandomUtil {
 			String refer = request.getHeader("REFERER");
 			request.getSession().setAttribute("refer", refer);
 			//调用util类中的方法生成随机数并写入session
+			session.setAttribute("type", "listenning");
 			String result = generateRandom();
 			request.getSession().setAttribute("course_randomOrderId", result);
 			//跳转至课程购买确认页

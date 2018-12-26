@@ -66,7 +66,7 @@
                             <div id="order">
                                 <span class="board-title-h1">订单信息</span> 
                                 <div class="order-content">
-                                    <div class="line"><span class="name">订单号：</span><span class="content">${consultOrderId }</span></div>
+                                    <div class="line"><span class="name">订单号：</span><span class="content">${course_randomOrderId }</span></div>
                                     <!--
                                         业务类型：
                                         咨询-在线视频 / 咨询-在线语音 / 咨询-线下面对面 / 倾听                                        
@@ -74,12 +74,12 @@
                                     -->
                                     <div class="line"><span class="name">业务类型：</span><span class="content">${type }</span></div>
                                     <!--倾听师/咨询师 ★课程没有这一行👇-->
-                                    <div class="line"><span class="name">咨询师：</span><span class="content">梁田</span></div>
+                                    <div class="line"><span class="name">课程名：</span><span class="content">${course.courseName}</span></div>
                                     <!--倾听和课程没有这一行👇-->
-                                    <div class="line"><span class="name">预约时间：</span><span class="content">2018-12-13 10:00</span></div>
+                                    <div class="line"><span class="name">购买时间：</span><span class="content">2018-12-13 10:00</span></div>
                                     <!--课程要加上这一行👇-->
                                     <!-- <div class="line"><span class="name">课程名称：</span><span class="content">《走进心理学》</span></div> -->
-                                    <div class="line"><span class="name">应付金额：</span><span class="content">200￥</span></div>
+                                    <div class="line"><span class="name">应付金额：</span><span class="content">￥${course.coursePrice}</span></div>
                                 </div>
                             </div>
 
@@ -112,7 +112,7 @@
                                 <div id="code">
                                     <div id="code-showcode">
 										<!--   支付宝的二维码 -->
-                                        <img src="${path}/psychological-counseling/getQ?total_amount=123&subject=iphone6s 32G&courseId=123&out_trade_number=123465" alt="">
+                                        <img src="${path}/psychological-counseling/getQ?total_amount=1230&subject=iphone6s 32G&courseId=123&out_trade_number=${course_randomOrderId }" alt="">
                                         <div>请打开手机支付宝<br>扫一扫继续付款</div>
                                     </div>
                                     <!--成功提示-->
@@ -137,7 +137,7 @@
 			                	<input type="hidden" name="type" value="${type }">
 		                    <span class="tag">订单号：${reOrderId }</span><br/>
 		                    <span class="board-title-h1"> 金额&nbsp;￥${teacherPrice }</span><br/>
-                                <span>订单号：213247225348975</span><br/>
+                                <span>订单号：${course_randomOrderId }</span><br/>
                                 <span class="board-title-h1"> 金额&nbsp;￥200</span><br/>
                                 <div style="margin-bottom:20px">
                                     <span>请选择支付银行：</span> <br/>

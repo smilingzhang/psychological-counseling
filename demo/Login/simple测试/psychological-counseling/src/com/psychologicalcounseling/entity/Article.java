@@ -12,11 +12,11 @@ import javax.persistence.Table;
 
 /**
  * 
- *@desc:文章表
- *	字段：文章ID(article)，文章名称，咨询师ID，banner图路径，简介，正文，发表时间，浏览数量
+ *@desc:文章�?
+ *	字段：文章ID(article)，文章名称，咨询师ID，banner图路径，�?介，正文，发表时间，浏览数量
  *	映射关系：单向多对一   咨询师表
- *@author 段智兴
- *@date:2018年11月20日下午4:35:40
+ *@author 段智�?
+ *@date:2018�?11�?20日下�?4:35:40
  */
 @Entity
 @Table(name="article")

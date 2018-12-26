@@ -1,5 +1,7 @@
 package com.psychologicalcounseling.login.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -60,7 +62,7 @@ public class AlipayServiceImpl {
 	}
 	/**
 	 * 
-	 *@desc:插入订单
+	 *@desc:插入课程订单
 	 *@param courseId
 	 *@param userId
 	 *@param orderId4Alipay
@@ -71,6 +73,27 @@ public class AlipayServiceImpl {
 	public void insertCourseOrderByPrecreate(int courseId,int userId,String orderId4Alipay ,float courseorderPrice) {
 		adi.insertCourseOrderByPrecreate(courseId, userId, orderId4Alipay, courseorderPrice);
 	}
+	public void insertConsultationRecord(int userId,int randomNum,int teacherId,String consultationrecordStartTime,String consultationrecordEndTime,float consultationrecordPrice,
+			String consultState,String consultationrecordMethod) {
+		//时间
+		Calendar calendar=Calendar.getInstance();
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		String time=sdf.format(calendar);
+		adi.insertConsultationRecord(userId,randomNum,teacherId,time,consultationrecordStartTime,consultationrecordEndTime,consultationrecordPrice,
+				consultState,consultationrecordMethod);
+	}
+	public void insertListenRecord(int userId,float listenrecordPrice,int teacherId,
+			int randomNum) {
+		//时间
+		Calendar calendar=Calendar.getInstance();
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		String time=sdf.format(calendar);
+		//
+		adi.insertListenRecord(userId, time,listenrecordPrice,teacherId,
+				randomNum);
+	}
+	
+	
 	/**
 	 * 
 	 *@desc:第三方登录时插入用户。

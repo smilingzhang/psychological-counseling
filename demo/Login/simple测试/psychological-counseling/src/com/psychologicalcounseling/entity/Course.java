@@ -9,11 +9,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 /**
  * 
- *@desc:课程表
- *		字段：课程ID，课程名称，咨询师ID，价格 ，折扣，介绍 ，banner图路径，学习人数，简介
+ *@desc:课程�?
+ *		字段：课程ID，课程名称，咨询师ID，价�? ，折扣，介绍 ，banner图路径，学习人数，简�?
  *		映射关系：单向多对一  咨询师表
  *@author XX
- *@date:2018年11月20日下午4:27:21
+ *@date:2018�?11�?20日下�?4:27:21
  */
 @Entity
 @Table(name="course")

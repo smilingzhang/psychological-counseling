@@ -9,11 +9,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 /**
  * 
- *@desc:用户标签表
+ *@desc:用户标签�?
  *		字段：流水号，业务类型：1.咨询2.倾听3.课程4.测评，业务ID，评论内容，评价时间，星级，评价人ID
-		映射关系：双向一对多  用户表
- *@author 段智兴
- *@date:2018年11月20日下午4:18:02
+		映射关系：双向一对多  用户�?
+ *@author 段智�?
+ *@date:2018�?11�?20日下�?4:18:02
  */
 @Entity
 @Table(name="userlabel")

@@ -24,9 +24,10 @@ public class CourseRecord {
 	private int courserecordId;
 	private int courserecordIsFinish;
 	private Date courserecordStartTime;
-	private String courserecordStopPosition;
+	private int courserecordStopPosition;
 	private User user;
 	private Course course;
+	private int coursecatalogId;
 	
 	
 	@Id
@@ -50,10 +51,10 @@ public class CourseRecord {
 	public void setCourserecordStartTime(Date courserecordStartTime) {
 		this.courserecordStartTime = courserecordStartTime;
 	}
-	public String getCourserecordStopPosition() {
+	public int getCourserecordStopPosition() {
 		return courserecordStopPosition;
 	}
-	public void setCourserecordStopPosition(String courserecordStopPosition) {
+	public void setCourserecordStopPosition(int courserecordStopPosition) {
 		this.courserecordStopPosition = courserecordStopPosition;
 	}
 	@ManyToOne
@@ -71,6 +72,12 @@ public class CourseRecord {
 	}
 	public void setCourse(Course course) {
 		this.course = course;
+	}
+	public int getCoursecatalogId() {
+		return coursecatalogId;
+	}
+	public void setCoursecatalogId(int coursecatalogId) {
+		this.coursecatalogId = coursecatalogId;
 	}
 	
 	

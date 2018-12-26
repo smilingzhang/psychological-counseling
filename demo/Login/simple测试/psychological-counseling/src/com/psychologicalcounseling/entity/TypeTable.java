@@ -7,10 +7,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 /**
  * 
- *@desc:类别表
- *		字段：类别ID，类别名称
- *@author 段智兴
- *@date:2018年11月20日下午4:34:19
+ *@desc:类别�?
+ *		字段：类别ID，类别名�?
+ *@author 段智�?
+ *@date:2018�?11�?20日下�?4:34:19
  */
 @Entity
 @Table(name="typetable")
@@ -23,11 +23,11 @@ public class TypeTable {
 	public int getTypetableId() {
 		return typetableId;
 	}
-	public void setTypetableId(int typetableId) {
-		this.typetableId = typetableId;
-	}
 	public String getTypetableName() {
 		return typetableName;
+	}
+	public void setTypetableId(int typetableId) {
+		this.typetableId = typetableId;
 	}
 	public void setTypetableName(String typetableName) {
 		this.typetableName = typetableName;

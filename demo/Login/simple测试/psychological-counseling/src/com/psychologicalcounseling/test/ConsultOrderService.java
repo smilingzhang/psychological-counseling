@@ -86,7 +86,7 @@ public class ConsultOrderService {
 		ListenRecord listenRecord = new ListenRecord();
 		listenRecord.setUser(user);
 		listenRecord.setTeacher(teacher);
-		listenRecord.setListenrecordOrderTime(new Date(date));
+		//listenRecord.setListenrecordOrderTime(new Date(date));
 		listenRecord.setListenrecordPrice(price);
 		int listenOrderId = this.listenOrderDao.insertListenOrder(listenRecord);
 		return listenOrderId;

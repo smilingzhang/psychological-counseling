@@ -63,7 +63,16 @@ public class NotifyUrlController {
 		JSONObject pa=new JSONObject(json);
         String courseId=pa.getString("courseId");
         int userId=pa.getInt("userId");
-        System.out.println(courseId+"20:4033333333333333333");
+        String type=pa.getString("type");
+        String content=pa.getString("content");
+        String consultState=pa.getString("consultState");
+        int teacherId=pa.getInt("teacherId");
+        String consultationrecordMethod=pa.getString("consultationrecordMethod");
+        int  randomNum=pa.getInt("randomNum");
+        
+        String[] arr=content.split("-");
+        String consultationrecordStartTime=arr[0];
+        String consultationrecordEndTime=arr[1];
 		//获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表(以上仅供参考)//
 		//计算得出通知验证结果
 		//boolean AlipaySignature.rsaCheckV1(Map<String, String> params, String publicKey, String charset, String sign_type)
@@ -82,8 +91,15 @@ public class NotifyUrlController {
 				AlipayTradeQueryResponse alipayTradeQueryResponse=asi.AlipayTradeQuery(out_trade_no);
 				//进行正确性判断。
 				if(alipayTradeQueryResponse.getTotalAmount().equals(total_amount)&&alipayTradeQueryResponse.getOutTradeNo().equals(out_trade_no)){
-					session.setAttribute("moneySuccessMessage", "支付成功");
-					asi.insertCourseOrderByPrecreate(Integer.parseInt(courseId),userId,out_trade_no, Float.parseFloat(total_amount));  					
+					if(type.equals("courseing")) {
+						asi.insertCourseOrderByPrecreate(Integer.parseInt(courseId),userId,out_trade_no, Float.parseFloat(total_amount)); 
+					}else if(type.equals("listenning")) {
+						asi.insertConsultationRecord(userId,randomNum,teacherId,consultationrecordStartTime,consultationrecordEndTime,Float.parseFloat(total_amount),
+								consultState,consultationrecordMethod);
+					}else {
+						asi.insertListenRecord( userId,Float.parseFloat(total_amount), teacherId,
+								randomNum);
+					}
 				}
 			}
 			//——请根据您的业务逻辑来编写程序（以上代码仅作参考）——

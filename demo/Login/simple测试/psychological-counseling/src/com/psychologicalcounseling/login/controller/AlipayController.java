@@ -139,11 +139,23 @@ public void loginByAlipay(@RequestParam(value="auth_code") String auth_code,
 
 /**
  * 
- *@desc:扫码支付
+ *@desc:一句话描述
  *@param resp
  *@param total_amount
  *@param subject
  *@param courseId
+ *@param out_trade_number
+ *@param consultationrecordStartTime
+ *@param consultationrecordEndTime
+ *@param consultationrecordState
+ *@param teacherId
+ *@param consultationrecordMethod
+ *@param consultState
+ *@param listenrecordStartTime
+ *@param listenrecordEndTime
+ *@param listenrecordState
+ *@param randomNum
+ *@param type
  *@param session
  *@throws IOException
  *@throws AlipayApiException
@@ -152,10 +164,19 @@ public void loginByAlipay(@RequestParam(value="auth_code") String auth_code,
  */
 @RequestMapping(value = "/getQ", method = { RequestMethod.POST, RequestMethod.GET })
 public void AlipayTradePrecreate(HttpServletResponse resp, 
-		@RequestParam(value="total_amount") String total_amount,
-		@RequestParam(value="subject") String subject,
-		@RequestParam(value="courseId") String courseId,
-		@RequestParam(value="out_trade_number") String out_trade_number,
+		@RequestParam(value="total_amount",required=false) String total_amount,
+		@RequestParam(value="subject",required=false) String subject,
+		@RequestParam(value="courseId",required=false) String courseId,
+		@RequestParam(value="out_trade_number",required=false) String out_trade_number,
+		@RequestParam(value="content",required=false) String content,
+		//
+		@RequestParam(value="consultationrecordState",required=false) String consultationrecordState,
+		@RequestParam(value="teacherId",required=false) String teacherId,
+		@RequestParam(value="consultationrecordMethod",required=false) String consultationrecordMethod,
+		@RequestParam(value="consultState",required=false) String consultState,
+		@RequestParam(value="listenrecordState",required=false) String listenrecordState,
+		@RequestParam(value="randomNum",required=false) String randomNum,
+		@RequestParam(value="type",required=false) String type,
 		HttpSession session
         ) throws IOException, AlipayApiException {
 	//下面是支付功能
@@ -163,7 +184,7 @@ public void AlipayTradePrecreate(HttpServletResponse resp,
     AlipayTradePrecreateRequest tradePrecreateRequest = new AlipayTradePrecreateRequest();//创建API对应的request类
     //设置异步请求参数
     tradePrecreateRequest.setNotifyUrl(AlipayConfig.notify_url);
-    //设置 产品参数
+    //设置 产品参数  
     AlipayTradePrecreateModel model = new AlipayTradePrecreateModel();
 	//out_trade_no（订单号）必须是唯一的，测试一次必须修改新的订单号
 	model.setOutTradeNo(out_trade_number);
@@ -174,6 +195,15 @@ public void AlipayTradePrecreate(HttpServletResponse resp,
 		json.put("userId",session.getAttribute("userId"));
 	}
 	json.put("courseId", courseId);
+	json.put("type", type);
+	json.put("content", content);
+
+	
+	json.put("teacherId", teacherId);
+	json.put("consultationrecordMethod", consultationrecordMethod);
+	json.put("consultState", consultState);
+	json.put("listenrecordState", listenrecordState);
+	json.put("randomNum", randomNum);
 	model.setBody(json.toString());
 	tradePrecreateRequest.setBizModel(model);
     AlipayTradePrecreateResponse  alipayTradePrecreateResponse = alipayClient.execute(tradePrecreateRequest);
@@ -313,10 +343,9 @@ public String queryBill(String outTradeNo) throws AlipayApiException {
 	
 	
 	if(response.isSuccess()){
-		System.out.println("调用成功");
 		return response.getTradeStatus();
 	} else {
-		System.out.println("调用失败");
+		System.out.println("查询失败");
 		return null;
 	}
 }
@@ -326,10 +355,16 @@ public String queryBill(String outTradeNo) throws AlipayApiException {
 public String polling4Alipay(@RequestParam(value="out_trade_number",required=false) String outTradeNumber) throws AlipayApiException {
 	Calendar calendar=Calendar.getInstance();
 	Long startTime=calendar.getTimeInMillis();
+	System.out.println("ajax进入到循环里了");
+	System.out.println(outTradeNumber);
 	//死循环模式，如果死循环时间超过5分钟，那么停止循环。
+	
 	while(true&&(startTime-calendar.getTimeInMillis()<1000*60*5)) {
-		if(queryBill(outTradeNumber)=="TRADE_SUCCESS") {
+		if(queryBill(outTradeNumber)!=null&&queryBill(outTradeNumber).equals("TRADE_SUCCESS")) {
+			System.out.println("不要再进行下去了啊");
 			return "{\"result\":\"TRADE_SUCCESS\"}";
+		}else {
+			
 		}
 	}
 	return "{\"result\":\"TRADE_FAILURE\"}";

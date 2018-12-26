@@ -379,13 +379,14 @@ public class UserController {
 	@ResponseBody
 	public String revisePwd(@RequestParam(value="newPwd",required=false) String newPwd,HttpSession session) {
 		int userId=0;
-		if(session!=null) {
+		if(session.getAttribute("userId")!=null) {
 		 userId=((User) session.getAttribute("user")).getUserId();
 		}else {
 			System.out.println("session为空");
+			return "{\"result\":\"false\"}";
 		}
 		userService.revisePwd(newPwd, userId);
-		return "{\"result\":\"false\"}";
+		return "{\"result\":\"true\"}";
 		
 	}
 	/**
@@ -408,11 +409,7 @@ public class UserController {
 			map.put("result", "false");
 			return map;
 		}
-<<<<<<< HEAD
-=======
-		System.out.println(request.getServletContext().getRealPath("/"));
-		System.out.println(request.getServletContext());
->>>>>>> 6a93e7a4b97d324d2ca24db37be20a302ce5b6d6
+
 		String rootPath=request.getServletContext().getRealPath("/")+"images/";
 		//为路径设置名字。
 		Calendar calendar=Calendar.getInstance();
@@ -438,15 +435,10 @@ public class UserController {
 		//更新session中的user
 		int userId=(int)session.getAttribute("userId");
 		session.setAttribute("user", userService.getUser(userId));
-<<<<<<< HEAD
+
 		map.put("result", "success");
 		map.put("userHeadPath", relativePath);
-=======
-		System.out.println(userService.getUser(userId).getUserHeadPath()+"*************************************");
-		map.put("result", "success");
-		map.put("userHeadPath", relativePath);
-		
->>>>>>> 6a93e7a4b97d324d2ca24db37be20a302ce5b6d6
+
 		return map;
 	}
 }

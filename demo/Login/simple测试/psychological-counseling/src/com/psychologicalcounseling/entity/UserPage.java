@@ -3,8 +3,6 @@
  */
 package com.psychologicalcounseling.entity;
 
-import java.util.List;
-
 /**
  *@desc:分页类，只要调用setPage(int,int,long)一个方法初始化即可
  *@author 邓旸

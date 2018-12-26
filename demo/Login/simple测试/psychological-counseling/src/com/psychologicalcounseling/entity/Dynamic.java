@@ -9,10 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 /**
  * 
- *@desc:动态表
+ *@desc:动�?�表
  *		字段：动态ID，发表时间，标题，正文，图片路径，视频资源路径，活动报名链接
- *@author 段智兴
- *@date:2018年11月20日下午4:37:50
+ *@author 段智�?
+ *@date:2018�?11�?20日下�?4:37:50
  */
 @Entity
 @Table(name="dynamic")

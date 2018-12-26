@@ -14,18 +14,22 @@ import javax.persistence.Table;
 
 /**
  * 
- *@desc:用户表
- *	字段:用户ID,头像路径,昵称,性别,真实姓名,身份证号,个性签名,手机号（作为账号）,密码,注册时间,
-		身份：1.客户2.咨询师3.倾听师,省份+城市,邮箱
-	映射关系：双向一对多  用户标签和咨询记录
- *@author 段智兴
- *@date:2018年11月20日下午3:32:27
+ *@desc:用户�?
+ *	字段:用户ID,头像路径,昵称,性别,真实姓名,身份证号,个�?�签�?,手机号（作为账号�?,密码,注册时间,
+		身份�?1.客户2.咨询�?3.倾听�?,城市,邮箱
+	映射关系：双向一对多  用户标签和咨询记�?
+ *@author 段智�?
+ *@date:2018�?11�?20日下�?3:32:27
  */
 @Entity
 @Table(name="user")
 public class User {
 	public static final int IDENTITY_USER = 1;
 	public static final int IDENTITY_CONSULTER = 2;
+	public static final int IDENTITY_LISTENER=3;
+	private String userProvince;
+	private String alipayUserId;
+	private String weiboUid;
 	private Integer userId;
 	private String userHeadPath;
 	private String userNickName;
@@ -37,11 +41,8 @@ public class User {
 	private String userPassword;
 	private Date userRegistTime;
 	private Integer userIdentity;
-	private String userProvince;
 	private String userCity;
 	private String userEmail;
-	private String alipayUserId;
-	private String weiboUid;
 	private Set<UserLabel> userLabels= new HashSet<UserLabel>();
 	private Set<ConsultationRecord> consultationRecords = new HashSet<ConsultationRecord>();
 	
@@ -51,21 +52,14 @@ public class User {
 	public Integer getUserId() {
 		return userId;
 	}
-	public void setUserId(Integer userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	
 	public String getUserHeadPath() {
 		return userHeadPath;
 	}
 	public void setUserHeadPath(String userHeadPath) {
 		this.userHeadPath = userHeadPath;
-	}
-	public Integer getUserIdentity() {
-		return userIdentity;
-	}
-	public void setUserIdentity(Integer userIdentity) {
-		this.userIdentity = userIdentity;
 	}
 	public String getUserNickName() {
 		return userNickName;
@@ -115,11 +109,11 @@ public class User {
 	public void setUserRegistTime(Date userRegistTime) {
 		this.userRegistTime = userRegistTime;
 	}
-	public String getUserProvince() {
-		return userProvince;
+	public Integer getUserIdentity() {
+		return userIdentity;
 	}
-	public void setUserProvince(String userProvince) {
-		this.userProvince = userProvince;
+	public void setUserIdentity(int userIdentity) {
+		this.userIdentity = userIdentity;
 	}
 	public String getUserCity() {
 		return userCity;
@@ -132,19 +126,6 @@ public class User {
 	}
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
-	}
-	
-	public String getWeiboUid() {
-		return weiboUid;
-	}
-	public void setWeiboUid(String weiboUid) {
-		this.weiboUid = weiboUid;
-	}
-	public String getAlipayUserId() {
-		return alipayUserId;
-	}
-	public void setAlipayUserId(String alipayUserId) {
-		this.alipayUserId = alipayUserId;
 	}
 	@OneToMany(mappedBy="user",targetEntity=UserLabel.class,cascade=CascadeType.ALL)
 	public Set<UserLabel> getUserLabels() {
@@ -160,7 +141,39 @@ public class User {
 	public void setConsultationRecords(Set<ConsultationRecord> consultationRecords) {
 		this.consultationRecords = consultationRecords;
 	}
+	public String getUserProvince() {
+		return userProvince;
+	}
+	public void setUserProvince(String userProvince) {
+		this.userProvince = userProvince;
+	}
+	public String getAlipayUserId() {
+		return alipayUserId;
+	}
+	public void setAlipayUserId(String alipayUserId) {
+		this.alipayUserId = alipayUserId;
+	}
+	public String getWeiboUid() {
+		return weiboUid;
+	}
+	public void setWeiboUid(String weiboUid) {
+		this.weiboUid = weiboUid;
+	}
+	public static int getIdentityUser() {
+		return IDENTITY_USER;
+	}
+	public static int getIdentityConsulter() {
+		return IDENTITY_CONSULTER;
+	}
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+	public void setUserIdentity(Integer userIdentity) {
+		this.userIdentity = userIdentity;
+	}
 	
-	
+	public String toString() {
+		return "uaserName is"+userRealName;
+	}
 	
 }

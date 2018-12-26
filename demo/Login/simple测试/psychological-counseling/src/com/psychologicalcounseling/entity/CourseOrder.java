@@ -12,7 +12,7 @@ import javax.persistence.Table;
 /**
  * 
  *@desc:课程订单表
- *		字段：流水号，课程ID，用户ID，购买时间，成交价格
+ *		字段：流水号，课程ID，用户ID，购买时间，成交价格,课程订单号
  *		映射关系：单向多对一  用户表和课程表
  *@author 段智兴
  *@date:2018年11月20日下午4:30:41
@@ -23,9 +23,9 @@ public class CourseOrder {
 	private int courseorderId;
 	private Date courseorderBuyTime;
 	private float courseorderPrice;
-	private String orderId4Alipay;
 	private User user;
 	private Course course;
+	private String courseorderRandomId;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -62,6 +62,12 @@ public class CourseOrder {
 	}
 	public void setCourse(Course course) {
 		this.course = course;
+	}
+	public String getCourseorderRandomId() {
+		return courseorderRandomId;
+	}
+	public void setCourseorderRandomId(String courseorderRandomId) {
+		this.courseorderRandomId = courseorderRandomId;
 	}
 	
 	

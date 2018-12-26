@@ -11,11 +11,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 /**
  * 
- *@desc:日记表
- *		字段：日记号，用户ID，记日记的时间，日记内容，天气
- *		映射关系： 单向多对一   用户表
- *@author 段智兴
- *@date:2018年11月20日下午4:49:03
+ *@desc:日记�?
+ *		字段：日记号，用户ID，记日记的时间，日记内容，天�?
+ *		映射关系�? 单向多对�?   用户�?
+ *@author 段智�?
+ *@date:2018�?11�?20日下�?4:49:03
  */
 
 @Entity

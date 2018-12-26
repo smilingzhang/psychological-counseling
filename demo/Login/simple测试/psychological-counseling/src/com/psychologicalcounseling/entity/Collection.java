@@ -1,5 +1,6 @@
 package com.psychologicalcounseling.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,6 +24,7 @@ public class Collection {
 	public void setCollectionId(int collectionId) {
 		CollectionId = collectionId;
 	}
+	@Column(name="userId")
 	public int getUesrId() {
 		return uesrId;
 	}

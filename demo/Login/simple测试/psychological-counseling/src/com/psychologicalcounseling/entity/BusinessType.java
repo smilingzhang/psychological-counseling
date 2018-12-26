@@ -7,13 +7,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 /**
  * 
- *@desc:业务类别表
- *		字段：流水号，业务类型：1.咨询2.课程3.测评4.动态5.文章，业务ID，类别ID
- *		映射关系：单向多对一  类别表
- *@author 段智兴
- *@date:2018年11月20日下午4:34:57
+ *@desc:业务类别�?
+ *		字段：流水号，业务类型：1.咨询2.课程3.测评4.动�??5.文章，业务ID，类别ID
+ *		映射关系：单向多对一  类别�?
+ *@author 段智�?
+ *@date:2018�?11�?20日下�?4:34:57
  */
 @Entity
 @Table(name="businesstype")
@@ -45,6 +48,7 @@ public class BusinessType {
 	}
 	@ManyToOne
 	@JoinColumn(name="typetableId")
+	@NotFound(action=NotFoundAction.IGNORE) 
 	public TypeTable getTypeTable() {
 		return typeTable;
 	}
