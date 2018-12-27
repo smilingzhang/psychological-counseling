@@ -1,5 +1,7 @@
 package com.util;
 
+import org.apache.log4j.Logger;
+
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
@@ -13,6 +15,7 @@ import com.alipay.api.response.AlipayTradeRefundResponse;
  *@date:Dec 7, 20183:30:30 PM
  */
 public class PartialRefundUtil {
+	private static Logger logger = Logger.getLogger(PartialRefundUtil.class);
 	/**
 	 * 
 	 *@desc:一句话描述
@@ -44,7 +47,7 @@ public class PartialRefundUtil {
 				 "}");
 		AlipayTradeRefundResponse response=alipayClient.execute(request);
 		if(response.isSuccess()) {
-			System.out.println("支付宝退款成功");
+			logger.info("支付宝退款成功");
 		}else {
 			returnStr=response.getSubMsg();//失败时返回的错误信息
 		}

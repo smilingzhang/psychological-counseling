@@ -1,3 +1,52 @@
+/* 合并修改：添加 */
+.modal-header{
+	height:300px;
+	width:650px;
+	background:white;
+}
+/* 合并修改：添加 大概是视频播放模块的 */
+.remind{
+	display: none;
+	overflow: hidden;
+}
+.vip_limit_content{
+	margin-top: 15%;
+}
+.vip_limit_content h3{
+	font-size:25px;
+	line-height: 36px;
+	color:black;
+	text-align: center;
+	margin-bottom: 50px;
+}
+.buy_vip,.buy_course{
+	width:200px;
+	height:40px;
+	margin-left:40%;
+	margin-bottom:30px;
+	position:relative;
+	background: #e7c781;
+	padding:0 30px;
+	border-radius:30px;
+	font-size: 18px;
+	line-height: 38px;
+	color:#623a0c;
+	text-align: center;
+	
+}
+.elsechoose h6{
+	width:500px;
+	height: 40px;
+	float: left;
+	margin-left: 25%;
+	margin-top:50px;
+	font-size: 20px;
+	color:black;
+}
+.elsechoose h6 a {
+	color:#d75455;
+}
+
 .label{
     background-color: #d75455;
 }
@@ -44,22 +93,15 @@ a:focus{
     display: block;
 
 }
-#header .nav-list img{
-    display: block;
-    line-height: 50px;
-    height: 35px;
-    margin-top: 7px;
-    margin-bottom: auto;
-}
 .navbar .nav-list li{
     list-style: none;
     float: left;
-    width: 80px;
+    font-size: 16px;
+    width: 5em;
     /* margin-left: 30px; */
 }
 .navbar .nav-list .search{
-    width: 350px;
-    float: left;
+    width: 20em;
 }
 .navbar .nav-list a{
     display: block;
@@ -811,56 +853,6 @@ a:focus{
     font-weight: 600
 }
 
-.media{
-    display: block;
-    height: 700px;
-    width: 1300px;
-    /* background-color: #fff; */
-    /* margin: 20px; */
-}
-.media .video{
-    display: block;
-    width: 70%;
-    height: 100%;
-    /* background-color:#979292; */
-}
-.media .video .video-consulter{
-    display: block;
-    width: 100%;
-    height: 100%;
-    background-color:#979292;
-}
-.media .video .video-user{
-    display: block;
-    width: 30%;
-    height: 30%;
-    position: relative;
-    top: 0;right: 0;
-    background-color:#fffefe;
-    
-}
-.media .board-text{
-    width: 28%;
-    height: 100%;
-    background-color: #fff;
-}
-.media .board-text,
-.media .video
-{
-    margin: 5px;
-    float: left;
-}
-.board-text .board-show {
-    height: 70%;
-}
-.board-text .input{
-    height: 25%;
-}
-.input .board-words-input,
-.input #editor
-{
-    height: 100%;
-}
 .lesson-nav{
     margin-bottom: 0;
 }
@@ -1541,6 +1533,7 @@ a:focus{
 {
     padding-left: 6%;
     padding-right: 6%;
+    width:100%;/* 合并修改：文章模块 */    
 }
 .passage-contain .passage-panel .bread-crumb-navigation{
     display: block;
@@ -1557,6 +1550,7 @@ a:focus{
 .passage-contain .passage-panel .passage .writer-info img{
     float: left;
     margin-right: 20px;
+    width:40px;/* 合并修改：文章模块 */
 }
 .passage-contain .passage-panel .passage-body{
     text-indent: 2em;
@@ -1617,7 +1611,8 @@ a:focus{
     padding: 10px;
     float: left;
     margin-right: 10px;
-    line-height: 1em;
+    line-height: 1em;    
+    margin-bottom:20px;/* 合并添加 */
 }
 .search-conatin .panel .result .result-block.consult-block .consult-block-contain .name{
     line-height: 1.5em;
@@ -1625,31 +1620,152 @@ a:focus{
 .search-conatin .panel .result .result-block.consult-block .consult-block-contain img{
     float: left;
     padding-right: 10px;
+    width: 25%;
 }
 .checkout-contain{
-    width: 50%
+    width: 50%;
+    height: 50%;
 }
 .checkout-contain .checkout-panel{
     width: 100%;
     clear: both;
-    padding-left: 18%;
-    padding-right: 18%;
+    padding: 30px 40px 30px 40px
 }
 .checkout-contain .checkout-panel .board-title-h1{
-    font-size: 30px;
+    font-size: 20px;
     line-height: 2em;
     color: #d75455;
 }
-.checkout-contain .checkout-panel .panel-body div{
-    /* margin-top: 14px; */
-    margin-bottom: 14px
+.checkout-contain .checkout-panel #step{
+    width: 100%;
+    height: 4em;
+    background-color: #f7e7e3;
+    box-sizing: content-box;
+    border: 1px solid #e7e4e4;
 }
-.checkout-contain .checkout-panel .panel-body div span{
-    line-height: 2em
+.checkout-contain .checkout-panel #step .step,
+.checkout-contain .checkout-panel #step .icon-arrow,
+.checkout-contain .checkout-panel #step .normal
+{
+    text-align: center;
+    vertical-align: middle;
+    line-height: 4em;
+    float: left;
+    color: #979292;
+    /* font-weight: bold; */
 }
-.checkout-contain .checkout-panel .panel-body div input{
-    /* line-height: 3em */
-    margin: 5px
+.checkout-contain .checkout-panel #step .step{
+    width: 30%;
+}
+.checkout-contain .checkout-panel #step .icon-arrow{
+    width: 5%;
+}
+.checkout-contain .checkout-panel #step .active{
+    color: #db5757;
+    box-sizing: border-box;
+    border-bottom: 2px solid #883231;
+    font-weight: bold;
+}
+.checkout-contain .checkout-panel #step-1 .step-1-content{
+    height: 100%;
+}
+.checkout-contain .checkout-panel #order{
+    font-size: 14px;
+    line-height: 2em;
+    width: 50%;
+    height: 100%;
+    margin-right: 10%;
+    float: left;
+}
+.checkout-contain .checkout-panel #order .order-content{
+    /* padding: 20px; */
+    height: 100%;
+}
+.checkout-contain .checkout-panel #order .line,
+.checkout-contain .checkout-panel #step-3 .final-order .line
+{
+    clear: both;
+}
+.checkout-contain .checkout-panel #order .name,
+.checkout-contain .checkout-panel #step-3 .final-order .name
+{
+    float: left;
+}
+.checkout-contain .checkout-panel #order .content,
+.checkout-contain .checkout-panel #step-3 .final-order .content
+{
+    float: right;
+}
+.checkout-contain .checkout-panel #select-method{
+    width: 40%;
+    float: right;
+}
+.checkout-contain .checkout-panel #select-method .pay-method ::before{
+    font-size: 22px;
+}
+.checkout-contain .checkout-panel #select-method .pay-method img{
+    margin: 0;
+    vertical-align: middle
+}
+.checkout-contain .checkout-panel #select-method .pay-method .logo{
+    display: inline-block;
+    width: 50%;
+    height: 50px;
+    border: 1px solid #e7e4e4;
+    border-radius: 15px;
+    margin: 20px;
+    padding: 10px 20px 10px 20px;
+}
+.checkout-contain .checkout-panel #select-method .checked .logo{
+    background-color: #ff8383;
+}
+.checkout-contain .checkout-panel #select-method .checked :before{
+    color: #d75455;
+    font-size: 22px;
+}
+.checkout-contain .checkout-panel #select-method .unchecke :before{
+    color: #979292;
+    font-size: 22px;
+}
+.checkout-contain .checkout-panel #select-method .pay-method .logo:hover{
+    opacity: 0.8;
+}
+.checkout-contain .checkout-panel #step-2 #pay-board-2{
+    padding: 10px 30px 10px 30px
+}
+.checkout-contain .checkout-panel #step-2 #pay-board-1 .info{
+    width: 40%;
+    margin-bottom: 20px;
+}
+.checkout-contain .checkout-panel #step-2 #pay-board-1 #code{
+    width: 40%;
+    height: 80%;
+    padding: 20px 40px 20px 40px;
+    background-color: #fff;
+    box-shadow: 1px 1px 5px #97929275;
+    border-radius: 5px;
+}
+.checkout-contain .checkout-panel #step-2 #pay-board-1 #code img{
+    width: 100%;
+    margin-bottom: 20px;
+}
+.checkout-contain .checkout-panel #step-2 #pay-board-1 #code div{
+    text-align: center;
+    vertical-align: middle;
+}
+.checkout-contain .checkout-panel #step-2 #pay-board-1 #code #code-accomplished span,
+.checkout-contain .checkout-panel #step-2 #pay-board-1 #code #code-accomplished span ::before
+{
+    text-align: center;
+    color: #4f8a4e;
+    font-size: 20px;
+}
+.checkout-contain .checkout-panel #step-3 .final-order{
+    width: 60%;
+    padding: 20px 40px 20px 40px;
+    background-color: #fff;
+    box-shadow: 1px 1px 5px #97929275;
+    border-radius: 5px;
 }
 
 .weiboContain{
@@ -1711,33 +1827,29 @@ a:focus{
 	color: #6e0706;
 	background-color: #faf1f1;
 }
-#index-header{
+#header{
     background-color: #fff;
     margin: 0;
 }
-#index-header .nav-list .logo{
-    width: 40%;
+#header .nav-list .logo{
+    width: 30%;
     padding-top: 10px;
     padding-bottom: 10px;
+    padding: 10px 5px 10px 5px;
     /* float: left; */
 }
-#index-header .index-contain{
+#header .nav-list .logo img{
+    width: 90%;
+}
+#header .index-contain{
     margin: 0;
 }
 .index-contain{
-    margin-top: 0
-}
-#index-header .logo img{
-    /* margin: 20px; */
-    width: 75%;
-}
-.index-contain .row1{
-    margin-top: 20px;
-    height: 370px;
+    margin-top: 0;
 }
 .index-contain .intro{
     float: left;
-    width: 33%;
+    width: 35%;
     height: 100%;
 }
 .index-contain .intro .title{
@@ -1758,9 +1870,17 @@ a:focus{
     margin-top: 10px;
     width: 60%;
 }
+.index-contain .row1{
+    margin-top: 20px;
+    height: 380px;
+}
 .index-contain .row1 .news{
     width: 38%;
     height: 100%;
+}
+.index-contain .row1 .panel{
+    margin-right: 1%;
+    margin-left: 0px
 }
 .index-contain .row1 .news .news-contain{
     margin-top: 10px;
@@ -1775,6 +1895,7 @@ a:focus{
 .index-contain .row1 .service{
     width: 25%;
     height: 100%;
+    margin-right: 0px;
 }
 .index-contain .row1 .service img{
     width: 30%;
@@ -1804,7 +1925,7 @@ a:focus{
 }
 .index-contain .row2{
     clear: both;
-    height: 320px;
+    height: 400px;
 }
 .index-contain .row2 .consultation{
     width: 72%;
@@ -1829,6 +1950,7 @@ a:focus{
 .index-contain .row2 .consultation .consultor img{
     float: left;
     margin-right: 10px;
+    width: 15%;
 }
 .index-contain .row2 .consultation .consultor .tag .stress{
     color: #d75455;
@@ -1841,14 +1963,15 @@ a:focus{
     height: 100%;
     margin-right: 5px;
 }
+.index-contain .row2 .index-listening .board-title-h1{
+    margin-bottom: 10px;
+}
 .index-contain .row2 .index-listening .index-listener{
     width: 100%;
     background-image: none;
-    margin: 20px 0 40px 0;
+    margin: 10px 0 10px 0;
     clear: both;
     height: 50%;
-    /* padding-top: 10px;
-    padding-bottom: 10px; */
 }
 .index-contain .row2 .index-listening .index-listener .head{
     float: left;
@@ -1919,3 +2042,5 @@ a:focus{
 .section2 .index-contain .row4 .more{
     float: right;
 }
+
+/* 支付-新版 */

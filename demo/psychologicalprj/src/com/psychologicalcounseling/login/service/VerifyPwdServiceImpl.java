@@ -8,14 +8,15 @@ import com.psychologicalcounseling.login.dao.VerifyPwdDaoImpl;
 
 @Service
 public class VerifyPwdServiceImpl {
-    
+
 	@Resource
 	private VerifyPwdDaoImpl vpdi;
-	public boolean verifyPwd(String phone,String pwd){
-		
-		if(pwd.equals(vpdi.findPwdByPhone(phone))) {
+
+	public boolean verifyPwd(String phone, String pwd) {
+
+		if (pwd.equals(vpdi.findPwdByPhone(phone))) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
 	}

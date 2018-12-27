@@ -10,9 +10,8 @@ import com.entity.Course;
 import com.util.BaseDao;
 
 @Repository
-public class CourseDaoImpl extends BaseDao<Course>{
-	
-	
+public class CourseDaoImpl extends BaseDao<Course> {
+
 	public List<Course> findCoursesByTeacherId(int id) {
 		Session session = sessionFactory.getCurrentSession();
 		String hql = "from Course c where c.teacher.teacherId=?";
@@ -20,5 +19,5 @@ public class CourseDaoImpl extends BaseDao<Course>{
 		q.setInteger(0, id);
 		return q.list();
 	}
-	
+
 }

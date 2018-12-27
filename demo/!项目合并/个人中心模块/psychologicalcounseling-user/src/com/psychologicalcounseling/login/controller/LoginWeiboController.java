@@ -64,6 +64,7 @@ public class LoginWeiboController {
 					session.setAttribute("userNickName", user.getUserNickName());
 					session.setAttribute("description", user.getUserAutograph());
 					session.setAttribute("avatarLink", user.getUserHeadPath());
+					session.setAttribute("userIdentity", user.getUserIdentity());
 				}
 				else session.setAttribute("uid", null);
 			} else {

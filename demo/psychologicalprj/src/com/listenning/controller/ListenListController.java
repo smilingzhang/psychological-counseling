@@ -1,4 +1,5 @@
 package com.listenning.controller;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -8,6 +9,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +21,9 @@ import com.listenning.service.CourseServiceImpl;
 import com.listenning.service.TeacherServiceImpl;
 import com.util.Page;
 
-import sun.java2d.pipe.SpanShapeRenderer.Simple;
-
 @Controller
 public class ListenListController {
+	private Logger logger = Logger.getLogger(ListenListController.class);
 
 	@Resource
 	private TeacherServiceImpl teacherServiceImpl;
@@ -43,7 +44,7 @@ public class ListenListController {
 		page.setPageSize(Page.PageSize);
 		page.setTotalCount(totalCount);
 
-		System.out.println("before add.. pageNum : " + pageNum);
+		logger.info("before add.. pageNum : " + pageNum);
 		model.addAttribute("page", page);
 		model.addAttribute("pageNum", pageNum);
 
@@ -71,10 +72,9 @@ public class ListenListController {
 	}
 
 	@RequestMapping("/nextPage")
-	public String nextPage(String gender, String age, HttpSession session,
-			Model model, int pageNum) throws Exception {
+	public String nextPage(String gender, String age, HttpSession session, Model model, int pageNum) throws Exception {
 		// 如果gender 和 age 为空
-		if(gender == null && age == null) {
+		if (gender == null && age == null) {
 			gender = (String) session.getAttribute("gender");
 			age = (String) session.getAttribute("age");
 		}
@@ -89,7 +89,6 @@ public class ListenListController {
 		return "listen-list";
 	}
 
-	
 	@RequestMapping("/consulterDetail")
 	public String consulterDetailController(@RequestParam("id") int id, Model model) {
 		Teacher t = teacherServiceImpl.findTeacherById(id);
@@ -107,7 +106,7 @@ public class ListenListController {
 	public String consultAppointmentController1(@RequestParam("id") int id, Model model) {
 		DateFormat bf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date1 = new Date();
-	    String format = bf.format(date1);
+		String format = bf.format(date1);
 		Teacher t = teacherServiceImpl.findTeacherById(id);
 		String[] aString = t.getAuthenticationAptitudeName().split(" ");
 		String[] goodats = t.getGoodats().split(" ");

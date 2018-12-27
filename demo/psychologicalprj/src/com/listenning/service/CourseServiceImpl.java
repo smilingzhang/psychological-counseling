@@ -14,7 +14,7 @@ public class CourseServiceImpl {
 
 	@Resource
 	private CourseDaoImpl courseDaoImpl;
-	
+
 	public List<Course> listCoursesByTeacherId(int id) {
 		return courseDaoImpl.findCoursesByTeacherId(id);
 	}
