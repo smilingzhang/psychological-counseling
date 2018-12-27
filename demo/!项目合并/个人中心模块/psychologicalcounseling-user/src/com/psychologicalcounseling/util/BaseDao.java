@@ -329,12 +329,11 @@ public class BaseDao<T> {
 		 * @return 统计的数量
 		 * @throws Exception
 		 */
-		public Long findCountBySql(String sql, Object ... params) throws Exception {
+		public Long findCountBySql(String sql, Object[] ... params) throws Exception {
 			SQLQuery query = this.sessionFactory.getCurrentSession().createSQLQuery(sql);
 			if (params != null && params.length > 0) {
-				for (int i = 0; i < params.length; i++) {
+				for (int i = 0; i < params.length; i++)
 					query.setParameter(i, params[i]);
-				}
 			}
 			BigInteger countResult = (BigInteger) query.uniqueResult();
 			return Long.valueOf(countResult.toString());

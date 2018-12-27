@@ -32,7 +32,7 @@ import com.psychologicalcounseling.login.service.VerifyPwdServiceImpl;
 public class LoginController {
 	
 
-//------------刘田会：登录--------------
+//------------刘田会：登录注册--------------
 	/**
 	 * 
 	 *@desc:此控制器控制登录注册的所有功能
@@ -88,6 +88,10 @@ public class LoginController {
 		if(json.getString("result").equals("false")) {
 			//result为影响的条数
 		   int result=rsl.regist(phoneNum);
+		   //获取用户的头像
+		   String userHeadPath=rsl.getUserHeadPath(phoneNum);
+		   session.setAttribute("userHeadPath", userHeadPath);
+		   //获取用户的Id
 		   int userId=rsl.getUserId(phoneNum);
 		   session.setAttribute("userId", userId);
 		}
@@ -132,6 +136,8 @@ public class LoginController {
 	public void login4Pwd(HttpSession session,@RequestParam(value="phoneNum",required=false) String phoneNum,
 			HttpServletRequest req,HttpServletResponse resp) throws ServletException, IOException {
 		int userId=rsl.getUserId(phoneNum);
+		String userHeadPath=rsl.getUserHeadPath(phoneNum);
+	   	session.setAttribute("userHeadPath", userHeadPath);
 		session.setAttribute("userId", userId);
 		req.getRequestDispatcher("/login/redirect").forward(req, resp);
 	}
@@ -147,6 +153,7 @@ public class LoginController {
 	@ResponseBody
     public void addPhone(@RequestParam(value="phoneNum",required=false) String phoneNum,HttpSession session) {
 		apbaisi.addPhone(phoneNum, session.getAttribute("userId").toString());
+		
 	}
 	
 //-------------邓旸------------	

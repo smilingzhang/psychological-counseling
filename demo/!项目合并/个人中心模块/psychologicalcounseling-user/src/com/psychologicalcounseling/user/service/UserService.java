@@ -84,7 +84,7 @@ public class UserService {
 			int pos = 0;
 			if(list.size()!=0) { 
 				for(ConsultationRecord cre:list) {
-					int rs = DateUtil.compare(cre.getConsultationrecordOrderTime()+" "+e.getConsultationrecordStartTime(), cre.getConsultationrecordOrderTime()+" "+cre.getConsultationrecordStartTime());
+					int rs = DateUtil.compare(e.getConsultationrecordStartTime(), cre.getConsultationrecordStartTime());
 					if(rs!=-1 && rs!=1) {
 						pos = list.indexOf(cre);
 						break;
@@ -323,13 +323,13 @@ public class UserService {
 	 *@trhows
 	 */
 	public List<Map<String, Object>> listenServiceWithPaging(int uid, int pageNum) throws Exception {
-		String sql = "select listenrecordOrderTime,listenrecordStartTime,listenrecordEndTime,listenrecordPrice,teacherId,userHeadPath,userRealName"
+		String sql = "select listenrecordStartTime,listenrecordEndTime,listenrecordPrice,teacherId,userHeadPath,userRealName"
 				+ " from user,listenrecord"
-				+ " where user.userId=listenrecord.teacherId and listenrecord.userId=? and listenrecord.listenrecordState=?";
+				+ " where user.userId=listenrecord.teacherId and listenrecord.userId=?";
 		String sql4count = "select count(*)"
 				+ " from user,listenrecord"
-				+ " where user.userId=listenrecord.teacherId and listenrecord.userId=? and listenrecord.listenrecordState=?";
-		Object[] obj = new Object[] {uid, "已倾听"};
+				+ " where user.userId=listenrecord.teacherId and listenrecord.userId=?";
+		Object[] obj = new Object[] {uid};
 		UserPage page = userDao.initPageInstanceBySql(PAGE_SIZE, pageNum, sql4count, obj);
 		return userDao.getPageBySql(sql, page, obj);
 	}

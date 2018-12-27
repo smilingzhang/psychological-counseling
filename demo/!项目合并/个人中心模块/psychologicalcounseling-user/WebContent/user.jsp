@@ -116,9 +116,9 @@
 	                    <!--导航-->
 	                    <div class="dir-nav">
 	                        <ul class="nav nav-pills">
-	                            <li <c:if test='${empty(consultState) || consultState=="未咨询" }'> class="active"</c:if>><a href="consultationRecord?consultState=0">未开始</a></li>
-	                            <li <c:if test='${!empty(consultState) and consultState=="已咨询" }'> class="active"</c:if>><a href="consultationRecord?consultState=1">已完成</a></li>
-	                            <li <c:if test='${!empty(consultState) and consultState=="已取消" }'> class="active"</c:if>><a href="consultationRecord?consultState=2">已取消</a></li>
+	                            <li <c:if test='${empty(consultState) || consultState=="0" }'> class="active"</c:if>><a href="consultationRecord?consultState=0">未开始</a></li>
+	                            <li <c:if test='${!empty(consultState) and consultState=="1" }'> class="active"</c:if>><a href="consultationRecord?consultState=1">已完成</a></li>
+	                            <li <c:if test='${!empty(consultState) and consultState=="2" }'> class="active"</c:if>><a href="consultationRecord?consultState=2">已取消</a></li>
 	                        </ul>
 	                    </div>
 	                    <!--咨询列表-->
@@ -150,7 +150,7 @@
 			                                    <!--咨询费用-->
 			                                    <span>咨询费用：￥${consulter.getConsultationrecordPrice() }</span><br/>
 			                                    <!--咨询时间：精确到几点机几分-->
-			                                    <span>预约时间：${consulter.getConsultationrecordOrderTime() } ${consulter.getConsultationrecordStartTime() }</span><br/>
+			                                    <span>预约时间：${dateutil:formatDate(consulter.getConsultationrecordStartTime()) }</span><br/>
 			                                    <!--咨询方式-->
 			                                    <c:if test="${consulter.getConsultationrecordMethod()==1 }">
 				                                    <span>咨询方式：面对面咨询</span><br/>
@@ -182,18 +182,18 @@
 				                                </c:if>
 				                                <!-- 非面对面咨询且没到规定时间 -->
 				                                <c:if test="${consulter.getConsultationrecordMethod()!=1 
-				                                				&& dateutil:compare(requestScope.targetDate,consulter.getConsultationrecordOrderTime()+' '+consulter.getConsultationrecordStartTime())==2 }">
+				                                				&& dateutil:compare(requestScope.targetDate,consulter.getConsultationrecordStartTime())==2 }">
 					                                <td><span class="disabled">进入咨询室</span></td>
 				                                </c:if>
 				                                <!-- 若是线上咨询，且离预约时间仅剩十分钟 -->
 				                                <c:if test="${consulter.getConsultationrecordMethod()!=1
-				                                				&& dateutil:compare(requestScope.targetDate,consulter.getConsultationrecordOrderTime()+' '+consulter.getConsultationrecordStartTime())==1
-				                                				&& dateutil:compare(dateutil:getDate(),consulter.getConsultationrecordOrderTime()+' '+consulter.getConsultationrecordEndTime())==2 }">
+				                                				&& dateutil:compare(requestScope.targetDate,consulter.getConsultationrecordStartTime())==1
+				                                				&& dateutil:compare(dateutil:getDate(),consulter.getConsultationrecordEndTime())==2 }">
 					                                <td width="15%"><span><a class="enter-room" href="room.html">进入咨询室</a></span></td>
 				                                </c:if>
 				                                <!-- 若是线上咨询，且已经结束 -->
 				                                <c:if test="${consulter.getConsultationrecordMethod()!=1
-				                                				&& dateutil:compare(dateutil:getDate(),consulter.getConsultationrecordOrderTime()+' '+consulter.getConsultationrecordEndTime())==1 }">
+				                                				&& dateutil:compare(dateutil:getDate(),consulter.getConsultationrecordEndTime())==1 }">
 					                                <td><span class="disabled">进入咨询室</span></td>
 				                                </c:if>
 			                                </c:if>
@@ -340,8 +340,6 @@
 	                            	</tr>
 		                            <!--一个倾听-->
 		                            <c:forEach items="${listenList }" var="listen">
-		                            <c:set var="startTime" value="${listen.get('listenrecordOrderTime')} ${listen.get('listenrecordStartTime') }" scope="request"></c:set>
-		                            <c:set var="endTime" value="${listen.get('listenrecordOrderTime')} ${listen.get('listenrecordEndTime') }" scope="request"></c:set>
 			                            <tr>
 	                            			<!--倾听者头像-->
 			                            	<td>
@@ -351,7 +349,7 @@
 		                                    </td>
 		                                    <td>
 			                                    <!-- 倾听时间 -->
-			                                    ${listen.get('listenrecordOrderTime') }<br/>${listen.get('listenrecordStartTime') }&nbsp;~&nbsp;${listen.get('listenrecordEndTime') }
+			                                    ${fn:split(dateutil:formatDate(listen.get('listenrecordStartTime')),' ')[0] }<br/>${fn:split(dateutil:formatDate(listen.get('listenrecordStartTime')),' ')[1] }&nbsp;~&nbsp;${fn:split(dateutil:formatDate(listen.get('listenrecordEndTime')),' ')[1] }
 		                                    </td>
 		                                    <!--倾听费用-->
 		                                    <td>￥${listen.get('listenrecordPrice') }</td>
@@ -359,7 +357,7 @@
 				                            	<!-- 倾听时长 -->
 				                            	<c:set var="startTime" value="${listen.get('listenrecordStartTime') }"/>
 				                            	<c:set var="endTime" value="${listen.get('listenrecordEndTime') }"/>
-				                            	<span class="min">${dateutil:getMinutes(dateutil:sub(requestScope.startTime,requestScope.endTime)) }分钟</span>
+				                            	<span class="min">${dateutil:getMinutes(dateutil:sub(listen.get('listenrecordStartTime'),listen.get('listenrecordEndTime'))) }分钟</span>
 			                            	</td>
 			                            </tr> 
 		                            </c:forEach>

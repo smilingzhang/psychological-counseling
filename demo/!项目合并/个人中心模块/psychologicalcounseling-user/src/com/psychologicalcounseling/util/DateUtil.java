@@ -132,4 +132,3 @@ public class DateUtil {
 		 return ft.format(dNow);
 	}
 }
-

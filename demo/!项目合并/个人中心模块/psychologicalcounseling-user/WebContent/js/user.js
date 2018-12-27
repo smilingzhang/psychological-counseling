@@ -177,11 +177,11 @@ function PwdVerifyCode(obj){
 	if(code.length > 6 || code.length < 6){ 
         $("#error-msg-code").text("验证码长度不正确");
         $("#error-msg-code").attr("class","msg-err");
-        setErrorInput($(obj).parent());
+      
     } else if(code.length==0){
     	 $("#error-msg-code").text("请输入验证码");
     	 $("#error-msg-code").attr("class","msg-err");
-    	 setErrorInput($(obj).parent());
+    
     }else{
        
     }
@@ -198,17 +198,17 @@ function PwdVerifyCode(obj){
 			if(data.result=="different"){
 				$("#error-msg-code").text("验证码不正确");
 				$("#error-msg-code").attr("class","msg-err");
-				setErrorInput($(obj).parent());
+				
 				$("#verify-code-pwd").attr("disabled","disabled");
 			}else if(data.result=="outOfTime"){
 				$("#error-msg-code").attr("class","msg-err");
 				$("#error-msg-code").text("验证码超时");
-				setErrorInput($(obj).parent());
+				
 				$("#verify-code-pwd").attr("disabled","disabled");
 			}else if(data.result=="same"){
 				$("#error-msg-code").attr("class","msg-right");
 				$("#error-msg-code").text("验证码正确");
-				setSuccessInput($(obj).parent());
+				
 				$("#verify-code-pwd").removeAttr("disabled");
 			}else{
 				console.log("在修改密码界面，发送手机验证码出错");
@@ -247,11 +247,11 @@ function verifyOldPwd(obj){
  			if(data.result=="false"){
  				$("#errorMsg-oldPwd").text("原始密码错误");
  				$("#errorMsg-oldPwd").attr("class","msg-err");
- 				setErrorInput($(obj).parent());
+ 			
  			}else{
  				$("#errorMsg-oldPwd").text("原始密码正确");
  				$("#errorMsg-oldPwd").attr("class","msg-right");
- 				setSuccessInput($(obj).parent());
+ 				
  			}
  		},
  		error:function(XMLHttpRequest, textStatus, errorThrown){
@@ -271,11 +271,11 @@ function checkNewPwd(obj){
 	if(newPwd.length>16||newPwd.length<6){
 		$("#errorMsg-newPwd").text("密码位数须在6-16位之间");
 		$("#errorMsg-newPwd").attr("class","msg-err");
-		setErrorInput($(obj).parent());
+	
 	}else{
 		$("#errorMsg-newPwd").text("密码合法");
 		$("#errorMsg-newPwd").attr("class","msg-right");
-		setSuccessInput($(obj).parent());
+		
 	}
 	isCanClick4Pwd();
 }
@@ -286,11 +286,11 @@ function checkNewPwdWithPhone(obj){
 	if(newPwd.length>16||newPwd.length<6){
 		$("#errorMsg-newPwd-phone").text("密码位数须在6-16位之间");
 		$("#errorMsg-newPwd-phone").attr("class","msg-err");
-		setErrorInput($(obj).parent());
+	
 	}else{
 		$("#errorMsg-newPwd-phone").text("密码合法");
 		$("#errorMsg-newPwd-phone").attr("class","msg-right");
-		setSuccessInput($(obj).parent());
+		
 	}
 	isCanClick4PwdWithPhone();
 }
@@ -302,11 +302,11 @@ function confirm4Pwd(obj){
 	if(newPwd==confirmPwd){
 		$("#errorMsg-confirmPwd").text("密码相匹配");
 		$("#errorMsg-confirmPwd").attr("class","msg-right");
-		setSuccessInput($(obj).parent());
+		
 	}else{
 		$("#errorMsg-confirmPwd").text("两次密码不一致，请修改");
 		$("#errorMsg-confirmPwd").attr("class","msg-err");
-		setErrorInput($(obj).parent());
+	
 	}
 	isCanClick4Pwd();
 }
@@ -318,11 +318,10 @@ function confirm4PwdWithPhone(obj){
 	if(newPwd==confirmPwd){
 		$("#errorMsg-confirmPwd-phone").text("密码相匹配");
 		$("#errorMsg-confirmPwd-phone").attr("class","msg-right");
-		setSuccessInput($(obj).parent());
 	}else{
 		$("#errorMsg-confirmPwd-phone").text("两次密码不一致，请修改");
 		$("#errorMsg-confirmPwd-phone").attr("class","msg-err");
-		setErrorInput($(obj).parent());
+		
 	}
 	isCanClick4PwdWithPhone();
 }
