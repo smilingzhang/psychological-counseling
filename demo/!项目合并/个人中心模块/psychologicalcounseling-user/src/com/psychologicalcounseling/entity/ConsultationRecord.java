@@ -25,6 +25,9 @@ public class ConsultationRecord {
 	public static final String TODO = "未咨询";
 	public static final String FINISHED = "已完成";
 	public static final String CANCELED = "已取消";
+	public static final String FACE_TO_FACE = "faceToFace";
+	public static final String VEDIO = "vedio";
+	public static final String AUDIO = "audio";
 
 	private int consultationrecordId;
 	private String consultationrecordOrderTime;

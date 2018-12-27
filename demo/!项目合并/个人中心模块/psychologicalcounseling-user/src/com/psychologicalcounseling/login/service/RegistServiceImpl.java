@@ -18,8 +18,6 @@ public class RegistServiceImpl {
     public int getUserId(String phone ) {
     	return rdl.selectUserId(phone);
     }
-    public String getUserHeadPath(String phone) {
-    	return rdl.selectUserHeadPath(phone);
-    }
+	
 
 }

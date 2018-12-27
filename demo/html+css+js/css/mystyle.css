@@ -1620,6 +1620,7 @@ a:focus{
 .search-conatin .panel .result .result-block.consult-block .consult-block-contain img{
     float: left;
     padding-right: 10px;
+    width: 25%;
 }
 .checkout-contain{
     width: 50%;
@@ -1844,11 +1845,11 @@ a:focus{
     margin: 0;
 }
 .index-contain{
-    margin-top: 0
+    margin-top: 0;
 }
 .index-contain .intro{
     float: left;
-    width: 33%;
+    width: 35%;
     height: 100%;
 }
 .index-contain .intro .title{
@@ -1869,9 +1870,17 @@ a:focus{
     margin-top: 10px;
     width: 60%;
 }
+.index-contain .row1{
+    margin-top: 20px;
+    height: 380px;
+}
 .index-contain .row1 .news{
     width: 38%;
     height: 100%;
+}
+.index-contain .row1 .panel{
+    margin-right: 1%;
+    margin-left: 0px
 }
 .index-contain .row1 .news .news-contain{
     margin-top: 10px;
@@ -1886,6 +1895,7 @@ a:focus{
 .index-contain .row1 .service{
     width: 25%;
     height: 100%;
+    margin-right: 0px;
 }
 .index-contain .row1 .service img{
     width: 30%;
@@ -1915,7 +1925,7 @@ a:focus{
 }
 .index-contain .row2{
     clear: both;
-    height: 320px;
+    height: 400px;
 }
 .index-contain .row2 .consultation{
     width: 72%;
@@ -1940,6 +1950,7 @@ a:focus{
 .index-contain .row2 .consultation .consultor img{
     float: left;
     margin-right: 10px;
+    width: 15%;
 }
 .index-contain .row2 .consultation .consultor .tag .stress{
     color: #d75455;
@@ -1952,14 +1963,15 @@ a:focus{
     height: 100%;
     margin-right: 5px;
 }
+.index-contain .row2 .index-listening .board-title-h1{
+    margin-bottom: 10px;
+}
 .index-contain .row2 .index-listening .index-listener{
     width: 100%;
     background-image: none;
-    margin: 20px 0 40px 0;
+    margin: 10px 0 10px 0;
     clear: both;
     height: 50%;
-    /* padding-top: 10px;
-    padding-bottom: 10px; */
 }
 .index-contain .row2 .index-listening .index-listener .head{
     float: left;
