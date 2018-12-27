@@ -165,7 +165,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div><form action="" method="post" enctype="multipart/form-data"></form>
                 <!--分页器：一页显示6~8篇为宜-->
                 <div class="button-pager">
                     <ul id="myPager" class="pager" data-elements="prev,nav,next" data-ride="pager"
@@ -442,7 +442,8 @@
                                     价格：<input type="number" name="" id="price" disabled="disabled">
                                 </div>
                                 <!--banner图上传-->
-                                <div class="course-block" id="ImgUpload-block">
+                                <div class="course-block" id="ImgUpload-block-passage">
+                                    <input type="radio" name="imgFileName" style="display:none" checked>
                                     <span>上传标题图片</span>
                                     <div id="courseImgUploader" class="uploader">
                                         <div class="file-list" data-drag-placeholder="请拖拽文件到此处"></div>
@@ -451,7 +452,7 @@
                                     <script>
                                         $('#courseImgUploader').uploader({
                                             url: 'http://your/post/url',
-                                            // 只允许上传视频文件
+                                            // 只允许上传图片文件
                                             mime_types: [
                                                     {title: '图片', extensions: 'png,jpg'},
                                                 ],
@@ -460,7 +461,12 @@
                                             // 不允许上传重复文件
                                             prevent_duplicates: true,
                                             //上传文件个数
-                                            limitFilesCount: 1
+                                            limitFilesCount: 1,
+                                            // rename: true
+                                        });
+                                        $('#courseImgUploader').uploader().on('onFileUploaded', function(file,responseObject) {
+                                            // console.log($("#ImgUpload-block").children("input[type='hidden']"))
+                                            $("#ImgUpload-block-passage").children("input[type='radio']").attr("value",responseObject.name);                                               
                                         });
                                     </script>
                                 </div>
@@ -494,16 +500,15 @@
                                 <div class="course-block">
                                     <form action="" method="post">
                                     <!--课程分类-->
-                                        <select name="" id="passage-type">
-                                            <option selected>课程分类</option>
-                                            <option value="个人成长">个人成长</option>
-                                            <option value="两性关系">两性关系</option>
-                                            <option value="家庭亲子">家庭亲子</option>
-                                            <option value="心理健康">心理健康</option>
-                                        </select>
-                                        <!--课程标题-->
-                                        <input type="text" name="" id="passage-title" placeholder="课程标题" class="form-control">
-                                    </div>
+                                    <select name="" id="passage-type">
+                                        <option selected>课程分类</option>
+                                        <option value="个人成长">个人成长</option>
+                                        <option value="两性关系">两性关系</option>
+                                        <option value="家庭亲子">家庭亲子</option>
+                                        <option value="心理健康">心理健康</option>
+                                    </select>
+                                    <!--课程标题-->
+                                    <input type="text" name="" id="passage-title" placeholder="课程标题" class="form-control">
                                     <!--课程类型-->
                                     <div class="course-block">
                                         课程类型&nbsp;
@@ -512,7 +517,8 @@
                                         价格：<input type="number" name="" id="price" class="form-control" style="width: 5em;display:inline;">￥
                                     </div>
                                     <!--banner图上传-->
-                                    <div class="course-block" id="ImgUpload-block">
+                                    <div class="course-block" id="ImgUpload-block-course">
+                                        <input type="radio" name="imgFileName" style="display:none" checked>
                                         <span>封面图片</span>
                                         <!-- <input class="tag" type="file" name="ImgUpload"/> -->
                                         <div id="courseImgEditingUploader" class="uploader">
@@ -541,7 +547,12 @@
                                                     {name: 'zui.js', size: 216159, url: 'http://zui.sexy'},
                                                 ]
                                             });
-                                        </script>
+                                            $('#courseImgEditingUploader').uploader().on('onFileUploaded', function(file,responseObject) {
+                                                // console.log($("#ImgUpload-block").children("input[type='hidden']"))
+                                                $("#ImgUpload-block-course").children("input[type='radio']").attr("value",responseObject.name);                                               
+                                            });
+                                            </script>
+                                        </div>
                                     </div>
                                     <!--课程简介-->
                                     <div class="course-block">课程简介<br/><input maxlength="40" type="text" name="" id="" placeholder="课程简介" class="form-control"></div>

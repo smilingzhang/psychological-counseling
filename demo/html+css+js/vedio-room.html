@@ -6,8 +6,6 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>聊天室</title>
-        <meta name="description" content="A set of animated ambient canvas backgrounds with different effects" />
-		<meta name="keywords" content="canvas, ambient, background, animation, javascript, demo, web development" />
         <!-- zui -->
         <script src="js/jquery-3.3.1.js"></script>
         <script src="js/zui.js"></script> 
@@ -16,15 +14,12 @@
         <!--自定义-->
         <link href="css/room.css" rel="stylesheet">
         <script src="js/room.js"></script>
-        <!--背景-->
-        <link rel="stylesheet" href="css/bg-animate.css">	
-		<script>document.documentElement.className="js";var supportsCssVars=function(){var e,t=document.createElement("style");return t.innerHTML="root: { --tmp-var: bold; }",document.head.appendChild(t),e=!!(window.CSS&&window.CSS.supports&&window.CSS.supports("font-weight","var(--tmp-var)")),t.parentNode.removeChild(t),e};supportsCssVars()||alert("Please view this demo in a modern browser that supports CSS Variables.");</script>
   </head>
   <body>
     <!-- 在此处编码你的创意 -->
     <div id="media-container">
         <!--视频放置处 包括用户和咨询师的画面-->
-        <div id="video" style="display:none" onmouseover="showTool(this)" onmouseout="hideTool(this)">
+        <div id="video" onmouseover="showTool(this)" onmouseout="hideTool(this)">
             <!--工具栏-->
             <div class="tool-nav" style="display:none" id="video-tool-nav">
                 <!--按钮-->
@@ -32,15 +27,7 @@
             </div>
             <div class="video-consulter"></div>
             <!-- <div class="video-user"></div> -->
-        </div>
-        <div id="voice" style="display:block" onmouseover="showTool(this)" onmouseout="hideTool(this)">
-             <!--工具栏-->
-             <div class="tool-nav" style="display:none"  id="voice-tool-nav">
-                <!--按钮-->
-                <button class="btn btn-primary" type="button">结束咨询</button>
-            </div>
-            <iframe src="voice-bg.html" frameborder="no"></iframe>
-        </div>
+        </div>        
         <!--文字聊天-->
         <div class="board-text" id="board-text">
             <!--信息展示：包括咨询信息、对话气泡-->

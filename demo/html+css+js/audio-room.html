@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="A set of animated ambient canvas backgrounds with different effects" />
+		<meta name="keywords" content="canvas, ambient, background, animation, javascript, demo, web development" />
+        <title>聊天室</title>
+        <!-- zui -->
+        <script src="js/jquery-3.3.1.js"></script>
+        <script src="js/zui.js"></script> 
+        <script src="js/zui.lite.js"></script>
+        <link rel="stylesheet" href="css/zui.min.css">
+        <!--自定义-->
+        <link href="css/room.css" rel="stylesheet">
+        <script src="js/room.js"></script>
+        <!--背景-->
+
+		<link rel="stylesheet" type="text/css" href="css/animate/base.css" />
+		<link rel="stylesheet" type="text/css" href="css/animate/demo2.css" />
+		
+		<!-- <script>document.documentElement.className="js";var supportsCssVars=function(){var e,t=document.createElement("style");return t.innerHTML="root: { --tmp-var: bold; }",document.head.appendChild(t),e=!!(window.CSS&&window.CSS.supports&&window.CSS.supports("font-weight","var(--tmp-var)")),t.parentNode.removeChild(t),e};supportsCssVars()||alert("Please view this demo in a modern browser that supports CSS Variables.");</script> -->
+		<!-- <script>document.documentElement.className="js";var supportsCssVars=function(){var e,t=document.createElement("style");return t.innerHTML="root: { --tmp-var: bold; }",document.head.appendChild(t),e=!!(window.CSS&&window.CSS.supports&&window.CSS.supports("font-weight","var(--tmp-var)")),t.parentNode.removeChild(t),e};supportsCssVars()||alert("Please view this demo in a modern browser that supports CSS Variables.");</script> -->
+  </head>
+  <body>
+    <!-- 在此处编码你的创意 -->
+    <div id="media-container">
+        <div id="voice" style="display:block" onmouseover="showTool(this)" onmouseout="hideTool(this)">
+             <!--工具栏-->
+             <div class="tool-nav" style="display:none"  id="voice-tool-nav">
+                <!--按钮-->
+                <button class="btn btn-primary" type="button">结束咨询</button>
+            </div>
+            <iframe src="voice-bg.html" frameborder="no" id="bg"></iframe>
+            <iframe src="audio-room-audio.html" frameborder="no" id="audio"></iframe>
+        </div>
+        <!--文字聊天-->
+        <div class="board-text" id="board-text">
+            <!--信息展示：包括咨询信息、对话气泡-->
+            <div class="board-show">
+                <!--咨询信息-->
+                <div id="board-show-info">
+                    <div class="state">
+                        <div>
+                            <span>语音咨询</span>
+                            <span>进行中</span><span class="on">&nbsp;◉</span><!--这个圆，结束的class="off"，不设置直接关闭也可以-->                         
+                        </div>
+                    </div>
+                    <div class="info ">
+                        <!--头像-->
+                        <div class="avatar"><img src="images/consultant.png" alt=""></div>                        
+                        <div class="info-contain">
+                            <!--名字-->
+                            <span class="name">梁田</span><br>
+                            <!--资质-->
+                            <span class="certification">什么什么一级/什么什么什么</span>
+                        </div>
+                    </div>
+                </div>
+                <!--对话气泡-->
+                <iframe src="room-send.html" id="board-show-dialog-iframe" frameborder="no" style="background-color: #503d3d;"></iframe>
+            </div>
+            <iframe id="input-iframe" src="room-text.html" frameborder="no"></iframe>               
+        </div>
+    </div>
+    <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <!-- ZUI Javascript组件 -->
+    <script src="js/zui.min.js"></script>
+  </body>
+</html>
