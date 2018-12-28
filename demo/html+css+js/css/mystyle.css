@@ -1925,7 +1925,7 @@ a:focus{
 }
 .index-contain .row2{
     clear: both;
-    height: 400px;
+    height: 500px;
 }
 .index-contain .row2 .consultation{
     width: 72%;
@@ -1942,15 +1942,29 @@ a:focus{
 .index-contain .row2 .consultation .consultor{
     float: left;
     width: 45%;
-    height: 45%;
+    height: 120px;
     margin: 10px;
-    border: 1px solid #979292;
+    border: 1px solid #dadada;
     padding: 20px 10px 20px 10px;
 }
 .index-contain .row2 .consultation .consultor img{
+    display: block;
+    border-radius: 100%;
+    width: 100%;
+    /* height: 100%; */
+    margin: 0px;
+}
+.index-contain .row2 .consultation .consultor .avatar{
     float: left;
-    margin-right: 10px;
-    width: 15%;
+    height: 100%;
+    width: 20%;
+    margin-right: 2%;
+}
+.index-contain .row2 .consultation .consultor .info{
+    width: 76%;
+    height: 100%;
+    margin:0px;
+    float:right;
 }
 .index-contain .row2 .consultation .consultor .tag .stress{
     color: #d75455;
