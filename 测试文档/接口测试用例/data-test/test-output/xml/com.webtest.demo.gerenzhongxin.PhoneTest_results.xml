@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="gerenzhongxin"
+           tests="1"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="6.288">
+  <properties />
+  
+  
+            <testcase name="phone" time="6.288" classname="com.webtest.demo.gerenzhongxin.PhoneTest" />
+      
+</testsuite>

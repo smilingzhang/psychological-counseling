@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="read"
+           tests="1"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="14.296">
+  <properties />
+  
+  
+            <testcase name="picture" time="14.296" classname="com.webtest.demo.read.PictureTest" />
+      
+</testsuite>

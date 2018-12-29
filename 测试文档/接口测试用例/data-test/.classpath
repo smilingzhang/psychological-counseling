@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
+	<classpathentry kind="con" path="org.testng.TESTNG_CONTAINER"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="libs/commons-collections4-4.2.jar"/>
+	<classpathentry kind="lib" path="libs/commons-compress-1.18.jar"/>
+	<classpathentry kind="lib" path="libs/mysql-connector-java-5.1.39-bin.jar"/>
+	<classpathentry kind="lib" path="libs/poi-4.0.0.jar"/>
+	<classpathentry kind="lib" path="libs/poi-ooxml-4.0.0.jar"/>
+	<classpathentry kind="lib" path="libs/poi-ooxml-schemas-4.0.0.jar"/>
+	<classpathentry kind="lib" path="libs/selenium-server-standalone-3.6.0.jar"/>
+	<classpathentry kind="lib" path="libs/testng.jar"/>
+	<classpathentry kind="lib" path="libs/xmlbeans-3.0.1.jar"/>
+	<classpathentry kind="lib" path="libs/guice-3.0.jar"/>
+	<classpathentry kind="lib" path="libs/log4j-api-2.11.1.jar"/>
+	<classpathentry kind="lib" path="libs/log4j-core-2.11.1.jar"/>
+	<classpathentry kind="lib" path="libs/velocity-dep-1.4.jar"/>
+	<classpathentry kind="lib" path="libs/reportng-1.1.4.jar"/>
+	<classpathentry kind="lib" path="libs/activation.jar"/>
+	<classpathentry kind="lib" path="libs/mail.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

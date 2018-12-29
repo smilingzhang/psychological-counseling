@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="read"
+           tests="3"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="31.844">
+  <properties />
+  
+  
+            <testcase name="tanlun2" time="8.306" classname="com.webtest.demo.read.TaolunTest" />
+                <testcase name="tanlun3" time="9.400" classname="com.webtest.demo.read.TaolunTest" />
+                <testcase name="tanlun1" time="14.138" classname="com.webtest.demo.read.TaolunTest" />
+      
+</testsuite>
