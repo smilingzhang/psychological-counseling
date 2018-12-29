@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.entity.ConsultationRecord;
 import com.entity.ListenRecord;
 import com.entity.User;
-import com.listenning.service.ConsultationRecordServiceImpl;
+import com.indexing.service.ConsultationRecordServiceImpl;
+import com.indexing.service.TeacherServiceImpl;
 import com.listenning.service.ListenRecordServiceImpl;
 import com.listenning.service.OrderTimeCheckServiceImpl;
-import com.listenning.service.TeacherServiceImpl;
 import com.listenning.service.UserServiceImpl;
 
 @Controller
@@ -53,7 +53,6 @@ public class OrderTimeCheckController {
 		PrintWriter pw = res.getWriter();
 		User user = (User) session.getAttribute("user");
 		if (user == null) {
-			pw.print("请登录");
 			return;
 		}
 		int identity = user.getUserIdentity();

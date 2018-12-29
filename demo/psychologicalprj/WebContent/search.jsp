@@ -72,7 +72,7 @@
                  <c:forEach items="${listSearchConsulters }" var="consulters">
                     <div class="consult-block-contain">
                       <!--头像：圆形-->
-                     <a href="${ctx }/consultdetail/showdetail?teacherId=${consulters.teacherId }"> <img src="${ctx }/images/avatar.png"  alt="${consulters.user.userRealName }"></a>
+                     <a href="${ctx }/consultdetail/showdetail?teacherId=${consulters.teacherId }"> <img src="${ctx }/images/${consulters.user.userHeadPath}"  alt="${consulters.user.userRealName }"></a>
                       <div>
                         <!--咨询师/倾听师名-->
                          <a href="${ctx }/consultdetail/showdetail?teacherId=${consulters.teacherId }"><span class="name">${consulters.user.userRealName }</span></a><br/>
@@ -130,7 +130,7 @@
                		<c:forEach var="consultersIndex" items="${consulterIndexSearchs }">
                			 <div class="consult-block-contain">
                      	
-	                      	<a href="${ctx }/consultdetail/showdetail?teacherId=${consultersIndex.teacherId }"><img src="${ctx }/images/avatar.png"  alt="${consultersIndex.teacherName }"></a>
+	                      	<a href="${ctx }/consultdetail/showdetail?teacherId=${consultersIndex.teacherId }"><img src="${ctx }/images/${consultersIndex.teacherHeaderUrl}"  alt="${consultersIndex.teacherName }"></a>
 	                      	<div>
 	                       
 	                       <a href="${ctx }/consultdetail/showdetail?teacherId=${consultersIndex.teacherId }"> <span class="name">${consultersIndex.teacherName }</span></a><br/>
@@ -167,7 +167,7 @@
 	                   
 	                    <span class="tag">${articleIndex.publicationTime }</span>
 	                  
-	                    <p>${articleIndex.articleContent }</p>
+	                    <p>${articleIndex.articleIntroduction }</p>
 	               	    </div>
                   </c:forEach>
                   </c:if>                 

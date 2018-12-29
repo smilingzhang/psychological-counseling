@@ -15,9 +15,9 @@ import com.entity.ConsultationRecord;
 import com.entity.ListenRecord;
 import com.entity.Teacher;
 import com.entity.User;
-import com.listenning.service.ConsultationRecordServiceImpl;
+import com.indexing.service.ConsultationRecordServiceImpl;
+import com.indexing.service.TeacherServiceImpl;
 import com.listenning.service.ListenRecordServiceImpl;
-import com.listenning.service.TeacherServiceImpl;
 import com.util.SubTime;
 
 @Controller

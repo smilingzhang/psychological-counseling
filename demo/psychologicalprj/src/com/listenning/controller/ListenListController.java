@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.entity.Course;
 import com.entity.Teacher;
-import com.listenning.service.CourseServiceImpl;
-import com.listenning.service.TeacherServiceImpl;
+import com.indexing.service.CourseServiceImpl;
+import com.indexing.service.TeacherServiceImpl;
 import com.util.Page;
 
 @Controller

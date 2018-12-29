@@ -53,6 +53,7 @@ public class TestLucene extends  FileManager{
 	private static final String TEACHER_INTRODUCTION="teacherIntrduction";//咨询师个人信息的介绍
 	private static final String TEACHER_APITUDE="teacherApitude";//咨询师的资质认证
 	private static final String GOODATS="goodsat";//咨询师的擅长方向
+	private static final String TEACHER_HEADERURL="headerUrl";//咨询师的头像
 	//关于咨询师在索引库中存储的字段
 	/**
 	 * 
@@ -97,6 +98,7 @@ public class TestLucene extends  FileManager{
 	        	doc.add(new Field(TEACHER_INTRODUCTION, listTeachers.get(m).getTeacherIntroduction(), Store.YES,Index.ANALYZED));
 	        	doc.add(new Field(TEACHER_APITUDE, listTeachers.get(m).getAuthenticationAptitudeName(), Store.YES,Index.ANALYZED));
 	        	doc.add(new Field(GOODATS,listTeachers.get(m).getGoodats(), Store.YES,Index.ANALYZED));
+	        	doc.add(new Field(TEACHER_HEADERURL,listTeachers.get(m).getUser().getUserHeadPath(),Store.YES,Index.ANALYZED));
 	        	writer.addDocument(doc);
 	        	
 	        }
@@ -153,8 +155,6 @@ public class TestLucene extends  FileManager{
 	    	int i=0;
 	    	for(i=0;i<docs.length;i++) {
 	    		int docId=docs[i].doc;		
-	    		System.out.println("课程索引为");
-	    		System.out.println(docId);
 	    		Document document = searcher.doc(docId);
 	    		CourseIndexSearcher c=new CourseIndexSearcher();
 	    		c.setCourseId(String.valueOf(docs[i].doc+1));
@@ -167,8 +167,6 @@ public class TestLucene extends  FileManager{
 	    		
 	    		lastId1=docs[i-1].doc;
 	    	}
-	    	System.out.println("最后一个编号为");
-	    	System.out.println(lastId1);
 	    	return listCour;
 	    	
 	      }
@@ -202,9 +200,7 @@ public class TestLucene extends  FileManager{
 	    	List<ArticleIndexSearch> listArti=new ArrayList<ArticleIndexSearch>();
 	    	for(int i=0;i<docs.length;i++) {
 	    		int docId=docs[i].doc;
-	    		System.out.println(docId);
-	    		System.out.println("索引值为");
-	    		System.out.println(docs[i].doc-lastId1);
+	
 	    		Document document = searcher.doc(docId);
 	    		ArticleIndexSearch a=new ArticleIndexSearch();
 	    		a.setArticleId(String.valueOf(docs[i].doc-26));
@@ -254,6 +250,7 @@ public class TestLucene extends  FileManager{
 	    		a.setTeacherIntroduction(document.get(TEACHER_INTRODUCTION));
 	    		a.setTeacherApitude(document.get(TEACHER_APITUDE));
 	    		a.setGoodats(document.get(GOODATS));
+	    		a.setTeacherHeaderUrl(document.get(TEACHER_HEADERURL));
 	    		listCons.add(a);   		
 	    	}
 	    	return listCons;

@@ -42,6 +42,8 @@ public class ConsulterListController {
 	public String showConsults(@RequestParam(value = "fenlei", required = false) int type,
 			@RequestParam(value = "shijian", required = false) String date,
 			@RequestParam(value = "pageNum", required = false) String pageNum, HttpServletRequest request) {
+		
+		System.out.println("获取的日期时间为=============================================="+date);
 		// 右侧热门专家
 		Page<Teacher> page = this.consulterService.showByConditions(type, date, pageNum, 2);
 		request.setAttribute("page", page);

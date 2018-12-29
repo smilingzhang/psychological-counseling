@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <html lang="en">
     <head>
         <script>
@@ -81,11 +82,16 @@
            	}
 
             #local-media-stream {
-            	width: 400px; 
-            	position: absolute;
-            	left: 300px; 
-            	top: 621px;
+            	
             }
+		
+			#remote-media-streams{
+				width: 400px; 
+            	position: absolute;
+            	left: 252px; 
+            	top: 500px;
+			}
+			
 		
 			#self{
 				width: 400px;
@@ -96,10 +102,11 @@
             
             #close{
             	position: absolute;
-            	left: 19px;
-            	top:634px;
+            	left: 44px;
+            	top:514px;
             }
 
+		
            
         </style> 
         <script src="https://cdn.webrtc-experiment.com/socket.io.js"></script>
@@ -157,6 +164,12 @@
                 if(cnt == 2){
                 	// 如果不是发起请求方需要判断是否接受。
                 	// alert("flag:" + flag);
+                	
+                	// ajax 更改订单记录的起始时间
+                	var ajt = new XMLHttpRequest();
+                	ajt.open("get", "listenStartTimeControl", true);
+                	ajt.send();
+                	
                 	if(!flag){
 	                	var res = confirm("接受语音邀请吗?");
 	                	// 如果点了取消，重新加载页面。
@@ -177,10 +190,14 @@
     				close.id = "close";
     				close.innerHTML = "挂断";
     				close.onclick = function(){
+    					
     					var ajaxRequest=new XMLHttpRequest();
     					// ajax 后台发送到 listenStateController 更改该订单的状态。
     			    	ajaxRequest.open("GET","listenStateControl?", true);
     			    	ajaxRequest.send();
+    			    	ajaxRequest.open("GET","listenEndTimeControl?", true);
+    			    	ajaxRequest.send();
+    			    	
     				}
     				var closeWrapper = document.createElement('a');
     				closeWrapper.id = "closeWrapper";
@@ -197,9 +214,9 @@
     					ajax.open("GET", "listenTimeControl", true);
     					ajax.send();
     				}, 2000);
-    				
                 }
-                if (e.type == 'local') localMediaStream.appendChild(e.audio);
+                
+//                 if (e.type == 'local') localMediaStream.appendChild(e.audio);
                 // if (e.type == 'remote') remoteMediaStreams.insertBefore(e.audio, remoteMediaStreams.firstChild);
                 if (e.type == 'remote') remoteMediaStreams.appendChild(e.audio);
             };
@@ -223,11 +240,7 @@
                 meeting.setup('meeting room name');
                 this.disabled = true;
                 flag = true;
-
             };
-            
-            
-            
         </script>
 
         <script src="https://cdn.webrtc-experiment.com/common.js"> </script>

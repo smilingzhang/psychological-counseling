@@ -26,10 +26,8 @@ public class ListenRecordServiceImpl {
 	public List<ListenRecord> listUnusedListenRecordsById(int id, int identity) {
 		List<ListenRecord> listenRecords;
 		if (identity == 1) {
-			logger.info("I am a common user...");
 			listenRecords = listenRecordDaoImpl.findUnusedListenRecordsByUserId(id);
 		} else {
-			logger.info("I am a common teacher...");
 			listenRecords = listenRecordDaoImpl.findUnusedListenRecordsByTeacherId(id);
 		}
 		return listenRecords;

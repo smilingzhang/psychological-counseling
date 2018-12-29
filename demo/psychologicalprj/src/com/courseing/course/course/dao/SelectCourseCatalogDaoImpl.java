@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,16 +15,13 @@ import com.entity.CourseCatalog;
 public class SelectCourseCatalogDaoImpl {
 	@Resource
 	private SessionFactory sessionFactory;
-	private Logger logger = Logger.getLogger(SelectCourseCatalogDaoImpl.class);
-
 	public List<CourseCatalog> selectCourseCatalog(int courseId) {
-		logger.info("courseId: " + courseId);
+		System.out.println("courseId: "+courseId);
 		Session session = this.sessionFactory.getCurrentSession();
-		Query query = session
-				.createQuery("from CourseCatalog cou where cou.parentCourseCatalog = null and cou.courseId= ?");
+		Query query = session.createQuery("from CourseCatalog cou where cou.parentCourseCatalog = null and cou.courseId= ?");
 		query.setInteger(0, courseId);
 		List<CourseCatalog> list = query.list();
-		logger.info("list size: " + list.size());
+		System.out.println("list size: "+list.size());
 		return list;
 	}
 

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+    <%@taglib prefix="jm" uri="http://localhost:8080/psychologicalprj/encrypt"%>
 <% String path = request.getContextPath(); %>
 <!DOCTYPE html>
 <html lang="zh-cn">
@@ -86,7 +87,7 @@
                         <!--头像-->
                         <img class="avatar-round" src="<%=path %>/images/consultant2.png" style="float:left;width: 66px;"/>
                         <!--课程名称-->
-                        <a href="<%=path%>/course-intr?courseId=${course.courseId }"><span class="name">${course.courseName }</span></a>     
+                        <a href="<%=path%>/course-intr?courseId=<jm:encrypt>${course.courseId }</jm:encrypt>"><span class="name">${course.courseName }</span></a>     
                         <!--课程价格-->
                         <span class="intr">￥${course.coursePrice }元</span></br>
                     </div>

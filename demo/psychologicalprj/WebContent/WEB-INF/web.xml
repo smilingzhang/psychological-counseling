@@ -77,6 +77,19 @@
 		<filter-name>openSessionInView</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	<jsp-config>
+    <taglib>
+      <taglib-uri>http://janborn.wang/dateutil</taglib-uri>
+      <taglib-location>/tld/Datetld-d.xml</taglib-location>
+    </taglib>
+		<taglib>
+			<taglib-uri>http://localhost:8080/psychologicalprj/encrypt</taglib-uri>
+			<taglib-location>/WEB-INF/tags/encrypt.tld</taglib-location>
+		</taglib>
+  </jsp-config>
+
+  
+ 
 	
 	
 	

@@ -21,6 +21,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name="consultationrecord")
 public class ConsultationRecord {
+	public static final String TODO = "未咨询";
+	public static final String FINISHED = "已咨询";
+	public static final String CANCELED = "已取消";
 	@Override
 	public String toString() {
 		return "ConsultationRecord [consultationrecordId=" + consultationrecordId + ", randomNum=" + randomNum

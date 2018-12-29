@@ -44,14 +44,19 @@ public class GenerateOrderController extends GenerateRandomUtil {
 		if (consultType.equals("listenning")) {
 			consultOrderId = this.consultOrderService.generateListenOrder(userId, Integer.parseInt(teacherId),
 					teacherPrice, date);
-		} else {
+		} else if(consultType.equals("courseing")){
+			String refer = request.getHeader("REFERER");
+			request.getSession().setAttribute("refer", refer);
+		}else {
 			consultOrderId = this.consultOrderService.generateConsultOrder(userId, Integer.parseInt(teacherId), date,
 					teacherPrice, content, consultType);
 		}
 		String result = generateRandom();
 		if (consultType.equals("listenning")) {
 			this.consultOrderService.modifyListenRandomNum(result, consultOrderId);
-		} else {
+		} else if(consultType.equals("courseing")){
+			consultOrderId=0;
+		}else {
 			this.consultOrderService.modifyRandomNum(result, consultOrderId);
 		}
 		String reOrderId = result + consultOrderId;
@@ -64,7 +69,7 @@ public class GenerateOrderController extends GenerateRandomUtil {
 		request.getSession().setAttribute("content", content);
 		request.getSession().setAttribute("type", consultType);
 		if (isHasPhone) {
-			return "checkout";
+			return "course-checkout";
 		}
 		response.getWriter().write(
 				"<script>alert('您尚未完填写联系方式,为了能及时给您发送课程、咨询等提醒信息，给您提供更友好的服务，我们需要您提供联系方式!'); window.location='phone.jsp' ;window.close();</script>");

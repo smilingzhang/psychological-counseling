@@ -64,24 +64,21 @@
                 <!--导航条-->
                 <div class="login-nav">
                     <ul class="nav nav-secondary">
-                        <li class="active" onclick="changeNav(this,'form-')"><a href="#">注册/快速登录</a></li>
-                        <li onclick="changeNav(this,'form-')"><a href="#">账号密码登录</a></li>
+	                        <li class="active" onclick="changeNav(this,'form-')"><a href="#">注册/快速登录</a></li>
+	                        <li onclick="changeNav(this,'form-')"><a href="#">账号密码登录</a></li>
                     </ul>
                 </div>
-                
-              
 	                <!--手机号登录表单-->
-	        
 	                <form class="login-form" action="${ctx }/login/regist" method="POST" id="form-1">
 	                	<div class="group">
 			                <!--错误信息-->
 		                    <font name="loginErrMsg4Phone" id="loginErrMsg4Phone" class="">&nbsp;</font>
-		                    <div id="first"><input id="phoneNum" name="phoneNum" type="text" class="form-control" placeholder="11位手机号" onkeyup="loginVerifyPhone(this)"></div></br>
+		                    <div id="first"><input id="phoneNum" name="phoneNum" type="text" class="form-control" placeholder="11位手机号" onkeyup="loginVerifyPhone()"></div></br>
                         </div> 
                         <div class="group">
 		                    <!--错误信息-->
 		                    <font name="loginErrMsg4Code" id="loginErrMsg4Code" class="">&nbsp;</font>
-		                    <div><input id="verifyCode" name="verifyCode" type="text" class="form-control" placeholder="验证码" onkeyup="loginVerifyCode(this)" ></div>
+		                    <div><input id="verifyCode" name="verifyCode" type="text" class="form-control" placeholder="验证码" onkeyup="loginVerifyCode()" style="width: 63%;display: block;float: left;"></div>
 		                    <a class="btn btn-primarys" id="login-send-verifyCode"  onclick="settime(this);sendVerifyCode()" disabled="disabled">获取验证码</a></br>                   
 	                    </div>
 	                    <!-- 用户协议 -->
@@ -95,19 +92,21 @@
 	                <!--账号密码登录表单-->
 	                <form class="login-form" action="${ctx }/login/login4Pwd" method="POST" id="form-2" style="display:none">
 	                    <div class="group">
-		                    <font name="loginErrMsg4Phone4Second" id="loginErrMsg4Phone4Second" class="">&nbsp;</font>
+		                    <font name="loginErrMsg4Phone4Second" id="loginErrMsg4Phone4Second" class=""></font>
 	                    	<div><input name="phoneNum" type="text" class="form-control" id="phoneNum4Pwd" placeholder="11位手机号" onkeyup="loginVerifyPhone4Pwd()"></div><br/>
 	                    </div>
 	                    <div class="group">
 		                    <!-- 错误信息 -->							
-		                    <font name="loginErrMsg4Pwd" id="loginErrMsg4Pwd" class="">&nbsp;</font>
+		                    <font name="loginErrMsg4Pwd" id="loginErrMsg4Pwd" class=""></font>
 	                    	<div><input name="pwd" type="password" class="form-control" id="pwd" placeholder="密码" onkeyup="loginVerifyPwd();"></div><br/>
 	                    </div>
 	                    <button id="login-form-submit-button-Second" class="btn btn-block" disabled="disabled" onclick="this.form.submit()">登录</button>
 	                </form>
                     <!--第三方登录接口-->
 	                <div class="login-tag">
-	                    <span class="tag center-block" style="text-align:center">---------------------第三方登录---------------------</span>
+	                    <span class="tag">---------------------</span>
+	                    <span class="tag">第三方登录</span>
+	                    <span class="tag">--------------------</span>
 	                </div>
 	                <div class="login-other center-block">
 	                    <!--原生icon-->

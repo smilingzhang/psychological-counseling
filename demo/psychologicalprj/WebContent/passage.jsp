@@ -1,6 +1,7 @@
 <%@ page language = "java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<c:set var="ctx" value="${pageContext.request.contextPath }"></c:set>
 <!DOCTYPE html>
 <html lang="zh-cn">
   <head>
@@ -10,14 +11,14 @@
     <!--文章_${文章名}-->
     <title>文章_结婚前，听听咨询师给你的3个建议</title>
     <!-- zui -->
-    <link href="css/zui-theme.css" rel="stylesheet">
-    <link href="css/zui.css" rel="stylesheet">
-    <script src="js/jquery-3.3.1.js"></script>
-    <script src="js/zui.js"></script> 
-    <script src="js/zui.lite.js"></script>
+    <link href="${ctx }/css/zui-theme.css" rel="stylesheet">
+    <link href="${ctx }/css/zui.css" rel="stylesheet">
+    <script src="${ctx }/js/jquery-3.3.1.js"></script>
+    <script src="${ctx }/js/zui.js"></script> 
+    <script src="${ctx }/js/zui.lite.js"></script>
     <!--自定义-->
-    <link href="css/mystyle.css" rel="stylesheet">
-    <script src="js/change-state.js"></script>
+    <link href="${ctx }/css/mystyle.css" rel="stylesheet">
+    <script src="${ctx }/js/change-state.js"></script>
   </head>
   <body>
   	<!-- head.jsp -->
@@ -41,7 +42,7 @@
             <!--咨询师信息栏-->
             <div class="writer-info">
               <!--头像：圆形-->
-              <img src="images/${a.teacher.user.userHeadPath}" alt="${咨询师名字}"/>
+              <img src="${ctx }/images/${a.teacher.user.userHeadPath}" alt="${咨询师名字}"/>
               <div>
                 <!--咨询师名字-->
                 <span class="writer">${a.teacher.user.userRealName }</span><br/>
@@ -208,7 +209,7 @@
                     <!--用户头像-->
                     <img src="images/${p.user.userHeadPath }" alt="头像">
                     <!--用户昵称：点击跳转到用户个人页面-->
-                    <a href="#">${p.user.userRealName }</a>
+                    <a href="#">${p.user.userNickName }</a>
                     <!--评论时间：精细到日即可-->
                      <span class="tag">${p.evaluateTime }</span>
                 </div>

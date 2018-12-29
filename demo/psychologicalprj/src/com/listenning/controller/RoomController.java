@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.entity.Teacher;
 import com.entity.User;
-import com.listenning.service.TeacherServiceImpl;
+import com.indexing.service.TeacherServiceImpl;
 
 @Controller
 public class RoomController {

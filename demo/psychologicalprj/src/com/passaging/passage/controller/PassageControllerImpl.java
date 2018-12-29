@@ -33,17 +33,23 @@ public class PassageControllerImpl {
 	public String show(HttpSession session, HttpServletRequest request) {
 		String evaluateComment = request.getParameter("evaluateContent"); // 获取评论内容
 		// System.out.println("evaluateComment"+evaluateComment);
-
+		int articleId=0;
 		String id = request.getParameter("articleId"); // 获取文章的articleId
-		int articleId = Integer.parseInt(id);
+		if(id==null||id.equals("")) {
+			articleId=(int) session.getAttribute("articleId");
+		}
+		else {
+			
+			articleId= Integer.parseInt(id);
+		}
 
 		Article article = this.passageServiceImpl.findArticleByArticleId(articleId); // 根据articleId获取文章
-		// System.out.println(article.getArticleContent());
+		
 		List<Article> list = new ArrayList<Article>();
 		list.add(article);
 
 		int articleLookNumber = article.getArticleLookNumber() + 1; // 更新文章的浏览数量
-		// System.out.println("articleLookNumber--------"+articleLookNumber);
+		
 		this.passageServiceImpl.updateLookNumber(articleLookNumber, articleId);
 
 		String pageNum = request.getParameter("pageNum"); // 获取pageNum的值
@@ -68,10 +74,13 @@ public class PassageControllerImpl {
 				pageNums.add(i);
 			}
 			request.setAttribute("page", page);
-			request.getServletContext().setAttribute("articleId", articleId);
+			session.setAttribute("articleId", articleId);
 			request.setAttribute("article", list);
 			request.setAttribute("pages", pageNums);
-
+			String url=request.getRequestURI();
+			String[] aStrings=url.split("/");
+			String newUrl="/"+aStrings[2];
+			request.getSession().setAttribute("backToUrl", newUrl);
 			return "passage";
 		} else { // 如果评论内容不为空，那么就将评论内容插入数据库，然后重新转入passage页面（需要在评论区button按钮那里添加一个超链接，以便跳转）
 			Evaluate evaluate = new Evaluate();
@@ -97,9 +106,13 @@ public class PassageControllerImpl {
 				pageNums.add(i);
 			}
 			request.getServletContext().setAttribute("page", page);
-			request.getServletContext().setAttribute("articleId", articleId);
+			session.setAttribute("articleId", articleId);
 			request.getServletContext().setAttribute("article", list);
 			request.setAttribute("pages", pageNums);
+			String url=request.getRequestURI();
+			String[] aStrings=url.split("/");
+			String newUrl="/"+aStrings[2];
+			request.getSession().setAttribute("backToUrl", newUrl);
 			return "passage";
 		}
 	}

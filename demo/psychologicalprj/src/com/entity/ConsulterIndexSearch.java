@@ -13,6 +13,7 @@ public class ConsulterIndexSearch implements Serializable{
 	private String teacherIntroduction;
 	private String teacherApitude;
 	private String goodats;
+	private String teacherHeaderUrl;
 	public String getTeacherId() {
 		return teacherId;
 	}
@@ -43,6 +44,16 @@ public class ConsulterIndexSearch implements Serializable{
 	public void setGoodats(String goodats) {
 		this.goodats = goodats;
 	}
+	public String getTeacherHeaderUrl() {
+		return teacherHeaderUrl;
+	}
+	public void setTeacherHeaderUrl(String teacherHeaderUrl) {
+		this.teacherHeaderUrl = teacherHeaderUrl;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
 	
 	
 }

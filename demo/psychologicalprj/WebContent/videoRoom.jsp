@@ -1,55 +1,68 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<!DOCTYPE html>
 <html lang="zh-cn">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/zui-theme.css" rel="stylesheet">
-    <script src="js/jquery-3.3.1.js"></script>
-    <script src="js/zui.js"></script> 
-    <script src="js/zui.lite.js"></script>
-    <title>videoRoom.jsp</title>
-    <link href="css/zui.css" rel="stylesheet">
-    <link href="css/mystyle.css" rel="stylesheet">
-    <style type="text/css">
-    	#down{
-    		width:370px;
-    		height:200px;
-    		border:1px solid black;
-    	}
-    	#left{
-    		border:1px solid black;
-    	}
-    	#up{
-    		width: 370px;
-    		border:1px solid black;
-    	}
-    	
-    </style>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="A set of animated ambient canvas backgrounds with different effects" />
+		<meta name="keywords" content="canvas, ambient, background, animation, javascript, demo, web development" />
+        <title>聊天室</title>
+        <!-- zui -->
+        <script src="js/jquery-3.3.1.js"></script>
+        <script src="js/zui.js"></script> 
+        <script src="js/zui.lite.js"></script>
+        <link rel="stylesheet" href="css/zui.min.css">
+        <!--自定义-->
+        <link href="css/room.css" rel="stylesheet">
+        <script src="js/room.js"></script>
+        <!--背景-->
+
+		<link rel="stylesheet" type="text/css" href="css/animate/base.css" />
+		<link rel="stylesheet" type="text/css" href="css/animate/demo2.css" />
+		
   </head>
-    <div class="contains media">
-        <div class="video">
-        	<iframe id="left" src="video.jsp" class="video-consulter" frameborder="no"></iframe>
+  <body>
+    <!-- 在此处编码你的创意 -->
+    <div id="media-container">
+        <div id="voice" style="display:block" onmouseover="showTool(this)" onmouseout="hideTool(this)">
+            <iframe src="video.jsp" frameborder="no" id="audio"></iframe>
         </div>
-        <div class="board-text">
-        	<iframe id="up" src="ContentController" class="board-show" frameborder="no" scrolling="auto"></iframe>
-            <div class="input">
-
-                    <iframe id="down" src="send.jsp" frameborder="no"></iframe>
-
+        <!--文字聊天-->
+        <div class="board-text" id="board-text">
+            <!--信息展示：包括咨询信息、对话气泡-->
+            <div class="board-show">
+                <!--咨询信息-->
+                <div id="board-show-info">
+                    <div class="state">
+                        <div>
+                            <span>视频咨询</span>
+                            <span>进行中</span><span class="on">&nbsp;◉</span><!--这个圆，结束的class="off"，不设置直接关闭也可以-->                         
+                        </div>
+                    </div>
+                    <div class="info ">
+                        <!--头像-->
+                        <div class="avatar"><img src="images/consultant.png" alt=""></div>                        
+                        <div class="info-contain">
+                            <!--名字-->
+                            <span class="name">${sessionScope.other.userRealName }</span><br>
+                            <!--电话-->
+                            <span class="certification">${sessionScope.other.userPhone }</span>
+                        </div>
+                    </div>
+                </div>
+                <!--对话气泡-->
+                <iframe src="content.jsp" id="board-show-dialog-iframe" frameborder="no" style="background-color: #503d3d;"></iframe>
             </div>
+            <iframe id="input-iframe" src="send.jsp" frameborder="no"></iframe>               
         </div>
     </div>
-    
-	
+    <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
     <script src="js/jquery-1.11.0.min.js"></script>
+    <!-- ZUI Javascript组件 -->
     <script src="js/zui.min.js"></script>
-    
-
-    
+  </body>
 </html>
-    

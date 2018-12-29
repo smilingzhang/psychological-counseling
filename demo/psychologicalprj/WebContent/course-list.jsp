@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="jm" uri="http://localhost:8080/psychologicalprj/encrypt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="ctx" value="${pageContext.request.contextPath }"></c:set>
 <!DOCTYPE html>
@@ -43,21 +44,21 @@
                     <!-- 轮播项目 -->
                     <div class="carousel-inner">
                         <div class="item active">
-                        <a href="${ctx }/course-intr?courseId=${freelesson[0].courseId}"><img style="width:1500px;height:250px;" alt="First slide" src="${ctx }/${freelesson[0].courseImgPath }">
+                        <a href="${ctx }/course-intr?courseId=<jm:encrypt>${freelesson[0].courseId}</jm:encrypt>"><img style="width:1500px;height:250px;" alt="First slide" src="${ctx }/${freelesson[0].courseImgPath }">
                         <div class="carousel-caption">
                             <h3 style="color:blue;">${freelesson[0].courseName }</h3>
                             <p style="color:red;">免费</p>
                         </div></a>
                         </div>
                         <div class="item">
-                        <a href="${ctx }/course-intr?courseId=${freelesson[1].courseId}"><img style="width:1500px;height:250px;" alt="First slide" src="${ctx }/${freelesson[1].courseImgPath }">
+                        <a href="${ctx }/course-intr?courseId=<jm:encrypt>${freelesson[1].courseId}</jm:encrypt>"><img style="width:1500px;height:250px;" alt="First slide" src="${ctx }/${freelesson[1].courseImgPath }">
                         <div class="carousel-caption">
                             <h3 style="color:blue;">${freelesson[1].courseName }</h3>
                             <p style="color:red;">免费</p>
                         </div></a>
                         </div>
                         <div class="item">
-                        <a href="${ctx }/course-intr?courseId=${freelesson[2].courseId}"><img style="width:1500px;height:250px;" alt="First slide" src="${ctx }/${freelesson[2].courseImgPath }">
+                        <a href="${ctx }/course-intr?courseId=<jm:encrypt>${freelesson[2].courseId}</jm:encrypt>"><img style="width:1500px;height:250px;" alt="First slide" src="${ctx }/${freelesson[2].courseImgPath }">
                         <div class="carousel-caption">
                             <h3 style="color:blue;">${freelesson[2].courseName }</h3>
                             <p style="color:red;">免费</p>
@@ -85,16 +86,24 @@
                     <!--课程图片-->
                         <img src="${ctx }/${lesson.courseImgPath }" alt="推荐课程"/>
                         <!--课程名-->
-                        <a href="${ctx }/course-intr?courseId=${lesson.courseId}" class="course-name">${lesson.courseName }</a><br/>
+                        <a href="${ctx }/course-intr?courseId=<jm:encrypt>${lesson.courseId}</jm:encrypt>"  class="course-name">${lesson.courseName }</a><br/>
                         <!--主讲人：跳转到讲师个人主页-->
                         <a href="${ctx }/consultdetail/showdetail?teacherId=${lesson.teacher.teacherId}" class="teacher">${lesson.teacher.user.userRealName }</a>
                         <!--价格-->
-                        <span class="price">${lesson.coursePrice }</span>
+                        <span class="price">￥${lesson.coursePrice }</span>
                     </div>
                 </div>
-               </c:forEach>   
+               </c:forEach> 
+               
+
             </div>
         </div>
+        <script type="text/javascript">
+        
+            function hideData(courseId){
+            	window.location.href="${ctx }/course-intr?courseId=" + courseId; 
+            }
+        </script>
         
         <!--END 推荐结束-->
         <!--类别-->
@@ -133,7 +142,7 @@
                     <!--课程图片-->
                     <img src="${ctx }/${lesson.courseImgPath }" alt="${lesson.courseName }">
                     <!--课程名-->
-                    <a class="title-h2" href="${ctx }/course-intr?courseId=${lesson.courseId}">${lesson.courseName }</a><br/>
+                    <a class="title-h2" href="${ctx }/course-intr?courseId=<jm:encrypt>${lesson.courseId}</jm:encrypt>">${lesson.courseName }</a><br/>
                     <!--一句话简介-->
                     <span class="tag">${lesson.courseSynopsis }</span><br/>
                     <!--主讲人-->
@@ -143,7 +152,7 @@
                          <span class="price">免费</span>
                     </c:if>
                     <c:if test="${ lesson.coursePrice > 0}">
-                         <span class="price">${lesson.coursePrice }</span>
+                         <span class="price">￥${lesson.coursePrice }</span>
                     </c:if>
                 </div>
                </c:forEach> 
@@ -178,7 +187,10 @@
         var type = 0;
         var order = 0;
         var totalPageNum = ${endlesson.totalPageNum};
-        
+        function getParamName(p){
+        	var result = p;
+        	return result;
+        }
         
         
         function searchType(obj){
@@ -249,7 +261,7 @@
  		   else{
  		         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
  		   }
- 		   xmlhttp.open("POST","search?type="+type,true);
+ 		   xmlhttp.open("POST","${ctx}/lesson/search?type="+type,true);
  		   xmlhttp.send();  
  		   xmlhttp.onreadystatechange=function(){
  			    if (xmlhttp.readyState==4 && xmlhttp.status==200){
@@ -259,6 +271,8 @@
  			        var value;
  			        var keys;
  			        var values;
+ 			        //var courseId="";
+ 			        
  			        for(var p in endlesson){
  			        	key = p;
  			        	value = endlesson[p];
@@ -266,6 +280,7 @@
  			        keys = JSON.parse(key);
  			        values = JSON.parse(value);
  			        courses = values.list;
+ 			        console.log(courses);
  			        totalPageNum = values.totalPageNum;
  			        var pageNum = values.pageNum;
  			        var pages =[] ;
@@ -274,11 +289,14 @@
  			        }
  			        for(var i = 0;i < courses.length;i++){
  			        	var price = "免费";
+ 			        	console.log(courses[i].courseId);
+ 			        	//var courseId="<jm:encrypt>"+courses[i].courseId+"</jm:encrypt>";
+ 			            //console.log(courseId);
  			        	if(courses[i].coursePrice > 0){
  			        		price = courses[i].coursePrice;
- 			        	}
- 	    		    	html += '<div class="course-block"><img src="../'+courses[i].courseImgPath+ '" alt="课程图片">'+
- 	    		    	        '<a class="title-h2" href="../course-intr?courseId='+courses[i].courseId+'">'+courses[i].courseName+'</a><br/>'+
+ 			        	}                              
+ 	    		    	html += '<div class="course-block"><img src="${ctx}/'+courses[i].courseImgPath+ '" alt="课程图片">'+
+ 	    		    	        '<a class="title-h2" href="${ctx }/course-intr?courseId='+keys[i].userAutograph+'">'+courses[i].courseName+'</a><br/>'+
  	    		    	        '<span class="tag">'+courses[i].courseSynopsis+'</span><br/>'+
  	    	                    '<a class="teacher" href="${ctx }/consultdetail/showdetail?teacherId='+keys[i].userId+'">'+keys[i].userRealName+'</a>'+
  	    	                    '<span class="price">'+price+'</span></div>';
@@ -315,7 +333,7 @@
 		   else{
 		         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 		   }
-		   xmlhttp.open("POST","search?type="+type+"&&order="+order+"&&pagenum=1",true);
+		   xmlhttp.open("POST","${ctx}/lesson/search?type="+type+"&&order="+order+"&&pagenum=1",true);
 		   xmlhttp.send();  
 		   xmlhttp.onreadystatechange=function(){
 			    if (xmlhttp.readyState==4 && xmlhttp.status==200){
@@ -341,11 +359,12 @@
 			        
 			        for(var i = 0;i < courses.length;i++){
 			        	var price = "免费";
+			        	//var courseId="<jm:encrypt>"+courses[i].courseId+"</jm:encrypt>";
 			        	if(courses[i].coursePrice > 0){
 			        		price = courses[i].coursePrice;
 			        	}
-	    		    	html += '<div class="course-block"><img src="../'+courses[i].courseImgPath+ '" alt="课程图片">'+
-	    		    	        '<a class="title-h2" href="../course-intr?courseId='+courses[i].courseId+'">'+courses[i].courseName+'</a><br/>'+
+	    		    	html += '<div class="course-block"><img src="${ctx}/'+courses[i].courseImgPath+ '" alt="课程图片">'+
+	    		    	        '<a class="title-h2" href="${ctx}/course-intr?courseId='+keys[i].userAutograph+'">'+courses[i].courseName+'</a><br/>'+
 	    		    	        '<span class="tag">'+courses[i].courseSynopsis+'</span><br/>'+
 	    	                    '<a class="teacher" href="${ctx }/consultdetail/showdetail?teacherId='+keys[i].userId+'">'+keys[i].userRealName+'</a>'+
 	    	                    '<span class="price">'+price+'</span></div>';
@@ -387,7 +406,7 @@
 		   else{
 		         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 		   }
-		   xmlhttp.open("POST","search?type="+type+"&&order="+order+"&&pagenum="+pageNum,true);
+		   xmlhttp.open("POST","${ctx}/lesson/search?type="+type+"&&order="+order+"&&pagenum="+pageNum,true);
 		   xmlhttp.send();  
 		   xmlhttp.onreadystatechange=function(){
 			    if (xmlhttp.readyState==4 && xmlhttp.status==200){
@@ -415,12 +434,13 @@
 			        }
 			        
 			        for(var i = 0;i < courses.length;i++){
+			        	//var courseId="<jm:encrypt>"+courses[i].courseId+"</jm:encrypt>";
 			        	var price = "免费";
 			        	if(courses[i].coursePrice > 0){
 			        		price = courses[i].coursePrice;
 			        	}
-	    		    	html += '<div class="course-block"><img src="../'+courses[i].courseImgPath+ '" alt="课程图片">'+
-	    		    	        '<a class="title-h2" href="../course-intr?courseId='+courses[i].courseId+'">'+courses[i].courseName+'</a><br/>'+
+	    		    	html += '<div class="course-block"><img src="${ctx}/'+courses[i].courseImgPath+ '" alt="课程图片">'+
+	    		    	        '<a class="title-h2" href="${ctx}/course-intr?courseId='+keys[i].userAutograph+'">'+courses[i].courseName+'</a><br/>'+
 	    		    	        '<span class="tag">'+courses[i].courseSynopsis+'</span><br/>'+
 	    	                    '<a class="teacher" href="${ctx }/consultdetail/showdetail?teacherId='+keys[i].userId+'">'+keys[i].userRealName+'</a>'+
 	    	                    '<span class="price">'+price+'</span></div>';
@@ -458,7 +478,7 @@
 		   else{
 		         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 		   }
-		   xmlhttp.open("POST","search?type="+type+"&&order="+order+"&&pagenum="+nowPageNum,true);
+		   xmlhttp.open("POST","${ctx}/lesson/search?type="+type+"&&order="+order+"&&pagenum="+nowPageNum,true);
 		   xmlhttp.send(); 
 		   //alert("firesun");
 		   xmlhttp.onreadystatechange=function(){
@@ -488,11 +508,12 @@
 			        
 			        for(var i = 0;i < courses.length;i++){
 			        	var price = "免费";
+			        	//var courseId="<jm:encrypt>"+courses[i].courseId+"</jm:encrypt>";
 			        	if(courses[i].coursePrice > 0){
 			        		price = courses[i].coursePrice;
 			        	}
-	    		    	html += '<div class="course-block"><img src="../'+courses[i].courseImgPath+ '" alt="课程图片">'+
-	    		    	        '<a class="title-h2" href="../course-intr?courseId='+courses[i].courseId+'">'+courses[i].courseName+'</a><br/>'+
+	    		    	html += '<div class="course-block"><img src="${ctx}/'+courses[i].courseImgPath+ '" alt="课程图片">'+
+	    		    	        '<a class="title-h2" href="${ctx}/course-intr?courseId='+keys[i].userAutograph+'">'+courses[i].courseName+'</a><br/>'+
 	    		    	        '<span class="tag">'+courses[i].courseSynopsis+'</span><br/>'+
 	    	                    '<a class="teacher" href="${ctx }/consultdetail/showdetail?teacherId='+keys[i].userId+'">'+keys[i].userRealName+'</a>'+
 	    	                    '<span class="price">'+price+'</span></div>';
@@ -544,7 +565,7 @@
     		   else{
     		         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
     		   }
-    		   xmlhttp.open("POST","search?type="+type+"&&order="+order+"&&pagenum="+nowPageNum,true);
+    		   xmlhttp.open("POST","${ctx}/lesson/search?type="+type+"&&order="+order+"&&pagenum="+nowPageNum,true);
     		   xmlhttp.send();  
     		   xmlhttp.onreadystatechange=function(){
     			    if (xmlhttp.readyState==4 && xmlhttp.status==200){
@@ -572,12 +593,13 @@
     			        console.log(pages);
     			        
     			        for(var i = 0;i < courses.length;i++){
+    			        	//var courseId="<jm:encrypt>"+courses[i].courseId+"</jm:encrypt>";
     			        	var price = "免费";
      			        	if(courses[i].coursePrice > 0){
      			        		price = courses[i].coursePrice;
      			        	}
-    	    		    	html += '<div class="course-block"><img src="../'+courses[i].courseImgPath+ '" alt="课程图片">'+
-    	    		    	        '<a class="title-h2"href="../course-intr?courseId='+courses[i].courseId+'">'+courses[i].courseName+'</a><br/>'+
+    	    		    	html += '<div class="course-block"><img src="${ctx}/'+courses[i].courseImgPath+ '" alt="课程图片">'+
+    	    		    	        '<a class="title-h2"href="${ctx}/course-intr?courseId='+keys[i].userAutograph+'">'+courses[i].courseName+'</a><br/>'+
     	    		    	        '<span class="tag">'+courses[i].courseSynopsis+'</span><br/>'+
     	    	                    '<a class="teacher" href="${ctx }/consultdetail/showdetail?teacherId='+keys[i].userId+'">'+keys[i].userRealName+'</a>'+
     	    	                    '<span class="price">'+price+'</span></div>';

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="jm" uri="http://localhost:8080/psychologicalprj/encrypt"%>
 <c:set var="ctx" value="${pageContext.request.contextPath }"></c:set>
 <!DOCTYPE html>
 <jsp lang="zh-cn">
@@ -8,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>课程介绍页</title>
+    <title></title>
     <!-- zui -->
     <link href="${ctx }/css/zui-theme.css" rel="stylesheet">
     <link href="${ctx }/css/zui.css" rel="stylesheet">
@@ -45,7 +46,7 @@
                     
                     <span class="price">
                     	<c:if test="${myprice==0.0}">免费</c:if>
-                    	<c:if test="${myprice!=0.0}">${myprice}</c:if>
+                    	<c:if test="${myprice!=0.0}">￥${myprice}</c:if>
                     </span>
                     <!--✦✦✦注：加入课程按钮：若是付费课程，显示“购买课程”，否则显示“加入我的课程”-->
                     <!--✦✦✦注：加入课程成功之后，将按钮的内容改为“进入学习”-->
@@ -55,12 +56,8 @@
                     		<c:if test="${ifbc==true}">
                     			<!--2.免费课程-->
                     			<!--2-2 加入课程之后-->
-                    			<form action="${ctx }/joinstudy" method="post">
-                    			   
-                    			    <input type="text" name="courseId" value="${course.courseId }" style="display:none"/>
-                    			    <input type="text" name="ifbc" value="${ifbc}" style="display:none"/>
-                       				
-                       				<input type="submit" class="btn btn-block " value="进入学习" />
+                    			<form action="${ctx }/joinstudy?&courseId=<jm:encrypt>${course.courseId }</jm:encrypt>&ifbc=<jm:encrypt>${ifbc}</jm:encrypt>" method="post" name="client">
+                    			   <button class="btn btn-block ">进入学习</button>
                        			</form>
                     		</c:if>
                     		<c:if test="${ifbc==false}">
@@ -68,7 +65,7 @@
                       			<form action="${ctx }/collect" method="post">
                        				<button  class="btn btn-block add-course">加入我的课程</button>
                        			</form>
-                       			<form action="${ctx }/joinstudy?&courseId=${course.courseId }&ifbc=${ifbc}" method="post">
+                       			<form action="${ctx }/joinstudy?&courseId=<jm:encrypt>${course.courseId }</jm:encrypt>&ifbc=<jm:encrypt>${ifbc}</jm:encrypt>" method="post">
                        				<button class="btn btn-primary">预览&nbsp;<i class="icon icon-play-circle"></i></button>
                        			</form>
                     		</c:if>
@@ -77,16 +74,21 @@
                    			<c:if test="${ifbc==true}">
                    			     <!--1.付费课程-->
                     			 <!--1-2 购买之后-->
-                    			 <form action="${ctx }/joinstudy?&courseId=${course.courseId }&ifbc=${ifbc}" method="post">
+                    			 <form action="${ctx }/joinstudy?&courseId=<jm:encrypt>${course.courseId }</jm:encrypt>&ifbc=<jm:encrypt>${ifbc}</jm:encrypt>" method="post">
                         		 	<button class="btn btn-block ">进入学习</button>
                         		 </form>
                     		</c:if>
                     		<c:if test="${ifbc==false}">
                        			 <!--1-1 未购买-->
-                       			 <form action="${ctx }/random_order" method="post">
+                       			 <form action="${ctx }/insertorder" method="post">
+                       			 	<input type="hidden" name="teacherId" value="${course.teacher.teacherId }">
+                       			 	 <input type="hidden" value="${course.coursePrice }" name="teacherPrice">
+					                <input type="hidden" value="${date }" name="date"/>
+					                <input type="hidden" value="8:00-9:00" name="content"/>
+					                 <input type="hidden" value="courseing" name="type"/>
                      		   		 <button  class="btn btn-block add-course">购买课程</button>
                      		   	 </form>
-                     		   	 <form action="${ctx }/joinstudy?&courseId=${course.courseId }&ifbc=${ifbc}" method="post">
+                     		   	 <form action="${ctx }/joinstudy?&courseId=<jm:encrypt>${course.courseId }</jm:encrypt>&ifbc=<jm:encrypt>${ifbc}</jm:encrypt>" method="post">
                      		   		 <button class="btn btn-primary">试看&nbsp;<i class="icon icon-play-circle"></i></button>
                     			 </form>
                     		</c:if>
@@ -129,7 +131,7 @@
                            <tr><td class="title-h3">${connect.coursecatalogName }</td></tr>
                            <c:forEach items="${connect.courseCatalogs }" var="content">
                                <tr><td onmouseout="hideBtn(this)" onmouseover="showBtn(this);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${content.coursecatalogName }
-                                   <a style="display:none" class="btn btn-primary" href="${ctx }/course?courseCatalogId=${content.coursecatalogId }&startPosition=0&courseId=${course.courseId }&ifbc=${ifbc}">开始学习<i class="icon icon-play-sign"></i></a>
+                                   <a style="display:none" class="btn btn-primary" href="${ctx }/course?courseCatalogId=<jm:encrypt>${content.coursecatalogId }</jm:encrypt>&startPosition=<jm:encrypt>0</jm:encrypt>&courseId=<jm:encrypt>${course.courseId }</jm:encrypt>&firesun=<jm:encrypt>${ifbc}</jm:encrypt>">开始学习<i class="icon icon-play-sign"></i></a>
                                    </td>
                                </tr>
                            </c:forEach>
@@ -163,6 +165,7 @@
                             $("#submit").click(function(){
                 	                 var xmlhttp;
                 	                 var content=editor.txt.html();
+                	                 //editor.txt.html("");
                 	                 var html = "";
                 	                 var htmls = "";
                 	                 //alert(content);
@@ -184,10 +187,21 @@
 	              		    		return;
 	              		    	}
 	              		    	var pageComment = JSON.parse(res);
+	              		    	var key;
+	        			        var value;
+	        			        var keys;
+	        			        var values;
+	        			        for(var p in pageComment){
+	        			        	key = p;
+	        			        	value = pageComment[p];
+	        			        }
+	        			        keys = JSON.parse(key);
+	        			        values = JSON.parse(value);
+
 	              		    	//console.log(pageComment);1
-	              		    	var comments = pageComment.list;
-	              		    	var totalNum = pageComment.totalPageNum;;
-	              		    	var pageNum = pageComment.pageNum;
+	              		    	var comments = values.list;
+	              		    	var totalNum = values.totalPageNum;;
+	              		    	var pageNum = values.pageNum;
 	              		    	console.log(totalNum);
 	              		    	//console.log(pageNum);
 	              		    	var pages =[] ;
@@ -198,7 +212,7 @@
 	        			        var aft= i;
 	        			        htmls += "<div class='pager-bar' id='firesun'><ul class='pager'><li class='previous' id='pagePre'><a pagenum='"+pre+"' href='javascript:void(0)' onclick='showLeftComment(this)'>«</a></li>";
 	              		    	for(var i = 0;i<comments.length;i++){
-	              		    		html +=  "<div class='comment'><div class='comment-header'><img  src='${ctx}/"+comments[i].user.userHeadPath+"' alt='头像'><a href='#'>"+comments[i].user.userNickName+
+	              		    		html +=  "<div class='comment'><div class='comment-header'><img  src='${ctx}/"+keys[i].userHeadPath+"' alt='头像'><a href='#'>"+keys[i].userNickName+
 	              		    		"</a><span class='tag'>"+comments[i].evaluateTime+"</span></div><p>"+comments[i].evaluateComment+"</p></div>";
 	              		    	}
 	              		    	//console.log(html);
@@ -215,6 +229,8 @@
 	                		    htmls += "<li class='next' id='pageNext'><a href='javascript:void(0)' onclick='showRightComment(this);' pagenum='"+aft+"'>»</a></li></ul></div>";
 	              		    	document.getElementById("pageses").innerHTML = html + htmls;
 	              		     }
+	              		    editor.txt.html("");
+
 	               	        } 
               		     })
               		      
@@ -274,8 +290,8 @@
                         <!--课程图片-->
                         <img class="course-img" src="${ctx }/${ cou.courseImgPath}" alt="课程"/>
                         <!--课程名：跳转到对应课程介绍页-->
-                        <a href="${ctx }/course-intr?courseId=${cou.courseId}&userId=${userId}" class="course-name title-h2">${cou.courseName }</a>
-                        <!--主讲人姓名-->
+                        <a href="${ctx }/course-intr?courseId=<jm:encrypt>${cou.courseId}</jm:encrypt>" class="course-name title-h2" style="color:#cb4043">${cou.courseName }</a>
+                        <br/><!--主讲人姓名-->
                         <a href="${ctx }/consultdetail/showdetail?teacherId=${cou.teacher.teacherId}" class="teacher">${cou.teacher.user.userRealName }</a>
                     </div>
                     </c:forEach>
@@ -311,10 +327,23 @@
 		    	var res=xmlhttp.responseText;
 		    	var pageComment = JSON.parse(res);
 		    	console.log(pageComment);
-		    	var comments = pageComment.list;
-		    	var totalNum = pageComment.totalCount;
-		    	var pageNum = pageComment.pageNum;
-		    	totalPageNum = pageComment.totalPageNum;
+		    	var key;
+		        var value;
+		        var keys;
+		        var values;
+		        for(var p in pageComment){
+		        	key = p;
+		        	value = pageComment[p];
+		        }
+		        keys = JSON.parse(key);
+		        values = JSON.parse(value);
+
+  		    	//console.log(pageComment);1
+  		    	var comments = values.list;
+  		    	var totalNum = values.totalPageNum;;
+  		    	var pageNum = values.pageNum;
+		    	var totalNum = values.totalCount;
+		    	totalPageNum = values.totalPageNum;
 		    	console.log(comments);
 		    	//console.log(pageNum);
 		    	var pages =[] ;
@@ -325,7 +354,7 @@
 		        }
 		    	for(var i = 0;i<comments.length;i++){
 		    		html +=  "<div class='comment'><div class='comment-header'><img src='${ctx}/"+
-		    		comments[i].user.userHeadPath+"' alt=' 头像 ' ><a href='#'>"+comments[i].user.userNickName+
+		    		keys[i].userHeadPath+"' alt=' 头像 ' ><a href='#'>"+keys[i].userNickName+
 		    		"</a><span class='tag'>"+comments[i].evaluateTime+"</span></div><p>"+comments[i].evaluateComment+
 		    		"</p></div>";
 		    	}
@@ -369,13 +398,23 @@
  			    	var res=xmlhttp.responseText;
  			    	var pageComment = JSON.parse(res);
  			    	console.log(pageComment);
- 			    	var comments = pageComment.list;
- 			    	//var totalNum = pageComment.totalCount;
- 			    	var pageNum = pageComment.pageNum;
- 			    	//console.log(totalNum);
- 			    	console.log(comments);
- 			    	totalPageNum = pageComment.totalPageNum;
- 			        //var pageNum = values.pageNum;
+ 			    	var key;
+ 			        var value;
+ 			        var keys;
+ 			        var values;
+ 			        for(var p in pageComment){
+ 			        	key = p;
+ 			        	value = pageComment[p];
+ 			        }
+ 			        keys = JSON.parse(key);
+ 			        values = JSON.parse(value);
+
+ 	  		    	//console.log(pageComment);1
+ 	  		    	var comments = values.list;
+ 	  		    	var totalNum = values.totalPageNum;;
+ 	  		    	var pageNum = values.pageNum;
+ 			    	var totalNum = values.totalCount;
+ 			    	totalPageNum = values.totalPageNum;
  			    	var pages =[] ;
 			        for(var i=prePageNum-4;i<=totalPageNum&&i<=prePageNum-4+3;i++){
 			        	pages.push(i);
@@ -383,7 +422,7 @@
 			        //alert(pages);
  			    	for(var i = 0;i<comments.length;i++){
  			    		html +=  "<div class='comment'><div class='comment-header'><img src='${ctx}/"+
- 			    		comments[i].user.userHeadPath+"' alt=' 头像 ' ><a href='#'>"+comments[i].user.userNickName+
+ 			    		keys[i].userHeadPath+"' alt=' 头像 ' ><a href='#'>"+keys[i].userNickName+
  			    		"</a><span class='tag'>"+comments[i].evaluateTime+"</span></div><p>"+comments[i].evaluateComment+
  			    		"</p></div>";
  			    	}
@@ -433,13 +472,30 @@
 			    if (xmlhttp.readyState==4 && xmlhttp.status==200){
 			    	var res=xmlhttp.responseText;
 			    	var pageComment = JSON.parse(res);
-			    	console.log(pageComment);
-			    	var comments = pageComment.list;
+			    	//console.log(pageComment);
+			    	//var comments = pageComment.list;
 			    	//var totalCount = pageComment.totalCount;
-			    	var pageNum = pageComment.pageNum;
+			    	//var pageNum = pageComment.pageNum;
 			       // console.log(totalNum);
-			    	console.log(pageNum);
-			    	totalPageNum = pageComment.totalPageNum;
+			    	//console.log(pageNum);
+			    	var key;
+			        var value;
+			        var keys;
+			        var values;
+			        for(var p in pageComment){
+			        	key = p;
+			        	value = pageComment[p];
+			        }
+			        keys = JSON.parse(key);
+			        values = JSON.parse(value);
+
+	  		    	//console.log(pageComment);1
+	  		    	var comments = values.list;
+	  		    	var totalNum = values.totalPageNum;;
+	  		    	var pageNum = values.pageNum;
+			    	var totalNum = values.totalCount;
+			    	totalPageNum = values.totalPageNum;
+			    	//totalPageNum = pageComment.totalPageNum;
 			    	var pages =[] ;
 			        for(var i=nowPageNum;i<=totalPageNum&&i<=nowPageNum+3;i++){
 			        	pages.push(i);
@@ -447,7 +503,7 @@
 			        }
 			        for(var i = 0;i<comments.length;i++){
  			    		html +=  "<div class='comment'><div class='comment-header'><img src='${ctx}/"+
- 			    		comments[i].user.userHeadPath+"' alt=' 头像 ' ><a href='#'>"+comments[i].user.userNickName+
+ 			    		keys[i].userHeadPath+"' alt=' 头像 ' ><a href='#'>"+keys[i].userNickName+
  			    		"</a><span class='tag'>"+comments[i].evaluateTime+"</span></div><p>"+comments[i].evaluateComment+
  			    		"</p></div>";
 			        }

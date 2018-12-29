@@ -72,10 +72,10 @@
 
             .highlight { color: rgb(0, 8, 189); }
             #video1{
-            	width : 907px;
+            	width : 819px;
             }
             #video2{
-            	width:250px;
+            	width:163px;
             }
             #videoDoubleWrapper{
             	position: absolute;
@@ -96,8 +96,8 @@
             #closeWrapper{
             	z-index: 99;
             	position: absolute;
-            	left:0px;
-            	top:628px;
+            	left:2px;
+            	top:550px;
             }
         </style>
         
@@ -291,7 +291,7 @@
 	    				videos[1].removeAttribute("controls");
 	    				
 	    				console.log("close has been created...");
-	    				
+
 	    				// 当两个窗口都加载完毕时，产生挂断按钮并添加 ajax 操作.
 	    				var close = document.createElement('button');
 	    				close.id = "close";
@@ -304,11 +304,11 @@
 	    				var closeWrapper = document.createElement('a');
 	    				closeWrapper.id = "closeWrapper";
 	    				closeWrapper.href = "consultStateControl";
+
 	    				// 控制在父窗口打开
 	    				closeWrapper.target = "_parent";
 	    				closeWrapper.appendChild(close);
 	    				document.getElementById("videoWrapper1").appendChild(closeWrapper);
-	    				
 	    				
 	    				// 已存在两个窗口则停止监测
 	    				clearInterval(loop);

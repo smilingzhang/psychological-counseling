@@ -15,33 +15,33 @@ import com.entity.CourseCatalog;
 
 @Controller
 /**
- * @desc:请求资源
- * @author 段智兴
- * @date:2018年12月7日下午9:16:03
+ *@desc:请求资源
+ *@author 段智兴
+ *@date:2018年12月7日下午9:16:03
  */
 public class Mysrc {
 	@Resource
 	private CourseCatalogService courseCatalogService;
-
+	
 	@RequestMapping("/mysrc")
-	public void jumpsrc(@RequestParam(name = "courseCatalogId") int logId, HttpServletResponse response,
-			HttpServletRequest request) {
-		// 从url中得到目录id
-		// 通过logId 调用service方法进行查询得到目录对象
-		CourseCatalog courseCatalog = courseCatalogService.getCourseCatalog(logId);
-		// 得到资源路径
-		String url = courseCatalog.getCoursecatalogResourcePath();
-		// 将该目录名存入session
-		String logName = courseCatalog.getCoursecatalogName();
+	public void jumpsrc(@RequestParam(name="courseCatalogId")int logId,HttpServletResponse response,HttpServletRequest request) {
+		//从url中得到目录id
+		//通过logId 调用service方法进行查询得到目录对象
+		CourseCatalog courseCatalog =courseCatalogService.getCourseCatalog(logId);
+		//得到资源路径
+		String url = courseCatalog.getCoursecatalogResourcePath();	
+		//将该目录名存入session
+		String logName= courseCatalog.getCoursecatalogName();
 		request.getSession().setAttribute("CourseCatalogName", logName);
 		try {
-			// 重定向请求资源
-			response.sendRedirect(url);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+			//重定向请求资源
+				response.sendRedirect(url);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		
 	}
-
+	
 }

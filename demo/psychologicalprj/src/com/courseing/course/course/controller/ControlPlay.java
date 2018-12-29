@@ -1,6 +1,8 @@
 package com.courseing.course.course.controller;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,7 +11,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +20,7 @@ import com.courseing.course.course_record.service.CourseRecordService;
 import com.courseing.lesson.service.LessonServiceImp;
 import com.entity.Course;
 import com.entity.CourseCatalog;
+import com.util.EncryUtil;
 import com.util.Page;
 
 @Controller
@@ -28,49 +30,55 @@ public class ControlPlay {
 	@Resource
 	private CourseIntrService courseIntrService;
 	@Resource
-	private LessonServiceImp lessonserviceimp;
-	private Logger logger = Logger.getLogger(ControlPlay.class);
-
+	private  LessonServiceImp lessonserviceimp;
 	@RequestMapping("/course")
-	public String controlPlay(@RequestParam(name = "courseCatalogId") int logId,
-			@RequestParam(name = "startPosition") int startPosition, @RequestParam(name = "courseId") int courseId,
-			@RequestParam(name = "ifbc") Boolean ifbc, HttpServletRequest request, HttpServletResponse response)
-			throws IOException {
-		// 从url中拿到course课程信息和ifbc是否购买/收藏
-
-		// 通过courseId拿到course
+	public String controlPlay(@RequestParam(name="courseCatalogId") String logIds,@RequestParam(name="startPosition")String startPositions,@RequestParam(name="courseId") String courseIds,@RequestParam(name="firesun") String ifbcs,HttpServletRequest request,HttpServletResponse response) throws IOException {
 		response.setContentType("text/html;charset=utf-8");
-		Course course = courseIntrService.findCourse(courseId);
-		logger.info("courseName: " + course.getCourseName());
-		logger.info("ifbc: " + ifbc);
+		//从url中拿到course课程信息和ifbc是否购买/收藏
+		int logId = Integer.parseInt(EncryUtil.decrypt(logIds));
+		int startPosition = Integer.parseInt(EncryUtil.decrypt(startPositions));
+		int courseId = Integer.parseInt(EncryUtil.decrypt(courseIds));
+		boolean ifbc = false;
+		System.out.println("解密后的课程号"+courseId);
+		System.out.println("ifbcs ====="+ifbcs);
+		System.out.println("解密之后"+EncryUtil.decrypt(EncryUtil.decrypt(ifbcs)));
+		System.out.println("解密一次之后"+EncryUtil.decrypt(ifbcs));
+		if(EncryUtil.decrypt(ifbcs).equals("true")) {
+			ifbc = true;
+		}
+		//通过courseId拿到course
+		Course course =courseIntrService.findCourse(courseId);
+		System.out.println("courseName: "+course.getCourseName());
+		System.out.println("ifbc: "+ ifbc);
 		Boolean ifplay = false;
-		// 如果是免费的或者是非免费但购买了该课程的，给予播放权限
-		if (course.getCoursePrice() == 0 || (ifbc == true)) {
-			ifplay = true;
+		//如果是免费的或者是非免费但购买了该课程的，给予播放权限
+		if(course.getCoursePrice()==0||(ifbc==true)) {
+			ifplay=true;
 		}
 		request.getSession().setAttribute("course", course);
 		request.getSession().setAttribute("ifplay", ifplay);
-		// 通过url路径上的参数，写入session
+		//通过url路径上的参数，写入session
 		request.getSession().setAttribute("courseCatalogId", logId);
 		request.getSession().setAttribute("startPosition", startPosition);
-		// 从session中获得课程记录表所需信息
-		if (request.getSession().getAttribute("userId") == null) {
-			response.getWriter()
-					.write("<script>alert('请您先完成登录！'); window.location='login.jsp' ;window.close();</script>");
+		//从session中获得课程记录表所需信息
+		int userId=0;
+		if(request.getSession().getAttribute("userId")==null) {
+			response.getWriter().write(
+					"<script>alert('请您先完成登录!'); window.location='login.jsp' ;window.close();</script>");
 			response.getWriter().flush();
 			return "phone";
 		}
-		int userId = (int) request.getSession().getAttribute("userId");
+		userId =(int) request.getSession().getAttribute("userId");
 		Date date = new Date();
-		// 调用service方法进行对课程记录进行插入
-		int crid = CourseReacordService.addCourseRecord(userId, courseId, date, logId);
-		// 将合法的课程信息记录的id写入session以便对记录进行完善
-		if (crid != 0) {
+		//调用service方法进行对课程记录进行插入
+		int crid =CourseReacordService.addCourseRecord(userId, courseId, date, logId);
+		//将合法的课程信息记录的id写入session以便对记录进行完善
+		if(crid!=0) {
 			request.getSession().setAttribute("CourseRecordId", crid);
 		}
-		// 形成分页链表
+		//形成分页链表
 		List<Integer> nums = new ArrayList<Integer>();
-		// 查询所有的目录
+		//查询所有的目录
 		List<CourseCatalog> catalogs = null;
 		try {
 			catalogs = this.lessonserviceimp.showContentLesson(courseId);
@@ -78,22 +86,26 @@ public class ControlPlay {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// 查询相关类型的视频
+		//查询相关类型的视频
 		List<Course> aboutCourse = this.lessonserviceimp.showAboutTypeLesson(courseId);
-		// 查询评论
+		//查询评论
 		Page pagecomment = this.lessonserviceimp.showComment(courseId, 1, 4);
-		// 控制page页数
-		int num = 0;
+		//控制page页数
+		int num =0;
 		num = (int) pagecomment.getTotalPageNum();
-		for (Integer i = 1; i <= num; i++) {
+		for(Integer i = 1;i<=num;i++) {
 			nums.add(i);
 		}
+		DateFormat bf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date1 = new Date();
+		String format = bf.format(date1);
 		request.setAttribute("comment", pagecomment);
 		request.setAttribute("aboutcourse", aboutCourse);
 		request.setAttribute("catalog", catalogs);
 		request.setAttribute("pages", nums);
-		// 返回课程播放页面
+		request.getSession().setAttribute("date", format);
+		//返回课程播放页面
 		return "course";
-
+	
 	}
 }

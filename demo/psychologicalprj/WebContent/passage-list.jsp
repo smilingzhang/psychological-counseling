@@ -102,7 +102,7 @@
 	                    <!--文章图片-->
 	                    <img src="${ctx }/images/${p.articleImgPath }" alt="！！这里写文章的名字！！">
 	                    <!--文章名-->
-	                    <a class="title" href="${ctx }/PassageControllerImpl?articleId=${p.articleId }">${p.articleName }&nbsp;|&nbsp;心事博物馆</a><br/>
+	                    <a class="title" href="${ctx }/PassageControllerImpl?articleId=${p.articleId }">${p.articleName }&nbsp;</a><br/>
 	                    <!--文章作者-->
 	                    <a class="writer" href="${ctx }/consultdetail/showdetail?teacherId=${p.teacher.user.userId}">${p.teacher.user.userRealName }</a><br/>
 	                    <!--文章介绍-->

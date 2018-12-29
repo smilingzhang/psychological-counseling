@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"  autoFlush="false" buffer="300kb"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="jm" uri="http://localhost:8080/psychologicalprj/encrypt"%>
 <c:set var="ctx" value="${pageContext.request.contextPath }"></c:set>
 <!DOCTYPE html>
 <jsp lang="zh-cn">
@@ -9,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--页面标题“课程_章节命名”-->
-    <title>课程播放</title>
+    <title>课程</title>
     <!--video-->
     <link href="${ctx }/css/video/video-js.min.css" rel="stylesheet">
     <!-- zui -->
@@ -31,7 +32,7 @@
             <!-- 一般导航项目 -->
             <ul class="nav navbar-nav">
                <!--返回目录按钮-->
-              <li><a href="${ctx }/course-intr?courseId=${course.courseId }&userId=${userId }"><i class="icon icon-reply"></i></a></li>
+              <li><a href="${ctx }/course-intr?courseId=<jm:encrypt>${course.courseId }</jm:encrypt>"><i class="icon icon-reply"></i></a></li>
               <!--章节名-->
               <li><span class="ch-name">${CourseCatalogName}</span></li>
               <!--跳转评论按钮：锚点定位-->
@@ -64,10 +65,10 @@
                     <!--一级目录：章节-->
                     <c:forEach items="${catalog }" var="cou">
                     
-                        <span class="directory-level-1"><span class="num">①</span><a>${cou.coursecatalogName }</a></span>
+                        <span class="directory-level-1"><span class="num"></span><a>${cou.coursecatalogName }</a></span>
                     <!-- 二级目录：课程 -->
                         <c:forEach items="${cou.courseCatalogs }" var="temp">
-                                 <span class="directory-level-2 active"><a href="${ctx }/course?courseCatalogId=${temp.coursecatalogId }&startPosition=0&courseId=${course.courseId }&ifbc=${ifbc}">${temp.coursecatalogName }</a></span>
+                                 <span class="directory-level-2 active"><a href="${ctx }/course?courseCatalogId=<jm:encrypt>${temp.coursecatalogId }</jm:encrypt>&startPosition=<jm:encrypt>0</jm:encrypt>&courseId=<jm:encrypt>${temp.courseId }</jm:encrypt>&firesun=<jm:encrypt>${ifbc}</jm:encrypt>">${temp.coursecatalogName }</a></span>
                         </c:forEach>
                      </c:forEach>
                     <!--END 范例-->
@@ -83,7 +84,7 @@
                         <!--课程图片-->
                         <img class="course-img" src="${ctx }/${temp.courseImgPath }" alt="课程"/>
                         <!--课程名：跳转到对应课程介绍页-->
-                        <a href="${ctx }/course-intr?courseId=${temp.courseId}&userId=${userId}" class="course-name title-h2">${temp.courseName }</a>
+                        <a href="${ctx }/course-intr?courseId=<jm:encrypt>${temp.courseId}</jm:encrypt>" class="course-name title-h2">${temp.courseName }</a>
                         <!--主讲人姓名-->
                         <a href="${ctx }/consultdetail/showdetail?teacherId=${temp.teacher.teacherId}"><span class="teacher">${temp.teacher.user.userRealName }</span></a>
                     </div>
@@ -179,12 +180,19 @@
               	  	<div class = "buy_vip">
               	 		<a href="#">开通VIP会员</a>
               	 	</div>
-              	 	<div class ="buy_course">
-              	 	 	<a href="${ctx }/random_order">购买相关课程</a>
+              	 	<div>
+              	 	 	 <form action="${ctx }/insertorder" method="post">
+                       			 	<input type="hidden" name="teacherId" value="${course.teacher.teacherId }">
+                       			 	 <input type="hidden" value="${course.coursePrice }" name="teacherPrice">
+					                <input type="hidden" value="${date }" name="date"/>
+					                <input type="hidden" value="8:00-9:00" name="content"/>
+					                 <input type="hidden" value="courseing" name="type"/>
+                     		   		 <button  class="buy_course">购买相关课程</button>
+                     		   	 </form>
               	  	</div>
               	  	<div class="elsechoose">
               	  		<h6>
-              	  			你也可以选择：   <a onclick="rewatch()" href="#">重新试看  </a>或<a onclick="gowatch()" href="#"> 已有会员，登录学习</a>
+              	  			<center>你也可以选择：   <a onclick="rewatch()" href="#">重新试看  </a></center>
               	  		</h6>
               
               	  	</div>
@@ -237,12 +245,28 @@
 		 		    	var res=xmlhttp.responseText;
 		 		    	var pageComment = JSON.parse(res);
 		 		    	console.log(pageComment);
-		 		    	var comments = pageComment.list;
-		 		    	var totalNum = pageComment.totalCount;
-		 		    	var pageNum = pageComment.pageNum;
-		 		    	totalPageNum = pageComment.totalPageNum;
-		 		    	console.log(totalNum);
-		 		    	console.log(pageNum);
+		 		    	//var comments = pageComment.list;
+		 		    	//var totalNum = pageComment.totalCount;
+		 		    	//var pageNum = pageComment.pageNum;
+		 		    	//totalPageNum = pageComment.totalPageNum;
+		 		    	//console.log(totalNum);
+		 		    	//console.log(pageNum);
+		 		    	var key;
+    			        var value;
+    			        var keys;
+    			        var values;
+    			        for(var p in pageComment){
+    			        	key = p;
+    			        	value = pageComment[p];
+    			        }
+    			        keys = JSON.parse(key);
+    			        values = JSON.parse(value);
+
+          		    	//console.log(pageComment);1
+          		    	var comments = values.list;
+          		    	var totalNum = values.totalPageNum;;
+          		    	var pageNum = values.pageNum;
+          		    	totalPageNum = values.totalPageNum;
 		 		    	var pages =[] ;
 				        for(var i=1;i<=totalPageNum&&i<=4;i++){
 				        	pages.push(i);
@@ -250,7 +274,7 @@
 				        var aft = i;
 		 		    
 		 		    	for(var i = 0;i<comments.length;i++){
-		 		    		html +=  "<div class='comment'><div class='comment-header'><img src='${ctx}/"+comments[i].user.userHeadPath+"' alt='头像'><a href='#'>"+comments[i].user.userNickName+
+		 		    		html +=  "<div class='comment'><div class='comment-header'><img src='${ctx}/"+keys[i].userHeadPath+"' alt='头像'><a href='#'>"+keys[i].userNickName+
 		 		    		"</a><span class='tag'>"+comments[i].evaluateTime+"</span></div><p>"+comments[i].evaluateComment+"</p></div>";
 		 		    	}
 		 		    	html +="</div>";
@@ -267,7 +291,9 @@
 					    	htmls += "<li class='next' id='pageNext'><a pagenum='"+aft+"' href='javascript:void(0)' onclick='showRightComment(this);'>»</a></ul></div>";
 		 		    		document.getElementById("pagescomment").innerHTML = html + htmls;
 		 		    	 }
-		  	       	 }           	
+		  	       	 } 
+		  	      editor.txt.html("");
+
 		           })
             </script>
         </div>
@@ -291,7 +317,7 @@
                             <!--用户头像-->
                             <img src="${ctx }/${temp.user.userHeadPath }" alt="头像">
                             <!--用户昵称：点击跳转到用户个人页面-->
-                            <a href="#">${ temp.user.userRealName}</a>
+                            <a href="#">${ temp.user.userNickName}</a>
                             <!--评论时间：精细到日即可-->
                             <span class="tag">${ temp.evaluateTime}</span>
                         </div>
@@ -374,16 +400,30 @@
   		    	var res=xmlhttp.responseText;
   		    	var pageComment = JSON.parse(res);
   		    	//console.log(pageComment);
-  		    	var comments = pageComment.list;
   		    	//var totalNum = pageComment.totalCount;
   		    	//var pageNum = pageComment.pageNum;
-  		    	totalPageNum = pageComment.totalPageNum;
+  		    	//totalPageNum = pageComment.totalPageNum;
   		    	//console.log(comments);
   		    	//console.log(pageNum);
+  		    	var key;
+		        var value;
+		        var keys;
+		        var values;
+		        for(var p in pageComment){
+		        	key = p;
+		        	value = pageComment[p];
+		        }
+		        keys = JSON.parse(key);
+		        values = JSON.parse(value);
+		        totalPageNum = values.totalPageNum;
+  		    	//console.log(pageComment);1
+  		    	var comments = values.list;
+  		    	var totalNum = values.totalPageNum;;
+  		    	var pageNum = values.pageNum;
   		    	
   		    	for(var i = 0;i<comments.length;i++){
   		    		html +=  "<div class='comment'><div class='comment-header'><img src='${ctx}/"+
-  		    		comments[i].user.userHeadPath+"' alt=' 头像 '><a href='#'>"+comments[i].user.userNickName+
+  		    		keys[i].userHeadPath+"' alt=' 头像 '><a href='#'>"+keys[i].userNickName+
   		    		"</a><span class='tag'>"+comments[i].evaluateTime+"</span></div><p>"+comments[i].evaluateComment+
   		    		"</p></div>";
   		    	}
@@ -416,11 +456,29 @@
     		    if (xmlhttp.readyState==4 && xmlhttp.status==200){
     		    	var res=xmlhttp.responseText;
     		    	var pageComment = JSON.parse(res);
-    		    	console.log(pageComment);
-    		    	var comments = pageComment.list;
-    		    	totalPageNum = pageComment.totalPageNum;
-    		    	 pageNum = pageComment.pageNum;
+    		    	//console.log(pageComment);
+    		    	//var comments = pageComment.list;
+    		    	//totalPageNum = pageComment.totalPageNum;
+    		    	 //pageNum = pageComment.pageNum;
     		    	//var pre = pageNum
+    		    	var key;
+    		        var value;
+    		        var keys;
+    		        var values;
+    		        for(var p in pageComment){
+    		        	key = p;
+    		        	value = pageComment[p];
+    		        }
+    		        keys = JSON.parse(key);
+    		        values = JSON.parse(value);
+
+      		    	//console.log(pageComment);1
+      		    	var comments = values.list;
+      		    	var totalNum = values.totalPageNum;;
+      		    	var pageNum = values.pageNum;
+    		    	var totalNum = values.totalCount;
+    		    	totalPageNum = values.totalPageNum;
+    		    	console.log(comments);
     		    	var pages =[];
     		    	var pre = pageNum -4;
     		    	var aft= pageNum + 1;
@@ -433,7 +491,7 @@
     		    	
     		    	for(var i = 0;i<comments.length;i++){
     		    		html +=  "<div class='comment'><div class='comment-header'><img src='${ctx}/"+
-    		    		comments[i].user.userHeadPath+"' alt=' 头像 '><a href='#'>"+comments[i].user.userNickName+
+    		    		keys[i].userHeadPath+"' alt=' 头像 '><a href='#'>"+keys[i].userNickName+
     		    		"</a><span class='tag'>"+comments[i].evaluateTime+"</span></div><p>"+comments[i].evaluateComment+
     		    		"</p></div>";
     		    	}
@@ -477,10 +535,28 @@
         		    	var res=xmlhttp.responseText;
         		    	var pageComment = JSON.parse(res);
         		    	//console.log(pageComment);
-        		    	var comments = pageComment.list;
-        		    	totalPageNum = pageComment.totalPageNum;
-        		    	 pageNum = pageComment.pageNum;
+        		    	//var comments = pageComment.list;
+        		    	//totalPageNum = pageComment.totalPageNum;
+        		    	 //pageNum = pageComment.pageNum;
         		    	//var pre = pageNum
+        		    	var key;
+        		        var value;
+        		        var keys;
+        		        var values;
+        		        for(var p in pageComment){
+        		        	key = p;
+        		        	value = pageComment[p];
+        		        }
+        		        keys = JSON.parse(key);
+        		        values = JSON.parse(value);
+
+          		    	//console.log(pageComment);1
+          		    	var comments = values.list;
+          		    	var totalNum = values.totalPageNum;;
+          		    	var pageNum = values.pageNum;
+        		    	var totalNum = values.totalCount;
+        		    	totalPageNum = values.totalPageNum;
+        		    	console.log(comments);
         		    	var pages =[];
         		    	var pre = pageNum -1;
         		    	console.log(pageNum);
@@ -498,7 +574,7 @@
         		    	
         		    	for(var i = 0;i<comments.length;i++){
         		    		html +=  "<div class='comment'><div class='comment-header'><img src='${ctx}/"+
-        		    		comments[i].user.userHeadPath+"' alt=' 头像 '><a href='#'>"+comments[i].user.userNickName+
+        		    		keys[i].userHeadPath+"' alt=' 头像 '><a href='#'>"+keys[i].userNickName+
         		    		"</a><span class='tag'>"+comments[i].evaluateTime+"</span></div><p>"+comments[i].evaluateComment+
         		    		"</p></div>";
         		    	}

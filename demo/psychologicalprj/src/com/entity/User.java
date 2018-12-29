@@ -26,6 +26,7 @@ import javax.persistence.Table;
 public class User {
 	public static final int IDENTITY_USER = 1;
 	public static final int IDENTITY_CONSULTER = 2;
+	public static final int IDENTITY_LISTENER=3;
 	private String userProvince;
 	private String alipayUserId;
 	private String weiboUid;
