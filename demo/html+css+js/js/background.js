@@ -4,6 +4,25 @@ window.onload = function (){
     // $("#bg-contain").css("height",window.innerHeight);
     $("#bg-nav").css("width",window.innerWidth*0.2);
     $("#bg-contain").css("width",window.innerWidth-window.innerWidth*0.2);
+
+}
+function timeChecking(obj){
+    var controllerName = "timeChecking";
+    var toUrl = window.location.protocol+controllerName;
+    $.ajax({
+        url:toUrl,
+        async:false,
+        type:"post",
+        dataType:"json",
+        charset:"utf-8",
+        data:{"time":$(obj).siblings("eq(2)").text()},
+        success:function(data){
+            window.location.href="https://www.baidu.com";
+        },
+        error:function(XMLHttpRequest, textStatus, errorThrown){
+            alert("尚未到达规定时间！只能提前十分钟创建！"); 
+        }
+    })
 }
 
 

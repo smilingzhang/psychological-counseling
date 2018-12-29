@@ -1,56 +1,93 @@
+
 <!DOCTYPE html>
 <html lang="zh-cn">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>倾听</title>
-    <!-- zui -->
-    <link href="css/zui-theme.css" rel="stylesheet">
-    <link href="css/zui.css" rel="stylesheet">
-    <link href="css/mystyle.css" rel="stylesheet">
-    <script src="js/jquery-3.3.1.js"></script>
-    <script src="js/zui.js"></script> 
-    <script src="js/zui.lite.js"></script>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>聊天室</title>
+        <meta name="description" content="A set of animated ambient canvas backgrounds with different effects" />
+		<meta name="keywords" content="canvas, ambient, background, animation, javascript, demo, web development" />
+        <!-- zui -->
+        <script src="js/jquery-3.3.1.js"></script>
+        <script src="js/zui.js"></script> 
+        <script src="js/zui.lite.js"></script>
+        <link rel="stylesheet" href="css/zui.min.css">
+        <!--自定义-->
+        <link href="css/room.css" rel="stylesheet">
+        <script src="js/room.js"></script>
+        <!--背景-->
+        <link rel="stylesheet" href="css/bg-animate.css">	
+		<script>document.documentElement.className="js";var supportsCssVars=function(){var e,t=document.createElement("style");return t.innerHTML="root: { --tmp-var: bold; }",document.head.appendChild(t),e=!!(window.CSS&&window.CSS.supports&&window.CSS.supports("font-weight","var(--tmp-var)")),t.parentNode.removeChild(t),e};supportsCssVars()||alert("Please view this demo in a modern browser that supports CSS Variables.");</script>
   </head>
   <body>
     <!-- 在此处编码你的创意 -->
-    <!DOCTYPE html>
-<html lang="zh-cn">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>倾听列表</title>
-    <!-- zui -->
-    <link href="css/zui-theme.css" rel="stylesheet">
-    <link href="css/zui.css" rel="stylesheet">
-    <link href="css/mystyle.css" rel="stylesheet">
-    <script src="js/jquery-3.3.1.js"></script>
-    <script src="js/zui.js"></script> 
-    <script src="js/zui.lite.js"></script>
-  </head>
-  <body>
-    <!-- 在此处编码你的创意 -->
-    <div class="contains media">
+    <div id="media-container">
         <!--视频放置处 包括用户和咨询师的画面-->
-        <div class="video">
+        <div id="video" style="display:none" onmouseover="showTool(this)" onmouseout="hideTool(this)">
+            <!--工具栏-->
+            <div class="tool-nav" style="display:none" id="video-tool-nav">
+                <!--按钮-->
+                <button class="btn btn-primary" type="button">结束咨询</button>
+            </div>
             <div class="video-consulter"></div>
             <!-- <div class="video-user"></div> -->
         </div>
+        <div id="voice" style="display:block" onmouseover="showTool(this)" onmouseout="hideTool(this)">
+             <!--工具栏-->
+             <div class="tool-nav" style="display:none"  id="voice-tool-nav">
+                <!--按钮-->
+                <button class="btn btn-primary" type="button">结束咨询</button>
+            </div>
+            <iframe src="voice-bg.html" frameborder="no"></iframe>
+        </div>
         <!--文字聊天-->
-        <div class="board-text">
+        <div class="board-text" id="board-text">
+            <!--信息展示：包括咨询信息、对话气泡-->
             <div class="board-show">
+                <!--咨询信息-->
+                <div id="board-show-info">
+                    <div class="state">
+                        <div>
+                            <span>语音咨询</span>
+                            <span>进行中</span><span class="on">&nbsp;◉</span><!--这个圆，结束的class="off"，不设置直接关闭也可以-->                         
+                        </div>
+                    </div>
+                    <div class="info ">
+                        <!--头像-->
+                        <div class="avatar"><img src="images/consultant.png" alt=""></div>                        
+                        <div class="info-contain">
+                            <!--名字-->
+                            <span class="name">梁田</span><br>
+                            <!--资质-->
+                            <span class="certification">什么什么一级/什么什么什么</span>
+                        </div>
+                    </div>
+                </div>
+                <!--对话气泡-->
+                <div id="board-show-dialog">
+                    <ul>
+                        <!--靠左的气泡-->
+                        <li><div class="bubble left-bubble"><span>hhh</span></div></li>
+                        <!--靠右的气泡-->
+                        <li><div class="bubble right-bubble"><span>hhh</span></div></li>
+                        <!--时间：扩展，若3或5分钟不发言，下次发言时显示时间-->
+                        <li><span class="time center-block">20:37</span></li>
+                    </ul>
+                </div>
             </div>
             <div class="input">
-                <div class="board-words-input">
-                    <div id="editor" class=""></div>
-                </div>
+                <!--工具栏-->
+                <div id="toolbar" class="toolbar"></div>
+                <!--输入框-->
+                <div id="text"></div>
+                <!--提示信息-->
+                <div class="msg">请按回车键发送</div>
                 <!-- 注意， 只需要引用 JS，无需引用任何 CSS ！！！-->
                 <script type="text/javascript" src="js/wangEditor.min.js"></script>
                 <script type="text/javascript">
                     var E = window.wangEditor
-                    var editor = new E('#editor')
+                    var editor = new E('#toolbar','#text')
                     // 或者 var editor = new E( document.getElementById('editor') )
                     // 自定义菜单配置
                     editor.customConfig.menus = [
@@ -58,20 +95,24 @@
                     ]
 
                     // var editor = new E('#div1')
-                    editor.customConfig.zIndex = 100
-                    editor.create()
+                    editor.customConfig.zIndex = 100;
+                    editor.create();
+
+                    //绑定事件
+                    //自动发送
+                    $("#text").children(":first").keydown(function(event){
+                        console.log(event.keyCode)
+                        clearEnter();
+                        if(event.keyCode=="13" && editor.txt.text()!=null && editor.txt.text().length!=0){
+                            sendRightBubble(editor.txt.text());
+                            editor.txt.html("");
+                        }
+                    })
+                    // document.getElementById("text").firstChild.
                 </script>
             </div>
         </div>
     </div>
-    <!--课程列表-->
-    <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
-    <script src="js/jquery-1.11.0.min.js"></script>
-    <!-- ZUI Javascript组件 -->
-    <script src="js/zui.min.js"></script>
-  </body>
-</html>
-
     <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
     <script src="js/jquery-1.11.0.min.js"></script>
     <!-- ZUI Javascript组件 -->

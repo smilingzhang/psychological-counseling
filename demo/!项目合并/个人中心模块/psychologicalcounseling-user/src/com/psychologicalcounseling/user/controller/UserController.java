@@ -68,6 +68,7 @@ public class UserController {
 	@RequestMapping(value="/goToUser",method=RequestMethod.GET)
 	public void goToUser(HttpSession session,HttpServletResponse resp) throws IOException {
 		session.setAttribute("userId", 1);
+		session.setAttribute("userIdentity", 2);
 		resp.sendRedirect("user");
 	}
 	@RequestMapping(value="/user",method=RequestMethod.GET)

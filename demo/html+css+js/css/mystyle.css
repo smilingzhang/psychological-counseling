@@ -93,22 +93,15 @@ a:focus{
     display: block;
 
 }
-#header .nav-list img{
-    display: block;
-    line-height: 50px;
-    height: 35px;
-    margin-top: 7px;
-    margin-bottom: auto;
-}
 .navbar .nav-list li{
     list-style: none;
     float: left;
-    width: 80px;
+    font-size: 16px;
+    width: 5em;
     /* margin-left: 30px; */
 }
 .navbar .nav-list .search{
-    width: 350px;
-    float: left;
+    width: 20em;
 }
 .navbar .nav-list a{
     display: block;
@@ -860,56 +853,6 @@ a:focus{
     font-weight: 600
 }
 
-.media{
-    display: block;
-    height: 700px;
-    width: 1300px;
-    /* background-color: #fff; */
-    /* margin: 20px; */
-}
-.media .video{
-    display: block;
-    width: 70%;
-    height: 100%;
-    /* background-color:#979292; */
-}
-.media .video .video-consulter{
-    display: block;
-    width: 100%;
-    height: 100%;
-    background-color:#979292;
-}
-.media .video .video-user{
-    display: block;
-    width: 30%;
-    height: 30%;
-    position: relative;
-    top: 0;right: 0;
-    background-color:#fffefe;
-    
-}
-.media .board-text{
-    width: 28%;
-    height: 100%;
-    background-color: #fff;
-}
-.media .board-text,
-.media .video
-{
-    margin: 5px;
-    float: left;
-}
-.board-text .board-show {
-    height: 70%;
-}
-.board-text .input{
-    height: 25%;
-}
-.input .board-words-input,
-.input #editor
-{
-    height: 100%;
-}
 .lesson-nav{
     margin-bottom: 0;
 }
@@ -1677,6 +1620,7 @@ a:focus{
 .search-conatin .panel .result .result-block.consult-block .consult-block-contain img{
     float: left;
     padding-right: 10px;
+    width: 25%;
 }
 .checkout-contain{
     width: 50%;
@@ -1888,28 +1832,24 @@ a:focus{
     margin: 0;
 }
 #header .nav-list .logo{
-    width: 40%;
+    width: 30%;
     padding-top: 10px;
     padding-bottom: 10px;
+    padding: 10px 5px 10px 5px;
     /* float: left; */
+}
+#header .nav-list .logo img{
+    width: 90%;
 }
 #header .index-contain{
     margin: 0;
 }
 .index-contain{
-    margin-top: 0
-}
-#header .logo img{
-    /* margin: 20px; */
-    width: 75%;
-}
-.index-contain .row1{
-    margin-top: 20px;
-    height: 370px;
+    margin-top: 0;
 }
 .index-contain .intro{
     float: left;
-    width: 33%;
+    width: 35%;
     height: 100%;
 }
 .index-contain .intro .title{
@@ -1930,9 +1870,17 @@ a:focus{
     margin-top: 10px;
     width: 60%;
 }
+.index-contain .row1{
+    margin-top: 20px;
+    height: 380px;
+}
 .index-contain .row1 .news{
     width: 38%;
     height: 100%;
+}
+.index-contain .row1 .panel{
+    margin-right: 1%;
+    margin-left: 0px
 }
 .index-contain .row1 .news .news-contain{
     margin-top: 10px;
@@ -1947,6 +1895,7 @@ a:focus{
 .index-contain .row1 .service{
     width: 25%;
     height: 100%;
+    margin-right: 0px;
 }
 .index-contain .row1 .service img{
     width: 30%;
@@ -1976,7 +1925,7 @@ a:focus{
 }
 .index-contain .row2{
     clear: both;
-    height: 320px;
+    height: 500px;
 }
 .index-contain .row2 .consultation{
     width: 72%;
@@ -1993,14 +1942,29 @@ a:focus{
 .index-contain .row2 .consultation .consultor{
     float: left;
     width: 45%;
-    height: 45%;
+    height: 120px;
     margin: 10px;
-    border: 1px solid #979292;
+    border: 1px solid #dadada;
     padding: 20px 10px 20px 10px;
 }
 .index-contain .row2 .consultation .consultor img{
+    display: block;
+    border-radius: 100%;
+    width: 100%;
+    /* height: 100%; */
+    margin: 0px;
+}
+.index-contain .row2 .consultation .consultor .avatar{
     float: left;
-    margin-right: 10px;
+    height: 100%;
+    width: 20%;
+    margin-right: 2%;
+}
+.index-contain .row2 .consultation .consultor .info{
+    width: 76%;
+    height: 100%;
+    margin:0px;
+    float:right;
 }
 .index-contain .row2 .consultation .consultor .tag .stress{
     color: #d75455;
@@ -2013,14 +1977,15 @@ a:focus{
     height: 100%;
     margin-right: 5px;
 }
+.index-contain .row2 .index-listening .board-title-h1{
+    margin-bottom: 10px;
+}
 .index-contain .row2 .index-listening .index-listener{
     width: 100%;
     background-image: none;
-    margin: 20px 0 40px 0;
+    margin: 10px 0 10px 0;
     clear: both;
     height: 50%;
-    /* padding-top: 10px;
-    padding-bottom: 10px; */
 }
 .index-contain .row2 .index-listening .index-listener .head{
     float: left;
