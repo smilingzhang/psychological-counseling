@@ -3,6 +3,7 @@
     <%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <c:set var="ctx" value="${pageContext.request.contextPath }"></c:set>
   <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+  <%@taglib prefix="jm" uri="http://localhost:8080/psychologicalprj/encrypt"%>
 <!DOCTYPE html>
 
 <html lang="zh-cn">
@@ -95,7 +96,7 @@
                   <!--类型-->
                   <span class="type">课程</span>
                   <!--名称_发布人-->
-                  <a href="${ctx }/lesson/instr?id=${courses.courseId }">${courses.courseName }_${courses.teacher.user.userRealName }</a>
+                  <a href="${ctx }/course-intr?courseId=<jm:encrypt>${courses.courseId}</jm:encrypt>">${courses.courseName }_${courses.teacher.user.userRealName }</a>
                   <!--发布时间-->
                   <!--课程没有发布时间-->
                   <!-- <span></span> -->
@@ -114,7 +115,7 @@
                     <!--类型-->
                     <span class="type">文章</span>
                     <!--名称_发布人-->
-                    <a href="PassageControllerImpl?articleId=${articles.articleId }">${articles.articleName }_${articles.teacher.user.userRealName }</a><br/>
+                    <a href="${ctx }/PassageControllerImpl?articleId=${articles.articleId }">${articles.articleName }_${articles.teacher.user.userRealName }</a><br/>
                     <!--发布时间-->
                     <span class="tag">${articles.articlePublishTime }</span>
                     <!--介绍-->
@@ -151,7 +152,7 @@
 	                
 	                  <span class="type">课程</span>
 	                 
-	                  <a href="${ctx }/lesson/instr?id=${coursesIndex.courseId }">${coursesIndex.courseTitle }_${coursesIndex.teacherName }</a>
+	                  <a href="${ctx }/course-intr?courseId=<jm:encrypt>${coursesIndex.courseId}</jm:encrypt>">${coursesIndex.courseTitle }_${coursesIndex.teacherName }</a>
 	                 
 	                  <p>${coursesIndex.courseSynopsis }</p>
 	                  </div>

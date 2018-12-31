@@ -48,9 +48,7 @@ public class SearchForKeyWordDao extends BaseDao<Course>{
 		Session session =sessionFactory.getCurrentSession();
 		for(int i=0;i<list.size();i++) {
 			Query query =session.createSQLQuery("select userRealName from user where userId in(select teacherId from article where articleId=?)");
-			System.out.println("文章的id为"+list.get(i).getArticleId());
 			query.setParameter(0, list.get(i).getArticleId());
-			System.out.println(query.uniqueResult());
 			String teacherNames=query.uniqueResult().toString();
 			listNames.add(teacherNames);	
 		}

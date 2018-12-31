@@ -36,9 +36,8 @@ public class SearchForKeyWordService extends TestLucene{
 	private SearchConsulterDao searchConsulterDao;
 	public List<CourseIndexSearcher> getSearchTeacherName(String searchContent) throws IOException, ParseException, org.apache.lucene.queryParser.ParseException{
 		List<Course> searchCourse=this.searchCourseDao.searchAllCourses();
-		List<Article> searchArticle=this.searchArticleDao.searchAllArticles();
-		List<Teacher> searchTeacher=this.searchConsulterDao.getAllConsulters();
-		createIndex(searchCourse,searchArticle,searchTeacher);
+		createIndex(searchCourse);
+		
 		List<CourseIndexSearcher> courseIndexSearchers=seacher(searchContent);
 		List<String> searchedTeacherName= this.searchForKeyWordDao.selectSearchTeachersName(courseIndexSearchers);
 		for(int i=0;i<courseIndexSearchers.size();i++) {
@@ -48,6 +47,8 @@ public class SearchForKeyWordService extends TestLucene{
 	}
 	
 	public List<ArticleIndexSearch> getArticleIndexSearch(String searchContent) throws IOException, ParseException, org.apache.lucene.queryParser.ParseException{
+		List<Article> searchArticle=this.searchArticleDao.searchAllArticles();
+		createArticleIndex(searchArticle);
 		List<ArticleIndexSearch> articleIndexSearchers=seacherArticle(searchContent);
 		List<String> searchedTeacherName= this.searchForKeyWordDao.selectSearchTeachersNameByArticle(articleIndexSearchers);
 		for(int i=0;i<articleIndexSearchers.size();i++) {
@@ -57,6 +58,8 @@ public class SearchForKeyWordService extends TestLucene{
 	}
 	
 	public List<ConsulterIndexSearch> getConsulterIndexSearch(String searchContent) throws IOException, ParseException, org.apache.lucene.queryParser.ParseException{
+		List<Teacher> searchTeacher=this.searchConsulterDao.getAllConsulters();
+		createConsulterIndex(searchTeacher);
 		List<ConsulterIndexSearch> consulterIndexSearchs=seacherConsulter(searchContent);
 		return consulterIndexSearchs;
 	}

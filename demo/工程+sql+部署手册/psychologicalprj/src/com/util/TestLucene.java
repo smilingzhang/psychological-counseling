@@ -57,13 +57,13 @@ public class TestLucene extends  FileManager{
 	//关于咨询师在索引库中存储的字段
 	/**
 	 * 
-	 *@desc:建立索引
+	 *@desc:建立索引,建立3个索引
 	 *@param listCourses
 	 *@return:void
 	 * @throws IOException 
 	 *@trhows
 	 */
-	public void createIndex(List<Course> listCourses,List<Article> listArticles,List<Teacher> listTeachers) throws IOException{
+	public void createIndex(List<Course> listCourses) throws IOException{
 	
 		IndexWriter writer=null;
 	      try{
@@ -80,6 +80,26 @@ public class TestLucene extends  FileManager{
 		          doc.add(new Field(COURSE_INTRODUCTION, listCourses.get(i).getCourseIntroduction(), Store.YES,Index.ANALYZED));
 		          writer.addDocument(doc);  
 	          }
+	        
+	        writer.commit();
+	        writer.close();
+	    //    isImplement=true;
+	      }
+	      catch(IOException e){
+	        System.out.println(e);
+	      }finally {
+	    	  if(writer!=null) {	  
+	    		  writer.close();
+	    	  }
+	      }
+	    }
+	public void createArticleIndex(List<Article> listArticles) throws IOException{
+		IndexWriter writer=null;
+	      try{
+  		//创建索引写入器 	
+	        Directory d = FSDirectory.open(new File("d:/lucenearticle/"));
+	        Analyzer analyzer = getAnalyzer();
+	        writer = new IndexWriter(d, analyzer, true, IndexWriter.MaxFieldLength.LIMITED);
 	        //创建文章索引
 	        for(int j=0;j<listArticles.size();j++) {
 	        	Document doc=new Document();
@@ -90,6 +110,27 @@ public class TestLucene extends  FileManager{
 	        	doc.add(new Field(PUBLICATIONTIME,listArticles.get(j).getArticlePublishTime().toString() ,Store.YES,Index.ANALYZED));
 	        	writer.addDocument(doc);
 	        }
+	        
+	        writer.commit();
+	        writer.close();
+	    //    isImplement=true;
+	      }
+	      catch(IOException e){
+	        System.out.println(e);
+	      }finally {
+	    	  if(writer!=null) {	  
+	    		  writer.close();
+	    	  }
+	      }
+		
+	}
+	public void createConsulterIndex(List<Teacher> listTeachers) throws IOException{
+		IndexWriter writer=null;
+	      try{
+		//创建索引写入器 	
+	        Directory d = FSDirectory.open(new File("d:/luceneconsulter/"));
+	        Analyzer analyzer = getAnalyzer();
+	        writer = new IndexWriter(d, analyzer, true, IndexWriter.MaxFieldLength.LIMITED);
 	        //创建咨询师索引
 	        for(int m=0;m<listTeachers.size();m++) {
 	        	Document doc=new Document();
@@ -105,7 +146,6 @@ public class TestLucene extends  FileManager{
 	        
 	        writer.commit();
 	        writer.close();
-	    //    isImplement=true;
 	      }
 	      catch(IOException e){
 	        System.out.println(e);
@@ -114,7 +154,7 @@ public class TestLucene extends  FileManager{
 	    		  writer.close();
 	    	  }
 	      }
-	    }
+	}
 		/**
 		 * 
 		 *@desc:二分法分词器
@@ -154,7 +194,7 @@ public class TestLucene extends  FileManager{
 	    	List<CourseIndexSearcher> listCour=new ArrayList<CourseIndexSearcher>();
 	    	int i=0;
 	    	for(i=0;i<docs.length;i++) {
-	    		int docId=docs[i].doc;		
+	    		int docId=docs[i].doc;				
 	    		Document document = searcher.doc(docId);
 	    		CourseIndexSearcher c=new CourseIndexSearcher();
 	    		c.setCourseId(String.valueOf(docs[i].doc+1));
@@ -185,7 +225,7 @@ public class TestLucene extends  FileManager{
 	    public List<ArticleIndexSearch> seacherArticle(String queryString) throws IOException, ParseException, org.apache.lucene.queryParser.ParseException{
 	    
 	    	//1.创建索引写入器,指出索引在硬盘上的存储位置
-		    Directory d = FSDirectory.open(new File("d:/lucene/"));
+		    Directory d = FSDirectory.open(new File("d:/lucenearticle/"));
 		    //创建分词器
 		   Analyzer analyzer = getAnalyzer();
 		    //创建索引查询对象
@@ -200,10 +240,9 @@ public class TestLucene extends  FileManager{
 	    	List<ArticleIndexSearch> listArti=new ArrayList<ArticleIndexSearch>();
 	    	for(int i=0;i<docs.length;i++) {
 	    		int docId=docs[i].doc;
-	
 	    		Document document = searcher.doc(docId);
 	    		ArticleIndexSearch a=new ArticleIndexSearch();
-	    		a.setArticleId(String.valueOf(docs[i].doc-26));
+	    		a.setArticleId(String.valueOf(docs[i].doc+1));
 	    		a.setArticleTitle(document.get(ARTICLE_TITLE));
 	    		a.setArticleIntroduction(document.get(ARTICLE_INTRODUCTION));
 	    		a.setArticleContent(document.get(ARTICLE_CONTENT));
@@ -228,7 +267,7 @@ public class TestLucene extends  FileManager{
 	    public List<ConsulterIndexSearch> seacherConsulter(String queryString) throws IOException, ParseException, org.apache.lucene.queryParser.ParseException{
 		    
 	    	//1.创建索引写入器,指出索引在硬盘上的存储位置
-		    Directory d = FSDirectory.open(new File("d:/lucene/"));
+		    Directory d = FSDirectory.open(new File("d:/luceneconsulter/"));
 		    //创建分词器
 		   Analyzer analyzer = getAnalyzer();
 		    //创建索引查询对象
@@ -245,7 +284,7 @@ public class TestLucene extends  FileManager{
 	    		int docId=docs[i].doc;
 	    		Document document = searcher.doc(docId);
 	    		ConsulterIndexSearch a=new ConsulterIndexSearch();
-	    		a.setTeacherId(String.valueOf(docs[i].doc));
+	    		a.setTeacherId(String.valueOf(docs[i].doc+1));
 	    		a.setTeacherName(document.get(TEACHER_NAME));
 	    		a.setTeacherIntroduction(document.get(TEACHER_INTRODUCTION));
 	    		a.setTeacherApitude(document.get(TEACHER_APITUDE));
