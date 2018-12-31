@@ -51,7 +51,7 @@
                     </div>
                     <div class="info ">
                         <!--头像-->
-                        <div class="avatar"><img src="images/consultant.png" alt=""></div>                        
+                        <div class="avatar"><img src="${ctx }/images/${other.userHeadPath }" alt=""></div>                        
                         <div class="info-contain">
                             <!--名字-->
                             <span class="name">${sessionScope.other.userRealName }</span><br>
