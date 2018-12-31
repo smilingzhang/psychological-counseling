@@ -46,7 +46,7 @@ public class IndexController {
 	@RequestMapping("/selectConsulter")
 	public void selectConsulter(String condition, Model model, HttpServletResponse response,HttpServletRequest request) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html;utf-8");
+		response.setContentType("text/html;charset=utf-8");
 		PrintWriter p = response.getWriter();
 		List<Teacher> consulters = teacherServiceImpl.listConsulterByTypeAndPage(condition);
 		
@@ -57,22 +57,32 @@ public class IndexController {
 			counts.add(res);
 		}
 		model.addAttribute("counts", counts);
-		
 		for(int i = 0; i < consulters.size(); ++i) {
-			p.println("<div class=\"consultor\">\r\n" + 
-					"							<!--头像-->\r\n" +  
-					"						<img src='" + consulters.get(i).getUser().getUserHeadPath() + "' alt=\"\">\r\n" + 
-					"							<div>\r\n" + 
-					"								<!--名字-->\r\n" + 
+			String[] arr = consulters.get(i).getAuthenticationAptitudeName().split(" ");
+			String partHtml = "";
+			for(int j = 0; j <= 1; ++j) {
+				partHtml += "<span class='tag'>" + arr[j] + "</span>";
+			}
+			p.print("<div class=\"consultor\">\r\n" + 
+					"								<!--头像-->\r\n" + 
+					"								<div class=\"avatar\">\r\n" + 
+					"						<img src='/psychologicalprj/images/" + consulters.get(i).getUser().getUserHeadPath() + "' alt='咨询师'>\r\n" + 
+					"								</div>\r\n" + 
+					"								<div class=\"info\">\r\n" + 
+					"									<!--名字-->\r\n" + 
 					"								<span><a href=\"#\">" + consulters.get(i).getUser().getUserRealName() + "</a></span>\r\n" + 
-					"								<!--资质-->\r\n" + 
-					"								<span class=\"tag\">" + consulters.get(i).getAuthenticationAptitudeName() + "</span><br />\r\n" + 
-					"								<!--咨询人次-->\r\n" + 
+					"									<!--资质-->\r\n"  +
+					partHtml + 
+					"									<br/>\r\n" + 
+					"									<!--咨询人次-->\r\n" + 
 					"								<span class=\"tag\">咨询人次&nbsp;<span class=\"stress\">" + counts.get(i) + "</span></span>\r\n" + 
-					"								<!--好评率-->\r\n" + 
-					"								<span class=\"tag\">好评率<span class=\"stress\">" + consulters.get(i).getTeacherPraiseRate() +"%</span></span>\r\n" + 
-					"							</div>\r\n" + 
-					"						</div>");
+					"									\r\n" + 
+					"									<!--好评率-->\r\n" + 
+					"								<span class=\"tag\">好评率<span class=\"stress\">" + consulters.get(i).getTeacherPraiseRate() +"%</span></span>\r\n" +
+					"								</div>\r\n" + 
+					"							</div>");
+			
+			
 		}
 		
 		
@@ -82,7 +92,7 @@ public class IndexController {
 	@RequestMapping("/selectCourse")
 	public void selectCourse(String condition, Model model, HttpServletResponse response,HttpServletRequest request) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html;utf-8");
+		response.setContentType("text/html;charset=utf-8");
 		PrintWriter p = response.getWriter();
 		List<Course> courses = courseServiceImpl.listCoursesByTypeAndPage(condition);
 		

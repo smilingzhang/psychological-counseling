@@ -406,7 +406,7 @@
 		$selectConsulters.click(function() {
 			var ajax = new XMLHttpRequest();
 			var condition = $(this).html();
-			ajax.open("GET", "selectConsulter?condition=" + condition, true);
+			ajax.open("GET", "/psychologicalprj/selectConsulter?condition=" + condition, true);
 			ajax.send();
 			
 			ajax.onreadystatechange = function() {
