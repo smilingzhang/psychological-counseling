@@ -23,8 +23,8 @@ public class CourseInformationService {
 	private insertCourseType insertCourseType;
 	@Resource
 	private UpdateCourseType updateCourseType;
-	public void UpdateCourse(String ctype,String cname,float fprice,String csynopsis,String wang,int courseId) {
-		updateCourse.updateCurse(cname, fprice, csynopsis, wang, courseId);
+	public void UpdateCourse(String ctype,String cname,float fprice,String csynopsis,String wang,int courseId,String imgpath) {
+		updateCourse.updateCurse(cname, fprice, csynopsis, wang, courseId,imgpath);
 		updateCourseType.updateType(courseId, ctype);
 	}
 	public void UpdateCourseCatalog(String data,int cid) {
@@ -35,8 +35,9 @@ public class CourseInformationService {
 			e.printStackTrace();
 		}
 	}
-	public void addCourse(int teacherId,String cname,String ctype,float fprice,String imgFileName,String csynopsis,String articleContent) {
+	public int addCourse(int teacherId,String cname,String ctype,float fprice,String imgFileName,String csynopsis,String articleContent) {
 		int i =insertCourse.insertCourse(teacherId, cname, ctype, fprice, imgFileName, csynopsis, articleContent);
 		insertCourseType.insertType(i, ctype);
+		return i;
 	}
 }

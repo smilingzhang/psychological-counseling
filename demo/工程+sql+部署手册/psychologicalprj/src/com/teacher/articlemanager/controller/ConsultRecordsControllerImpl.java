@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.entity.Article;
 import com.entity.BusinessType;
@@ -88,8 +89,6 @@ public class ConsultRecordsControllerImpl {
 	@RequestMapping(value="/consultRecord")
 	@ResponseBody
 	public void publish(HttpServletRequest request,HttpServletResponse response,HttpSession session) throws ServletException, IOException {
-		
-		
 		int teacherId = 4;
 		
 		String pagenum1 = request.getParameter("pageNum1");        //获取页码
@@ -195,7 +194,7 @@ public class ConsultRecordsControllerImpl {
 		request.setAttribute("todoListenCount", todoCount);
 		request.setAttribute("canceledListenCount",canceledCount);
 		try {
-			request.getRequestDispatcher("/background?teacherId=4&page=2").forward(request, response);
+			request.getRequestDispatcher("/background?teacherId=4&page=1").forward(request, response);
 		} catch (ServletException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -272,7 +271,7 @@ public class ConsultRecordsControllerImpl {
 	 * @throws ServletException 
 	 */
 	@RequestMapping(value="/publishArticle")
-	public void publisharticle(HttpServletRequest request,HttpServletResponse response,HttpSession session) throws ServletException, IOException {
+	public void publisharticle(@RequestParam(name="imgFileName") String name,HttpServletRequest request,HttpServletResponse response,HttpSession session) throws ServletException, IOException {
 
 		
 		int teacherId = 4;
@@ -282,9 +281,7 @@ public class ConsultRecordsControllerImpl {
 		//获取文章名字
 		String articleName = request.getParameter("articleName");     
 		
-		/**
-		 * 图片上传下载没写
-		 */
+		
 		
 		
 		//获取文章的简介
@@ -298,7 +295,12 @@ public class ConsultRecordsControllerImpl {
 		//创建article对象
 		Article article = new Article();
 		article.setArticleName(articleName);
-		article.setArticleImgPath("teacher.png");
+		if(name==null || name .equals("")) {
+			article.setArticleImgPath("teacher.png");
+		}else {
+			article.setArticleImgPath(name);
+		}
+		
 		article.setArticleIntroduction(articleIntroduction);
 		article.setArticleContent(articleContent);
 		article.setArticlePublishTime(new Date());
@@ -326,17 +328,18 @@ public class ConsultRecordsControllerImpl {
 		this.publishArticleServiceImpl.AddpassageToBusinessType(businessType);
 		
 		request.setAttribute("alert", "文章发表成功");
-		request.getRequestDispatcher("/consultTeacher/articleTypeTable").forward(request, response);;
+	//	request.getRequestDispatcher("/consultTeacher/articleTypeTable").forward(request, response);
+		response.sendRedirect("/psychologicalprj/consultTeacher/articleTypeTable");
 	}
 	
 	@RequestMapping(value="/upload")
 	@ResponseBody
-	public String uploadImage(@RequestParam(value="name") String name,HttpServletRequest request,HttpServletResponse response) {
-		String rootPath="c:/";
+	public String uploadImage(@RequestParam("file")CommonsMultipartFile file,@RequestParam(name="name") String name,HttpServletRequest request,HttpServletResponse response) {
+		String rootPath="F:\\大三上--工程\\工程+sql+部署手册\\psychologicalprj\\WebContent\\images";
 		InputStream is;
 		
 		try {
-			is = request.getInputStream();
+			is = file.getInputStream();
 			logger.info("name:"+name);
 			FileOutputStream fos = new FileOutputStream(rootPath+"/"+name);
 			byte [] cache = new byte[is.available()];

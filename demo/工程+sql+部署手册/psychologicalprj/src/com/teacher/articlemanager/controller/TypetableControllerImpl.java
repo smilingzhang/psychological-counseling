@@ -26,7 +26,7 @@ public class TypetableControllerImpl {
 		
 		session.setAttribute("typetableList", typetableList);
 		try {
-			request.getRequestDispatcher("/background?teacherId=4&page=2").forward(request, response);
+			request.getRequestDispatcher("/background?teacherId=4&page=1").forward(request, response);
 		} catch (ServletException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

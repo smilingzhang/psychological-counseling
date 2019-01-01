@@ -36,7 +36,7 @@ public class UpdateCourseCatalog extends BaseDao<CourseCatalog> {
         	}else {
         		logger.info("插入前i的值："+i);
         		if(arr2.length>=4) {
-        			excuteBySql("insert into coursecatalog(courseId,coursecatalogParentId,coursecatalogName,coursecatalogResourcePath) values(?,?,?,?)", cid,i,arr2[2],arr2[arr2.length-1]);
+        			excuteBySql("insert into coursecatalog(courseId,coursecatalogParentId,coursecatalogName,coursecatalogResourcePath) values(?,?,?,?)", cid,i,arr2[2],"/psychologicalcounseling/videos/"+arr2[arr2.length-1]);
         			logger.info(cid+"--"+i+"--"+arr2[2]+"--"+arr2[arr2.length-1]);
         		}
         	}
