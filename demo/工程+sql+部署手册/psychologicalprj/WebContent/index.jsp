@@ -167,10 +167,10 @@
 				                        </c:forEach>
 									<br/>
 									<!--咨询人次-->
-									<span class="tag">咨询人次&nbsp;<span class="stress">${counts[s.index] }</span></span>
+									<span style="font-size:12px">咨询人次&nbsp;<span class="stress">${counts[s.index] }</span></span>
 									
 									<!--好评率-->
-									<span class="tag">好评率<span class="stress">${consulter.teacherPraiseRate }%</span></span>
+									<span style="font-size:12px">好评率<span class="stress">${consulter.teacherPraiseRate }%</span></span>
 								</div>
 							</div>
 						</c:forEach>

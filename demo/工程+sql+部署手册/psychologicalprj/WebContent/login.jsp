@@ -92,12 +92,12 @@
 	                <!--账号密码登录表单-->
 	                <form class="login-form" action="${ctx }/login/login4Pwd" method="POST" id="form-2" style="display:none">
 	                    <div class="group">
-		                    <font name="loginErrMsg4Phone4Second" id="loginErrMsg4Phone4Second" class=""></font>
+		                    <font name="loginErrMsg4Phone4Second" id="loginErrMsg4Phone4Second" class="">&nbsp;</font>
 	                    	<div><input name="phoneNum" type="text" class="form-control" id="phoneNum4Pwd" placeholder="11位手机号" onkeyup="loginVerifyPhone4Pwd()"></div><br/>
 	                    </div>
 	                    <div class="group">
 		                    <!-- 错误信息 -->							
-		                    <font name="loginErrMsg4Pwd" id="loginErrMsg4Pwd" class=""></font>
+		                    <font name="loginErrMsg4Pwd" id="loginErrMsg4Pwd" class="">&nbsp;</font>
 	                    	<div><input name="pwd" type="password" class="form-control" id="pwd" placeholder="密码" onkeyup="loginVerifyPwd();"></div><br/>
 	                    </div>
 	                    <button id="login-form-submit-button-Second" class="btn btn-block" disabled="disabled" onclick="this.form.submit()">登录</button>

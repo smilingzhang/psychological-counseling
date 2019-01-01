@@ -28,6 +28,7 @@
     <script src="${ctx}/js/background.js"></script>
     <link href="${ctx}/css/mystyle.css" rel="stylesheet">
     <link href="${ctx}/css/background.css" rel="stylesheet">
+    <script src="${ctx}/js/change-state.js"></script>
     <!--富文本编辑器-->
     <script type="text/javascript" charset="utf-8" src="${ctx}/utf8-jsp/ueditor.config.js"></script>
     <script type="text/javascript" charset="utf-8" src="${ctx}/utf8-jsp/ueditor.all.min.js"> </script>

@@ -100,14 +100,16 @@
 	            <c:forEach items="${passageList.list }" var="p">
 	                <div class="passage-block">
 	                    <!--文章图片-->
-	                    <img src="${ctx }/images/${p.articleImgPath }" alt="！！这里写文章的名字！！">
-	                    <!--文章名-->
-	                    <a class="title" href="${ctx }/PassageControllerImpl?articleId=${p.articleId }">${p.articleName }&nbsp;</a><br/>
-	                    <!--文章作者-->
-	                    <a class="writer" href="${ctx }/consultdetail/showdetail?teacherId=${p.teacher.user.userId}">${p.teacher.user.userRealName }</a><br/>
-	                    <!--文章介绍-->
-	                    <p>${p.articleIntroduction }</p>
-	                </div><br><br>
+	                    <img src="${ctx }/images/${p.articleImgPath }" alt="${p.articleName }">
+	                    <div>
+		                    <!--文章名-->
+		                    <a class="title" href="${ctx }/PassageControllerImpl?articleId=${p.articleId }">${p.articleName }&nbsp;</a><br/>
+		                    <!--文章作者-->
+		                    <a class="writer" href="${ctx }/consultdetail/showdetail?teacherId=${p.teacher.user.userId}">${p.teacher.user.userRealName }</a><br/>
+		                    <!--文章介绍-->
+		                    <p>${p.articleIntroduction }</p>
+	                    </div>
+	                </div>
 	            </c:forEach>  
             </div>
          <!--分页器：一页最多显示10篇文章。示例并没有超过10篇，就把这段注释掉吧-->
@@ -142,6 +144,7 @@
 					});
 				</script>
 			</c:if>  
+		</div>
    	</div>
     <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
     <script src="${ctx }/js/jquery-1.11.0.min.js"></script>

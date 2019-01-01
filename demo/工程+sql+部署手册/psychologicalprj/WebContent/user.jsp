@@ -191,7 +191,7 @@
 				                                <c:if test="${consulter.getConsultationrecordMethod()!='faceToFace'
 				                                				&& dateutil:compare(requestScope.targetDate,requestScope.startDate)==1
 				                                				&& dateutil:compare(dateutil:getDate(),requestScope.endDate)==2 }">
-					                                <td width="15%"><span><a class="enter-room" href="room.html">进入咨询室</a></span></td>
+					                                <td width="15%"><span><a class="enter-room" href="roomControl">进入咨询室</a></span></td>
 				                                </c:if>
 				                                <!-- 若是线上咨询，且已经结束 -->
 				                                <c:if test="${consulter.getConsultationrecordMethod()!='faceToFace'

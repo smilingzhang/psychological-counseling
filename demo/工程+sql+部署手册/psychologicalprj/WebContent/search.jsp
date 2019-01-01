@@ -79,11 +79,11 @@
                          <a href="${ctx }/consultdetail/showdetail?teacherId=${consulters.teacherId }"><span class="name">${consulters.user.userRealName }</span></a><br/>
                         <!--资质-->
                          <c:set var="var1" value="${consulters.authenticationAptitudeName }"/>
-                        <c:forEach  var="tdv" items="${fn:split(var1,' ')}" begin="1" end="1">   
+                        <c:forEach  var="tdv" items="${fn:split(var1,' ')}" begin="0" end="1">   
                        		 <span class="tag">${tdv }</span>
                        </c:forEach>
                       </div>
-                    </div>      
+                    </div>
                   </c:forEach>           
                 </div>
                 </c:if>
@@ -137,7 +137,7 @@
 	                       <a href="${ctx }/consultdetail/showdetail?teacherId=${consultersIndex.teacherId }"> <span class="name">${consultersIndex.teacherName }</span></a><br/>
 	                      
 	                         <c:set var="var1" value="${consultersIndex.teacherApitude }"/>
-	                        <c:forEach  var="tdv" items="${fn:split(var1,' ')}" begin="1" end="1">   
+	                        <c:forEach  var="tdv" items="${fn:split(var1,' ')}" begin="0" end="1">   
 	                       		 <span class="tag">${tdv }</span>
 	                        </c:forEach>
 	                      </div>

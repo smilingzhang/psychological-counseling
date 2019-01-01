@@ -36,7 +36,7 @@ public class SendController extends HttpServlet {
 		String otherName = other.getUserRealName();
 		String videoChatAddress = (String) session.getAttribute("videoChatAddress");
 		String audioChatAddress = (String) session.getAttribute("audioChatAddress");
-		String message = request.getParameter("message");
+		String message = dealWithMessage(request.getParameter("message"));
 		logger.info("message:" + message);
 		Map<String, List<String[]>> videoAddress2messages = (Map<String, List<String[]>>) application
 				.getAttribute("videoAddress2messages");
@@ -57,6 +57,22 @@ public class SendController extends HttpServlet {
 
 		}
 
+	}
+
+	/**
+	 *@desc:去掉包裹的p标签
+	 *@param parameter
+	 *@return
+	 *@return:String
+	 *@trhows
+	 */
+	private String dealWithMessage(String message) {
+		if(message!=null) {
+			int start = 3;
+			int end = message.indexOf("</p>");
+			return message.substring(start, end);
+		}
+		return null;
 	}
 
 }
