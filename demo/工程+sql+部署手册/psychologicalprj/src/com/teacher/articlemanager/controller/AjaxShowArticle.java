@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -23,7 +24,7 @@ public class AjaxShowArticle {
 		@Resource
 		private SelectArticleServiceImpl selectArticleServiceImpl;
 		
-		@RequestMapping("/ajaxshowarticle")
+		@RequestMapping(value="/ajaxshowarticle",method=RequestMethod.POST)
 		public Map<String, Object> showArticle(@RequestParam(name="articleId")String aid){
 			int articleId=Integer.parseInt(aid);
 			Article article =passageServiceImpl.findArticleByArticleId(articleId);

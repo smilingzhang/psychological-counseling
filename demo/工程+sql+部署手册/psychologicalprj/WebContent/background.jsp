@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>后台管理</title>
+    <title>后台</title>
     <!-- zui -->
     <link href="${ctx}/css/zui-theme.css" rel="stylesheet">
     <link href="${ctx}/css/zui.css" rel="stylesheet">
@@ -28,7 +28,6 @@
     <script src="${ctx}/js/background.js"></script>
     <link href="${ctx}/css/mystyle.css" rel="stylesheet">
     <link href="${ctx}/css/background.css" rel="stylesheet">
-    <script src="${ctx}/js/change-state.js"></script>
     <!--富文本编辑器-->
     <script type="text/javascript" charset="utf-8" src="${ctx}/utf8-jsp/ueditor.config.js"></script>
     <script type="text/javascript" charset="utf-8" src="${ctx}/utf8-jsp/ueditor.all.min.js"> </script>
@@ -122,7 +121,30 @@
                                        			UE.getEditor('editor4PsgEditing').setContent(data.articleContent);
                                        			$("#page-2").css("display","none");
                                                 $("#edit-passage").css("display","block");
-                                    				
+                                                //因为新建文章时已经上传过图片了，这里写入静态资源
+                                                $('#psgImgEditingUploader').uploader({
+                                                    url: 'http://your/post/url',
+                                                    // 只允许上传视频文件
+                                                    mime_types: [
+                                                            {title: '图片', extensions: 'png,jpg'},
+                                                        ],
+                                                    // 最大上传文件大小
+                                                    max_file_size: '10mb',
+                                                    // 不允许上传重复文件
+                                                    prevent_duplicates: true,
+                                                    //上传文件个数
+                                                    limitFilesCount: 1,
+                                                    deleteActionOnDone: function(file, doRemoveFile) {
+                                                        doRemoveFile();
+                                                    },
+                                                    staticFiles: [
+                                                        {name: data.articleImgPath, url: 'http://zui.sexy'},
+                                                    ]
+                                                });
+                                                $('#psgImgEditingUploader').uploader().on('onFileUploaded', function(file,responseObject) {
+                                                    // console.log($("#ImgUpload-block").children("input[type='hidden']"))
+                                                    $("#ImgUpload-block-article-show").children("input[type='radio']").attr("value",responseObject.name);                                               
+                                                });	
                                 		}
                                 	});
                                     
@@ -153,7 +175,7 @@
                         	<c:forEach items="${artshowPage.list }" var="at">
                             <div class="item">
                                 <div class="item-heading">
-                                    <div class="pull-right"><a href="${ctx }/consultTeacher/usermessage" onclick="showEditPassage(${at.articleId})"><i class="icon-pencil"></i> 编辑</a> &nbsp;<a href="${ctx }/consultTeacher/deleteArticle?articleId=${at.articleId}" ty="${at.articleId}" onclick="deleteArtice(this);"><i class="icon-remove"></i> 删除</a></div>
+                                    <div class="pull-right"><a href="#" onclick="showEditPassage(${at.articleId})"><i class="icon-pencil"></i> 编辑</a> &nbsp;<a href="${ctx }/consultTeacher/deleteArticle?articleId=${at.articleId}" ty="${at.articleId}" onclick="deleteArtice(this);"><i class="icon-remove"></i> 删除</a></div>
                                     <h4>
                                         <!--文章分类-->
                                         <c:forEach items="${at.typetableList }" var="att">
@@ -274,7 +296,7 @@
                             <!--标题图上传-->
                             <div class="passage-block" id="ImgUpload-block">
                                 <span>上传标题图片<span class="tag">(可选)</span><span class="msg-warning">&nbsp;*若未上传，将使用默认图片</span></span>
-                                <!-- <input class="tag" type="file" name="ImgUpload"/> -->
+                                <input type="radio" name="imgFileName" style="display: none" checked />
                                 <div id="psgImgUploader" class="uploader">
                                     <div class="file-list" data-drag-placeholder="请拖拽文件到此处"></div>
                                         <button type="button" class="btn btn-primary uploader-btn-browse"><i class="icon icon-cloud-upload"></i> 选择文件</button>
@@ -293,6 +315,10 @@
                                         prevent_duplicates: true,
                                         //上传文件个数
                                         limitFilesCount: 1
+                                    });
+                                    $('#psgImgUploader').uploader().on('onFileUploaded', function(file,responseObject) {
+                                        // console.log($("#ImgUpload-block").children("input[type='hidden']"))
+                                        $("#psgImgUploader").children("input[type='radio']").attr("value",responseObject.name);                                               
                                     });
                                 </script>
                             </div>
@@ -335,32 +361,7 @@
                                     <div class="file-list" data-drag-placeholder="请拖拽文件到此处"></div>
                                     <button type="button" class="btn btn-primary uploader-btn-browse"><i class="icon icon-cloud-upload"></i> 选择文件</button>
                                 </div>
-                                <script>
-                                    //因为新建文章时已经上传过图片了，这里写入静态资源
-                                    $('#psgImgEditingUploader').uploader({
-                                        url: 'http://your/post/url',
-                                        // 只允许上传视频文件
-                                        mime_types: [
-                                                {title: '图片', extensions: 'png,jpg'},
-                                            ],
-                                        // 最大上传文件大小
-                                        max_file_size: '10mb',
-                                        // 不允许上传重复文件
-                                        prevent_duplicates: true,
-                                        //上传文件个数
-                                        limitFilesCount: 1,
-                                        deleteActionOnDone: function(file, doRemoveFile) {
-                                            doRemoveFile();
-                                        },
-                                        staticFiles: [
-                                            {name: 'article.jsp', size: 216159, url: 'http://zui.sexy'},
-                                        ]
-                                    });
-                                    $('#psgImgEditingUploader').uploader().on('onFileUploaded', function(file,responseObject) {
-                                        // console.log($("#ImgUpload-block").children("input[type='hidden']"))
-                                        $("#ImgUpload-block-article-show").children("input[type='radio']").attr("value",responseObject.name);                                               
-                                    });
-                                </script>
+                                
                                 <!-- <input class="tag" type="file" name="ImgUpload"/> -->
                             </div>
                             <!--编辑框：富文本编辑器-->
@@ -392,7 +393,7 @@
                         <header>
                             <h3><i class="icon-list-ul"></i> 课程 <small></small></h3>
                         </header>
-                        <div class="items items-hover" id="item">
+                        <div class="items items-hover" id="item-course">
                         	<c:forEach var="tc" items="${TeacherCourse}">
                             <!--已有课程展示-->
                             <div class="item">
@@ -550,7 +551,37 @@
                         			    data:data+'&teacherId='+teacherId,
                         			    dataType:'json', 
                         			    success:function(data){      
-                        			      alert('课程内容更新成功');
+                        			      alert('课程创建成功');
+                        			      $("#item-course").prepend(
+                        			    		  "<div class=\"item\">\r\n" + 
+                        			    			"                                                  <div class=\"item-heading\">\r\n" + 
+                        			    			"                                                      <div class=\"pull-right\"><a href=\"###\" id=\"course-edit-button\" onclick=\"editCourse("+data.cid+")\"><i class=\"icon-pencil\"></i> 编辑</a></div>\r\n" + 
+                        			    			"                                                      \r\n" + 
+                        			    			"                                                      <h4>\r\n" + 
+                        			    			"                                                          <!--课程分类-->\r\n" + 
+                        			    		
+                        			    			"                                                          	<span class=\"label label-danger\">"+data.ctype+"</span>\r\n" + 
+                        			    			
+                        			    			"                                                          <!--课程标题：点击跳转到课程介绍页-->\r\n" + 
+                        			    			"                                                          <a href=\"###\">"+data.cname+"</a>\r\n" + 
+                        			    			
+                        			    			"                                                           <span class=\"msg-err\">&nbsp;&nbsp;<i class=\"icon icon-frown\"></i>&nbsp;不符合发布要求&nbsp;原因：尚未上传课程视频</span>" + 
+
+                        			    			"                                                          \r\n" + 
+                        			    			"                                                      </h4>\r\n" + 
+                        			    			"                  								</div>\r\n" + 
+                        			    			"                                                  <!--课程简介-->\r\n" + 
+                        			    			"                                                  <div class=\"item-content\">\r\n" + 
+                        			    			"                                                      <div class=\"text\">"+data.csynopsis+"</div>\r\n" + 
+                        			    			"                                                      <!--banner图-->\r\n" + 
+                        			    			"                                                      <img class=\"bannerImg-course\" src=\"${ctx }/"+data.cimgpath+"\" alt=\"\">\r\n" + 
+                        			    			"                                                  </div>\r\n" + 
+                        			    			"                                                  <div class=\"item-footer\">\r\n" + 
+                        			    			"                                                      <i class=\"icon icon-eye-open\"></i> ${tc.lookNum } &nbsp; <i class=\"icon icon-comments\"></i>${tc.course.courseStudentNumber } &nbsp;\r\n" + 
+                        			    			"                                                      <span class=\"stress\">0个章节&nbsp;共0课时</span>\r\n" + 
+                        			    			"                                                  </div>\r\n" + 
+                        			    			"                                              </div>\r\n");
+                        			      
                         			    },
                         			    error:function(){ 
                         			     alert("请求失败，请重新尝试")
@@ -691,53 +722,13 @@
                                     <div class="course-block" id="ImgUpload-block-course-edit">
                                     	<input type="radio" name="imgFileName" style="display: none" checked id="show-course-imgpath"/>
                                         <span>封面图片</span>
+                                        
                                      <!--<input class="tag" type="file" name="ImgUpload" />-->
                                         <div id="courseImgEditingUploader" class="uploader">
                                             <div class="file-list" data-drag-placeholder="请拖拽文件到此处"></div>
                                             <button type="button" class="btn btn-primary uploader-btn-browse"><i class="icon icon-cloud-upload"></i> 选择文件</button>
                                         </div>
-                                        <script>
-                                            //因为新建文章时已经上传过图片了，这里写入静态资源
-                                             
-                                            console.log(window.imgpath)
-                                            $('#courseImgEditingUploader').uploader({
-                                            	autoUpload: true,//自动上传
-                                            	url: '${ctx}/imgupload',
-                                                // 只允许上传视频文件
-                                                mime_types: [
-                                                        {title: '图片', extensions: 'png,jpg'},
-                                                    ],
-                                                // 最大上传文件大小
-                                                max_file_size: '10mb',
-                                                // 不允许上传重复文件
-                                                prevent_duplicates: true,
-                                                //上传文件个数
-                                                limitFilesCount: 1,
-                                                deleteActionOnDone: function(file, doRemoveFile) {
-                                                    doRemoveFile();
-                                                },
-                                                //静态资源
-                                                staticFiles: [
-                                                    //{name: 'zui.js', size: 216159, url: 'http://zui.sexy'},
-                                                	{name:'course.jsp', url: '${ctx}/images'},
-                                                ]
-                                            });
-                                            $('#courseImgEditingUploader').uploader().on('onFileUploaded', function(file,responseObject) {
-                                                // console.log($("#ImgUpload-block").children("input[type='hidden']"))
-                                                $("#ImgUpload-block-course-edit").children("input[type='radio']").attr("value",responseObject.name); 
-                                                console.log( $("#ImgUpload-block-course-edit").children("input[type='radio']").attr("value"));
-                                                
-                                            });
-                                            //绑定错误事件
-                                            //$('#courseImgEditingUploader').uploader().on('onError', function(error) {
-                                                // code：错误代码，参见错误代码属性说明；
-                                                // message：错误消息文本；
-                                                // file：发生错误相关的文件对象。
-                                                //$('#courseImgEditingUploader').data('zui.uploader').showMessage(error.message, 'danger');
-                                                //console.log(error.code);
-                                            //});
-                                            
-                                        </script>
+                                        
                                     </div>
                                     <!--课程简介-->
                                     <div class="course-block">课程简介<br/><input maxlength="40" type="text" name="csynopsis" id="csynopsis" placeholder="课程简介" class="form-control"></div>
@@ -794,14 +785,54 @@
                                         	$("#course-free").attr("checked",true);
                                         	$("#edit-price").attr("value",0);
                                         }
-                                        window.imgpath=data.cimgpath;
-                                        console.log("imgpath:"+imgpath);
+                                        
                                			$("#csynopsis").attr("value",data.csynopsis);
                                			UE.getEditor('editor4EditCourse').setContent(data.cintroduction);
                          	   			$("#page-3").css("display","none");
                             			$("#edit-course").css("display","block");
                             			$("#courseTimeCid").attr("value",data.cid);
-                            				
+                            			
+                                        //因为新建文章时已经上传过图片了，这里写入静态资源
+                                         
+                                       
+                                        $('#courseImgEditingUploader').uploader({
+                                        	autoUpload: true,//自动上传
+                                        	url: '${ctx}/imgupload',
+                                            // 只允许上传视频文件
+                                            mime_types: [
+                                                    {title: '图片', extensions: 'png,jpg'},
+                                                ],
+                                            // 最大上传文件大小
+                                            max_file_size: '10mb',
+                                            // 不允许上传重复文件
+                                            prevent_duplicates: true,
+                                            //上传文件个数
+                                            limitFilesCount: 1,
+                                            deleteActionOnDone: function(file, doRemoveFile) {
+                                                doRemoveFile();
+                                            },
+                                            //静态资源
+                                            staticFiles: [
+                                                //{name: 'zui.js', size: 216159, url: 'http://zui.sexy'},
+                                            	{name:data.cimgpath, url: '${ctx}/images'},
+                                            ]
+                                        });
+                                        $('#courseImgEditingUploader').uploader().on('onFileUploaded', function(file,responseObject) {
+                                            // console.log($("#ImgUpload-block").children("input[type='hidden']"))
+                                            $("#ImgUpload-block-course-edit").children("input[type='radio']").attr("value",responseObject.name); 
+                                            console.log( $("#ImgUpload-block-course-edit").children("input[type='radio']").attr("value"));
+                                            
+                                        });
+                                        //绑定错误事件
+                                        //$('#courseImgEditingUploader').uploader().on('onError', function(error) {
+                                            // code：错误代码，参见错误代码属性说明；
+                                            // message：错误消息文本；
+                                            // file：发生错误相关的文件对象。
+                                            //$('#courseImgEditingUploader').data('zui.uploader').showMessage(error.message, 'danger');
+                                            //console.log(error.code);
+                                        //});
+                                        
+                                    
                         		}
                         	});
                         }
@@ -1124,7 +1155,7 @@
                                             <td>${cp.consultationrecordStartTime }</td>
                                             <td>${cp.consultationrecordLoc }</td>
                                             <td>${cp.consultationrecordPrice }￥</td>
-                                            <td><a href="#" onclick="showClient(${cp.user})">查看</a></td>
+                                            <td><a href="#" onclick="showClient(${cp.user.userId})">查看</a></td>
                                         </tr>
                                     </c:forEach>   
                                     </tbody>
@@ -1181,7 +1212,7 @@
                                             <td> ${tpl.listenrecordId }</td>
                                             <td>${tpl.listenrecordOrderTime }</td>
                                             <td> ${tpl.listenrecordPrice }￥</td>
-                                            <td><a href="#" onclick="showClient3(${tpl.user})">查看</a></td>
+                                            <td><a href="#" onclick="showClient(${tpl.user.userId})">查看</a></td>
                                         </tr>
                                         </c:forEach>
                                     </tbody>
@@ -1232,7 +1263,7 @@
                                             <td>${fpl.listenRecord.listenrecordOrderTime }</td>
                                             <td> ${fpl.listenTime }分钟</td>
                                             <td>${fpl.listenRecord.listenrecordPrice }￥</td>
-                                            <td><a href="#" onclick="showClient(${fpl.user})">查看</a></td>
+                                            <td><a href="#" onclick="showClient(${fpl.user.userId})">查看</a></td>
                                         </tr>
                                        	</c:forEach>
                                     </tbody>
@@ -1264,6 +1295,27 @@
                         </div>
                     </div>
                 </div>
+                 <script>
+	                              //显示用户信息对话框
+	                                function showClient(userId){
+	                            	  $.ajax({
+	                            		  async:true,
+	                            		  type:"POST",
+	                            		  dataType:"json",
+	                            		  data:{userId:userId},
+	                            		  url:'${ctx}/consultTeacher/usermessage',
+	                            		  success:function(data){
+	                            			  console.log(data);
+	                            			  //alert(data.userRealName);
+	                            			  
+	                            			   $('#datagrConsultation-client').datagrid({ dataSource: { cols:[ {name: 'name', label: '姓名', width: 0.3}, {name: 'gender', label: '性别', width: 0.1},{name: 'age', label: '年龄', width: 0.1},  {name: 'phone', label: '联系方式', width: 0.5}], array:[ {name:data.userRealName, gender:data.userSex, age: data.userAge, phone:data.userPhone} ] }}); 
+	                            			  
+	                            			   // $('#datagrConsultation-client').datagrid('reload'); 
+	                            			   $('#order-clientInfo').css('display','block');
+	                            		  }	
+	                            	  });
+	                              }
+                                </script>
             </div><!--END 订单管理-->
             <!--排班管理-->
             <div id="page-5" style="display:none" class="page">

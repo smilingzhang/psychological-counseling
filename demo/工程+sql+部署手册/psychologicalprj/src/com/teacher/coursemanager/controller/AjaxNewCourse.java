@@ -27,9 +27,17 @@ public class AjaxNewCourse {
 		String csynopsis=request.getParameter("csynopsis");
 		String articleContent=request.getParameter("articleContent");
 		int teacherId = Integer.parseInt(request.getParameter("teacherId"));
+		//System.out.println("ctype="+ctype+",cname="+cname+",carticleContent="+articleContent);
 		Map<String, Object>map = new HashMap<>();
-		courseInformationService.addCourse(teacherId, cname, ctype, fprice, imgFileName, csynopsis, articleContent);
+		int cid = courseInformationService.addCourse(teacherId, cname, ctype, fprice, imgFileName, csynopsis, articleContent);
 		map.put("result", "success");
+		map.put("ctype", ctype);
+		map.put("cname", cname);
+		map.put("cprice", fprice);
+		map.put("cimgpath", "images/"+imgFileName);
+		map.put("csynopsis", csynopsis);
+		map.put("cintroduction", articleContent);
+		map.put("cid", cid);
 		return map;
 	}
 }

@@ -22,14 +22,16 @@ public class AjaxUpdateCourse {
 		String ctype=request.getParameter("ctype");
 		String cname=request.getParameter("cname");
 		String cprice=request.getParameter("cprice");
+		String imgpath = request.getParameter("imgFileName");
 		Float fprice =Float.parseFloat(cprice);
 		String csynopsis=request.getParameter("csynopsis");
 		String wang=request.getParameter("wang");
 		String cid = request.getParameter("courseId");
 		int courseId= Integer.parseInt(cid);
-		courseInformationService.UpdateCourse(ctype,cname, fprice, csynopsis, wang, courseId);
+		courseInformationService.UpdateCourse(ctype,cname, fprice, csynopsis, wang, courseId,imgpath);
 		Map<String, Object> map = new HashMap<>();
 		map.put("result", "success");
+		
 		return map;
 	}
 }

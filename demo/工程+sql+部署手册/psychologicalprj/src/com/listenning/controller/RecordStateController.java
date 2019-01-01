@@ -55,7 +55,7 @@ public class RecordStateController {
 
 		session.setAttribute("consultationRecords", consultationRecords);
 
-		return "redirect:head.jsp";
+		return "redirect:main.jsp";
 
 	}
 
@@ -89,7 +89,7 @@ public class RecordStateController {
 		logger.info("found listenRecords : " + listenRecords);
 
 		session.setAttribute("listenRecords", listenRecords);
-		return "redirect:head.jsp";
+		return "redirect:main.jsp";
 
 	}
 

@@ -51,14 +51,16 @@ public class OrderTimeCheckController {
 	@RequestMapping("/OrderTimeCheck")
 	
 	public void check(HttpServletResponse res, HttpSession session) throws IOException, ParseException {
+		
 		res.setContentType("text/html; charset=utf-8");
+		
 		PrintWriter p = res.getWriter();
 		User user = (User) session.getAttribute("user");
-		System.out.println("orderTime check");
 		if(user == null) return;
 		// 如果未登录终止.
 		
 		int identity = user.getUserIdentity();
+		System.out.println("user:" + user);
 		int id = user.getUserId();
 		logger.info("OrderTimeCheck...");
 		

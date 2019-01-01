@@ -1,5 +1,7 @@
 package com.teacher.coursemanager.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.entity.CourseRecord;
@@ -8,8 +10,8 @@ import com.util.BaseDao;
 public class SelectLookNum extends BaseDao<CourseRecord> {
 	public int selectLookNum(int courseId) {
 		try {
-			int i =(int)findCount("from CourseRecord cr where cr.course.courseId=?", courseId);
-			return i;
+			List<CourseRecord> list = find("from CourseRecord cr where cr.course.courseId=?", courseId);
+			return list.size();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
