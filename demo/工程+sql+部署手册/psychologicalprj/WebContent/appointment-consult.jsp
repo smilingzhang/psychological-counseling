@@ -59,7 +59,7 @@
                       <!--在线语音-->
                       <input id="audio" type="radio" name="type" value="audio">在线语音&nbsp;
                       <!--在线视频-->
-                      <input id="vedio" type="radio" name="type" id="" value="vedio">在线视频&nbsp;
+                      <input id="vedio" type="radio" name="type" id="" value="video">在线视频&nbsp;
                       <!--线下面对面-->
                       <input id="faceToFace" type="radio" name="type" id="" value="faceToFace">线下面对面&nbsp;
                     </p>

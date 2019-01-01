@@ -60,16 +60,18 @@ public class UserService {
 			
 			//3. 遍历集合，根据consultState字段拆分表
 			for(ConsultationRecord record : list) {
-				switch(record.getConsultState()) {
-				case ConsultationRecord.TODO:
-					toDoList.add(record);
-					break;
-				case ConsultationRecord.FINISHED:
-					finishedList.add(record);
-					break;
-				case ConsultationRecord.CANCELED:
-					canceledList.add(record);
-					break;
+				if(record.getConsultState()!=null) {
+					switch(record.getConsultState()) {
+					case ConsultationRecord.TODO:
+						toDoList.add(record);
+						break;
+					case ConsultationRecord.FINISHED:
+						finishedList.add(record);
+						break;
+					case ConsultationRecord.CANCELED:
+						canceledList.add(record);
+						break;
+					}
 				}
 			}
 		}

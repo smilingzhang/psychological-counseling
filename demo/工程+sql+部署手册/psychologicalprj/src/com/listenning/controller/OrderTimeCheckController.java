@@ -54,15 +54,13 @@ public class OrderTimeCheckController {
 		res.setContentType("text/html; charset=utf-8");
 		PrintWriter p = res.getWriter();
 		User user = (User) session.getAttribute("user");
-		if(user == null) {
-			System.out.println("user == null");
-			return;
-		}
+		System.out.println("orderTime check");
+		if(user == null) return;
 		// 如果未登录终止.
 		
 		int identity = user.getUserIdentity();
 		int id = user.getUserId();
-		System.out.println("OrderTimeCheck...");
+		logger.info("OrderTimeCheck...");
 		
 		
 		List<ConsultationRecord> consultationRecords = consultationRecordServiceImpl
@@ -94,21 +92,37 @@ public class OrderTimeCheckController {
 				
 				User other = userServiceImpl.getOtherUser(user, cr);
 				session.setAttribute("other", other);
-				 
 				
-				p.print("<div id=\"invite\">\r\n" + 
-						"			        <div class=\"animate\">\r\n" + 
-						"			            <span class=\"animate-snake\"><i class=\"icon icon-spin icon-spinner-snake icon-5x\"></i></span>\r\n" + 
-						"			            <span class=\"animate-phone\"><i class=\"icon icon-phone icon-3x\"></i></span>\r\n" + 
-						"			        </div>\r\n" + 
-						"			        <div class=\"msg\">\r\n" + 
-						"				            <div>您预约的&nbsp;<span class=\"stress\">在线视频咨询</span>&nbsp;即将开始</div>\r\n" + 
-						"			        	\r\n" + 
-						"			            <div>咨询师&nbsp;<span class=\"stress\">" + other.getUserRealName() + "</span>&nbsp;向你发出了邀请</div>\r\n" + 
-						"			            <div class=\"tag\">请尽快进入咨询室</div>\r\n" + 
-						"			            <button class=\"btn btn-block\" type=\"button\">立即进入咨询室&nbsp;<i class=\"icon icon-hand-right\"></i></button>\r\n" + 
-						"			        </div>\r\n" + 
-						"			    </div>");
+				// if 是客户
+				if(identity == 1) {
+					p.print("<div id=\"invite\">\r\n" + 
+							"			        <div class=\"animate\">\r\n" + 
+							"			            <span class=\"animate-snake\"><i class=\"icon icon-spin icon-spinner-snake icon-5x\"></i></span>\r\n" + 
+							"			            <span class=\"animate-phone\"><i class=\"icon icon-phone icon-3x\"></i></span>\r\n" + 
+							"			        </div>\r\n" + 
+							"			        <div class=\"msg\">\r\n" + 
+							"				            <div>您预约的&nbsp;<span class=\"stress\">在线视频咨询</span>&nbsp;即将开始</div>\r\n" + 
+							"			        	\r\n" + 
+							"			            <div>咨询师&nbsp;<span class=\"stress\">" + other.getUserRealName() + "</span>&nbsp;向你发出了邀请</div>\r\n" + 
+							"			            <div class=\"tag\">请尽快进入咨询室</div>\r\n" + 
+							"			            <button class=\"btn btn-block\" type=\"button\">立即进入咨询室&nbsp;<i class=\"icon icon-hand-right\"></i></button>\r\n" + 
+							"			        </div>\r\n" + 
+							"			    </div>");
+				} else {
+					p.print("<div id=\"invite\">\r\n" + 
+							"			        <div class=\"animate\">\r\n" + 
+							"			            <span class=\"animate-snake\"><i class=\"icon icon-spin icon-spinner-snake icon-5x\"></i></span>\r\n" + 
+							"			            <span class=\"animate-phone\"><i class=\"icon icon-phone icon-3x\"></i></span>\r\n" + 
+							"			        </div>\r\n" + 
+							"			        <div class=\"msg\">\r\n" + 
+							"				            <div>您被预约的&nbsp;<span class=\"stress\">在线视频咨询</span>&nbsp;即将开始</div>\r\n" + 
+							"			        	\r\n" + 
+							"			            <div>客户&nbsp;<span class=\"stress\">" + other.getUserRealName() + "</span>&nbsp;向你发出了邀请</div>\r\n" + 
+							"			            <div class=\"tag\">请尽快进入咨询室</div>\r\n" + 
+							"			            <button class=\"btn btn-block\" type=\"button\">立即进入咨询室&nbsp;<i class=\"icon icon-hand-right\"></i></button>\r\n" + 
+							"			        </div>\r\n" + 
+							"			    </div>");
+				}
 			}
 		}
 
@@ -116,9 +130,10 @@ public class OrderTimeCheckController {
 			logger.info("listenRecords != null");
 			ListenRecord lr = OrderTimeCheckServiceImpl.checkListenOrder(listenRecords);
 			if (lr != null) {
-				
+				logger.info("lr != null");
 				// 放入audioChatAddress
 				String audioChatAddress = lr.getRandomNum() + lr.getListenrecordId();
+				logger.info("放入audioChatAddress.." + audioChatAddress);
 				session.setAttribute("audioChatAddress", audioChatAddress);
 
 				// 放入 listenRecordId  
@@ -128,21 +143,36 @@ public class OrderTimeCheckController {
 
 				User other = userServiceImpl.getOtherUser(user, lr);
 				session.setAttribute("other", other);
-				
-				
-				p.print("<div id=\"invite\">\r\n" + 
-						"			        <div class=\"animate\">\r\n" + 
-						"			            <span class=\"animate-snake\"><i class=\"icon icon-spin icon-spinner-snake icon-5x\"></i></span>\r\n" + 
-						"			            <span class=\"animate-phone\"><i class=\"icon icon-phone icon-3x\"></i></span>\r\n" + 
-						"			        </div>\r\n" + 
-						"			        <div class=\"msg\">\r\n" + 
-						"				            <div>您预约的&nbsp;<span class=\"stress\">在语音频咨询</span>&nbsp;即将开始</div>\r\n" + 
-						"			        	\r\n" + 
-						"			            <div>咨询师&nbsp;<span class=\"stress\">" + other.getUserRealName() + "</span>&nbsp;向你发出了邀请</div>\r\n" + 
-						"			            <div class=\"tag\">请尽快进入咨询室</div>\r\n" + 
-						"			            <button class=\"btn btn-block\" type=\"button\">立即进入咨询室&nbsp;<i class=\"icon icon-hand-right\"></i></button>\r\n" + 
-						"			        </div>\r\n" + 
-						"			    </div>");
+				logger.info("other:" + other);
+				if(identity == 1) {
+					p.print("<div id=\"invite\">\r\n" + 
+							"			        <div class=\"animate\">\r\n" + 
+							"			            <span class=\"animate-snake\"><i class=\"icon icon-spin icon-spinner-snake icon-5x\"></i></span>\r\n" + 
+							"			            <span class=\"animate-phone\"><i class=\"icon icon-phone icon-3x\"></i></span>\r\n" + 
+							"			        </div>\r\n" + 
+							"			        <div class=\"msg\">\r\n" + 
+							"				            <div>您预约的&nbsp;<span class=\"stress\">在语音频咨询</span>&nbsp;即将开始</div>\r\n" + 
+							"			        	\r\n" + 
+							"			            <div>倾听师&nbsp;<span class=\"stress\">" + other.getUserRealName() + "</span>&nbsp;向你发出了邀请</div>\r\n" + 
+							"			            <div class=\"tag\">请尽快进入咨询室</div>\r\n" + 
+							"			            <button class=\"btn btn-block\" type=\"button\">立即进入咨询室&nbsp;<i class=\"icon icon-hand-right\"></i></button>\r\n" + 
+							"			        </div>\r\n" + 
+							"			    </div>");
+				} else {
+					p.print("<div id=\"invite\">\r\n" + 
+							"			        <div class=\"animate\">\r\n" + 
+							"			            <span class=\"animate-snake\"><i class=\"icon icon-spin icon-spinner-snake icon-5x\"></i></span>\r\n" + 
+							"			            <span class=\"animate-phone\"><i class=\"icon icon-phone icon-3x\"></i></span>\r\n" + 
+							"			        </div>\r\n" + 
+							"			        <div class=\"msg\">\r\n" + 
+							"				            <div>您被预约的&nbsp;<span class=\"stress\">在语音频咨询</span>&nbsp;即将开始</div>\r\n" + 
+							"			        	\r\n" + 
+							"			            <div>客户&nbsp;<span class=\"stress\">" + other.getUserRealName() + "</span>&nbsp;向你发出了邀请</div>\r\n" + 
+							"			            <div class=\"tag\">请尽快进入咨询室</div>\r\n" + 
+							"			            <button class=\"btn btn-block\" type=\"button\">立即进入咨询室&nbsp;<i class=\"icon icon-hand-right\"></i></button>\r\n" + 
+							"			        </div>\r\n" + 
+							"			    </div>");
+				}
 			}
 		}
 

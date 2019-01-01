@@ -246,7 +246,7 @@
                         <div class="comment">
                             <div class="comment-header">
                                 <!--用户头像-->
-                                <img src="${ctx }/${temp.user.userHeadPath }" alt="头像">
+                                <img src="${ctx }/images/${temp.user.userHeadPath }" alt="头像">
                                 <!--用户昵称：点击跳转到用户个人页面-->
                                 <a href="#">${temp.user.userNickName }</a>
                                 <!--评论时间：精细到日即可-->
