@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kecheng"
+           tests="1"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="11.781">
+  <properties />
+  
+  
+            <testcase name="pinglun1" time="11.781" classname="com.webtest.demo.kecheng.PinglunTest" />
+      
+</testsuite>
