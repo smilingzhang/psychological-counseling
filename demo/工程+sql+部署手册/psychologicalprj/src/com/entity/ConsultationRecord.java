@@ -38,6 +38,7 @@ public class ConsultationRecord {
 	private float consultationrecordPrice;
 	private String consultationrecordState;
 	private String consultationrecordMethod;
+	private String consultationrecordLoc;
 	private String consultationrecordResourcePath;
 	private String consultState;
 	private Teacher teacher;
@@ -121,5 +122,11 @@ public class ConsultationRecord {
 	}
 	public void setRandomNum(String randomNum) {
 		this.randomNum = randomNum;
+	}
+	public String getConsultationrecordLoc() {
+		return consultationrecordLoc;
+	}
+	public void setConsultationrecordLoc(String consultationrecordLoc) {
+		this.consultationrecordLoc = consultationrecordLoc;
 	}	
 }

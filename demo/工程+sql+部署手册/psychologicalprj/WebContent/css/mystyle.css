@@ -1053,7 +1053,7 @@ a:focus{
 }
 .recomment-course{
     width: 100%;
-    height: 120px;
+    height: 18%;
     padding: 10px;
     /* margin-bottom: 2px; */
 }
@@ -1471,7 +1471,6 @@ a:focus{
     width: 74%;
     clear: both;
     margin-bottom: 24px;
-    height:130px;
 }
 .info-contain .directory-contain-list .passage-block img,
 .passage-list-contain .passage-list-body .passage-block img,
@@ -1607,6 +1606,7 @@ a:focus{
 }
 .search-conatin .panel .result .consult-block .consult-block-contain{
     width: 30%;
+    height:80px;
     background-color: #f7babd41;
     border-radius: 27px;
     padding: 10px;
@@ -1846,11 +1846,11 @@ a:focus{
     margin: 0;
 }
 .index-contain{
-    margin-top: 0;
+    margin-top: 0
 }
 .index-contain .intro{
     float: left;
-    width: 35%;
+    width: 33%;
     height: 100%;
 }
 .index-contain .intro .title{
@@ -1871,17 +1871,9 @@ a:focus{
     margin-top: 10px;
     width: 60%;
 }
-.index-contain .row1{
-    margin-top: 20px;
-    height: 380px;
-}
 .index-contain .row1 .news{
     width: 38%;
     height: 100%;
-}
-.index-contain .row1 .panel{
-    margin-right: 1%;
-    margin-left: 0px
 }
 .index-contain .row1 .news .news-contain{
     margin-top: 10px;
@@ -1896,7 +1888,6 @@ a:focus{
 .index-contain .row1 .service{
     width: 25%;
     height: 100%;
-    margin-right: 0px;
 }
 .index-contain .row1 .service img{
     width: 30%;
@@ -1930,7 +1921,7 @@ a:focus{
 }
 .index-contain .row2 .consultation{
     width: 72%;
-    height: 100%;
+    
 }
 .index-contain .row2 .consultation .title{
     margin-bottom: 10px;
@@ -1941,7 +1932,7 @@ a:focus{
     float: right;
 }
 .index-contain .row2 .consultation .consultor{
-    float: left;
+     float: left;
     width: 45%;
     height: 120px;
     margin: 10px;
@@ -1949,7 +1940,7 @@ a:focus{
     padding: 20px 10px 20px 10px;
 }
 .index-contain .row2 .consultation .consultor img{
-    display: block;
+     display: block;
     border-radius: 100%;
     width: 100%;
     /* height: 100%; */
@@ -1975,22 +1966,19 @@ a:focus{
 }
 .index-contain .row2 .index-listening{
     width: 25%;
-    height: 100%;
+  
     margin-right: 5px;
-}
-.index-contain .row2 .index-listening .board-title-h1{
-    margin-bottom: 10px;
 }
 .index-contain .row2 .index-listening .index-listener{
     width: 100%;
     background-image: none;
-    margin: 10px 0 10px 0;
+    margin: 20px 0 20px 0;
     clear: both;
     height: 50%;
 }
 .index-contain .row2 .index-listening .index-listener .head{
     float: left;
-    height: 100%;
+    
     width: 34%;
     margin-right: 10px;
 
@@ -2057,5 +2045,6 @@ a:focus{
 .section2 .index-contain .row4 .more{
     float: right;
 }
+
 
 /* 支付-新版 */

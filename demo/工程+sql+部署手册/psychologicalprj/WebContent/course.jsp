@@ -315,7 +315,7 @@
                     <div class="comment">
                         <div class="comment-header">
                             <!--用户头像-->
-                            <img src="${ctx }/${temp.user.userHeadPath }" alt="头像">
+                            <img src="/psychologicalprj/images/${temp.user.userHeadPath }" alt="头像">
                             <!--用户昵称：点击跳转到用户个人页面-->
                             <a href="#">${ temp.user.userNickName}</a>
                             <!--评论时间：精细到日即可-->
@@ -422,8 +422,8 @@
   		    	var pageNum = values.pageNum;
   		    	
   		    	for(var i = 0;i<comments.length;i++){
-  		    		html +=  "<div class='comment'><div class='comment-header'><img src='${ctx}/"+
-  		    		keys[i].userHeadPath+"' alt=' 头像 '><a href='#'>"+keys[i].userNickName+
+  		    		html +=  "<div class='comment'><div class='comment-header'><img src='/psychologicalprj/images/"+
+  		    		keys[i].userHeadPath+"' alt='智障'><a href='#'>"+keys[i].userNickName+
   		    		"</a><span class='tag'>"+comments[i].evaluateTime+"</span></div><p>"+comments[i].evaluateComment+
   		    		"</p></div>";
   		    	}
@@ -490,7 +490,7 @@
     		    	//console.log(pageNum);
     		    	
     		    	for(var i = 0;i<comments.length;i++){
-    		    		html +=  "<div class='comment'><div class='comment-header'><img src='${ctx}/"+
+    		    		html +=  "<div class='comment'><div class='comment-header'><img src='/psychologicalprj/images/"+
     		    		keys[i].userHeadPath+"' alt=' 头像 '><a href='#'>"+keys[i].userNickName+
     		    		"</a><span class='tag'>"+comments[i].evaluateTime+"</span></div><p>"+comments[i].evaluateComment+
     		    		"</p></div>";
@@ -573,7 +573,7 @@
         		    	//console.log(pageNum);
         		    	
         		    	for(var i = 0;i<comments.length;i++){
-        		    		html +=  "<div class='comment'><div class='comment-header'><img src='${ctx}/"+
+        		    		html +=  "<div class='comment'><div class='comment-header'><img src='/psychologicalprj/images/"+
         		    		keys[i].userHeadPath+"' alt=' 头像 '><a href='#'>"+keys[i].userNickName+
         		    		"</a><span class='tag'>"+comments[i].evaluateTime+"</span></div><p>"+comments[i].evaluateComment+
         		    		"</p></div>";

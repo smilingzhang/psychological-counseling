@@ -22,7 +22,7 @@ public class ImgUpload {
 	
 		@RequestMapping("/imgupload")
 		public Map<String, Object> saveImgs(@RequestParam("file")CommonsMultipartFile file,@RequestParam(name="name") String name,HttpServletRequest request,HttpServletResponse response) {
-				String rootPath="F:\\大三上--工程\\工程+sql+部署手册\\psychologicalprj\\WebContent\\images";
+				String rootPath="C:\\Users\\baozhangjun\\Desktop\\psychologicalprj\\WebContent\\images";
 				InputStream is;
 				Map<String, Object> map =new HashMap<>();
 				

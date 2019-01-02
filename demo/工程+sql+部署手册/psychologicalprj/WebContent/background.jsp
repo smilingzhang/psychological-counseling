@@ -123,7 +123,9 @@
                                                 $("#edit-passage").css("display","block");
                                                 //因为新建文章时已经上传过图片了，这里写入静态资源
                                                 $('#psgImgEditingUploader').uploader({
-                                                    url: 'http://your/post/url',
+                                                	autoUpload: true,//自动上传
+                                                	
+                                                    url: '${ctx}/imgupload',
                                                     // 只允许上传视频文件
                                                     mime_types: [
                                                             {title: '图片', extensions: 'png,jpg'},

@@ -56,7 +56,7 @@
 	                        <a href="#"  class="dropdown-toggle" data-toggle="dropdown"><img id="avatar" src="${ctx }/images/${sessionScope.userHeadPath }" alt="${sessionScope.userHeadPath }"  width="40px" ></a>
 	                        <ul class="dropdown-menu" role="menu">
 	                            <li class="dropdown-list"><a href="${ctx }/user">个人中心</a></li>
-	                            <c:if test="${sessionScope.userIdentity!=1 }"><li class="dropdown-list"><a href="${ctx }/background.jsp">后台管理</a></li></c:if>
+	                            <c:if test="${sessionScope.userIdentity!=1 }"><li class="dropdown-list"><a href="${ctx }/consultTeacher/articleTypeTable">后台管理</a></li></c:if>
 	                            <li class="dropdown-list"><a href="${ctx }/logout">退出登录</a></li>
 	                        </ul>
                     	</li>

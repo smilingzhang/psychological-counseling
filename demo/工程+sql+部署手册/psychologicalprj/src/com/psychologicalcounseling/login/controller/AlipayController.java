@@ -337,7 +337,7 @@ public String queryBill(String outTradeNo) throws AlipayApiException {
 	request.setBizModel(model);
 	AlipayTradeQueryResponse response = alipayClient.execute(request);
 	
-	System.out.println(response.getBody());
+	
 	if(response.isSuccess()){
 		return response.getTradeStatus();
 	} else {

@@ -212,7 +212,7 @@
 	        			        var aft= i;
 	        			        htmls += "<div class='pager-bar' id='firesun'><ul class='pager'><li class='previous' id='pagePre'><a pagenum='"+pre+"' href='javascript:void(0)' onclick='showLeftComment(this)'>«</a></li>";
 	              		    	for(var i = 0;i<comments.length;i++){
-	              		    		html +=  "<div class='comment'><div class='comment-header'><img  src='${ctx}/"+keys[i].userHeadPath+"' alt='头像'><a href='#'>"+keys[i].userNickName+
+	              		    		html +=  "<div class='comment'><div class='comment-header'><img  src='/psychologicalprj/images/"+keys[i].userHeadPath+"' alt='头像'><a href='#'>"+keys[i].userNickName+
 	              		    		"</a><span class='tag'>"+comments[i].evaluateTime+"</span></div><p>"+comments[i].evaluateComment+"</p></div>";
 	              		    	}
 	              		    	//console.log(html);
@@ -246,7 +246,7 @@
                         <div class="comment">
                             <div class="comment-header">
                                 <!--用户头像-->
-                                <img src="${ctx }/images/${temp.user.userHeadPath }" alt="头像">
+                                <img src="/psychologicalprj/images/${temp.user.userHeadPath }" alt="头像">
                                 <!--用户昵称：点击跳转到用户个人页面-->
                                 <a href="#">${temp.user.userNickName }</a>
                                 <!--评论时间：精细到日即可-->
@@ -353,7 +353,7 @@
 		        	pages.push(i);
 		        }
 		    	for(var i = 0;i<comments.length;i++){
-		    		html +=  "<div class='comment'><div class='comment-header'><img src='${ctx}/"+
+		    		html +=  "<div class='comment'><div class='comment-header'><img src='/psychologicalprj/images/"+
 		    		keys[i].userHeadPath+"' alt=' 头像 ' ><a href='#'>"+keys[i].userNickName+
 		    		"</a><span class='tag'>"+comments[i].evaluateTime+"</span></div><p>"+comments[i].evaluateComment+
 		    		"</p></div>";
@@ -421,7 +421,7 @@
 			        }
 			        //alert(pages);
  			    	for(var i = 0;i<comments.length;i++){
- 			    		html +=  "<div class='comment'><div class='comment-header'><img src='${ctx}/"+
+ 			    		html +=  "<div class='comment'><div class='comment-header'><img src='/psychologicalprj/images/"+
  			    		keys[i].userHeadPath+"' alt=' 头像 ' ><a href='#'>"+keys[i].userNickName+
  			    		"</a><span class='tag'>"+comments[i].evaluateTime+"</span></div><p>"+comments[i].evaluateComment+
  			    		"</p></div>";
@@ -502,7 +502,7 @@
 			        	console.log(i);
 			        }
 			        for(var i = 0;i<comments.length;i++){
- 			    		html +=  "<div class='comment'><div class='comment-header'><img src='${ctx}/"+
+ 			    		html +=  "<div class='comment'><div class='comment-header'><img src='/psychologicalprj/images/"+
  			    		keys[i].userHeadPath+"' alt=' 头像 ' ><a href='#'>"+keys[i].userNickName+
  			    		"</a><span class='tag'>"+comments[i].evaluateTime+"</span></div><p>"+comments[i].evaluateComment+
  			    		"</p></div>";
