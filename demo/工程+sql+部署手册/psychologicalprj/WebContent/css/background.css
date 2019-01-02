@@ -62,7 +62,8 @@ html{
 }
 .bg-contain #new-passage #passage-type,
 .bg-contain #passage-type,
-.bg-contain #edit-passage #passage-type
+.bg-contain #edit-passage #passage-type,
+#passage-type-edit,#passage-type-new,#passage-type-article-show
 {
     float: left;
     width: 20%;
@@ -71,7 +72,8 @@ html{
 }
 .bg-contain #new-passage #passage-title,
 .bg-contain #edit-passage #passage-title,
-.bg-contain  #passage-title
+.bg-contain  #passage-title,
+ #passage-title-edit,#passage-title-new,#passage-title-article-show
 {
     width: 79%;
     /* display: inline; */
