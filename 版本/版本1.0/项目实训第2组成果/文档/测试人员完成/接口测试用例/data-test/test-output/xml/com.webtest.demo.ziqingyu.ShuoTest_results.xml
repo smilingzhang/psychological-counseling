@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ziqingyu"
+           tests="1"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="17.741">
+  <properties />
+  
+  
+            <testcase name="shuo" time="17.741" classname="com.webtest.demo.ziqingyu.ShuoTest" />
+      
+</testsuite>

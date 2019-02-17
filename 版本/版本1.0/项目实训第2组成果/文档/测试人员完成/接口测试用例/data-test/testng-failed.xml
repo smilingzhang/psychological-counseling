@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [s1]">
+  <listeners>
+    <listener class-name="com.webtest.core.WebTestListener"/>
+  </listeners>
+  <test thread-count="5" name="test1(failed)">
+    <classes>
+      <class name="com.webtest.demo.Grbg_Test">
+        <methods>
+          <include name="doBeforeSuite"/>
+          <include name="doAfterMethod"/>
+          <include name="dakaSuccess"/>
+        </methods>
+      </class> <!-- com.webtest.demo.Grbg_Test -->
+    </classes>
+  </test> <!-- test1(failed) -->
+</suite> <!-- Failed suite [s1] -->

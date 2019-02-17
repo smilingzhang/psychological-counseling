@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kecheng"
+           tests="1"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="5.012">
+  <properties />
+  
+  
+            <testcase name="fenlei1" time="5.012" classname="com.webtest.demo.kecheng.FenleiTest" />
+      
+</testsuite>

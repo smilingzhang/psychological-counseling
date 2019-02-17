@@ -1,0 +1,58 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="s2" data-provider-thread-count="2">
+	<listeners> 
+		<listener class-name="org.uncommons.reportng.HTMLReporter" />
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
+        <listener class-name="com.webtest.core.WebTestListener"/>
+	</listeners>
+	<test name="ziqingyu">
+		<classes>
+			<class name="com.webtest.demo.ziqingyu.DingdanhaoTest" />
+			<class name="com.webtest.demo.ziqingyu.HuanyiboTest" />
+			<class name="com.webtest.demo.ziqingyu.InviteTest" />
+			<class name="com.webtest.demo.ziqingyu.PayTest" />
+			<class name="com.webtest.demo.ziqingyu.QingtingshaiTest" />
+			<class name="com.webtest.demo.ziqingyu.ShaixuanTest" />
+			<class name="com.webtest.demo.ziqingyu.ShuoTest" />
+			<class name="com.webtest.demo.ziqingyu.XiaotieshiTest" />
+		    <class name="com.webtest.demo.ziqingyu.XinxiTest" />
+		    <class name="com.webtest.demo.ziqingyu.YuyueTest" />
+					
+		</classes>
+	</test>
+	<test name="kecheng">
+		<classes>
+			<class name="com.webtest.demo.kecheng.FenleiTest" />
+			<class name="com.webtest.demo.kecheng.FreeTest" />
+			<class name="com.webtest.demo.kecheng.HuandengTest" />
+			<class name="com.webtest.demo.kecheng.PinglunTest" />
+			<class name="com.webtest.demo.kecheng.ShoufeiTest" />
+			<class name="com.webtest.demo.kecheng.XiangguanTest" />
+					
+		</classes>
+	</test>
+	<test name="read">
+		<classes>
+			<class name="com.webtest.demo.read.FenleiTest" />
+			<class name="com.webtest.demo.read.PictureTest" />
+			<class name="com.webtest.demo.read.TaolunTest" />
+			<class name="com.webtest.demo.read.XiangqingTest" />
+					
+		</classes>
+	</test>
+
+	<test name="gerenzhongxin">
+		<classes>
+			<class name="com.webtest.demo.gerenzhongxin.CancelTest" />
+			<class name="com.webtest.demo.gerenzhongxin.GerenshizhiTest" />
+			<class name="com.webtest.demo.gerenzhongxin.JiluTest" />
+			<class name="com.webtest.demo.gerenzhongxin.MimaTest" />
+			<class name="com.webtest.demo.gerenzhongxin.PhoneTest" />
+			<class name="com.webtest.demo.gerenzhongxin.TuichuTest" />
+					
+		</classes>
+	</test>
+	
+
+</suite>
