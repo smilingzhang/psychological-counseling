@@ -2,33 +2,43 @@ import pickle
 import math
 import pandas as pd
 import datetime
+import time
+import os
 from pyecharts import options as opts
 from pyecharts.charts import Bar,Line,Grid
-
-
+from datetime import timedelta
 
 # 预测未来一天
 def predict_day(module):
+    start_day = datetime.datetime.fromtimestamp(time.time())
+    end_day = start_day + datetime.timedelta(days=1)
 
-    start_day = '2018-09-05 00:00:00'
-    end_day =  '2018-09-05 23:30:00'
-    predict_day =  module.predict(start_day,end_day,dynamic=True)
+    start_day = datetime.datetime.strftime(start_day,"%Y-%m-%d")
+    end_day = datetime.datetime.strftime(end_day,"%Y-%m-%d")
+
+    predict_day = module.predict(start_day, end_day, dynamic=True)
     predict_day += math.fabs(predict_day.min())
 
     return predict_day
 
 # 预测未来一周
 def predict_week(module):
-    start_week = '2018-09-05 00:00:00'
-    end_week = '2018-09-11 23:30:00'
-    predict_week =  module.predict(start_week,end_week,dynamic=True)
+    week = {"Mon": 1, "Tue": 2, "Wed": 3, "Thu": 4, "Fri": 5, "Sat": 6, "Sun": 7}
+    now_day = datetime.datetime.fromtimestamp(time.time())
+    week_num = week[datetime.datetime.strftime(now_day,'%a')]
+    mon_day = now_day - datetime.timedelta(days=week_num - 1)
+    start_week_day = datetime.datetime.strftime(mon_day,'%Y-%m-%d')
+    end_week_day = datetime.datetime.strftime(mon_day + datetime.timedelta(days=6),"%Y-%m-%d")
+    # start_week_day = datetime.datetime.strftime(mon_day + datetime.timedelta(days=7),'%Y-%m-%d')
+    # end_week_day = datetime.datetime.strftime(mon_day + datetime.timedelta(days=13),"%Y-%m-%d")
+    print("start",start_week_day,"end",end_week_day)
+    predict_week = module.predict(start_week_day, end_week_day, dynamic=True)
     # 处理数据
     predict_week += math.fabs(predict_week.min())
     row_name = predict_week.index
     rows=[row for row in row_name if row.hour>20 or row.hour<8]
     for row in rows:
         predict_week.ix[row] = 0
-    new_week_data_index = pd.date_range(start='2018-09-05',periods=7)
     new_week_data = pd.DataFrame(columns=['counts'],dtype=int)
     day = 0
 
@@ -70,8 +80,9 @@ def overlap_line_scatter(day_data,week_data) -> Bar:
     )
     line = (
         Line()
-            .add_xaxis(x_week)
-            .add_yaxis("未来一周", Y_week, symbol="triangle", symbol_size=20)
+        .add_xaxis(x_week)
+        .add_yaxis("未来一周", Y_week, symbol="triangle", symbol_size=20)
+        .set_global_opts(legend_opts=opts.LegendOpts(pos_top="48%"))
     )
 
     grid = (
@@ -90,4 +101,7 @@ module = pickle.load(module_file)
 pre_day = predict_day(module)
 pre_week = predict_week(module)
 
-overlap_line_scatter(pre_day,pre_week).render("new_time_sequence_file.html")
+# 获取当前文件目录
+file_dir = os.path.split(os.path.realpath(__file__))[0]
+# 输出
+overlap_line_scatter(pre_day,pre_week).render(file_dir+r"\new_time_sequence_file.html")

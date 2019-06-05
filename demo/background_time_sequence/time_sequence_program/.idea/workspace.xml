@@ -9,15 +9,16 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/time_sequence_program$module_exercising.coverage" NAME="module_exercising Coverage Results" MODIFIED="1559699113682" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/1. module exercising" />
+    <SUITE FILE_PATH="coverage/time_sequence_program$prediction.coverage" NAME="prediction Coverage Results" MODIFIED="1559703419776" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/2. prediction" />
+    <SUITE FILE_PATH="coverage/time_sequence_program$module_exercising.coverage" NAME="module_exercising Coverage Results" MODIFIED="1559702985298" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/1. module exercising" />
   </component>
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/1. module exercising/module_exercising.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="11" column="24" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="24" />
+            <state relative-caret-position="228">
+              <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
             </state>
           </provider>
         </entry>
@@ -25,11 +26,23 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/2. prediction/prediction.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="316">
-              <caret line="92" column="29" selection-end-line="92" selection-end-column="76" />
+            <state relative-caret-position="272">
+              <caret line="84" column="8" lean-forward="true" selection-start-line="84" selection-start-column="8" selection-end-line="84" selection-end-column="68" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/1. module exercising/data_processed.csv">
+          <provider editor-type-id="csv-table-editor">
+            <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+          </provider>
+          <provider selected="true" editor-type-id="csv-text-editor">
+            <state relative-caret-position="292">
+              <caret line="7153" column="13" lean-forward="true" selection-start-line="7153" selection-start-column="13" selection-end-line="7153" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -46,10 +59,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/2. prediction/prediction.py" />
         <option value="$PROJECT_DIR$/1. module exerising/module exercising.py" />
         <option value="$PROJECT_DIR$/0. data_preprocessing/data_preprocessing.py" />
         <option value="$PROJECT_DIR$/0. data_preprocessing/data_smoothing.py" />
+        <option value="$PROJECT_DIR$/2. prediction/prediction.py" />
       </list>
     </option>
   </component>
@@ -101,6 +114,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\腾讯微云\学习资料\!大三下\实训\test program\time_sequence_program\2. prediction" />
+      <recent name="F:\腾讯微云\学习资料\!大三下\实训\test program\time_sequence_program\1. module exercising" />
       <recent name="F:\腾讯微云\学习资料\!大三下\实训\test program\time_sequence_program\0. data_preprocessing" />
       <recent name="F:\腾讯微云\学习资料\!大三下\实训\test program\time_sequence_program\1. module exerising" />
     </key>
@@ -117,7 +132,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.prediction">
     <configuration name="module_exercising" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="time_sequence_program" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -140,8 +155,31 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="prediction" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="time_sequence_program" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2. prediction" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2. prediction/prediction.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.prediction" />
         <item itemvalue="Python.module_exercising" />
       </list>
     </recent_temporary>
@@ -156,12 +194,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1559697895578</updated>
-      <workItem from="1559697898496" duration="1428000" />
+      <workItem from="1559697898496" duration="7730000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1428000" />
+    <option name="totallyTimeSpent" value="7730000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
@@ -178,7 +216,7 @@
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32931727" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32931727" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32931727" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -196,12 +234,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/1. module exercising/data_processed.csv">
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
-      <provider selected="true" editor-type-id="csv-text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/0. data_preprocessing/original_data.data">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -225,17 +257,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/1. module exercising/data_processed.csv">
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
+      <provider selected="true" editor-type-id="csv-text-editor">
+        <state relative-caret-position="292">
+          <caret line="7153" column="13" lean-forward="true" selection-start-line="7153" selection-start-column="13" selection-end-line="7153" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/1. module exercising/module_exercising.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="11" column="24" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="24" />
+        <state relative-caret-position="228">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/2. prediction/prediction.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="92" column="29" selection-end-line="92" selection-end-column="76" />
+        <state relative-caret-position="272">
+          <caret line="84" column="8" lean-forward="true" selection-start-line="84" selection-start-column="8" selection-end-line="84" selection-end-column="68" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
