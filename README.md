@@ -1,4 +1,4 @@
-﻿<img src="./images/logo.jpg" width="40px" height="40px"/>
+﻿<img src="./images/logo.jpg" width="100px" height="100px"/>
 
 # 2016级项目实训成果展示
 
