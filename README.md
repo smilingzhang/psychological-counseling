@@ -1,15 +1,59 @@
-# psychological-counseling
-明心社工事务所
+﻿#2016级项目实训成果展示
 
-1.第三方登录：微博开放平台接口：允许用户使用微博帐号登录访问本网站，分享内容，同步信息。难点在于理解OAuth2.0的授权机制，以及根据应用场景选择授权流程。
-2.加密技术：针对get方式的请求使用des加密技术。
-3.Ajax：实现局部刷新，通过json对象前端和后台互传数据（get和post），实现Json对象和java对象和jst对象的互相转化，用AJAX和Js实现局部刷新的分页器效果。
-4.webRTC 技术：实现语音，视频聊天，同时使用https加密提升浏览器操作摄像头的权限。
-5.轮询技术：以便实现同步的效果,当数据库内容改变时，网页不需刷新就能显示最新数据。轮询查找订单信息以及支付宝是否支付成功的信息。
-6.在线支付：易宝支付、支付宝扫码支付。
-7.全文检索技术：菜单栏搜索框的实现
-8.富文本编辑器：实现咨询师上传文章以及评论功能。
-9.boncp连接池技术
-10.js实现视频控制播放
-11.log4j：控制日志信息输送的目的地
-12.手机短信验证
+##明心心理咨询——大数据方向
+
+###项目简介
+
+本项目为明心社工事务所的企业网站，客户为北京通州明心社工事务所。主要功能为提供网上在线预约业务、网上在线咨询业务，以简化事务所客户的预约流程，提高事务所的工作效率、更好地拓展业务。
+另外，项目网站还提供一些附加功能：在线倾听、在线课程、心理文章等；同时融入大数据方面的知识，进行相关的推荐和预测。
+
+###项目地址
+GitHub:[https://github.com/smilingzhang/psychological-counseling]
+
+###项目成员
+-张春辉 (项目经理、开发工程师、质量专家)
+  -GitHub:[https://github.com/smilingzhang]
+-邓旸（开发工程师、UI设计师、质量专家）
+  -GitHub:[https://github.com/mutsuo]
+-鲍张军 （开发工程师、需求专家）
+  -GitHub:[https://github.com/bao9777]
+-段智兴 (开发工程师、需求专家、数据库设计人员)
+  -GitHub:[https://github.com/duanzhix]
+-刘田会 （开发工程师、需求专家）
+  -GitHub:[https://github.com/huihuiyouyou]
+-魏谦强 （开发工程师、需求专家）
+  -GitHub:[https://github.com/WeiQianQiang]
+-孙明伟 （开发工程师、需求专家）
+  -GitHub:[https://github.com/sunmingwei]
+-刘海迪 （测试工程师）
+  -GitHub:[https://github.com/liuhaidi]
+
+###项目截图
+<p>
+<img src="./images/登录.jpg" width=250 height=400 />
+</p>
+<p>
+<img src="./images/首页_1.jpg" width=250 height=400 />
+<img src="./images/首页_2.jpg" width=250 height=400 />
+</p>
+<p>
+<img src="./images/咨询_1.jpg" width=250 height=400 />
+<img src="./images/咨询_2.jpg" width=250 height=400 />
+<img src="./images/咨询_3.jpg" width=250 height=400 />
+<img src="./images/咨询_4.jpg" width=250 height=400 />
+</p>
+<p>
+<img src="./images/课程_1.jpg" width=250 height=400 />
+<img src="./images/课程_2.jpg" width=250 height=400 />
+<img src="./images/课程_3.jpg" width=250 height=400 />
+</p>
+<p>
+<img src="./images/阅读_1.jpg" width=250 height=400 />
+</p>
+<p>
+<img src="./images/个人中心.jpg" width=250 height=400 />
+</p>
+<p>
+<img src="./images/后台管理_1.jpg" width=250 height=400 />
+<img src="./images/后台管理_2.jpg" width=250 height=400 />
+</p>
