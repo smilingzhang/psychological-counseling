@@ -5,26 +5,37 @@ window.onload = function (){
     $("#page-4").bind("click",function(){
         //一点击订单管理，就去查哪些订单快要到达预约时间
     })
-    
-    //获取可视化数据
-    var controllerName = "getImageFile";
+
+    //获取用户昵称
+    var controllerName = "getUserNickName";
     var toUrl = window.location.protocol+controllerName;
     $.ajax({
         url:toUrl,
         async:false,
         type:"post",
-        dataType:"json",
+        dataType:"text",
+        charset:"utf-8",
+        data:{},
+        success:function(userNickName){
+    		$("#userName").html(userNickName);
+    		console.log(userNickName);
+        }
+    })
+    
+    //获取可视化数据
+    controllerName = "getImageFile";
+    toUrl = window.location.protocol+controllerName;
+    $.ajax({
+        url:toUrl,
+        async:false,
+        type:"post",
+        dataType:"text",
         charset:"utf-8",
         data:{"userName":$("#userName").attr("value")},
         success:function(msg){
-        	if(msg!="false"){
-        		$("#time_sequence > html").html = msg
-        	}
-        },
-        error:function(XMLHttpRequest, textStatus, errorThrown){
-        	alert(XMLHttpRequest.status); 
-        	alert(XMLHttpRequest.readyState); 
-        	alert(textStatus); 
+        	if(msg!="false")
+        		$("#time_sequence").html(msg)
+        	else $("#time_sequence").html("您尚未登录");
         }
     })
 }
