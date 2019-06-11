@@ -54,9 +54,52 @@
                 <a class="tag" href="#">网站首页</a>
             </div>
             <!--首页-->
-            <div id="page-1"></div>
+            <div id="page-1" class="page">
+                <h2>欢迎，<font id="userName" value="${user.userNickName }">${user.userNickName }</font></h2>
+                <hr>
+                <!--注：尽量把统计图上的表头去掉，显示地把表头写到<h3标签中>-->
+                <div class="board">
+                    <h1>业务分析</h1>
+                    <div id = "historical-record" class="panel">
+                        <div class="panel-body">
+                            <h3>表头</h3>
+                        </div>
+                    </div>
+                    <div id = "user-feedback" class="panel" frameborder="0" scrolling="no">
+                        <div class="panel-body">
+                            <h3>表头</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="board">
+                    <h1>业务统计与对比</h1>
+                    <div id = "daily-visit" class="panel" frameborder="0" scrolling="no">
+                        <div class="panel-body">
+                            <h3>表头</h3>
+                        </div>
+                    </div>
+                    <div id = "rank-list" class="panel" frameborder="0" scrolling="no">
+                        <div class="panel-body">
+                            <h3>表头</h3>
+                        </div>
+                    </div>
+                    <div id = "monthly-volume" class="panel" frameborder="0" scrolling="no">
+                        <div class="panel-body">
+                            <h3>表头</h3>
+                        </div>
+                    </div>
+                </div>
+                <div id="prediction" class="board">
+                    <h1>业务预测</h1>
+                    <div id="time_sequence" class="panel">
+                        <div class="panel-body">
+                            <h3>表头</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!--文章管理-->
-            <div id="page-2" class="page">
+            <div id="page-2" class="page" style="display:none">
                 <!--头部-->
                 <div>
                     <!--发表文章按钮-->
