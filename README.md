@@ -1,4 +1,4 @@
-﻿<img src="./images/logo.jpg"/>
+﻿<img src="./images/logo.jpg" width="40px" height="40px"/>
 
 # 2016级项目实训成果展示
 
@@ -30,7 +30,7 @@ GitHub:[https://github.com/smilingzhang/psychological-counseling]
 - 刘海迪 （测试工程师）
   - GitHub:[https://github.com/liuhaidi]
 
-###项目截图
+### 项目截图
 <p>
 <img src="./images/登录.jpg"/>
 </p>
