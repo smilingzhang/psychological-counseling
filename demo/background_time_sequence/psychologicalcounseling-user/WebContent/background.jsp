@@ -28,6 +28,7 @@
     <script src="${ctx}/js/background.js"></script>
     <link href="${ctx}/css/mystyle.css" rel="stylesheet">
     <link href="${ctx}/css/background.css" rel="stylesheet">
+    <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
     <!--富文本编辑器-->
     <script type="text/javascript" charset="utf-8" src="${ctx}/utf8-jsp/ueditor.config.js"></script>
     <script type="text/javascript" charset="utf-8" src="${ctx}/utf8-jsp/ueditor.all.min.js"> </script>
@@ -104,9 +105,48 @@
             </div>
             <!--首页-->
             <div id="page-1" class="page">
-            	<h2>欢迎,<font id="userName" value="${user.userNickName }">${user.userNickName }</font></h2>
-            	<hr>
-            	<iframe src="${ctx }/time_sequence.html" id="time_sequence" scrolling="no" frameborder="0" width="100%" height="500px"></iframe>
+                <h2>欢迎，<font id="userName" value="${user.userNickName }">${user.userNickName }</font></h2>
+                <hr>
+                <!--注：尽量把统计图上的表头去掉，显示地把表头写到<h3标签中>-->
+                <div class="board">
+                    <h1>业务分析</h1>
+                    <div id = "historical-record" class="panel">
+                        <div class="panel-body">
+                            <h3>表头</h3>
+                        </div>
+                    </div>
+                    <div id = "user-feedback" class="panel" frameborder="0" scrolling="no">
+                        <div class="panel-body">
+                            <h3>表头</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="board">
+                    <h1>业务统计与对比</h1>
+                    <div id = "daily-visit" class="panel" frameborder="0" scrolling="no">
+                        <div class="panel-body">
+                            <h3>表头</h3>
+                        </div>
+                    </div>
+                    <div id = "rank-list" class="panel" frameborder="0" scrolling="no">
+                        <div class="panel-body">
+                            <h3>表头</h3>
+                        </div>
+                    </div>
+                    <div id = "monthly-volume" class="panel" frameborder="0" scrolling="no">
+                        <div class="panel-body">
+                            <h3>表头</h3>
+                        </div>
+                    </div>
+                </div>
+                <div id="prediction" class="board">
+                    <h1>业务预测</h1>
+                    <div id="time_sequence" class="panel">
+                        <div class="panel-body">
+                            <h3>表头</h3>
+                        </div>
+                    </div>
+                </div>
             </div>
 
 			
